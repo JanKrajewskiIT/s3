@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <!-- Remember about precondition check for test data! -->
+    
+    <changeSet id="sample_users" author="bartosz.milczarek">
+        <preConditions onFail="MARK_RAN">
+            <changeLogPropertyDefined property="withTestData" value="true"/>
+        </preConditions>
+        
+        <insert tableName="users">
+            <column name="USER_ID" valueComputed="nextval('USERS_SEQ')" />
+            <column name="LOGIN" value="manager" />
+            <column name="PASSWORD" value="6ee4a469cd4e91053847f5d3fcb61dbcc91e8f0ef10be7748da4c4a1ba382d17" />
+            <column name="FIRST_NAME" value="Manager" />
+            <column name="SECOND_NAME" value="Managerski" />
+            <column name="EMAIL" value="manager@gmail.com" />
+            <column name="IS_ACTIVE" value="true" />
+            <column name="version" value="1" />
+        </insert>
+        <insert tableName="users_roles">
+            <column name="USER_ID" valueComputed="currval('USERS_SEQ')" />
+            <column name="ROLE_ID" valueComputed="2" />
+        </insert>
+        
+        <insert tableName="users">
+            <column name="USER_ID" valueComputed="nextval('USERS_SEQ')" />
+            <column name="LOGIN" value="user" />
+            <column name="PASSWORD" value="04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb" />
+            <column name="FIRST_NAME" value="User" />
+            <column name="SECOND_NAME" value="Userski" />
+            <column name="EMAIL" value="user@gmail.com" />
+            <column name="IS_ACTIVE" value="true" />
+            <column name="version" value="1" />
+        </insert>
+        <insert tableName="users_roles">
+            <column name="USER_ID" valueComputed="currval('USERS_SEQ')" />
+            <column name="ROLE_ID" valueComputed="3" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

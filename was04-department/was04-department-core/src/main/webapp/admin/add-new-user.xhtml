@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="../layout/main-template.xhtml">
+            <ui:define name="content">
+                <p:dialog id="sendingProgress-dialog" widgetVar="sendingProgressDlg" modal="true" draggable="false" closable="false" style="background-color: #FFFFFF;">
+                    <label>Wysyłanie</label>
+                    <p:graphicImage value="../resources/img/progress.gif" />
+                </p:dialog>
+                <!-- Right side column. Contains the navbar and content of the page -->
+                <aside class="right-side">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Kokpit</a></li>
+                            <li><a href="#">Użytkownicy</a></li>
+                            <li class="active">Dodaj</li>
+                        </ol>
+                    </section>
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Dodaj użytkownika</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <h:form id="addNewUser-form">
+                                            <p:growl id="growl" showDetail="true" life="2000"/>
+                                            <div style="padding-bottom: 10px;">
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                        <label>Rola</label>
+                                                        <h:selectOneMenu id="role-dropdown" value="#{addNewUserBean.selectedRole}" converter="#{roleDTOConverter}" styleClass="form-control">
+                                                            <f:selectItem itemLabel="Wybierz rolę użytkownika" noSelectionOption="true" />
+                                                            <f:selectItems value="#{addNewUserBean.roleList}" var="role" itemLabel="#{role.roleName}" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label>Adres e-mail</label>
+                                                        <p:inputText placeholder="Adres e-mail" value="#{addNewUserBean.email}" styleClass="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="row">
+                                                    <div class="col-xs-8">
+                                                        <p:commandButton value="Dodaj" action="#{addNewUserBean.sendInvitation}" onstart="PF('sendingProgressDlg').show();" oncomplete="PF('sendingProgressDlg').hide();" update="growl" styleClass="btn btn-primary btn-lg pull-right"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </section><!-- /.content -->
+                </aside><!-- /.right-side -->
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:param name="boxEffectTypeForShow" value="blind" />
+        <ui:param name="boxEffectTypeForHide" value="blind" />
+        <ui:composition template="../layout/main-template.xhtml">
+            <ui:define name="content">
+                <!-- Right side column. Contains the navbar and content of the page -->
+                <aside class="right-side">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Kokpit</a></li>
+                            <li class="active">Profil</li>
+                        </ol>
+                    </section>
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Twój profil</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <h:form id="profile-form">
+                                            <p:growl id="growl" showDetail="true" life="2000"/>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <label>Imię</label>
+                                                        <br />
+                                                        <h:outputText value="#{profileBean.userDTO.firstName}"/>
+                                                        <br />
+                                                        <label>Nazwisko</label>
+                                                        <br />
+                                                        <h:outputText value="#{profileBean.userDTO.secondName}"/>
+                                                        <br />
+                                                        <label>Adres e-mail</label>
+                                                        <br />
+                                                        <h:outputText value="#{profileBean.userDTO.email}" />
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <label>Przypisane role</label>
+                                                        <br />
+                                                        <h:outputText value="Administrator" rendered="#{profileBean.userDTO.admin}" />
+                                                        <br />
+                                                        <h:outputText value="Manager" rendered="#{profileBean.userDTO.manager}" />
+                                                        <br />
+                                                        <h:outputText value="Użytkownik" rendered="#{profileBean.userDTO.user}" />
+                                                    </div>
+                                                    <div class="col-xs-5" id="accordion">
+                                                        <div class="panel box box-primary">
+                                                            <div class="box-header">
+                                                                <h4 class="box-title">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapsePasswordChange">
+                                                                        Zmień hasło
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div id="collapsePasswordChange" class="panel-collapse collapse">
+                                                                <div class="box-body">
+                                                                    <label>Nowe hasło</label>
+                                                                    <p:password placeholder="Wprowadź nowe hasło" value="#{profileBean.newPassword}" styleClass="form-control"/>
+                                                                    <label>Powtórz nowe hasło</label>
+                                                                    <p:password placeholder="Powtórz nowe hasło" value="#{profileBean.repeatPassword}" styleClass="form-control"/>
+                                                                    <label>Aktualne hasło</label>
+                                                                    <p:password placeholder="Wprowadź aktualne hasło" value="#{profileBean.currentPassword}" styleClass="form-control"/>
+                                                                    <p:commandButton value="Zapisz" action="#{profileBean.changePassword}" update="growl" styleClass="btn btn-primary top10"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel box box-primary">
+                                                            <div class="box-header">
+                                                                <h4 class="box-title">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEmailChange">
+                                                                        Zmień adres e-mail
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div id="collapseEmailChange" class="panel-collapse collapse">
+                                                                <div class="box-body">
+                                                                    <label>Nowy adres e-mail</label>
+                                                                    <p:inputText placeholder="Wprowadź nowy adres e-mail" value="#{profileBean.newEmail}" styleClass="form-control"/>
+                                                                    <label>Powtórz nowy adres e-mail</label>
+                                                                    <p:inputText placeholder="Powtórz nowy adres e-mail" value="#{profileBean.repeatEmail}" styleClass="form-control"/>
+                                                                    <label>Hasło</label>
+                                                                    <p:password placeholder="Wprowadź hasło" value="#{profileBean.emailPassword}" styleClass="form-control"/>
+                                                                    <p:commandButton value="Zapisz" action="#{profileBean.changeEmailAddress}" update="growl" styleClass="btn btn-primary top10"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </section><!-- /.content -->
+                </aside><!-- /.right-side -->
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

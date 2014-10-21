@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Panel zajebistosci</title>
+</h:head>
+<h:body>
+	<form action="#{request.contextPath}/j_spring_security_check" method="post">
+		<p:panel id="login-panel">
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Podales hujowy login lub hasło " />
+			</h:panelGrid>
+		</p:panel>
+	</form>
+</h:body>
+</html>

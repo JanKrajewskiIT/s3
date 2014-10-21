@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="init_changeset_users" author="bartosz.milczarek">
+        <sql>DROP ROLE IF EXISTS glassfish</sql>
+        <sql>CREATE USER glassfish WITH ENCRYPTED PASSWORD 'glassfish';</sql>
+        <sql>
+            CREATE SEQUENCE USERS_SEQ
+            START WITH 1
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+	
+            CREATE TABLE USERS (
+            USER_ID INTEGER NOT NULL DEFAULT NEXTVAL('USERS_SEQ'::REGCLASS) NOT NULL,
+            LOGIN CHARACTER VARYING(20) NOT NULL,
+            PASSWORD CHARACTER(64) NOT NULL,
+            FIRST_NAME CHARACTER VARYING(20) NOT NULL,
+            SECOND_NAME CHARACTER VARYING(20) NOT NULL,
+            EMAIL CHARACTER VARYING(40) NOT NULL,
+            IS_ACTIVE BOOLEAN DEFAULT TRUE NOT NULL,
+            VERSION BIGINT NOT NULL
+            );
+            ALTER TABLE ONLY USERS ADD CONSTRAINT USERS_PK PRIMARY KEY(USER_ID);
+            
+            CREATE TABLE ROLES (
+            ROLE_ID INTEGER NOT NULL,
+            ROLE_NAME CHARACTER VARYING(20) NOT NULL,
+            VERSION BIGINT NOT NULL
+            );
+            ALTER TABLE ONLY ROLES ADD CONSTRAINT ROLES_PK PRIMARY KEY(ROLE_ID);
+            
+            CREATE TABLE USERS_ROLES (
+            USER_ID INTEGER NOT NULL,
+            ROLE_ID INTEGER NOT NULL
+            );
+            ALTER TABLE USERS_ROLES ADD CONSTRAINT USERS_ROLES_UK UNIQUE (USER_ID, ROLE_ID);
+            ALTER TABLE USERS_ROLES ADD CONSTRAINT USERS_ROLES_FK1 FOREIGN KEY (USER_ID) REFERENCES USERS (USER_ID);
+            ALTER TABLE USERS_ROLES ADD CONSTRAINT USERS_ROLES_FK2 FOREIGN KEY (ROLE_ID) REFERENCES ROLES (ROLE_ID);
+            
+           
+        </sql>
+        <sql>
+            CREATE OR REPLACE VIEW AUTH_VIEW AS 
+            SELECT U.LOGIN, U.PASSWORD, R.ROLE_NAME 
+            FROM USERS U
+            INNER JOIN USERS_ROLES UR ON U.USER_ID = UR.USER_ID
+            INNER JOIN ROLES R ON UR.ROLE_ID = R.ROLE_ID;
+            GRANT SELECT ON AUTH_VIEW TO glassfish;
+        </sql>
+    </changeSet>
+    <changeSet id="units_taxes_and_mops" author="bartosz.milczarek">
+        <sql>
+            CREATE SEQUENCE UNITS_SEQ
+            START WITH 1
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+
+            CREATE TABLE UNITS (
+            UNIT_ID SMALLINT DEFAULT NEXTVAL('UNITS_SEQ'::REGCLASS) NOT NULL,
+            NAME CHARACTER VARYING(5) NOT NULL,
+            ZERO_PLACES SMALLINT DEFAULT (2)::SMALLINT NOT NULL,
+            IS_ACTIVE BOOLEAN DEFAULT TRUE NOT NULL,
+            VERSION BIGINT NOT NULL
+            );
+
+            ALTER TABLE ONLY UNITS ADD CONSTRAINT UNITS_PK PRIMARY KEY (UNIT_ID);
+            ALTER SEQUENCE UNITS_SEQ OWNED BY UNITS.UNIT_ID;
+            SELECT PG_CATALOG.SETVAL('UNITS_SEQ', 1, FALSE);
+        </sql>
+        <sql>
+            CREATE SEQUENCE TAXES_SEQ
+            START WITH 7
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+
+            CREATE TABLE TAXES (
+            TAX_ID SMALLINT DEFAULT NEXTVAL('TAXES_SEQ'::REGCLASS) NOT NULL,
+            NAME CHARACTER VARYING(50) NOT NULL,
+            SHORT_NAME CHARACTER VARYING(6) DEFAULT ''::CHARACTER VARYING NOT NULL,
+            VALUE NUMERIC(4,2) NOT NULL,
+            IS_ACTIVE BOOLEAN DEFAULT TRUE NOT NULL,
+            VERSION BIGINT NOT NULL
+            );
+
+            ALTER TABLE ONLY TAXES ADD CONSTRAINT TAXES_PK PRIMARY KEY (TAX_ID);
+            ALTER SEQUENCE TAXES_SEQ OWNED BY TAXES.TAX_ID;
+            SELECT PG_CATALOG.SETVAL('TAXES_SEQ', 1, TRUE);
+        </sql>
+        <sql>
+            CREATE SEQUENCE METHODS_OF_PAYMENT_SEQ
+            START WITH 1
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+
+            CREATE TABLE METHODS_OF_PAYMENT (
+            MOP_ID SMALLINT DEFAULT NEXTVAL('METHODS_OF_PAYMENT_SEQ'::REGCLASS) NOT NULL,
+            NAME CHARACTER VARYING(35) DEFAULT NULL::CHARACTER VARYING,
+            MATURITY SMALLINT DEFAULT (0)::SMALLINT,
+            IS_ACTIVE BOOLEAN DEFAULT TRUE NOT NULL,
+            VERSION BIGINT NOT NULL
+            );
+
+            ALTER TABLE ONLY METHODS_OF_PAYMENT ADD CONSTRAINT METHODS_OF_PAYMENT_PK PRIMARY KEY (MOP_ID);
+            ALTER SEQUENCE METHODS_OF_PAYMENT_SEQ OWNED BY METHODS_OF_PAYMENT.MOP_ID;
+            SELECT PG_CATALOG.SETVAL('METHODS_OF_PAYMENT_SEQ', 1, FALSE);
+        </sql>
+    </changeSet>
+    <changeSet id="contractors" author="bartosz.milczarek">
+        <sql>
+            CREATE SEQUENCE SOURCES_OF_MEMBER_SEQ
+            START WITH 1
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+
+            CREATE TABLE SOURCES_OF_MEMBER (
+            SOURCE_OF_MEMBER_ID SMALLINT DEFAULT NEXTVAL('SOURCES_OF_MEMBER_SEQ'::REGCLASS) NOT NULL,
+            NAME CHARACTER VARYING(60) NOT NULL,
+            IS_ACTIVE BOOLEAN DEFAULT TRUE NOT NULL,
+            VERSION BIGINT NOT NULL
+            );
+
+            ALTER TABLE ONLY SOURCES_OF_MEMBER ADD CONSTRAINT SOURCES_OF_MEM_PK PRIMARY KEY (SOURCE_OF_MEMBER_ID);
+            ALTER SEQUENCE SOURCES_OF_MEMBER_SEQ OWNED BY SOURCES_OF_MEMBER.SOURCE_OF_MEMBER_ID;
+            SELECT PG_CATALOG.SETVAL('SOURCES_OF_MEMBER_SEQ', 1, FALSE);
+        </sql>
+        <sql>
+            CREATE SEQUENCE CONTRACTORS_GROUPS_SEQ
+            START WITH 1
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+
+            CREATE TABLE CONTRACTORS_GROUPS (
+            CONTRACTOR_GROUP_ID SMALLINT DEFAULT NEXTVAL('CONTRACTORS_GROUPS_SEQ'::REGCLASS) NOT NULL,
+            NAME CHARACTER VARYING(60) NOT NULL,
+            IS_ACTIVE BOOLEAN DEFAULT TRUE NOT NULL,
+            VERSION BIGINT NOT NULL
+            );
+
+            ALTER TABLE ONLY CONTRACTORS_GROUPS ADD CONSTRAINT CONTRACTORS_GROUPS_PK PRIMARY KEY (CONTRACTOR_GROUP_ID);
+            ALTER SEQUENCE CONTRACTORS_GROUPS_SEQ OWNED BY CONTRACTORS_GROUPS.CONTRACTOR_GROUP_ID;
+            SELECT PG_CATALOG.SETVAL('CONTRACTORS_GROUPS_SEQ', 1, TRUE);
+        </sql>
+        <sql>
+            CREATE SEQUENCE CONTRACTORS_SEQ
+            START WITH 1
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+
+            CREATE TABLE CONTRACTORS (
+            CONTRACTOR_ID INTEGER NOT NULL DEFAULT NEXTVAL('CONTRACTORS_SEQ'::REGCLASS),
+            NAME TEXT NOT NULL,
+            SYMBOL CHARACTER VARYING(70) NOT NULL,
+            CONTRACTOR_GROUP_ID SMALLINT DEFAULT (0)::SMALLINT NOT NULL,
+            TYPE SMALLINT DEFAULT (1)::SMALLINT NOT NULL,
+            POSTCODE CHARACTER VARYING(6) NOT NULL,
+            CITY CHARACTER VARYING(40) NOT NULL,
+            ADRESS CHARACTER VARYING(60) NOT NULL,
+            NIP CHARACTER VARYING(13) NOT NULL,
+            DISCOUNT NUMERIC(4,2) DEFAULT 0.00 NOT NULL,
+            ADDITIONAL CHARACTER VARYING(60) NOT NULL,
+            ACCOUNT_NUMBER CHARACTER VARYING(34) NOT NULL,
+            WEBSITE CHARACTER VARYING(60) NOT NULL,
+            EMAIL CHARACTER VARYING(60) NOT NULL,
+            COMMENTS TEXT NOT NULL,
+            SOURCE_OF_MEMBER_ID SMALLINT DEFAULT (1)::SMALLINT NOT NULL,
+            REPRESENTATIVE CHARACTER VARYING(70) NOT NULL,
+            IS_COMPANY BOOLEAN DEFAULT FALSE,
+            IS_ACTIVE BOOLEAN DEFAULT TRUE,
+            VERSION BIGINT NOT NULL
+            );
+
+            ALTER TABLE ONLY CONTRACTORS ADD CONSTRAINT CONTRACTORS_PK PRIMARY KEY (CONTRACTOR_ID);
+            ALTER TABLE CONTRACTORS ADD CONSTRAINT CONTRACTORS_FK1 FOREIGN KEY (CONTRACTOR_GROUP_ID) REFERENCES CONTRACTORS_GROUPS (CONTRACTOR_GROUP_ID) MATCH FULL;
+            ALTER TABLE CONTRACTORS ADD CONSTRAINT CONTRACTORS_FK2 FOREIGN KEY (SOURCE_OF_MEMBER_ID) REFERENCES SOURCES_OF_MEMBER (SOURCE_OF_MEMBER_ID) MATCH FULL;
+            ALTER SEQUENCE CONTRACTORS_SEQ OWNED BY CONTRACTORS.CONTRACTOR_ID;
+            SELECT PG_CATALOG.SETVAL('CONTRACTORS_SEQ', 1, TRUE);
+        </sql>
+    </changeSet>
+    <changeSet id="postal_codes_table" author="bartosz.milczarek">
+        <sql>
+            CREATE TABLE POSTAL_CODES (
+            CODE CHARACTER(6) NOT NULL,
+            CITY CHARACTER VARYING(30) NOT NULL
+            );
+            ALTER TABLE ONLY POSTAL_CODES ADD CONSTRAINT POSTAL_CODES_PK PRIMARY KEY (CODE);
+        </sql>
+        <sqlFile path="../files/001_inserts_postal_codes.sql" relativeToChangelogFile="true" />
+    </changeSet>
+    <changeSet id="goods_tables" author="bartosz.milczarek">
+        <sql>
+            CREATE SEQUENCE GOODS_GROUPS_SEQ
+            START WITH 1
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+
+            CREATE TABLE GOODS_GROUPS (
+            GOOD_GROUP_ID SMALLINT DEFAULT NEXTVAL('GOODS_GROUPS_SEQ'::REGCLASS) NOT NULL,
+            NAME CHARACTER VARYING(60) NOT NULL,
+            IS_ACTIVE BOOLEAN DEFAULT TRUE NOT NULL,
+            VERSION BIGINT NOT NULL
+            );
+
+            ALTER TABLE GOODS_GROUPS OWNER TO admin;
+            ALTER TABLE ONLY GOODS_GROUPS ADD CONSTRAINT GOODS_GROUPS_PK PRIMARY KEY (GOOD_GROUP_ID);
+
+            ALTER TABLE GOODS_GROUPS_SEQ OWNER TO admin;
+            ALTER SEQUENCE GOODS_GROUPS_SEQ OWNED BY GOODS_GROUPS.GOOD_GROUP_ID;
+            SELECT PG_CATALOG.SETVAL('GOODS_GROUPS_SEQ', 1, TRUE);
+        </sql>
+        <sql>
+            CREATE SEQUENCE GOODS_SEQ
+            START WITH 1
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+
+            CREATE TABLE GOODS (
+            GOOD_ID INTEGER DEFAULT NEXTVAL('GOODS_SEQ'::REGCLASS) NOT NULL,
+            SYMBOL CHARACTER VARYING(70) NOT NULL,
+            NAME CHARACTER VARYING(70) NOT NULL,
+            TYPE SMALLINT DEFAULT (1)::SMALLINT NOT NULL,
+            TAX_ID SMALLINT DEFAULT (1)::SMALLINT NOT NULL,
+            UNIT_ID SMALLINT DEFAULT (1)::SMALLINT NOT NULL,
+            PKWIU CHARACTER VARYING(25) NOT NULL,
+            GOOD_GROUP_ID SMALLINT DEFAULT (1)::SMALLINT NOT NULL,
+            PRICE_A_NET NUMERIC(10,2) NOT NULL,
+            PRICE_A_GROSS NUMERIC(10,2) NOT NULL,
+            PRICE_MAG_NET NUMERIC(10,2) NOT NULL,
+            PRICE_MAG_GROSS NUMERIC(10,2) NOT NULL,
+            PRICE_B_NET NUMERIC(10,2) NOT NULL,
+            PRICE_B_GROSS NUMERIC(10,2) NOT NULL,
+            PRICE_C_NET NUMERIC(10,2) NOT NULL,
+            PRICE_C_GROSS NUMERIC(10,2) NOT NULL,
+            DESCRIPTION TEXT NOT NULL,
+            PHOTO CHARACTER VARYING(180) NOT NULL,
+            WEIGHT DOUBLE PRECISION DEFAULT (0)::DOUBLE PRECISION NOT NULL,
+            IS_ACTIVE BOOLEAN DEFAULT TRUE NOT NULL,
+            VERSION BIGINT NOT NULL
+            );
+
+            ALTER TABLE ONLY GOODS ADD CONSTRAINT GOODS_PK PRIMARY KEY (GOOD_ID);
+            ALTER TABLE GOODS ADD CONSTRAINT GOODS_FK1 FOREIGN KEY (TAX_ID) REFERENCES TAXES (TAX_ID) MATCH FULL;
+            ALTER TABLE GOODS ADD CONSTRAINT GOODS_FK2 FOREIGN KEY (UNIT_ID) REFERENCES UNITS (UNIT_ID) MATCH FULL;
+            ALTER TABLE GOODS ADD CONSTRAINT GOODS_FK3 FOREIGN KEY (GOOD_GROUP_ID) REFERENCES GOODS_GROUPS (GOOD_GROUP_ID) MATCH FULL;
+
+            ALTER SEQUENCE GOODS_SEQ OWNED BY GOODS.GOOD_ID;
+            SELECT PG_CATALOG.SETVAL('GOODS_SEQ', 1, TRUE);
+        </sql>
+    </changeSet>
+    
+    <changeSet id="insert_required_data_for_users" author="bartosz.milczarek">
+        <insert tableName="roles">
+            <column name="ROLE_ID" value="1" />
+            <column name="ROLE_NAME" value="admin" />
+            <column name="version" value="1" />
+        </insert>
+        <insert tableName="roles">
+            <column name="ROLE_ID" value="2" />
+            <column name="ROLE_NAME" value="manager" />
+            <column name="version" value="1" />
+        </insert>
+        <insert tableName="roles">
+            <column name="ROLE_ID" value="3" />
+            <column name="ROLE_NAME" value="user" />
+            <column name="version" value="1" />
+        </insert>
+        <insert tableName="users">
+            <column name="USER_ID" valueComputed="nextval('USERS_SEQ')" />
+            <column name="LOGIN" value="admin" />
+            <column name="PASSWORD" value="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" />
+            <column name="FIRST_NAME" value="Admin" />
+            <column name="SECOND_NAME" value="Admiński" />
+            <column name="EMAIL" value="admin@gmail.com" />
+            <column name="IS_ACTIVE" value="true" />
+            <column name="version" value="1" />
+        </insert>
+        <insert tableName="users_roles">
+            <column name="USER_ID" valueComputed="currval('USERS_SEQ')" />
+            <column name="ROLE_ID" valueComputed="1" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

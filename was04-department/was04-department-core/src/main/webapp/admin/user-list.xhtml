@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="../layout/main-template.xhtml">
+            <ui:define name="content">
+                <!-- Right side column. Contains the navbar and content of the page -->
+                <aside class="right-side">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Kokpit</a></li>
+                            <li><a href="#">Użytkownicy</a></li>
+                            <li class="active">Zarządzaj</li>
+                        </ol>
+                    </section>
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Zarządzaj użytkownikami</h3>
+                                    </div>
+                                    <div class="box-body table-responsive">
+                                        <h:form id="userList-form">
+                                            <p:growl id="growl" showDetail="true" life="5000"/>
+                                            <p:dataTable id="userList-dataTable" value="#{userListBean.userList}" var="user" rowIndexVar="index" editable="true" tableStyleClass="table table-bordered dataTable">
+
+                                                <p:ajax event="rowEdit" listener="#{userListBean.onEdit}" />
+
+                                                <p:column>
+                                                    <h:outputText value="#{index + 1}" />
+                                                </p:column>
+                                                <p:column headerText="Adres e-mail">
+                                                    <h:outputText value="#{user.email}" />
+                                                </p:column>
+                                                <p:column headerText="Imię">
+                                                    <h:outputText value="#{user.firstName}" />
+                                                </p:column>
+                                                <p:column headerText="Nazwisko">
+                                                    <h:outputText value="#{user.secondName}" />
+                                                </p:column>
+                                                <p:column headerText="Rola">
+                                                    <p:cellEditor>
+                                                        <f:facet name="output">
+                                                            <h:selectBooleanCheckbox value="#{user.admin}" disabled="true"/>
+                                                            <h:outputText value="Administrator " style="margin-left: 5px; margin-right: 10px;"/>
+                                                            <h:selectBooleanCheckbox value="#{user.manager}" disabled="true"/>
+                                                            <h:outputText value="Manager " style="margin-left: 5px; margin-right: 10px;"/>
+                                                            <h:selectBooleanCheckbox value="#{user.user}" disabled="true"/>
+                                                            <h:outputText value="Użytkownik " style="margin-left: 5px; margin-right: 10px;"/>
+                                                        </f:facet>
+                                                        <f:facet name="input">
+                                                            <h:selectBooleanCheckbox value="#{user.admin}" />
+                                                            <h:outputText value="Administrator " style="margin-left: 5px; margin-right: 10px;"/>
+                                                            <h:selectBooleanCheckbox value="#{user.manager}" />
+                                                            <h:outputText value="Manager " style="margin-left: 5px; margin-right: 10px;"/>
+                                                            <h:selectBooleanCheckbox value="#{user.user}" />
+                                                            <h:outputText value="Użytkownik " style="margin-left: 5px; margin-right: 10px;"/>
+                                                        </f:facet>
+                                                    </p:cellEditor>
+                                                </p:column>
+                                                <p:column headerText="Konto aktywne">
+                                                    <p:cellEditor>
+                                                        <f:facet name="output">
+                                                            <h:selectBooleanCheckbox value="#{user.active}" disabled="true"/>
+                                                            <h:outputText value="Aktywny " style="margin-left: 5px; margin-right: 10px;"/>
+                                                        </f:facet>
+                                                        <f:facet name="input">
+                                                            <h:selectBooleanCheckbox value="#{user.active}" />
+                                                            <h:outputText value="Aktywny " style="margin-left: 5px; margin-right: 10px;"/>
+                                                        </f:facet>
+                                                    </p:cellEditor>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:rowEditor />
+                                                </p:column>
+                                            </p:dataTable>
+                                        </h:form>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </section><!-- /.content -->
+                </aside><!-- /.right-side -->
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

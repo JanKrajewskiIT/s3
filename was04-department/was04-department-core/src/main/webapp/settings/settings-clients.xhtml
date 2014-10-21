@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:param name="boxEffectTypeForShow" value="blind" />
+        <ui:param name="boxEffectTypeForHide" value="blind" />
+        
+        <div class="panel box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSettingsClients">
+                        Ustawienia klientów
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseSettingsClients" class="panel-collapse collapse">
+                <div class="box-body">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#settings_clients_groups" data-toggle="tab">Grupy kontrahenckie</a></li>
+
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane narrow-pane active" id="settings_clients_groups">
+                                <h:form id="settings-clients-groups-form">
+                                    <div class="row">
+                                        <p:commandLink styleClass="btn btn-primary">
+                                            <i class="glyphicon glyphicon-plus"></i> Dodaj
+                                            <p:effect type="#{boxEffectTypeForShow}" event="click" for="addClientGroupPanel">  
+                                                <f:param name="mode" value="'show'" />  
+                                            </p:effect>
+                                        </p:commandLink>
+                                    </div>
+                                    <p:outputPanel id="addClientGroupPanel" layout="block" style="display:none">  
+                                        <div class="row top10">
+                                            <div class="box box-primary">
+                                                <div class="box-header">
+                                                    <h3 class="box-title">Dodaj grupę kliencką</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <p:commandLink styleClass="btn btn-primary btn-xs">
+                                                            <i class="fa fa-times"></i>
+                                                            <p:effect type="#{boxEffectTypeForHide}" event="click" for="addClientGroupPanel">  
+                                                                <f:param name="mode" value="'hide'" />  
+                                                            </p:effect>
+                                                        </p:commandLink>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="form-group">
+                                                        <label for="inputClientGroupName">Nazwa</label>
+                                                        <p:inputText value="#{settingsClientsPageBean.newClientGroup.name}" styleClass="form-control" label="inputClientGroupName" placeholder="Wpisz nazwę" />
+                                                    </div>
+                                                </div>
+                                                <div class="box-footer text-right">
+                                                    <!-- Save unit button -->
+                                                    <p:commandButton styleClass="btn btn-primary" action="#{settingsClientsPageBean.saveNewClientGroup}" value="Zapisz" ajax="true" update="settingsClientsClientsGroupsTableId,addClientGroupPanel" resetValues="true">
+                                                        <p:effect type="#{boxEffectTypeForHide}" event="click" for="addClientGroupPanel">  
+                                                            <f:param name="mode" value="'hide'" />  
+                                                        </p:effect>
+                                                    </p:commandButton>
+                                                </div>
+                                            </div><!-- /.box -->
+                                        </div><!-- /.row -->
+                                    </p:outputPanel> 
+
+                                    <div class="row top17">
+                                        <p:messages id="messagesClientsClientsGroupsTableChanged" showDetail="true" />  
+                                        <p:dataTable id="settingsClientsClientsGroupsTableId" var="clientGroup" tableStyleClass="table table-bordered table-nonfluid dataTable" value="#{settingsClientsPageBean.clientsGroups}" editable="true">
+                                            <p:ajax event="rowEdit" listener="#{settingsClientsPageBean.onClientGroupEdit}" update=":settings-clients-groups-form:messagesClientsClientsGroupsTableChanged" />  
+                                            <p:column headerText="Nazwa" styleClass="col-md-4">
+                                                <p:cellEditor>  
+                                                    <f:facet name="output">  
+                                                        <h:outputText value="#{clientGroup.name}" />
+                                                    </f:facet>  
+                                                    <f:facet name="input">  
+                                                        <p:inputText value="#{clientGroup.name}" style="width:100%" label="Nazwa"/>  
+                                                    </f:facet>  
+                                                </p:cellEditor> 
+                                            </p:column>  
+                                            <p:column headerText="Akcja"  styleClass="col-md-2 text-center">  
+                                                <p:rowEditor />
+                                                <p:commandLink styleClass="btn btn-danger btn-xs" update=":settings-clients-groups-form:messagesClientsClientsGroupsTableChanged,settingsClientsClientsGroupsTableId" ajax="true" action="#{settingsClientsPageBean.removeClientGroup(clientGroup)}">
+                                                    <i class="glyphicon glyphicon-minus"></i> Usuń
+                                                </p:commandLink>
+                                            </p:column> 
+
+                                        </p:dataTable>
+                                    </div>
+                                </h:form>
+                            </div><!-- /.tab-pane -->
+                        </div><!-- /.tab-content -->
+                    </div><!-- nav-tabs-custom -->
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

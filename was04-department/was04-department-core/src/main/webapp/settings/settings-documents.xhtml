@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:param name="boxEffectTypeForShow" value="blind" />
+        <ui:param name="boxEffectTypeForHide" value="blind" />
+
+        <div class="panel box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        Ustawienia dokumentów
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="box-body">
+                    <div class="box-body">
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#settings_documents_numeration" data-toggle="tab">Numeracja</a></li>
+                                <li><a href="#settings_documents_payment_methods" data-toggle="tab">Sposoby płatności</a></li>
+                                <li><a href="#settings_documents_document_place" data-toggle="tab">Miejsce wystawienia</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane narrow-pane active" id="settings_documents_numeration">
+                                    <h:form id="settings-dcuments-format-form">
+                                        <p:messages id="messageDocumenFormat" showDetail="true" closable="true" />  
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <label>Format numeracji dokumentów</label>
+                                                <h:selectOneMenu id="documentSymbolFormatSelectMenu" value="#{settingsDocumentsPageBean.documentFormatSelection}" styleClass="form-control">  
+                                                    <f:selectItems value="#{settingsDocumentsPageBean.availableDocumentsSymbolFormats}" var="documentFormat" itemLabel="#{documentFormat}" itemValue="#{documentFormat}"/> 
+                                                    <p:ajax update="documentFormatSavePanel" />
+                                                </h:selectOneMenu> 
+                                            </div>
+                                            <p:outputPanel id="documentFormatSavePanel" styleClass="col-xs-4">
+                                                <p:commandLink styleClass="btn btn-primary top25" ajax="true" rendered="#{settingsDocumentsPageBean.documentFormatSelection != settingsDocumentsPageBean.currentDocumentSymbolFormat}" action="#{settingsDocumentsPageBean.saveDocumentSymbolFormat(settingsDocumentsPageBean.documentFormatSelection)}" value="Zapisz" update="@(form)" />
+                                            </p:outputPanel>
+                                        </div>
+                                    </h:form>
+                                </div><!-- /.tab-pane -->
+                                <!-- Settings Payment Methods -->
+                                <div class="tab-pane narrow-pane" id="settings_documents_payment_methods">
+                                    <h:form id="settings-payment-method-form">
+                                        <div class="row">
+                                            <p:commandLink styleClass="btn btn-primary">
+                                                <i class="glyphicon glyphicon-plus"></i> Dodaj
+                                                <p:effect type="#{boxEffectTypeForShow}" event="click" for="addPaymentMethodPanel">  
+                                                    <f:param name="mode" value="'show'" />  
+                                                </p:effect>
+                                            </p:commandLink>
+                                        </div>
+                                        <p:outputPanel id="addPaymentMethodPanel" layout="block" style="display:none">  
+                                            <div class="row top10">
+                                                <div class="box box-primary">
+                                                    <div class="box-header">
+                                                        <h3 class="box-title">Dodaj metodę płatności</h3>
+                                                        <div class="box-tools pull-right">
+                                                            <p:commandLink styleClass="btn btn-primary btn-xs">
+                                                                <i class="fa fa-times"></i>
+                                                                <p:effect type="#{boxEffectTypeForHide}" event="click" for="addPaymentMethodPanel">  
+                                                                    <f:param name="mode" value="'hide'" />  
+                                                                </p:effect>
+                                                            </p:commandLink>
+                                                        </div>
+                                                    </div>
+                                                    <div class="box-body">
+                                                        <div class="form-group">
+                                                            <label for="inputPaymentMethodName">Nazwa</label>
+                                                            <p:inputText value="#{settingsDocumentsPageBean.newPaymentMethod.name}" styleClass="form-control" label="inputPaymentMethodName" placeholder="Wpisz nazwę" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="inputPaymentMethodMaturity">Termin płatności (dni)</label>
+                                                            <p:inputText value="#{settingsDocumentsPageBean.newPaymentMethod.maturity}" styleClass="form-control" label="inputPaymentMethodMaturity" placeholder="Termin płatności dni" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="box-footer text-right">
+                                                        <!-- Save paymentMethod button -->
+                                                        <p:commandButton styleClass="btn btn-primary" action="#{settingsDocumentsPageBean.saveNewPaymentMethod}" value="Zapisz" ajax="true" update="settingsDocumentsPaymentMethodsTableId,addPaymentMethodPanel" resetValues="true">
+                                                            <p:effect type="#{boxEffectTypeForHide}" event="click" for="addPaymentMethodPanel">  
+                                                                <f:param name="mode" value="'hide'" />  
+                                                            </p:effect>
+                                                        </p:commandButton>
+                                                    </div>
+                                                </div><!-- /.box -->
+                                            </div><!-- /.row -->
+                                        </p:outputPanel> 
+
+                                        <div class="row top17">
+                                            <p:messages id="messagesDocumentsPaymentMethodsTableChanged" showDetail="true" closable="true" />  
+                                            <p:dataTable id="settingsDocumentsPaymentMethodsTableId" var="paymentMethod" tableStyleClass="table table-bordered table-nonfluid dataTable" value="#{settingsDocumentsPageBean.paymentMethods}" editable="true">
+                                                <p:ajax event="rowEdit" listener="#{settingsDocumentsPageBean.onPaymentMethodEdit}" update=":settings-payment-method-form:messagesDocumentsPaymentMethodsTableChanged,settingsDocumentsPaymentMethodsTableId" />  
+                                                <p:column headerText="Nazwa" styleClass="col-md-4">
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{paymentMethod.name}" />
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{paymentMethod.name}" style="width:100%" label="Nazwa"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor> 
+                                                </p:column>  
+                                                <p:column headerText="Termin płatności (dni)" styleClass="col-md-4 text-center">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{paymentMethod.maturity}" />
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{paymentMethod.maturity}" style="width:100%" label="Liczba miejsc po przecinku"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor> 
+                                                </p:column>  
+
+                                                <p:column headerText="Akcja"  styleClass="col-md-4 text-center">  
+                                                    <p:rowEditor />
+                                                    <p:commandLink styleClass="btn btn-danger btn-xs" update=":settings-payment-method-form:settingsDocumentsPaymentMethodsTableId,:settings-payment-method-form:messagesDocumentsPaymentMethodsTableChanged" ajax="true" action="#{settingsDocumentsPageBean.removePaymentMethod(paymentMethod)}">
+                                                        <i class="glyphicon glyphicon-minus"></i> Usuń
+                                                    </p:commandLink>
+                                                </p:column> 
+
+                                            </p:dataTable>
+                                        </div>
+                                    </h:form>
+                                </div><!-- /.tab-pane -->
+                                <div class="tab-pane narrow-pane" id="settings_documents_document_place">
+                                    <h:form id="settings-document-place-form">
+                                        <div class="row">
+                                            <div class="form-group col-xs-6">
+                                                <label for="inputDefaultDocumentPlace">Domyślnie miejsce wystawienia dokumentu</label>
+                                                <p:inputText value="#{settingsDocumentsPageBean.newDefaultDocumentPlace}" styleClass="form-control" label="inputDefaultDocumentPlace" placeholder="Wpisz miejscowość">
+                                                    <p:ajax event="keyup" update="documentPlaceSavePanel" />
+                                                </p:inputText>
+                                            </div>
+                                            <p:outputPanel id="documentPlaceSavePanel" styleClass="col-xs-4">
+                                                <p:commandLink styleClass="btn btn-primary top25" ajax="true" rendered="#{settingsDocumentsPageBean.newDefaultDocumentPlace != settingsDocumentsPageBean.currentDefaultDocumentPlace}" action="#{settingsDocumentsPageBean.saveDocumentDefaultPlace(settingsDocumentsPageBean.newDefaultDocumentPlace)}" value="Zapisz" update="@(form)" />
+                                            </p:outputPanel>
+                                        </div>
+                                    </h:form>
+                                </div><!-- /.tab-pane -->
+                            </div><!-- /.tab-content -->
+                        </div><!-- nav-tabs-custom -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+
