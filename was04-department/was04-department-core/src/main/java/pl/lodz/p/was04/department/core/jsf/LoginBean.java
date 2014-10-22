@@ -4,16 +4,13 @@ import java.io.IOException;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.springframework.context.annotation.Scope;
-
-@Named(value = "loginBean")
-@Scope("request")
+//@Named(value = "loginBean")
+//@Scope("request")
 public class LoginBean {
 
 	public String doLogin() throws IOException, ServletException {
