@@ -21,7 +21,7 @@ import pl.lodz.p.was04.department.core.endpoint.accountmanagement.AccountManagem
  * @author Łukasz Gadomski
  */
 @Named(value = "addNewUserBean")
-@Scope("view")
+@Scope("request")
 public class AddNewUserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

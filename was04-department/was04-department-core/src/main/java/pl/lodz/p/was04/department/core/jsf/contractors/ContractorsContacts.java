@@ -19,7 +19,7 @@ import pl.lodz.p.was04.department.core.endpoint.contractors.ContractorsContactsM
  * @author janiu
  */
 @Named(value = "contractorsContactsBean")
-@Scope("view")
+@Scope("request")
 public class ContractorsContacts implements Serializable {
 
 	private static final long serialVersionUID = 1L;

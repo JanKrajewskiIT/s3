@@ -17,7 +17,7 @@ import pl.lodz.p.was04.department.core.endpoint.goods.UnitsManagementEndpointLoc
  * @author Łukasz
  */
 @Named(value = "unitsBean")
-@Scope("view")
+@Scope("request")
 public class UnitsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

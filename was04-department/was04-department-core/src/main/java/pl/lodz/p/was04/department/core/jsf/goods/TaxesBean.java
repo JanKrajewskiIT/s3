@@ -17,7 +17,7 @@ import pl.lodz.p.was04.department.core.endpoint.goods.TaxesManagementEndpointLoc
  * @author Łukasz
  */
 @Named(value = "taxesBean")
-@Scope("view")
+@Scope("request")
 public class TaxesBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

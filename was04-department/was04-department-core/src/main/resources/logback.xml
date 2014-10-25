@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<configuration scan="true" scanPeriod="30 seconds">
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${catalina.home}/logs/was04/was04-department.log</file>
@@ -19,6 +19,7 @@
 		</encoder>
 	</appender>
 
+	<logger name="org.springframework.security" level="trace" />
 	<logger name="org.springframework" level="debug" />
 	<logger name="org.hibernate" level="info" />
 

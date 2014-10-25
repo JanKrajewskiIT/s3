@@ -21,7 +21,7 @@ import pl.lodz.p.was04.department.core.endpoint.contractors.ContractorsManagemen
  * @author Janiu
  */
 @Named(value = "contractorsTableBean")
-@Scope("view")
+@Scope("request")
 public class ContractorsTableBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -23,7 +23,7 @@ import pl.lodz.p.was04.department.core.endpoint.documents.PaymentMethodsManagent
  * @author milczu
  */
 @Named(value = "settingsDocumentsPageBean")
-@Scope("view")
+@Scope("request")
 public class SettingsDocumentsPageBean implements Serializable {
  
 	private static final long serialVersionUID = 1L;

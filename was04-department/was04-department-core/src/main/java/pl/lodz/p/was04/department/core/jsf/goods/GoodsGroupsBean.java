@@ -17,7 +17,7 @@ import pl.lodz.p.was04.department.core.endpoint.goods.GoodsGroupsManagementEndpo
  * @author Łukasz
  */
 @Named(value = "goodsGroupsBean")
-@Scope("view")
+@Scope("request")
 public class GoodsGroupsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

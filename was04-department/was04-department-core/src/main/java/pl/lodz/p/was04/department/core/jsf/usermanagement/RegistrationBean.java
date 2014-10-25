@@ -21,7 +21,7 @@ import pl.lodz.p.was04.department.core.exception.UniqueConstraintViolationExcept
  * @author Łukasz Gadomski
  */
 @Named(value = "registrationBean")
-@Scope("view")
+@Scope("request")
 public class RegistrationBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

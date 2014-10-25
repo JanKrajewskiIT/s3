@@ -17,7 +17,7 @@ import pl.lodz.p.was04.department.core.endpoint.accountmanagement.AccountManagem
  * @author Łukasz Gadomski
  */
 @Named(value = "resetPasswordBean")
-@Scope("view")
+@Scope("request")
 public class ResetPasswordBean {
 
     @Autowired

@@ -24,7 +24,7 @@ import pl.lodz.p.was04.department.core.endpoint.goods.UnitsManagementEndpointLoc
  * @author milczu
  */
 @Named(value = "settingsGoodsPageBean")
-@Scope("view")
+@Scope("request")
 public class SettingsGoodsPageBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -21,7 +21,7 @@ import pl.lodz.p.was04.department.core.manager.accountmanagement.AccountManagerL
  * @author milczu
  */
 @Named(value = "settingsClientsPageBean")
-@Scope("view")
+@Scope("request")
 public class SettingsClientsPageBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

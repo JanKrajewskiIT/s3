@@ -14,16 +14,16 @@ import javax.inject.Named;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.was04.department.core.dto.goods.GoodDTO;
-import com.sun.jersey.api.client.Client;
 
 import com.google.gson.Gson;
+import com.sun.jersey.api.client.Client;
 
 /**
  *
  * @author Łukasz Gadomski
  */
 @Named
-@Scope("view")
+@Scope("request")
 //TODO this class is no longer needed
 public class AvailableGoodsBean {
 

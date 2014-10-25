@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+    <menu-item name="Dashboard" styleClass="fa fa-dashboard" targetUrl="/">
+        <activeDefinitions>
+            <activeNode requestPath="/" compare="EQUALS" />
+            <activeNode requestPath="/index.xhtml" compare="EQUALS" />
+        </activeDefinitions>
+    </menu-item>
+    <menu-item name="Klienci" styleClass="fa fa-bar-chart-o" hasAnyRole="admin,user">
+        <activeDefinitions>
+            <activeNode requestPath="/contractors" compare="STARTS_WITH" />
+        </activeDefinitions>
+        <menu-items>
+            <menu-item name="Wyświetl" targetUrl="/contractors/contractorsTable.xhtml" />
+            <menu-item name="Dodaj" targetUrl="/contractors/addEditContractor.xhtml" />
+        </menu-items>
+    </menu-item>
+    <menu-item name="Produkty" styleClass="fa fa-laptop" hasAnyRole="admin,user">
+        <activeDefinitions>
+            <activeNode requestPath="/goods" compare="STARTS_WITH" />
+        </activeDefinitions>
+        <menu-items>
+            <menu-item name="Wyświetl" targetUrl="/goods/goodsTable.xhtml" />
+            <menu-item name="Dodaj" targetUrl="/goods/addEditGood.xhtml" />
+        </menu-items>
+    </menu-item>
+    <menu-item name="Sprzedaż" styleClass="fa fa-edit" hasAnyRole="admin,user">
+        <activeDefinitions>
+            <activeNode requestPath="/documents/saleDocuments" compare="STARTS_WITH" />
+        </activeDefinitions>
+        <menu-items>
+            <menu-item name="Faktura Vat" styleClass="fa fa-edit">
+                <menu-items>
+                    <menu-item name="Wyświetl" targetUrl="/documents/saleDocuments/vatInvoicesTable.xhtml" />
+                    <menu-item name="Dodaj" targetUrl="/documents/saleDocuments/vatInvoiceAddEdit.xhtml" />
+                </menu-items>
+            </menu-item>
+        </menu-items>
+    </menu-item>
+    <menu-item name="Magazyn" styleClass="fa fa-edit" hasAnyRole="admin,user">
+        <activeDefinitions>
+            <activeNode requestPath="/documents/warehouseDocuments" compare="STARTS_WITH" />
+        </activeDefinitions>
+        <menu-items>
+            <menu-item name="Wydanie Zęwnetrzne" styleClass="fa fa-edit">
+                <menu-items>
+                    <menu-item name="Wyświetl" targetUrl="/documents/warehouseDocuments/wzTable.xhtml" />
+                    <menu-item name="Dodaj" targetUrl="/documents/warehouseDocuments/wzAddEdit.xhtml" />
+                </menu-items>
+            </menu-item>
+        </menu-items>
+    </menu-item>
+    <menu-item name="Raporty" styleClass="fa fa-edit" hasAnyRole="manager">
+        <activeDefinitions>
+            <activeNode requestPath="/reports" compare="STARTS_WITH" />
+        </activeDefinitions>
+        <menu-items>
+            <menu-item name="Wyświetl" targetUrl="/reports/list.xhtml" />
+        </menu-items>
+    </menu-item>
+    <menu-item name="Użytkownicy" styleClass="fa fa-table" hasAnyRole="admin">
+        <activeDefinitions>
+            <activeNode requestPath="/admin" compare="STARTS_WITH" />
+        </activeDefinitions>
+        <menu-items>
+            <menu-item name="Zarządzaj" targetUrl="/admin/user-list.xhtml" />
+            <menu-item name="Dodaj" targetUrl="/admin/add-new-user.xhtml" />
+        </menu-items>
+    </menu-item>
+    <menu-item name="Ustawienia" styleClass="fa fa-dashboard" targetUrl="/settings/settings.xhtml" hasAnyRole="admin,manager">
+        <activeDefinitions>
+            <activeNode requestPath="/settings/settings.xhtml" compare="EQUALS" />
+        </activeDefinitions>
+    </menu-item>
+</menu>

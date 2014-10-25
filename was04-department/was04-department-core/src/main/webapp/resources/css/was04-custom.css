@@ -1,0 +1,19 @@
+.top5 { margin-top:5px; }
+.top7 { margin-top:7px; }
+.top10 { margin-top:10px; }
+.top15 { margin-top:15px; }
+.top17 { margin-top:17px; }
+.top25 { margin-top:25px; }
+.top30 { margin-top:30px; }
+
+/* white text on blue 'primary' button */
+.btn-primary i { color: #ffffff; }
+
+.narrow-pane { margin: auto; max-width: 700px; }
+
+
+.ui-row-editor { display: inline-block; }
+/*
+ * Margin for buttons in datatable rowEditor
+ */
+.ui-row-editor .btn { margin-left: 2px; margin-right: 2px; }

@@ -27,10 +27,12 @@ import pl.lodz.p.was04.department.core.endpoint.goods.WarehousesGoodsEndpointLoc
  * @author Łukasz
  */
 @Named(value = "goodAddEditBean")
-@Scope("view")
+@Scope("request")
 public class GoodAddEditBean implements Serializable {
 
-    @Autowired
+	private static final long serialVersionUID = -5504508900103108521L;
+
+	@Autowired
     private GoodsManagementEndpointLocal goodsManagementEndpointLocal;
 
     @Autowired
@@ -78,9 +80,7 @@ public class GoodAddEditBean implements Serializable {
         getGood().setGoodGroup(goodsGroupsManagementEndpointLocal.getGroup(getGood().getGoodGroup().getId()));
         getGood().setTax(taxesManagementEndpointLocal.getTax(getGood().getTax().getId()));
 
-        //TODO id changed from string to long
-        //if (StringUtils.isBlank(getGood().getId())) {
-        if(true) {  
+        if(getGood().getId() != null) {  
         	List<WarehouseDTO> warehouses = warehousesEndpoint.getWarehouses();
             Long id = goodsManagementEndpointLocal.add(getGood());
             for (WarehouseDTO warehouseDTO : warehouses) {

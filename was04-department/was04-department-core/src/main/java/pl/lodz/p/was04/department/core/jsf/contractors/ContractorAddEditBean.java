@@ -18,7 +18,7 @@ import pl.lodz.p.was04.department.core.endpoint.contractors.ContractorsManagemen
  *
  * @author Janiu
  */
-@Scope("view")
+@Scope("request")
 @Named(value = "contractorAddEditBean")
 public class ContractorAddEditBean implements Serializable {
 

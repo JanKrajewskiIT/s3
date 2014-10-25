@@ -21,7 +21,7 @@ import pl.lodz.p.was04.department.core.endpoint.goods.GoodsManagementEndpointLoc
  * @author Łukasz
  */
 @Named(value = "goodsTableBean")
-@Scope("view")
+@Scope("request")
 public class GoodsTableBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -8,10 +8,56 @@
 	</application>
 
 	<navigation-rule>
+		<from-view-id>*</from-view-id>
 		<navigation-case>
-            <from-outcome>index</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/logout.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>index</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrationSuccess</from-outcome>
+			<to-view-id>/registration/success.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>profile</from-outcome>
+			<to-view-id>/profile/profile.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+            <from-outcome>forgotpassword</from-outcome>
+            <to-view-id>/password-recovery/forgot-password.xhtml</to-view-id>
             <redirect />
         </navigation-case>
-	</navigation-rule>
+        <navigation-case>
+            <from-outcome>passwordresetsuccess</from-outcome>
+            <to-view-id>/password-recovery/success.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>404</from-outcome>
+            <to-view-id>/error/404.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.RowEditorRenderer</renderer-type>
+            <renderer-class>pl.lodz.p.was04.department.core.jsf.primefaces.BootstrapRowEditorRenderer</renderer-class>
+        </renderer>
+    </render-kit>
+		
+
 </faces-config>

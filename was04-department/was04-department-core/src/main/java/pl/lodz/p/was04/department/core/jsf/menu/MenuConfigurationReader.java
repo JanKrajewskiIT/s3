@@ -77,12 +77,13 @@ public class MenuConfigurationReader implements Serializable {
                     menuItem.setStyleClass(menuItemElement.getAttribute("styleClass"));
                 }
 
-                if (menuItemElement.hasAttribute("hasRole")) {
-                    String[] roles = menuItemElement.getAttribute("hasRole").split(",");
+                if (menuItemElement.hasAttribute("hasAnyRole")) {
+                    String[] roles = menuItemElement.getAttribute("hasAnyRole").split(",");
                     boolean result = false;
                     for (String role : roles) {
-                        if (FacesContext.getCurrentInstance().getExternalContext().isUserInRole(role)) {
+                        if (FacesContext.getCurrentInstance().getExternalContext().isUserInRole(role.trim())) {
                             result = true;
+                            break;
                         }
                     }
                     menuItem.setRendered(result);

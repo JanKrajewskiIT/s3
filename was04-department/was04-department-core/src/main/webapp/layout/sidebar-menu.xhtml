@@ -2,70 +2,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
     <h:head>
     </h:head>
-    <h:body >
+    <h:body>
         <ui:param name="root" value="#{request.contextPath}" />
-        
+        <ui:param name="requestPath" value="#{fn:replace(request.requestURI, request.contextPath, '')}" />
+
         <!-- Left side column. contains the logo and sidebar -->
-        <aside class="left-side sidebar-offcanvas">                
+        <aside class="left-side sidebar-offcanvas">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
+
                 <ul class="sidebar-menu">
-                    <li>
-                        <a href="#{root}/index.xhtml">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-bar-chart-o"></i>
-                            <span>Klienci</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Wyświetl</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Dodaj</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview active">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>Produkty</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="active"><a href="#{root}/goods/list.xhtml"><i class="fa fa-angle-double-right"></i> Wyświetl</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Dodaj</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-edit"></i> <span>Raporty</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Wyświetl</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-table"></i> <span>Użytkownicy</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Zarządzaj</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Dodaj</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Ustawienia</span>
-                        </a>
-                    </li>
+                    <c:forEach var="menuItem" items="#{applicationConfigurationBean.sidebarMenuItems}">
+                        <h:panelGroup rendered="#{menuItem.rendered}">
+                            <c:set var="classActive" value=" " />
+                            <c:if test="#{menuItem.isActive(requestPath)}">
+                                <c:set var="classActive" value="active" />
+                            </c:if>
+
+                            <c:choose>
+                                <c:when test="#{menuItem.hasChildren()}">
+                                    <li  class="treeview #{classActive}">
+                                        <a href="#">
+                                            <i class="#{menuItem.styleClass}"></i>
+                                            <span><h:outputText value="#{menuItem.name}" /></span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <c:forEach var="nestedMenuItem" items="#{menuItem.menuItems}">
+                                                <c:set var="nestedClassActive" value=" " />
+                                                <c:if test="#{nestedMenuItem.isActive(requestPath)}">
+                                                    <c:set var="nestedClassActive" value="active" />
+                                                </c:if>
+                                                <li class="#{nestedClassActive}"><a href="#{root}#{nestedMenuItem.targetUrl}"><i class="#{nestedMenuItem.styleClass}"></i> <h:outputText value="#{nestedMenuItem.name}" /></a></li>
+                                            </c:forEach>
+                                        </ul>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="#{classActive}">
+                                        <a href="#{root}#{menuItem.targetUrl}">
+                                            <i class="#{menuItem.styleClass}"></i> <span><h:outputText value="#{menuItem.name}" /></span>
+                                        </a>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
+                        </h:panelGroup>
+                    </c:forEach>
                 </ul>
             </section>
             <!-- /.sidebar -->

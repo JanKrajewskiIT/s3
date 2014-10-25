@@ -17,7 +17,7 @@ import pl.lodz.p.was04.department.core.endpoint.contractors.ContractorsGroupsMan
  * @author janiu
  */
 @Named(value = "contractorsGroupsBean")
-@Scope("view")
+@Scope("request")
 public class ContractorsGroupsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
