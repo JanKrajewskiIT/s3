@@ -1,20 +1,40 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" class="bg-black"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<title>System sprzedaży sieciowej - logowanie</title>
+	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'/>
+        <ui:param name="root" value="#{request.contextPath}" />
+        <!-- bootstrap 3.0.2 -->
+        <link href="#{root}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- font Awesome -->
+        <link href="#{root}/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <!-- Theme style -->
+        <link href="#{root}/resources/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 </h:head>
-<h:body>
-	<form action="#{request.contextPath}/j_spring_security_check" method="post">
-		<p:panel id="login-panel">
-			<h:panelGrid columns="2">
-				<p:outputLabel value="Login: " />
-				<input type="text" name="j_username" />
-				<p:outputLabel value="Hasło: " />
-				<input type="password" name="j_password" />
-				<button class="ui-button" type="submit">Zaloguj</button>
-			</h:panelGrid>
-		</p:panel>
-	</form>
+<h:body styleClass="bg-black">
+	<div class="form-box" id="login-box">
+            <div class="header">Logowanie</div>
+ 		<form action="#{request.contextPath}/j_spring_security_check" method="post"  id="login-form">
+                <div class="body bg-gray">
+                    <div class="form-group">
+			<input type="text" name="j_username" class="form-control" placeholder="Login" />
+                    </div>
+                    <div class="form-group">
+			<input type="password" name="j_password" class="form-control" placeholder="Hasło" />	
+                    </div>
+                </div>
+                <div class="footer">
+                    <button class="btn bg-olive btn-block">Zaloguj się</button>
+                    <a href="#forgotpassword">Nie pamiętasz hasła?</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- jQuery 2.0.2 -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="#{root}/resources/js/bootstrap.min.js" type="text/javascript"></script>
 </h:body>
 </html>
