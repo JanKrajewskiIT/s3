@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<changeSet id="settings_properties_table" author="bartosz.milczarek">
+		<createTable tableName="settings">
+			<column name="id" type="bigserial" autoIncrement="true">
+				<constraints primaryKey="true" primaryKeyName="settings_pk" />
+			</column>
+			<column name="property_key" type="VARCHAR(60)">
+				<constraints nullable="false" />
+			</column>
+			<column name="type" type="VARCHAR(15)">
+				<constraints nullable="false" />
+			</column>
+			<column name="key" type="VARCHAR(60)" />
+			<column name="value" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<insert tableName="settings">
+			<column name="property_key" value="document.symbol.format" />
+			<column name="type" value="SCALAR" />
+			<column name="value" value="PREFIKS/NR/RRRR" />
+		</insert>
+	
+		<insert tableName="settings">
+			<column name="property_key" value="document.defaultPlace" />
+			<column name="type" value="SCALAR" />
+			<column name="value" value="" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

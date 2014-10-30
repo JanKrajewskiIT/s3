@@ -39,7 +39,7 @@ public class DocumentPosition implements Serializable, BasePersistable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contractor_id")    
+    @Column(name = "document_position_id")    
     protected Long id;
     
 	@Basic(optional = false)

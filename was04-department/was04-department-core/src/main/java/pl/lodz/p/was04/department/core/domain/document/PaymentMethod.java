@@ -23,14 +23,14 @@ import pl.lodz.p.was04.department.core.domain.Activable;
  * @author Janiu
  */
 @Entity
-@Table(name = "methods_of_payment")
+@Table(name = "payment_methods")
 public class PaymentMethod implements Serializable, Activable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "mop_id")
+    @Column(name = "payment_method_id")
     private Long id;
 
     @Column(name = "name")

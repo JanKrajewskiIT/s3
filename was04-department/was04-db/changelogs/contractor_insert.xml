@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<changeSet id="sample_clients_groups" author="bartosz.milczarek">
+		<preConditions onFail="MARK_RAN">
+			<changeLogPropertyDefined property="withTestData" value="true" />
+		</preConditions>
+
+		<insert tableName="contractors_groups">
+			<column name="name" value="Grupa 1" />
+			<column name="is_active" value="true" />
+			<column name="version" value="1" />
+		</insert>
+		<insert tableName="contractors_groups">
+			<column name="name" value="Grupa 2" />
+			<column name="is_active" value="true" />
+			<column name="version" value="1" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="sample_clients_groups" author="bartosz.milczarek">
+		<preConditions onFail="MARK_RAN">
+			<changeLogPropertyDefined property="withTestData" value="true" />
+		</preConditions>
+
+		<insert tableName="payment_methods">
+			<column name="name" value="Gotówka" />
+			<column name="maturity" value="0" />
+			<column name="is_active" value="true" />
+			<column name="version" value="1" />
+		</insert>
+		<insert tableName="payment_methods">
+			<column name="name" value="Przelew" />
+			<column name="maturity" value="14" />
+			<column name="is_active" value="true" />
+			<column name="version" value="1" />
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>

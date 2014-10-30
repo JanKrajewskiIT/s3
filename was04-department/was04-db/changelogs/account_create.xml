@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+<!-- 
+source of member 
+wszedzie bigint
+postal_code_id
+DEFAULT (0)::BIGINT for fk
+tworzenie bazy , usera i schematu
+fk match full
+names in tables 
+ -->
+	<changeSet id="init_changeset_users" author="bartosz.milczarek">
+		<sql>
+			CREATE SEQUENCE USERS_SEQ
+			START WITH 1
+			INCREMENT BY 1
+			NO MINVALUE
+			NO MAXVALUE
+			CACHE 1;
+		</sql>
+		<sql>
+			CREATE TABLE USERS (
+				USER_ID BIGINT NOT NULL DEFAULT NEXTVAL('USERS_SEQ'::REGCLASS),
+				PASSWORD CHARACTER(64) NOT NULL,
+				FIRST_NAME CHARACTER VARYING(20) NOT NULL,
+				SECOND_NAME CHARACTER VARYING(20) NOT NULL,
+				EMAIL CHARACTER VARYING(40) NOT NULL,
+				IS_ACTIVE BOOLEAN DEFAULT TRUE NOT NULL,				
+				VERSION BIGINT DEFAULT (1)::BIGINT NOT NULL
+			);
+		</sql>
+		<sql>
+			ALTER TABLE ONLY USERS ADD CONSTRAINT USERS_PK PRIMARY KEY(USER_ID);
+            ALTER TABLE USERS ADD CONSTRAINT USERS_UK UNIQUE (EMAIL);
+		</sql>
+	</changeSet>
+	<changeSet id="init_changeset_roles" author="bartosz.milczarek">
+		<sql>
+			CREATE TABLE ROLES (
+				ROLE_ID BIGINT NOT NULL,
+				ROLE_NAME CHARACTER VARYING(20) NOT NULL,		
+				VERSION BIGINT DEFAULT (1)::BIGINT NOT NULL
+			);
+		</sql>
+		<sql>
+			ALTER TABLE ONLY ROLES ADD CONSTRAINT ROLES_PK PRIMARY KEY(ROLE_ID);
+            ALTER TABLE ROLES ADD CONSTRAINT ROLES_UK UNIQUE (ROLE_NAME);
+		</sql>
+	</changeSet>
+	<changeSet id="init_changeset_users_roles" author="bartosz.milczarek">
+		<sql>
+			CREATE TABLE USERS_ROLES (
+				USER_ID BIGINT NOT NULL,
+				ROLE_ID BIGINT NOT NULL
+			);
+		</sql>
+		<sql>
+			ALTER TABLE USERS_ROLES ADD CONSTRAINT USERS_ROLES_UK UNIQUE (USER_ID, ROLE_ID);
+			ALTER TABLE USERS_ROLES ADD CONSTRAINT USERS_ROLES_FK1 FOREIGN KEY (USER_ID) REFERENCES USERS (USER_ID);
+			ALTER TABLE USERS_ROLES ADD CONSTRAINT USERS_ROLES_FK2 FOREIGN KEY (ROLE_ID) REFERENCES ROLES (ROLE_ID);
+		</sql>
+	</changeSet>
+	<changeSet id="init_changeset_pending_invitations" author="lukasz.gadomski">
+    	<sql>        
+            CREATE SEQUENCE PENDING_INVITATIONS_SEQ
+            START WITH 1
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+        </sql>
+        <sql>
+            CREATE TABLE PENDING_INVITATIONS (
+            	PENDING_INVITATION_ID BIGINT NOT NULL DEFAULT NEXTVAL('PENDING_INVITATIONS_SEQ'::REGCLASS),
+            	EMAIL CHARACTER VARYING(40) NOT NULL,
+            	ROLE_ID BIGINT NOT NULL,
+            	TOKEN VARCHAR(64) NOT NULL,
+            	CREATION_DATE TIMESTAMPTZ NOT NULL
+            );
+		</sql>
+		<sql>
+            ALTER TABLE pending_invitations OWNER TO ADMIN;
+            ALTER TABLE PENDING_INVITATIONS_SEQ OWNER TO ADMIN;
+            ALTER SEQUENCE PENDING_INVITATIONS_SEQ OWNED BY PENDING_INVITATIONS.INVITATION_ID;            
+			ALTER TABLE ONLY PENDING_INVITATIONS ADD CONSTRAINT PENDING_INVITATIONS_PK PRIMARY KEY(INVITATION_ID);
+			ALTER TABLE PENDING_INVITATIONS ADD CONSTRAINT PENDING_INVITATIONS_FK1 FOREIGN KEY (ROLE_ID) REFERENCES ROLES (ROLE_ID);
+            SELECT PG_CATALOG.SETVAL('PENDING_INVITATIONS_SEQ', 1, TRUE);
+        </sql>
+	</changeSet>
+	<changeSet id="init_changeset_password_change_requests" author="lukasz.gadomski">
+    	<sql>
+            CREATE TABLE PASSWORD_CHANGE_REQUESTS (
+            	PASSWORD_CHANGE_REQUEST_ID BIGINT NOT NULL,
+            	USER_ID BIGINT NOT NULL,
+            	CREATION_DATE TIMESTAMPTZ NOT NULL
+            );
+		</sql>
+		<sql>
+            ALTER TABLE PASSWORD_CHANGE_REQUESTS OWNER TO ADMIN;
+            ALTER TABLE ONLY PASSWORD_CHANGE_REQUESTS ADD CONSTRAINT PASSWORD_CHANGE_REQUESTS_PK PRIMARY KEY(ID);
+			ALTER TABLE PASSWORD_CHANGE_REQUESTS ADD CONSTRAINT PASSWORD_CHANGE_REQUESTS_FK1 FOREIGN KEY (USER_ID) REFERENCES USERS (USER_ID);
+            
+        </sql>
+    </changeSet>
+</databaseChangeLog>

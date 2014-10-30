@@ -116,7 +116,7 @@ public class SaleDocument implements Serializable, Activable {
     @ManyToOne(optional = false)
     private User issuePerson;
     
-    @JoinColumn(name = "method_of_payment_id", referencedColumnName = "mop_id")
+    @JoinColumn(name = "payment_method_id", referencedColumnName = "payment_method_id")
     @ManyToOne(optional = false)
     private PaymentMethod methodOfPayment;
     
