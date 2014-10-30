@@ -19,11 +19,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import pl.lodz.p.was04.department.core.dto.settings.SettingsPropertyType;
+import pl.lodz.p.was04.department.core.dto.setting.SettingsPropertyType;
 
 /**
  *
- * @author milczu
+ * @author Milczu
  */
 @Entity
 @Table(name = "settings")

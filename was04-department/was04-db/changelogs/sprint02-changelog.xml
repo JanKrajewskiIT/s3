@@ -3,8 +3,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
     <changeSet id="init_changeset_users" author="bartosz.milczarek">
-        <sql>DROP ROLE IF EXISTS glassfish</sql>
-        <sql>CREATE USER glassfish WITH ENCRYPTED PASSWORD 'glassfish';</sql>
+        <!-- <sql>DROP ROLE IF EXISTS glassfish</sql>
+        <sql>CREATE USER glassfish WITH ENCRYPTED PASSWORD 'glassfish';</sql> -->
         <sql>
             CREATE SEQUENCE USERS_SEQ
             START WITH 1

@@ -12,14 +12,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.lodz.p.was04.department.core.domain.settings.SettingsEntry;
-import pl.lodz.p.was04.department.core.dto.settings.SettingsPropertyType;
+import pl.lodz.p.was04.department.core.dto.setting.SettingsPropertyType;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 /**
  *
- * @author milczu
+ * @author Milczu
  */
 @Repository
 @Transactional

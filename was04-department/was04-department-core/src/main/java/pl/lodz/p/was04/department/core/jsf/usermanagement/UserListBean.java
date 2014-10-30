@@ -13,8 +13,8 @@ import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.was04.department.core.dto.UserDTO;
-import pl.lodz.p.was04.department.core.endpoint.accountmanagement.AccountManagementEndpointLocal;
+import pl.lodz.p.was04.department.core.dto.account.UserDTO;
+import pl.lodz.p.was04.department.core.service.account.AccountService;
 
 /**
  *
@@ -27,7 +27,7 @@ public class UserListBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private AccountManagementEndpointLocal accountManagementEndpoint;
+    private AccountService accountManagementEndpoint;
 
     private List<UserDTO> userList;
 

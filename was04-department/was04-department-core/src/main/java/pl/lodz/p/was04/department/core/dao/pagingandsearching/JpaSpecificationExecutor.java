@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  *
- * @author milczu
+ * @author Milczu
  * @param <T>
  */
 public interface JpaSpecificationExecutor<T> {

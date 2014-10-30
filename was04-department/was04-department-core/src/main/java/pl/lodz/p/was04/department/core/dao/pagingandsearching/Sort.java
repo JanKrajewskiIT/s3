@@ -13,7 +13,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * Sort option for queries. You have to provide at least a list of properties to sort for that must not include
  * {@code null} or empty strings. The direction defaults to {@value Sort#DEFAULT_DIRECTION}.
  *
- * @author milczu
+ * @author Milczu
  */
 public class Sort implements Iterable<Sort.Order>, Serializable {
 

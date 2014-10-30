@@ -8,9 +8,9 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.was04.department.core.dto.PasswordChangeRequestDTO;
-import pl.lodz.p.was04.department.core.dto.UserDTO;
-import pl.lodz.p.was04.department.core.endpoint.accountmanagement.AccountManagementEndpointLocal;
+import pl.lodz.p.was04.department.core.dto.account.PasswordChangeRequestDTO;
+import pl.lodz.p.was04.department.core.dto.account.UserDTO;
+import pl.lodz.p.was04.department.core.service.account.AccountService;
 
 /**
  *
@@ -21,7 +21,7 @@ import pl.lodz.p.was04.department.core.endpoint.accountmanagement.AccountManagem
 public class ResetPasswordBean {
 
     @Autowired
-    private AccountManagementEndpointLocal accountManagementEndpoint;
+    private AccountService accountManagementService;
 
     private UserDTO userDTO;
     private PasswordChangeRequestDTO passwordChangeRequestDTO;
@@ -37,12 +37,13 @@ public class ResetPasswordBean {
             facesContext.getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "404");
             return;
         }
-        passwordChangeRequestDTO = accountManagementEndpoint.getPasswordChangeRequestById(id);
+        // TODO change id to long
+        //passwordChangeRequestDTO = accountManagementService.getPasswordChangeRequestById(id);
         if (passwordChangeRequestDTO == null) {
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "404");
             return;
         }
-        userDTO = passwordChangeRequestDTO.getUserDTO();
+        userDTO = passwordChangeRequestDTO.getUser();
     }
 
     public String changePassword() {
@@ -53,8 +54,8 @@ public class ResetPasswordBean {
         }
         try {
             userDTO.setPassword(newPassword);
-            accountManagementEndpoint.editUserPassword(userDTO);
-            accountManagementEndpoint.removePasswordChangeRequest(passwordChangeRequestDTO.getId());
+            accountManagementService.editUserPassword(userDTO);
+            accountManagementService.removePasswordChangeRequest(passwordChangeRequestDTO.getId());
             return "passwordresetsuccess";
         } catch (Exception e) {
             facesContext.addMessage(null, new FacesMessage("Zmiana hasła nie powiodłą się!"));

@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  *
- * @author milczu
+ * @author Milczu
  */
 public interface SettingsDao {
 

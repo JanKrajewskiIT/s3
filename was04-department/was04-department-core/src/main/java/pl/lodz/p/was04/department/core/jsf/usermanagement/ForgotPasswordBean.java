@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.was04.department.core.dto.UserDTO;
-import pl.lodz.p.was04.department.core.endpoint.accountmanagement.AccountManagementEndpointLocal;
+import pl.lodz.p.was04.department.core.dto.account.UserDTO;
+import pl.lodz.p.was04.department.core.service.account.AccountService;
 
 /**
  *
@@ -20,7 +20,7 @@ import pl.lodz.p.was04.department.core.endpoint.accountmanagement.AccountManagem
 public class ForgotPasswordBean {
 
     @Autowired
-    private AccountManagementEndpointLocal accountManagementEndpoint;
+    private AccountService accountManagementEndpoint;
 
     private String email;
 

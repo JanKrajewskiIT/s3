@@ -9,9 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import pl.lodz.p.was04.department.core.dao.UserDao;
-import pl.lodz.p.was04.department.core.domain.User;
+import pl.lodz.p.was04.department.core.dao.account.UserDao;
+import pl.lodz.p.was04.department.core.domain.account.User;
 
+/**
+ * 
+ * @author Milczu
+ *
+ */
 @Named
 public class UserDetailsServiceImpl implements UserDetailsService {
 

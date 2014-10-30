@@ -9,7 +9,7 @@ import java.util.List;
  * Basic {@code Page} implementation.
  *
  * @param <T> the type of which the page consists.
- * @author milczu
+ * @author Milczu
  */
 public class PageImpl<T> implements Page<T>, Serializable {
 

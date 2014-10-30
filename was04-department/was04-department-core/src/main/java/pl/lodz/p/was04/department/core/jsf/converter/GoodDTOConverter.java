@@ -9,8 +9,8 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.was04.department.core.dto.goods.GoodDTO;
-import pl.lodz.p.was04.department.core.endpoint.goods.GoodsManagementEndpointLocal;
+import pl.lodz.p.was04.department.core.dto.good.GoodDTO;
+import pl.lodz.p.was04.department.core.service.good.GoodsService;
 
 /**
  *
@@ -23,7 +23,7 @@ public class GoodDTOConverter implements Converter {
     public GoodDTOConverter() { }
     
     @Autowired
-    GoodsManagementEndpointLocal goodsManagementEndpointLocal;
+    GoodsService goodsManagementEndpointLocal;
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {

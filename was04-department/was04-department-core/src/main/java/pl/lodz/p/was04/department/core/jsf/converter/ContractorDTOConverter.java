@@ -14,8 +14,8 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.was04.department.core.dto.contractors.ContractorDTO;
-import pl.lodz.p.was04.department.core.endpoint.contractors.ContractorsManagementEndpointLocal;
+import pl.lodz.p.was04.department.core.dto.contractor.ContractorDTO;
+import pl.lodz.p.was04.department.core.service.contractor.ContractorsService;
 
 /**
  *
@@ -32,7 +32,7 @@ public class ContractorDTOConverter implements Converter {
     public ContractorDTOConverter() { }
     
     @Autowired
-    ContractorsManagementEndpointLocal contractorsManagementEndpointLocal;
+    ContractorsService contractorsManagementEndpointLocal;
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {

@@ -14,8 +14,8 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.was04.department.core.dto.RoleDTO;
-import pl.lodz.p.was04.department.core.endpoint.accountmanagement.AccountManagementEndpointLocal;
+import pl.lodz.p.was04.department.core.dto.account.RoleDTO;
+import pl.lodz.p.was04.department.core.service.account.AccountService;
 
 /**
  *
@@ -26,7 +26,7 @@ import pl.lodz.p.was04.department.core.endpoint.accountmanagement.AccountManagem
 public class RoleDTOConverter implements Converter {
 
     @Autowired
-    private AccountManagementEndpointLocal accountManagementEndpoint;
+    private AccountService accountManagementEndpoint;
 
     /**
      * Creates a new instance of RoleDTOConverter
@@ -52,7 +52,7 @@ public class RoleDTOConverter implements Converter {
         }
         if ((value instanceof RoleDTO)) {
             RoleDTO roleDTO = (RoleDTO) value;
-            return roleDTO.getRoleName();
+            return roleDTO.getName();
         }
         return String.valueOf(value);
     }

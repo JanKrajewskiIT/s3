@@ -12,9 +12,8 @@ import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.was04.department.core.dto.contractors.ContractorGroupDTO;
-import pl.lodz.p.was04.department.core.endpoint.contractors.ContractorsGroupsManagementEndpointLocal;
-import pl.lodz.p.was04.department.core.manager.accountmanagement.AccountManagerLocal;
+import pl.lodz.p.was04.department.core.dto.contractor.ContractorGroupDTO;
+import pl.lodz.p.was04.department.core.service.contractor.ContractorsGroupsService;
 
 /**
  *
@@ -30,10 +29,7 @@ public class SettingsClientsPageBean implements Serializable {
     private List<ContractorGroupDTO> clientsGroups;
     
     @Autowired
-    private ContractorsGroupsManagementEndpointLocal clientsGroupsManagement;
-    
-    @Autowired
-    private AccountManagerLocal accountManager;
+    private ContractorsGroupsService clientsGroupsManagement;
 
     @PostConstruct
     public void init() {
@@ -45,7 +41,7 @@ public class SettingsClientsPageBean implements Serializable {
     }
     
     public void saveNewClientGroup() {
-        ContractorGroupDTO clientGroupToSave = new ContractorGroupDTO(newClientGroup);
+        ContractorGroupDTO clientGroupToSave = null;//TODO = new ContractorGroupDTO(newClientGroup);
         System.out.println("New client group: " + clientGroupToSave);
         
         Long id =  clientsGroupsManagement.add(clientGroupToSave);

@@ -7,7 +7,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author milczu
+ * @author Milczu
  * @param <T>
  */
 public interface Specification<T> {

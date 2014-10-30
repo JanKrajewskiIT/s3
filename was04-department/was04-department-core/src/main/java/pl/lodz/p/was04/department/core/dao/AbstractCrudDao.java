@@ -11,6 +11,13 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 
+ * @author Milczu
+ *
+ * @param <T>
+ * @param <ID>
+ */
 @Repository
 @Transactional
 public abstract class AbstractCrudDao<T extends Persistable<ID>, ID extends Serializable> implements CrudDao<T, ID> {

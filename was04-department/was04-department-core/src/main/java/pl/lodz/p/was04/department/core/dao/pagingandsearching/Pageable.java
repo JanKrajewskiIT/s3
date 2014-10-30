@@ -3,7 +3,7 @@ package pl.lodz.p.was04.department.core.dao.pagingandsearching;
 /**
  * interface for pagination information.
  *
- * @author milczu
+ * @author Milczu
  */
 public interface Pageable {
 

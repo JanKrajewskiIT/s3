@@ -10,10 +10,10 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.was04.department.core.dto.PendingInvitationDTO;
-import pl.lodz.p.was04.department.core.dto.UserDTO;
-import pl.lodz.p.was04.department.core.endpoint.accountmanagement.AccountManagementEndpointLocal;
+import pl.lodz.p.was04.department.core.dto.account.PendingInvitationDTO;
+import pl.lodz.p.was04.department.core.dto.account.UserDTO;
 import pl.lodz.p.was04.department.core.exception.UniqueConstraintViolationException;
+import pl.lodz.p.was04.department.core.service.account.AccountService;
 
 /**
  * View scoped bean responsible for user registration.
@@ -27,7 +27,7 @@ public class RegistrationBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private AccountManagementEndpointLocal accountManagementEndpoint;
+    private AccountService accountManagementService;
 
     private UserDTO userDTO;
     private PendingInvitationDTO pendingInvitationDTO;
@@ -40,7 +40,7 @@ public class RegistrationBean implements Serializable {
 
     /**
      * Initializes the bean. Reads the token from the request parameter map. If there is a pending invitation with given
-     * token in the DB the registration form is displayed. Otherwise the browser is redirected to the 404 page. Invokes {@link AccountManagementEndpointLocal#getPendingInvitationByToken(java.lang.String)
+     * token in the DB the registration form is displayed. Otherwise the browser is redirected to the 404 page. Invokes {@link AccountService#getPendingInvitationByToken(java.lang.String)
      * }.
      *
      */
@@ -52,14 +52,14 @@ public class RegistrationBean implements Serializable {
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "404");
             return;
         }
-        pendingInvitationDTO = accountManagementEndpoint.getPendingInvitationByToken(token);
+        pendingInvitationDTO = accountManagementService.getPendingInvitationByToken(token);
         if (pendingInvitationDTO == null) {
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "404");
         }
     }
 
     /**
-     * Performs the registration of a user. Invokes {@link AccountManagementEndpointLocal#createUser(pl.lodz.p.was04.headoffice.dto.UserDTO)
+     * Performs the registration of a user. Invokes {@link AccountService#createUser(pl.lodz.p.was04.department.core.dto.account.headoffice.dto.UserDTO)
      * }.
      *
      */
@@ -71,10 +71,10 @@ public class RegistrationBean implements Serializable {
         }
         try {
             userDTO.setEmail(pendingInvitationDTO.getEmail());
-            userDTO.getRoleSet().add(pendingInvitationDTO.getRoleDTO());
-            userDTO.setActive(true);
-            accountManagementEndpoint.createUser(userDTO);
-            accountManagementEndpoint.removePendingInvitation(pendingInvitationDTO.getInvitationId());
+            userDTO.getRoleSet().add(pendingInvitationDTO.getRole());
+            //TODO userDTO.setActive(true);
+            accountManagementService.createUser(userDTO);
+            accountManagementService.removePendingInvitation(pendingInvitationDTO.getId());
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "registrationSuccess");
         } catch (UniqueConstraintViolationException e) {
             facesContext.addMessage(null, new FacesMessage("Istnieje już konto o danym adresie e-mail!"));

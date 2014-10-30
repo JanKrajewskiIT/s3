@@ -7,7 +7,7 @@ import pl.lodz.p.was04.department.core.dao.pagingandsearching.Sort.Direction;
 /**
  * Basic Java Bean implementation of {@code Pageable}.
  *
- * @author milczu
+ * @author Milczu
  */
 public class PageRequest implements Pageable, Serializable {
 

@@ -8,7 +8,7 @@ import java.util.List;
  * the position of it in the containing entire list.
  *
  * @param <T>
- * @author milczu
+ * @author Milczu
  */
 public interface Page<T> extends Iterable<T> {
 

@@ -12,12 +12,12 @@ import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.was04.department.core.dto.goods.GoodGroupDTO;
-import pl.lodz.p.was04.department.core.dto.goods.TaxDTO;
-import pl.lodz.p.was04.department.core.dto.goods.UnitDTO;
-import pl.lodz.p.was04.department.core.endpoint.goods.GoodsGroupsManagementEndpointLocal;
-import pl.lodz.p.was04.department.core.endpoint.goods.TaxesManagementEndpointLocal;
-import pl.lodz.p.was04.department.core.endpoint.goods.UnitsManagementEndpointLocal;
+import pl.lodz.p.was04.department.core.dto.good.GoodGroupDTO;
+import pl.lodz.p.was04.department.core.dto.good.TaxDTO;
+import pl.lodz.p.was04.department.core.dto.good.UnitDTO;
+import pl.lodz.p.was04.department.core.service.good.GoodsGroupsService;
+import pl.lodz.p.was04.department.core.service.good.TaxesService;
+import pl.lodz.p.was04.department.core.service.good.UnitsService;
 
 /**
  *
@@ -37,13 +37,13 @@ public class SettingsGoodsPageBean implements Serializable {
     private List<GoodGroupDTO> goodGroups;
 
     @Autowired
-    private TaxesManagementEndpointLocal taxesManagementEndpointLocal;
+    private TaxesService taxesManagementEndpointLocal;
 
     @Autowired
-    private GoodsGroupsManagementEndpointLocal goodsGroupsManagementEndpointLocal;
+    private GoodsGroupsService goodsGroupsManagementEndpointLocal;
 
     @Autowired
-    private UnitsManagementEndpointLocal unitsManagementEndpointLocal;
+    private UnitsService unitsManagementEndpointLocal;
 
     @PostConstruct
     public void init() {
@@ -96,7 +96,7 @@ public class SettingsGoodsPageBean implements Serializable {
     }
 
     public void saveNewTax() {
-        TaxDTO taxToSave = new TaxDTO(newTax);
+        TaxDTO taxToSave = null; //TODO new TaxDTO(newTax);
         System.out.println("New tax: " + taxToSave);
         taxesManagementEndpointLocal.add(taxToSave);
         loadTaxes();
@@ -124,7 +124,7 @@ public class SettingsGoodsPageBean implements Serializable {
     }
 
     public void saveNewUnit() {
-        UnitDTO unitToSave = new UnitDTO(newUnit);
+        UnitDTO unitToSave = null; //TODO new UnitDTO(newUnit);
         System.out.println("Zapisz: " + unitToSave);
         unitsManagementEndpointLocal.add(unitToSave);
         loadUnits();
@@ -152,7 +152,7 @@ public class SettingsGoodsPageBean implements Serializable {
     }
 
     public void saveNewGoodGroup() {
-        GoodGroupDTO groupToSave = new GoodGroupDTO(newGoodGroup);
+        GoodGroupDTO groupToSave = null; //TODO new GoodGroupDTO(newGoodGroup);
         System.out.println("New goodGroup: " + groupToSave);
         goodsGroupsManagementEndpointLocal.add(newGoodGroup);
         loadGoodGroups();

@@ -1,12 +1,10 @@
 package pl.lodz.p.was04.department.core.domain;
 
-import org.springframework.data.domain.Persistable;
-
 /**
  *
- * @author milczu, janiu
+ * @author Milczu
  */
-public interface Activable extends Persistable<Long> {
+public interface Activable extends BasePersistable {
     
     boolean isActive();
     

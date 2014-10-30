@@ -3,7 +3,7 @@ package pl.lodz.p.was04.department.core.dao;
 
 /**
  *
- * @author milczu
+ * @author Milczu
  */
 public class IdCustomGenerator { /* TODO implements IdentifierGenerator {
 

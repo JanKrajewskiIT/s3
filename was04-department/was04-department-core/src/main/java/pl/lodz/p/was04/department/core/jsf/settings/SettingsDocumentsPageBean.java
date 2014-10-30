@@ -13,10 +13,10 @@ import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.was04.department.core.dto.documents.PaymentMethodDTO;
-import pl.lodz.p.was04.department.core.endpoint.documents.DocumentNumeratorEndpointLocal;
-import pl.lodz.p.was04.department.core.endpoint.documents.DocumentSettingsEndpointLocal;
-import pl.lodz.p.was04.department.core.endpoint.documents.PaymentMethodsManagentEndpointLocal;
+import pl.lodz.p.was04.department.core.dto.document.PaymentMethodDTO;
+import pl.lodz.p.was04.department.core.service.document.DocumentNumeratorService;
+import pl.lodz.p.was04.department.core.service.document.DocumentSettingsService;
+import pl.lodz.p.was04.department.core.service.document.PaymentMethodsService;
 
 /**
  *
@@ -29,13 +29,13 @@ public class SettingsDocumentsPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private DocumentNumeratorEndpointLocal documentNumeratorEndpoint;
+    private DocumentNumeratorService documentNumeratorEndpoint;
     
     @Autowired
-    private PaymentMethodsManagentEndpointLocal paymentMethodsManagentEndpoint;
+    private PaymentMethodsService paymentMethodsManagentEndpoint;
     
     @Autowired
-    private DocumentSettingsEndpointLocal documentSettingsEnpoint;
+    private DocumentSettingsService documentSettingsEnpoint;
     
     private String currentDocumentSymbolFormat;
     private String documentFormatSelection;

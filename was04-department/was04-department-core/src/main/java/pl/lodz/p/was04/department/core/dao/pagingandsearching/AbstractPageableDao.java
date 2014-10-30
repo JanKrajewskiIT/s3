@@ -3,6 +3,7 @@ package pl.lodz.p.was04.department.core.dao.pagingandsearching;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,15 +12,17 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+
 import pl.lodz.p.was04.department.core.dao.AbstractCrudDao;
 import pl.lodz.p.was04.department.core.dao.pagingandsearching.Sort.Order;
-import pl.lodz.p.was04.department.core.utils.Assert;
+import pl.lodz.p.was04.department.core.util.Assert;
 
 /**
  *
- * @author milczu
+ * @author Milczu
  * @param <T>
  * @param <ID>
  */
