@@ -37,13 +37,13 @@ public class PostalCodes implements Serializable {
     }
 
     public void fillCity(ContractorDTO contractor) {
-        if(contractor.getPostCode() != null) {
+        if(contractor.getPostalCode() != null) {
             // TODO change from code to id 
         	//String code = contractor.getPostCode();
             //PostalCodeDTO postalCode = postalCodesManagementEndpointLocal.getPostalCode(code); 
             //contractor.setCity(postalCode.getCity());
         }
-            System.out.println(contractor.getPostCode() == null ? "NULL" : contractor.getPostCode());
+            System.out.println(contractor.getPostalCode() == null ? "NULL" : contractor.getPostalCode());
     }
     
     public List<PostalCodeDTO> getPostalCodesList() {

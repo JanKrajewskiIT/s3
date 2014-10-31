@@ -16,5 +16,6 @@
 	<include file="changelogs/setting_insert.xml" />
 
 	<include file="changelogs/document_create.xml" />
+	<include file="changelogs/document_insert.xml" />
 
 </databaseChangeLog>

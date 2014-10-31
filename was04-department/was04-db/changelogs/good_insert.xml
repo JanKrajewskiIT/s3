@@ -4,7 +4,6 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
 	<changeSet id="taxes_changes" author="bartosz.milczarek">
-		<dropColumn tableName="taxes" columnName="short_name" />
 		<insert tableName="taxes">
 			<column name="name" value="23%" />
 			<column name="value" value="23.00" />
