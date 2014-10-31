@@ -11,15 +11,13 @@
 	<mvc:annotation-driven />
 	<context:component-scan base-package="pl.lodz.p.was04.department" />
 	
-	<!-- <context:property-placeholder location="classpath*:*/jdbc_${env.name}.properties" order="0" />-->
 	<context:property-placeholder location="classpath*:*/jdbc_dev.properties" order="0" />
-	
-	
+
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/was04_headoffice" />
+		<property name="username" value="admin" />
+		<property name="password" value="admin" />
 		<property name="initialSize" value="1" />
 		<property name="maxActive" value="3" />
 		<property name="maxWait" value="5000" />
@@ -32,12 +30,12 @@
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="false" />
 				<property name="generateDdl" value="true" />
-				<property name="databasePlatform" value="${hibernate.dialect}" />
+				<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
 			</bean>
 		</property>
 		<property name="jpaProperties">
 			<props>
-				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 			</props>
 		</property>
@@ -48,4 +46,5 @@
 	</bean>
 
 	<bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
 </beans>

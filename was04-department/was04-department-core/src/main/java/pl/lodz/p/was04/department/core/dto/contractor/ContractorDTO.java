@@ -21,7 +21,7 @@ public class ContractorDTO implements Serializable, Comparable<ContractorDTO> {
     private String name;
     private String type;
     private String role;
-    private String postCode;
+    private PostalCodeDTO postalCode;
     private String city;
     private String adress;
     private String nip;
@@ -73,12 +73,12 @@ public class ContractorDTO implements Serializable, Comparable<ContractorDTO> {
         this.role = role;
     }
 
-    public String getPostCode() {
-        return postCode;
+    public PostalCodeDTO getPostalCode() {
+        return postalCode;
     }
 
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
+    public void setPostalCode(PostalCodeDTO postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getCity() {

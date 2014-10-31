@@ -40,7 +40,7 @@ public class Department implements Serializable, Activable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 35)
-    @Column(name = "department_name")
+    @Column(name = "name")
     private String name;
     
     @Basic(optional = false)

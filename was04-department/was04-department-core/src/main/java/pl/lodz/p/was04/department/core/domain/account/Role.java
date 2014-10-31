@@ -52,7 +52,7 @@ public class Role implements Serializable, BasePersistable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "role_name")
+    @Column(name = "name")
     private String name;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")

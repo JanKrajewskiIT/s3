@@ -30,7 +30,7 @@ public class SaleDocumentDTO implements Serializable, Comparable<SaleDocumentDTO
     private String orderSymbol;
     private boolean warehouseResult = true;
     private boolean paid;
-    private PaymentMethodDTO methodOfPayment;
+    private PaymentMethodDTO paymentMethod;
     private List<DocumentPositionDTO> goodsPositions;
 	
 	@NotNull(message = "Symbol nie może być pusty!")
@@ -116,12 +116,12 @@ public class SaleDocumentDTO implements Serializable, Comparable<SaleDocumentDTO
 		this.paid = paid;
 	}
 
-	public PaymentMethodDTO getMethodOfPayment() {
-		return methodOfPayment;
+	public PaymentMethodDTO getPaymentMethod() {
+		return paymentMethod;
 	}
 
-	public void setMethodOfPayment(PaymentMethodDTO methodOfPayment) {
-		this.methodOfPayment = methodOfPayment;
+	public void setPaymentMethod(PaymentMethodDTO paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 
 	public List<DocumentPositionDTO> getGoodsPositions() {

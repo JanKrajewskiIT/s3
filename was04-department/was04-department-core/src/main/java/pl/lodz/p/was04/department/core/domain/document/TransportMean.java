@@ -42,7 +42,7 @@ public class TransportMean implements Serializable, Activable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "transport_name")
+    @Column(name = "name")
     private String name;
     
     @Basic(optional = false)

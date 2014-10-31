@@ -7,8 +7,10 @@ import javax.inject.Named;
 import pl.lodz.p.was04.department.core.converter.Converter;
 import pl.lodz.p.was04.department.core.domain.contractor.Contractor;
 import pl.lodz.p.was04.department.core.domain.contractor.ContractorGroup;
+import pl.lodz.p.was04.department.core.domain.contractor.PostalCode;
 import pl.lodz.p.was04.department.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.was04.department.core.dto.contractor.ContractorGroupDTO;
+import pl.lodz.p.was04.department.core.dto.contractor.PostalCodeDTO;
 
 /**
 *
@@ -20,17 +22,21 @@ public class ContractorConverter implements Converter<Contractor, ContractorDTO>
 
     @Inject
 	private ContractorGroupConverter groupConverter;
+    
+    @Inject
+    private PostalCodeConverter postalCodeConverter;
 	
 	@Override
 	public Contractor convertDTO(ContractorDTO objectDTO) {
 		ContractorGroup group = groupConverter.convertDTO(objectDTO.getGroup());
+		PostalCode postalCode = postalCodeConverter.convertDTO(objectDTO.getPostalCode());
 		
 		Contractor entity = new Contractor();
 		entity.setId(objectDTO.getId());
 		entity.setSymbol(objectDTO.getSymbol());
 		entity.setName(objectDTO.getName());
 		entity.setAccountNumber(objectDTO.getAccountNumber());
-		entity.setPostCode(objectDTO.getPostCode());
+		entity.setPostalCode(postalCode);
 		entity.setCity(objectDTO.getCity());
 		entity.setAdress(objectDTO.getAdress());
 		entity.setNip(objectDTO.getNip());
@@ -48,6 +54,7 @@ public class ContractorConverter implements Converter<Contractor, ContractorDTO>
 	@Override
 	public ContractorDTO convertEntity(Contractor entity) {
 		ContractorGroupDTO group = groupConverter.convertEntity(entity.getGroup());
+		PostalCodeDTO postalCode = postalCodeConverter.convertEntity(entity.getPostalCode());
 		String type = entity.isCompany() ? "Firma" : "Osoba fizyczna";
 		String role = entity.isSupplier() ? "Dostawca" : "Nabywca";
 		
@@ -56,7 +63,7 @@ public class ContractorConverter implements Converter<Contractor, ContractorDTO>
 		objectDTO.setSymbol(entity.getSymbol());
 		objectDTO.setName(entity.getName());
 		objectDTO.setAccountNumber(entity.getAccountNumber());
-		objectDTO.setPostCode(entity.getPostCode());
+		objectDTO.setPostalCode(postalCode);
 		objectDTO.setCity(entity.getCity());
 		objectDTO.setAdress(entity.getAdress());
 		objectDTO.setNip(entity.getNip());

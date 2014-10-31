@@ -52,13 +52,7 @@ public class Contractor implements Serializable, Activable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "name")    
     private String name;
-    
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 6)
-    @Column(name = "postcode")    
-    private String postCode;
-    
+        
     @Size(min = 1, max = 40)    
     @Column(name = "city") 
     private String city;
@@ -105,6 +99,10 @@ public class Contractor implements Serializable, Activable {
     @JoinColumn(name = "contractor_group_id", referencedColumnName = "contractor_group_id")
     @ManyToOne(optional = false)
     private ContractorGroup group;
+    
+    @JoinColumn(name = "postal_code_id", referencedColumnName = "postal_code_id")
+    @ManyToOne(optional = false)
+    private PostalCode postalCode;    
 
 	@Basic(optional = false)
 	@NotNull    
@@ -138,12 +136,12 @@ public class Contractor implements Serializable, Activable {
 		this.name = name;
 	}
 
-	public String getPostCode() {
-		return postCode;
+	public PostalCode getPostalCode() {
+		return postalCode;
 	}
 
-	public void setPostCode(String postCode) {
-		this.postCode = postCode;
+	public void setPostalCode(PostalCode postalCode) {
+		this.postalCode = postalCode;
 	}
 
 	public String getCity() {

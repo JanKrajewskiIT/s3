@@ -118,7 +118,7 @@ public class SaleDocument implements Serializable, Activable {
     
     @JoinColumn(name = "payment_method_id", referencedColumnName = "payment_method_id")
     @ManyToOne(optional = false)
-    private PaymentMethod methodOfPayment;
+    private PaymentMethod paymentMethod;
     
     @JoinColumn(name = "contractor_id", referencedColumnName = "contractor_id")
     @ManyToOne(optional = false)
@@ -260,12 +260,12 @@ public class SaleDocument implements Serializable, Activable {
 		this.issuePerson = issuePerson;
 	}
 
-	public PaymentMethod getMethodOfPayment() {
-		return methodOfPayment;
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
 	}
 
-	public void setMethodOfPayment(PaymentMethod methodOfPayment) {
-		this.methodOfPayment = methodOfPayment;
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 
 	public Contractor getContractor() {

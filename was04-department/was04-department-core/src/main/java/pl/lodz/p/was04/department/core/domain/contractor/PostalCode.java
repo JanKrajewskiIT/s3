@@ -1,15 +1,19 @@
 package pl.lodz.p.was04.department.core.domain.contractor;
 
 import java.io.Serializable;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -43,6 +47,9 @@ public class PostalCode implements Serializable, BasePersistable {
     @Column(name = "city")
     private String city;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postalCode")
+    private Collection<Contractor> contractorsCollection;
+    
     @Override
     public Long getId() {
         return id;
@@ -68,7 +75,17 @@ public class PostalCode implements Serializable, BasePersistable {
         this.city = city;
     }
 
-    @Override
+    @XmlTransient
+    public Collection<Contractor> getContractorsCollection() {
+		return contractorsCollection;
+	}
+
+	public void setContractorsCollection(
+			Collection<Contractor> contractorsCollection) {
+		this.contractorsCollection = contractorsCollection;
+	}
+
+	@Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }

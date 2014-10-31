@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
-  
-    <include file="changelogs/sprint02-changelog.xml" />
-    <include file="changelogs/sprint02-testData-changelog.xml" />
-    
-    <include file="changelogs/sprint03-changelog.xml" />
-    <include file="changelogs/sprint03-testData-changelog.xml" />
-    
-    <include file="changelogs/sprint04-changelog.xml" />
-    <include file="changelogs/sprint04-testData-changelog.xml" />
-    
-    <include file="changelogs/sprint05-changelog.xml" />
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<include file="changelogs/account_create.xml" />
+	<include file="changelogs/account_insert.xml" />
+
+	<include file="changelogs/contractor_create.xml" />
+	<include file="changelogs/contractor_insert.xml" />
+
+	<include file="changelogs/good_create.xml" />
+	<include file="changelogs/good_insert.xml" />
+
+	<include file="changelogs/setting_create.xml" />
+	<include file="changelogs/setting_insert.xml" />
+
+	<include file="changelogs/document_create.xml" />
+
 </databaseChangeLog>

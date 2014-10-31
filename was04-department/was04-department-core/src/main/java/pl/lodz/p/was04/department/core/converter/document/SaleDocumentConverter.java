@@ -38,7 +38,7 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		Contractor contractor = contractorConverter.convertDTO(objectDTO.getContractor());
 		Contractor receivePerson = contractorConverter.convertDTO(objectDTO.getReceivePerson());
 		User issuePerson = userConverter.convertDTO(objectDTO.getIssuePerson());
-		PaymentMethod methodOfPayment = paymentMethodConverter.convertDTO(objectDTO.getMethodOfPayment());
+		PaymentMethod paymentMethod = paymentMethodConverter.convertDTO(objectDTO.getPaymentMethod());
 		
 		SaleDocument entity = new SaleDocument();
 		entity.setId(objectDTO.getId());
@@ -47,7 +47,7 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		entity.setDocumentDate(objectDTO.getDocumentDate());
 		entity.setDocumentPlace(objectDTO.getDocumentPlace());
 		entity.setIssuePerson(issuePerson);
-		entity.setMethodOfPayment(methodOfPayment);
+		entity.setPaymentMethod(paymentMethod);
 		entity.setOrderSymbol(objectDTO.getOrderSymbol());
 		entity.setPaidTotal(objectDTO.getPaidTotal());
 		entity.setPaid(objectDTO.isPaid());
@@ -66,7 +66,7 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		ContractorDTO contractor = contractorConverter.convertEntity(entity.getContractor());
 		ContractorDTO receivePerson = contractorConverter.convertEntity(entity.getReceivePerson());
 		UserDTO issuePerson = userConverter.convertEntity(entity.getIssuePerson());
-		PaymentMethodDTO methodOfPayment = paymentMethodConverter.convertEntity(entity.getMethodOfPayment());
+		PaymentMethodDTO paymentMethod = paymentMethodConverter.convertEntity(entity.getPaymentMethod());
 		
 		SaleDocumentDTO objectDTO = new SaleDocumentDTO();
 		objectDTO.setId(entity.getId());
@@ -75,7 +75,7 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		objectDTO.setDocumentDate(objectDTO.getDocumentDate());
 		objectDTO.setDocumentPlace(entity.getDocumentPlace());
 		objectDTO.setIssuePerson(issuePerson);
-		objectDTO.setMethodOfPayment(methodOfPayment);
+		objectDTO.setPaymentMethod(paymentMethod);
 		objectDTO.setOrderSymbol(entity.getOrderSymbol());
 		objectDTO.setPaidTotal(entity.getPaidTotal());
 		objectDTO.setPaid(entity.isPaid());
