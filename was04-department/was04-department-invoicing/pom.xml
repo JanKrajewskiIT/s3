@@ -2,17 +2,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>pl.lodz.p.was04</groupId>
-		<artifactId>was04-department</artifactId>
+		<groupId>pl.lodz.p.project</groupId>
+		<artifactId>project</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>was04-department-invoicing</artifactId>
-	<name>WAS04 Department Invocing Module</name>
+	<artifactId>project-invoicing</artifactId>
+	<name>Project Invocing Module</name>
 
 	<dependencies>
 		<dependency>
-			<groupId>pl.lodz.p.was04</groupId>
-			<artifactId>was04-department-commons</artifactId>
+			<groupId>pl.lodz.p.project</groupId>
+			<artifactId>project-commons</artifactId>
 		</dependency>
 		
 		<!-- Spring -->

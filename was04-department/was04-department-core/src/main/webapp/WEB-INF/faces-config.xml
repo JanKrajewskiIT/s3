@@ -55,7 +55,7 @@
         <renderer>
             <component-family>org.primefaces.component</component-family>
             <renderer-type>org.primefaces.component.RowEditorRenderer</renderer-type>
-            <renderer-class>pl.lodz.p.was04.department.core.jsf.primefaces.BootstrapRowEditorRenderer</renderer-class>
+            <renderer-class>pl.lodz.p.project.core.jsf.primefaces.BootstrapRowEditorRenderer</renderer-class>
         </renderer>
     </render-kit>
 		

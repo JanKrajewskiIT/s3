@@ -2,9 +2,9 @@
 <configuration scan="true" scanPeriod="30 seconds">
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${catalina.home}/logs/was04/was04-department.log</file>
+		<file>${catalina.home}/logs/project/project.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${catalina.home}/logs/was04/was04-department.%d{yyyy-MM-dd}.log
+			<fileNamePattern>${catalina.home}/logs/project/project.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
