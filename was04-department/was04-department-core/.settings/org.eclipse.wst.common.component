@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="was04-department-core">
+    <wb-module deploy-name="project-core">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="project-commons-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/was04-department-commons/was04-department-commons">
+        <dependent-module archiveName="project-commons-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/project-commons/project-commons">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <property name="context-root" value="was04-department-core"/>
-        <property name="java-output-path" value="/was04-department-core/target/classes"/>
+        <property name="java-output-path" value="/project-core/target/classes"/>
+        <property name="context-root" value="project-core"/>
     </wb-module>
 </project-modules>
