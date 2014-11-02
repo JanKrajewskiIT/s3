@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.service.good;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -14,6 +13,9 @@ import pl.lodz.p.project.core.dao.good.GoodGroupDao;
 import pl.lodz.p.project.core.domain.good.GoodGroup;
 import pl.lodz.p.project.core.dto.good.GoodGroupDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -32,12 +34,8 @@ public class GoodsGroupsServiceImpl implements GoodsGroupsService {
     @RolesAllowed("goodsGroupManagement")
     @Override
     public List<GoodGroupDTO> getGoodsGroups() {
-        List<GoodGroupDTO> goodsGroupsList = new ArrayList<>();
-        for(GoodGroup goodGroup : goodGroupDao.findAll()) {
-        	GoodGroupDTO goodGroupDTO = goodGroupConverter.convertEntity(goodGroup);
-        	goodsGroupsList.add(goodGroupDTO);
-        }
-        return goodsGroupsList;
+    	Transformer<GoodGroup, GoodGroupDTO> transformer = new Transformer<>(goodGroupConverter);
+    	return Lists.transform(goodGroupDao.findAll(), transformer);
     }
 
     @RolesAllowed("goodsGroupManagement")
@@ -68,4 +66,5 @@ public class GoodsGroupsServiceImpl implements GoodsGroupsService {
         GoodGroup goodGroup = goodGroupConverter.convertDTO(goodGroupDTO);
         goodGroupDao.delete(goodGroup);
     }
+    
 }

@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.service.contractor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -14,6 +13,9 @@ import pl.lodz.p.project.core.dao.contractor.ContractorContactDao;
 import pl.lodz.p.project.core.domain.contractor.ContractorContact;
 import pl.lodz.p.project.core.dto.contractor.ContractorContactDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -32,12 +34,8 @@ public class ContractorsContactsServiceImpl implements ContractorsContactsServic
     @RolesAllowed("contractorManagement")
     @Override
     public List<ContractorContactDTO> getContractorsContacts() {
-    	List<ContractorContactDTO> contractorContactList = new ArrayList<>();
-        for (ContractorContact contractorContact : contractorContactDao.findAll()) {
-        	ContractorContactDTO contractContactDTO = contractorContactConverter.convertEntity(contractorContact);
-            contractorContactList.add(contractContactDTO);
-        }
-        return contractorContactList;
+    	Transformer<ContractorContact, ContractorContactDTO> transformer = new Transformer<>(contractorContactConverter);
+    	return Lists.transform(contractorContactDao.findAll(), transformer);
     }
 
     @RolesAllowed("contractorManagement")

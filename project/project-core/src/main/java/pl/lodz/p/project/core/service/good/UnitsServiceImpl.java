@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.service.good;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -14,6 +13,9 @@ import pl.lodz.p.project.core.dao.good.UnitDao;
 import pl.lodz.p.project.core.domain.good.Unit;
 import pl.lodz.p.project.core.dto.good.UnitDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -32,12 +34,8 @@ public class UnitsServiceImpl implements UnitsService {
     @RolesAllowed({"settings", "goodsManagement"})
     @Override
     public List<UnitDTO> getUnits() {
-        List<UnitDTO> unitsList = new ArrayList<>();
-        for(Unit unit : unitDao.findAll()) {
-        	UnitDTO unitDTO = unitConverter.convertEntity(unit);
-        	unitsList.add(unitDTO);
-        }
-        return unitsList;
+    	Transformer<Unit, UnitDTO> transformer = new Transformer<>(unitConverter);
+    	return Lists.transform(unitDao.findAll(), transformer);
     }
 
     @RolesAllowed("goodsManagement")

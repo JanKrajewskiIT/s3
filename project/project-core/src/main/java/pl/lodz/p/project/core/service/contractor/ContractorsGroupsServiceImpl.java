@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.service.contractor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -14,6 +13,9 @@ import pl.lodz.p.project.core.dao.contractor.ContractorGroupDao;
 import pl.lodz.p.project.core.domain.contractor.ContractorGroup;
 import pl.lodz.p.project.core.dto.contractor.ContractorGroupDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -32,12 +34,8 @@ public class ContractorsGroupsServiceImpl implements ContractorsGroupsService {
     @RolesAllowed("contractorGroupManagement")
     @Override
     public List<ContractorGroupDTO> getContractorsGroups() {
-        List<ContractorGroupDTO> contractorGroupList = new ArrayList<>();
-        for (ContractorGroup contractorGroup : contractorGroupDao.findAll()) {
-        	ContractorGroupDTO contractorGroupDTO = contractorGroupConverter.convertEntity(contractorGroup);
-        	contractorGroupList.add(contractorGroupDTO);
-        }
-        return contractorGroupList;
+    	Transformer<ContractorGroup, ContractorGroupDTO> transformer = new Transformer<>(contractorGroupConverter);
+    	return Lists.transform(contractorGroupDao.findAll(), transformer);
     }
 
     @RolesAllowed("contractorGroupManagement")

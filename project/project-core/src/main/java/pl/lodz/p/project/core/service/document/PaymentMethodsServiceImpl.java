@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.service.document;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -15,6 +14,9 @@ import pl.lodz.p.project.core.dao.document.PaymentMethodDao;
 import pl.lodz.p.project.core.domain.document.PaymentMethod;
 import pl.lodz.p.project.core.dto.document.PaymentMethodDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -28,42 +30,38 @@ public class PaymentMethodsServiceImpl implements PaymentMethodsService {
     private PaymentMethodDao paymentMethodDao;
 
     @Inject
-    private PaymentMethodConverter converter;
+    private PaymentMethodConverter paymentMethodConverter;
 
     @RolesAllowed("documentManagement")
     @Override
     public PaymentMethodDTO getById(Long id) {
-        return converter.convertEntity(paymentMethodDao.findOne(id));
+        return paymentMethodConverter.convertEntity(paymentMethodDao.findOne(id));
     }
 
     @RolesAllowed("documentManagement")
     @Override
     public List<PaymentMethodDTO> getPaymentMethods() {
-        List<PaymentMethod> paymentMethodList = paymentMethodDao.findAll();
-        List<PaymentMethodDTO> paymentMethodDTOs = new ArrayList<>(paymentMethodList.size());
-        for (PaymentMethod paymentMethod : paymentMethodList) {
-            paymentMethodDTOs.add(converter.convertEntity(paymentMethod));
-        }
-        return paymentMethodDTOs;
+    	Transformer<PaymentMethod, PaymentMethodDTO> transformer = new Transformer<>(paymentMethodConverter);
+    	return Lists.transform(paymentMethodDao.findAll(), transformer);
     }
 
     @RolesAllowed("documentManagement")
     @Override
     public Long add(PaymentMethodDTO paymentMethodDTO) {
-        paymentMethodDao.save(converter.convertDTO(paymentMethodDTO));
+        paymentMethodDao.save(paymentMethodConverter.convertDTO(paymentMethodDTO));
         return paymentMethodDTO.getId();
     }
 
     @RolesAllowed("documentManagement")
     @Override
     public void edit(PaymentMethodDTO paymentMethod) {
-        paymentMethodDao.save(converter.convertDTO(paymentMethod));
+        paymentMethodDao.save(paymentMethodConverter.convertDTO(paymentMethod));
     }
 
     @RolesAllowed("documentManagement")
     @Override
     public void remove(PaymentMethodDTO paymentMethod) {
-    	paymentMethodDao.delete(converter.convertDTO(paymentMethod));
+    	paymentMethodDao.delete(paymentMethodConverter.convertDTO(paymentMethod));
     }
 
 }

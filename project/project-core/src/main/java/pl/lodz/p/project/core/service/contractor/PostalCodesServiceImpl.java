@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.service.contractor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -14,6 +13,9 @@ import pl.lodz.p.project.core.dao.contractor.PostalCodeDao;
 import pl.lodz.p.project.core.domain.contractor.PostalCode;
 import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -32,12 +34,8 @@ public class PostalCodesServiceImpl implements PostalCodesService {
     @RolesAllowed("contractorManagement")
     @Override
     public List<PostalCodeDTO> getPostalCodes() {
-        List<PostalCodeDTO> postalCodeList = new ArrayList<>();
-        for (PostalCode postalCode : postalCodeDao.findAll()) {
-        	PostalCodeDTO postalCodeDTO = postalCodeConverter.convertEntity(postalCode);
-            postalCodeList.add(postalCodeDTO);
-        }
-        return postalCodeList;
+    	Transformer<PostalCode, PostalCodeDTO> transformer = new Transformer<>(postalCodeConverter);
+    	return Lists.transform(postalCodeDao.findAll(), transformer);
     }
 
     @RolesAllowed("contractorManagement")

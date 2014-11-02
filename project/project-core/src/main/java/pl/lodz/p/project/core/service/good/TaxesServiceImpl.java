@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.service.good;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -14,6 +13,9 @@ import pl.lodz.p.project.core.dao.good.TaxDao;
 import pl.lodz.p.project.core.domain.good.Tax;
 import pl.lodz.p.project.core.dto.good.TaxDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -32,12 +34,8 @@ public class TaxesServiceImpl implements TaxesService {
     @RolesAllowed({"settings", "goodsManagement"})
     @Override
     public List<TaxDTO> getTaxes() {
-        List<TaxDTO> taxList = new ArrayList<>();
-        for (Tax tax : taxDao.findAll()) {
-        	TaxDTO taxDTO = taxConverter.convertEntity(tax);
-        	taxList.add(taxDTO);
-        }
-        return taxList;
+    	Transformer<Tax, TaxDTO> transformer = new Transformer<>(taxConverter);
+    	return Lists.transform(taxDao.findAll(), transformer);
     }
 
     @RolesAllowed("goodsManagement")

@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.service.account;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.PermitAll;
@@ -29,10 +28,12 @@ import pl.lodz.p.project.core.dto.account.RoleDTO;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.exception.UniqueConstraintViolationException;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
 import pl.lodz.p.project.core.util.MailSender;
 
+import com.google.common.collect.Lists;
+
 /**
- * EJB Stateful session bean serving as an endpoint for account management.
  *
  * @author Łukasz Gadomski, Janiu
  */
@@ -79,12 +80,8 @@ public class AccountServiceImpl implements AccountService {
 	@RolesAllowed("accountManagement")
 	@Override
 	public List<RoleDTO> getAllRoles() {
-		List<RoleDTO> roleList = new ArrayList<>();
-		for (Role role : roleDao.findAll()) {
-			RoleDTO roleDTO = roleConverter.convertEntity(role);
-			roleList.add(roleDTO);
-		}
-		return roleList;
+    	Transformer<Role, RoleDTO> transformer = new Transformer<>(roleConverter);
+    	return Lists.transform(roleDao.findAll(), transformer);
 	}
 
 	@PermitAll
@@ -163,12 +160,8 @@ public class AccountServiceImpl implements AccountService {
 	@RolesAllowed("accountManagement")
 	@Override
 	public List<UserDTO> getAllUsers() {
-		List<UserDTO> userList = new ArrayList<>();
-		for (User user : userDao.findAll()) {
-			UserDTO userDTO = userConverter.convertEntity(user);
-			userList.add(userDTO);
-		}
-		return userList;
+    	Transformer<User, UserDTO> transformer = new Transformer<>(userConverter);
+    	return Lists.transform(userDao.findAll(), transformer);
 	}
 
 	/**

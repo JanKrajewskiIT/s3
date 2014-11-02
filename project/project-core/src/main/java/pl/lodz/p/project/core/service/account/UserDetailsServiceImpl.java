@@ -33,7 +33,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			LOGGER.warn("User not found: {}", login);
 			throw new UsernameNotFoundException("Username " + login + " not exists");
 		}
-
 		return user;
 	}
 

@@ -20,6 +20,9 @@ import pl.lodz.p.project.core.domain.document.SaleDocument;
 import pl.lodz.p.project.core.dto.document.DocumentPositionDTO;
 import pl.lodz.p.project.core.dto.document.SaleDocumentDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -54,12 +57,8 @@ public class SaleDocumentsServiceImpl implements SaleDocumentsService {
     @RolesAllowed("documentManagement")
     @Override
     public List<SaleDocumentDTO> getSaleDocuments() {
-        List<SaleDocumentDTO> saleDocumentList = new ArrayList<>();
-        for (SaleDocument saleDocument : saleDocumentDao.findAll()) {
-        	SaleDocumentDTO saleDocumentDTO = saleDocumentConverter.convertEntity(saleDocument);
-        	saleDocumentList.add(saleDocumentDTO);
-        }
-        return saleDocumentList;
+    	Transformer<SaleDocument, SaleDocumentDTO> transformer = new Transformer<>(saleDocumentConverter);
+    	return Lists.transform(saleDocumentDao.findAll(), transformer);
     }
 
     @RolesAllowed("documentManagement")

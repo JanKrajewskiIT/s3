@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.service.document;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -14,6 +13,9 @@ import pl.lodz.p.project.core.dao.document.DocumentPositionDao;
 import pl.lodz.p.project.core.domain.document.DocumentPosition;
 import pl.lodz.p.project.core.dto.document.DocumentPositionDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -39,12 +41,8 @@ public class DocumentsPositionsServiceImpl implements DocumentsPositionsService 
     @RolesAllowed("documentManagement")
     @Override
     public List<DocumentPositionDTO> getDocumentsPositions() {
-        List<DocumentPositionDTO> documentsPositionList = new ArrayList<>();
-        for (DocumentPosition documentPosition : documentPositionDao.findAll()) {
-        	DocumentPositionDTO documentPositionDTO = documentPositionConverter.convertEntity(documentPosition);
-        	documentsPositionList.add(documentPositionDTO);
-        }
-        return documentsPositionList;
+    	Transformer<DocumentPosition, DocumentPositionDTO> transformer = new Transformer<>(documentPositionConverter);
+    	return Lists.transform(documentPositionDao.findAll(), transformer);
     }
 
     @Override

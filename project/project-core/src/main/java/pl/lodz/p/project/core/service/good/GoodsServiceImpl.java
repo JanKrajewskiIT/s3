@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.service.good;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -17,6 +16,9 @@ import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.domain.good.Good;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
+import pl.lodz.p.project.core.service.Transformer;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -35,12 +37,8 @@ public class GoodsServiceImpl implements GoodsService {
     @RolesAllowed("goodsManagement")
     @Override
     public List<GoodDTO> getAllGoods() {
-        List<GoodDTO> goodList = new ArrayList<>();
-        for (Good good : goodDao.findAll()) {
-        	GoodDTO goodDTO = goodConverter.convertEntity(good);
-        	goodList.add(goodDTO);
-        }
-        return goodList;
+    	Transformer<Good, GoodDTO> transformer = new Transformer<>(goodConverter);
+    	return Lists.transform(goodDao.findAll(), transformer);
     }
 
     @RolesAllowed("goodsManagement")
@@ -75,11 +73,8 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Page<GoodDTO> search(String searchQuery, PageRequest pageRequest) {
         Page<Good> pageGoods = goodDao.search(searchQuery, pageRequest);
-        List<GoodDTO> goodList = new ArrayList<>();
-        for (Good good : pageGoods.getContent()) {
-        	GoodDTO goodDTO = goodConverter.convertEntity(good);
-        	goodList.add(goodDTO);
-        }
+    	Transformer<Good, GoodDTO> transformer = new Transformer<>(goodConverter);
+    	List<GoodDTO> goodList = Lists.transform(pageGoods.getContent(), transformer);
         return new PageImpl<>(goodList, pageRequest, pageGoods.getTotalElements());
     }
 
