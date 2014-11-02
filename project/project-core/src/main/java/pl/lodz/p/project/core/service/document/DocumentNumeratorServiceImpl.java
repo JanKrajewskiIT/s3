@@ -50,7 +50,6 @@ public class DocumentNumeratorServiceImpl implements DocumentNumeratorService {
     }
 
     protected String findPrevious(String documentType) {
-       //return null;
        return documentNumeratorDao.findPrevious(documentType);
     }
     

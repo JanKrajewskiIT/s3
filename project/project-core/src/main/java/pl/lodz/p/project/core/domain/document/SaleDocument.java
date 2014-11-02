@@ -18,7 +18,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -35,7 +34,6 @@ import pl.lodz.p.project.core.domain.contractor.Contractor;
  */
 @Entity
 @Table(name = "sale_documents")
-@XmlRootElement
 public class SaleDocument implements Serializable, Activable {
 
     private static final long serialVersionUID = 1L;

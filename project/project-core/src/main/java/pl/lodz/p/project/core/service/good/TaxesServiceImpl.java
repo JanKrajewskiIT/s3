@@ -24,7 +24,7 @@ import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 public class TaxesServiceImpl implements TaxesService {
 
     @Autowired
-    TaxDao taxesDao;
+    TaxDao taxDao;
     
     @Autowired
     TaxConverter taxConverter; 
@@ -32,18 +32,18 @@ public class TaxesServiceImpl implements TaxesService {
     @RolesAllowed({"settings", "goodsManagement"})
     @Override
     public List<TaxDTO> getTaxes() {
-        List<TaxDTO> taxeList = new ArrayList<>();
-        for (Tax tax : taxesDao.findAll()) {
+        List<TaxDTO> taxList = new ArrayList<>();
+        for (Tax tax : taxDao.findAll()) {
         	TaxDTO taxDTO = taxConverter.convertEntity(tax);
-        	taxeList.add(taxDTO);
+        	taxList.add(taxDTO);
         }
-        return taxeList;
+        return taxList;
     }
 
     @RolesAllowed("goodsManagement")
     @Override
     public TaxDTO getTax(Long id) {
-    	Tax tax = taxesDao.findOne(id);
+    	Tax tax = taxDao.findOne(id);
         return taxConverter.convertEntity(tax);
     }
 
@@ -51,21 +51,22 @@ public class TaxesServiceImpl implements TaxesService {
     @Override
     public void edit(TaxDTO taxDTO) {
     	Tax tax = taxConverter.convertDTO(taxDTO);
-        taxesDao.save(tax);
+        taxDao.save(tax);
     }
 
     @RolesAllowed("settings")
     @Override
     public void remove(TaxDTO taxDTO) {
     	Tax tax = taxConverter.convertDTO(taxDTO);
-        taxesDao.save(tax);
+        taxDao.save(tax);
     }
 
     @RolesAllowed("settings")
     @Override
     public Long add(TaxDTO taxDTO) {
     	Tax tax = taxConverter.convertDTO(taxDTO);
-        taxesDao.save(tax);
+        taxDao.save(tax);
         return tax.getId();
     }
+    
 }

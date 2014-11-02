@@ -24,7 +24,7 @@ import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 public class PostalCodesServiceImpl implements PostalCodesService {
 
     @Autowired
-    PostalCodeDao postalCodesDao;
+    PostalCodeDao postalCodeDao;
     
     @Autowired
     PostalCodeConverter postalCodeConverter;
@@ -33,7 +33,7 @@ public class PostalCodesServiceImpl implements PostalCodesService {
     @Override
     public List<PostalCodeDTO> getPostalCodes() {
         List<PostalCodeDTO> postalCodeList = new ArrayList<>();
-        for (PostalCode postalCode : postalCodesDao.findAll()) {
+        for (PostalCode postalCode : postalCodeDao.findAll()) {
         	PostalCodeDTO postalCodeDTO = postalCodeConverter.convertEntity(postalCode);
             postalCodeList.add(postalCodeDTO);
         }
@@ -43,7 +43,7 @@ public class PostalCodesServiceImpl implements PostalCodesService {
     @RolesAllowed("contractorManagement")
     @Override
     public PostalCodeDTO getPostalCode(Long id) {
-    	PostalCode postalCode = postalCodesDao.findOne(id);
+    	PostalCode postalCode = postalCodeDao.findOne(id);
         return postalCodeConverter.convertEntity(postalCode);
     }
     

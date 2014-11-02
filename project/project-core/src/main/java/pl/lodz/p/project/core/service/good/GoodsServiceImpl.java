@@ -27,7 +27,7 @@ import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
-    GoodDao goodsDao;
+    GoodDao goodDao;
     
     @Autowired
     GoodConverter goodConverter;
@@ -36,7 +36,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<GoodDTO> getAllGoods() {
         List<GoodDTO> goodList = new ArrayList<>();
-        for (Good good : goodsDao.findAll()) {
+        for (Good good : goodDao.findAll()) {
         	GoodDTO goodDTO = goodConverter.convertEntity(good);
         	goodList.add(goodDTO);
         }
@@ -47,14 +47,14 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void removeGood(GoodDTO goodDTO) {
     	Good good = goodConverter.convertDTO(goodDTO);
-        goodsDao.delete(good);
+        goodDao.delete(good);
     }
 
     @RolesAllowed("goodsManagement")
     @Override
     public Long add(GoodDTO goodDTO) {
         Good good = goodConverter.convertDTO(goodDTO);
-        goodsDao.save(good);
+        goodDao.save(good);
         return good.getId();
     }
 
@@ -62,19 +62,19 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void edit(GoodDTO goodDTO) {
         Good good = goodConverter.convertDTO(goodDTO);
-        goodsDao.save(good);
+        goodDao.save(good);
     }
 
     @RolesAllowed("goodsManagement")
     @Override
     public GoodDTO findById(Long id) {
-        Good good = goodsDao.findOne(id);
+        Good good = goodDao.findOne(id);
         return goodConverter.convertEntity(good);
     }
 
     @Override
     public Page<GoodDTO> search(String searchQuery, PageRequest pageRequest) {
-        Page<Good> pageGoods = goodsDao.search(searchQuery, pageRequest);
+        Page<Good> pageGoods = goodDao.search(searchQuery, pageRequest);
         List<GoodDTO> goodList = new ArrayList<>();
         for (Good good : pageGoods.getContent()) {
         	GoodDTO goodDTO = goodConverter.convertEntity(good);

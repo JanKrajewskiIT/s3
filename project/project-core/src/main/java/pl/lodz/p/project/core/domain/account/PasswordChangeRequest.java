@@ -9,14 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -31,12 +28,6 @@ import pl.lodz.p.project.core.domain.BasePersistable;
  */
 @Entity
 @Table(name = "password_change_requests")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "PasswordChangeRequest.findAll", query = "SELECT p FROM PasswordChangeRequest p"),
-    @NamedQuery(name = "PasswordChangeRequest.findById", query = "SELECT p FROM PasswordChangeRequest p WHERE p.id = :id"),
-    @NamedQuery(name = "PasswordChangeRequest.findByCreationDate", query = "SELECT p FROM PasswordChangeRequest p WHERE p.creationDate = :creationDate"),
-    @NamedQuery(name = "PasswordChangeRequest.findByUser", query = "SELECT p FROM PasswordChangeRequest p WHERE p.user = :user")})
 public class PasswordChangeRequest implements Serializable, BasePersistable {
 
     private static final long serialVersionUID = 1L;

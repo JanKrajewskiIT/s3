@@ -33,7 +33,7 @@ public class SaleDocumentsServiceImpl implements SaleDocumentsService {
     private SaleDocumentDao saleDocumentDao;
 
     @Autowired
-    private DocumentPositionDao documentsPositionsDao;
+    private DocumentPositionDao documentPositionDao;
     
     @Autowired
     private UserDao userDao;
@@ -70,7 +70,7 @@ public class SaleDocumentsServiceImpl implements SaleDocumentsService {
             DocumentPosition documentPosition = documentPositionConverter.convertDTO(documentPositionDTO);
             documentPositionList.add(documentPosition);
         }
-        documentsPositionsDao.createAll(documentPositionList);
+        documentPositionDao.createAll(documentPositionList);
         
         User user = userDao.findByEmail(saleDocumentDTO.getIssuePerson().getEmail());
         SaleDocument saleDocument = saleDocumentConverter.convertDTO(saleDocumentDTO);

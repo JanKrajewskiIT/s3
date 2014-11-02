@@ -24,7 +24,7 @@ import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 public class UnitsServiceImpl implements UnitsService {
 
     @Autowired
-    UnitDao unitsDao;
+    UnitDao unitDao;
 
     @Autowired
     UnitConverter unitConverter;
@@ -33,7 +33,7 @@ public class UnitsServiceImpl implements UnitsService {
     @Override
     public List<UnitDTO> getUnits() {
         List<UnitDTO> unitsList = new ArrayList<>();
-        for(Unit unit : unitsDao.findAll()) {
+        for(Unit unit : unitDao.findAll()) {
         	UnitDTO unitDTO = unitConverter.convertEntity(unit);
         	unitsList.add(unitDTO);
         }
@@ -43,7 +43,7 @@ public class UnitsServiceImpl implements UnitsService {
     @RolesAllowed("goodsManagement")
     @Override
     public UnitDTO getUnit(Long id) {
-    	Unit unit = unitsDao.findOne(id);
+    	Unit unit = unitDao.findOne(id);
     	return unitConverter.convertEntity(unit);
     }
 
@@ -51,7 +51,7 @@ public class UnitsServiceImpl implements UnitsService {
     @Override
     public Long add(UnitDTO unitDTO) {
     	Unit unit = unitConverter.convertDTO(unitDTO);
-    	unitsDao.save(unit);
+    	unitDao.save(unit);
         return unit.getId();
     }
 
@@ -59,14 +59,14 @@ public class UnitsServiceImpl implements UnitsService {
     @Override
     public void edit(UnitDTO unitDTO) {
     	Unit unit = unitConverter.convertDTO(unitDTO);
-    	unitsDao.save(unit);
+    	unitDao.save(unit);
     }
 
     @RolesAllowed("settings")
     @Override
     public void remove(UnitDTO unitDTO) {
     	Unit unit = unitConverter.convertDTO(unitDTO);
-    	unitsDao.delete(unit);
+    	unitDao.delete(unit);
     }
     
 }

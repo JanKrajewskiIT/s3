@@ -79,12 +79,9 @@ public class AccountServiceImpl implements AccountService {
 	@RolesAllowed("accountManagement")
 	@Override
 	public List<RoleDTO> getAllRoles() {
-		//ServiceTransformer<RoleDTO, Role> transformer = new ServiceTransformer<>();
-		//return transformer.transformList();
-		
 		List<RoleDTO> roleList = new ArrayList<>();
-		for (Role roleEntity : roleDao.findAll()) {
-			RoleDTO roleDTO = roleConverter.convertEntity(roleEntity);
+		for (Role role : roleDao.findAll()) {
+			RoleDTO roleDTO = roleConverter.convertEntity(role);
 			roleList.add(roleDTO);
 		}
 		return roleList;
@@ -92,10 +89,10 @@ public class AccountServiceImpl implements AccountService {
 
 	@PermitAll
 	@Override
-	public RoleDTO getRoleByName(String roleName) {
-		Role roleEntity = roleDao.findByName(roleName);
-		if (roleEntity != null) {
-			return roleConverter.convertEntity(roleEntity);
+	public RoleDTO getRoleByName(String name) {
+		Role role = roleDao.findByName(name);
+		if (role != null) {
+			return roleConverter.convertEntity(role);
 		}
 		return null;
 	}
@@ -116,9 +113,9 @@ public class AccountServiceImpl implements AccountService {
 	 */
 	@RolesAllowed("accountManagement")
 	@Override
-	public void sendInvitation(String registrationURL, String email, RoleDTO roleDTO) {
-		Role roleEntity = roleConverter.convertDTO(roleDTO);
-		mailSender.sendInvitationMail(registrationURL, email, roleEntity);
+	public void sendInvitation(String url, String email, RoleDTO roleDTO) {
+		Role role = roleConverter.convertDTO(roleDTO);
+		mailSender.sendInvitationMail(url, email, role);
 	}
 
 	/**
@@ -167,8 +164,8 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public List<UserDTO> getAllUsers() {
 		List<UserDTO> userList = new ArrayList<>();
-		for (User userEntity : userDao.findAll()) {
-			UserDTO userDTO = userConverter.convertEntity(userEntity);
+		for (User user : userDao.findAll()) {
+			UserDTO userDTO = userConverter.convertEntity(user);
 			userList.add(userDTO);
 		}
 		return userList;
@@ -196,8 +193,8 @@ public class AccountServiceImpl implements AccountService {
 		User user = userConverter.convertDTO(userDTO);
 		user.setPassword(DigestUtils.sha256Hex(userDTO.getPassword()));
 		
-		String roleName = userDTO.getRoleSet().iterator().next().getName();
-		Role role = roleDao.findByName(roleName);
+		String name = userDTO.getRoleSet().iterator().next().getName();
+		Role role = roleDao.findByName(name);
         user.getRolesCollection().add(role);
         role.getUsersCollection().add(user);
         userDao.save(user);

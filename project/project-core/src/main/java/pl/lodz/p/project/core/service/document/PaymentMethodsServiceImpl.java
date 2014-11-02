@@ -25,7 +25,7 @@ import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 public class PaymentMethodsServiceImpl implements PaymentMethodsService {
 
     @Autowired
-    private PaymentMethodDao paymentMethodsDao;
+    private PaymentMethodDao paymentMethodDao;
 
     @Inject
     private PaymentMethodConverter converter;
@@ -33,15 +33,15 @@ public class PaymentMethodsServiceImpl implements PaymentMethodsService {
     @RolesAllowed("documentManagement")
     @Override
     public PaymentMethodDTO getById(Long id) {
-        return converter.convertEntity(paymentMethodsDao.findOne(id));
+        return converter.convertEntity(paymentMethodDao.findOne(id));
     }
 
     @RolesAllowed("documentManagement")
     @Override
     public List<PaymentMethodDTO> getPaymentMethods() {
-        List<PaymentMethod> paymentMethods = paymentMethodsDao.findAll();
-        List<PaymentMethodDTO> paymentMethodDTOs = new ArrayList<>(paymentMethods.size());
-        for (PaymentMethod paymentMethod : paymentMethods) {
+        List<PaymentMethod> paymentMethodList = paymentMethodDao.findAll();
+        List<PaymentMethodDTO> paymentMethodDTOs = new ArrayList<>(paymentMethodList.size());
+        for (PaymentMethod paymentMethod : paymentMethodList) {
             paymentMethodDTOs.add(converter.convertEntity(paymentMethod));
         }
         return paymentMethodDTOs;
@@ -50,20 +50,20 @@ public class PaymentMethodsServiceImpl implements PaymentMethodsService {
     @RolesAllowed("documentManagement")
     @Override
     public Long add(PaymentMethodDTO paymentMethodDTO) {
-        paymentMethodsDao.save(converter.convertDTO(paymentMethodDTO));
+        paymentMethodDao.save(converter.convertDTO(paymentMethodDTO));
         return paymentMethodDTO.getId();
     }
 
     @RolesAllowed("documentManagement")
     @Override
     public void edit(PaymentMethodDTO paymentMethod) {
-        paymentMethodsDao.save(converter.convertDTO(paymentMethod));
+        paymentMethodDao.save(converter.convertDTO(paymentMethod));
     }
 
     @RolesAllowed("documentManagement")
     @Override
     public void remove(PaymentMethodDTO paymentMethod) {
-    	paymentMethodsDao.delete(converter.convertDTO(paymentMethod));
+    	paymentMethodDao.delete(converter.convertDTO(paymentMethod));
     }
 
 }

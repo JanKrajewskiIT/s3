@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -32,7 +31,6 @@ import pl.lodz.p.project.core.domain.good.Tax;
  */
 @Entity
 @Table(name = "documents_positions")
-@XmlRootElement
 public class DocumentPosition implements Serializable, BasePersistable {
 
     private static final long serialVersionUID = 1L;

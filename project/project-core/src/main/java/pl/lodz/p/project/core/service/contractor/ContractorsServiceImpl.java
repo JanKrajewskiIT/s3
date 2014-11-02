@@ -27,7 +27,7 @@ import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 public class ContractorsServiceImpl implements ContractorsService {
 
     @Autowired
-    private ContractorDao contractorsDao;
+    private ContractorDao contractorDao;
     
     @Autowired
     private ContractorConverter contractorConverter;
@@ -37,7 +37,7 @@ public class ContractorsServiceImpl implements ContractorsService {
     @Override
     public List<ContractorDTO> getAllContractors() {
         List<ContractorDTO> contractorList = new ArrayList<>();
-        for (Contractor contractor : contractorsDao.findAll()) {
+        for (Contractor contractor : contractorDao.findAll()) {
         	ContractorDTO contractorDTO = contractorConverter.convertEntity(contractor);
         	contractorList.add(contractorDTO);
         }
@@ -47,32 +47,32 @@ public class ContractorsServiceImpl implements ContractorsService {
     @RolesAllowed("contractorManagement")
     @Override
     public void removeContractor(Long id) {
-        contractorsDao.delete(id);
+        contractorDao.delete(id);
     }
 
     @RolesAllowed("contractorManagement")
     @Override
     public void addContractor(ContractorDTO contractorDTO) {
         Contractor contractor = contractorConverter.convertDTO(contractorDTO);
-        contractorsDao.save(contractor, false);
+        contractorDao.save(contractor, false);
     }
     
     @Override
     public void editContractor(ContractorDTO contractorDTO) {
         Contractor contractor = contractorConverter.convertDTO(contractorDTO);
-        contractorsDao.save(contractor, true);
+        contractorDao.save(contractor, true);
     }
 
     @RolesAllowed("contractorManagement")
     @Override
     public ContractorDTO findById(Long id) {
-    	Contractor contractor = contractorsDao.findOne(id);
+    	Contractor contractor = contractorDao.findOne(id);
     	return contractorConverter.convertEntity(contractor);
     }
 
     @Override
     public Page<ContractorDTO> search(String searchQuery, PageRequest pageRequest) {
-        Page<Contractor> pageGoods = contractorsDao.search(searchQuery, pageRequest);
+        Page<Contractor> pageGoods = contractorDao.search(searchQuery, pageRequest);
         List<ContractorDTO> contractorList = new ArrayList<>();
         for (Contractor contractor : pageGoods.getContent()) {
         	ContractorDTO contractorDTO = contractorConverter.convertEntity(contractor);

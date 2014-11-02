@@ -24,7 +24,7 @@ import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 public class ContractorsContactsServiceImpl implements ContractorsContactsService {
 
     @Autowired
-    ContractorContactDao contractorContactsDao;
+    ContractorContactDao contractorContactDao;
     
     @Autowired
     ContractorContactConverter contractorContactConverter;
@@ -33,7 +33,7 @@ public class ContractorsContactsServiceImpl implements ContractorsContactsServic
     @Override
     public List<ContractorContactDTO> getContractorsContacts() {
     	List<ContractorContactDTO> contractorContactList = new ArrayList<>();
-        for (ContractorContact contractorContact : contractorContactsDao.findAll()) {
+        for (ContractorContact contractorContact : contractorContactDao.findAll()) {
         	ContractorContactDTO contractContactDTO = contractorContactConverter.convertEntity(contractorContact);
             contractorContactList.add(contractContactDTO);
         }
@@ -43,7 +43,7 @@ public class ContractorsContactsServiceImpl implements ContractorsContactsServic
     @RolesAllowed("contractorManagement")
     @Override
     public ContractorContactDTO getContractorContact(Long id) {
-    	ContractorContact contractorContact = contractorContactsDao.findOne(id);
+    	ContractorContact contractorContact = contractorContactDao.findOne(id);
     	return contractorContactConverter.convertEntity(contractorContact);
     }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,14 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -78,9 +75,6 @@ public class User implements UserDetails, BasePersistable {
 
 	@ManyToMany(mappedBy = "usersCollection", fetch = FetchType.EAGER)
 	private Collection<Role> rolesCollection = new ArrayList<>();
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private Collection<PasswordChangeRequest> passwordChangeRequestCollection = new ArrayList<>();
 
 	@Basic(optional = false)
 	@NotNull
@@ -200,16 +194,6 @@ public class User implements UserDetails, BasePersistable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
-
-	@XmlTransient
-	public Collection<PasswordChangeRequest> getPasswordChangeRequestCollection() {
-		return passwordChangeRequestCollection;
-	}
-
-	public void setPasswordChangeRequestCollection(
-			Collection<PasswordChangeRequest> passwordChangeRequestCollection) {
-		this.passwordChangeRequestCollection = passwordChangeRequestCollection;
-	}
 
 	@Override
 	public boolean isNew() {

@@ -24,7 +24,7 @@ import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 public class ContractorsGroupsServiceImpl implements ContractorsGroupsService {
 
 	@Autowired
-    ContractorGroupDao contractorsGroupsDao;
+    ContractorGroupDao contractorGroupDao;
 	
 	@Autowired
 	ContractorGroupConverter contractorGroupConverter;
@@ -33,7 +33,7 @@ public class ContractorsGroupsServiceImpl implements ContractorsGroupsService {
     @Override
     public List<ContractorGroupDTO> getContractorsGroups() {
         List<ContractorGroupDTO> contractorGroupList = new ArrayList<>();
-        for (ContractorGroup contractorGroup : contractorsGroupsDao.findAll()) {
+        for (ContractorGroup contractorGroup : contractorGroupDao.findAll()) {
         	ContractorGroupDTO contractorGroupDTO = contractorGroupConverter.convertEntity(contractorGroup);
         	contractorGroupList.add(contractorGroupDTO);
         }
@@ -43,7 +43,7 @@ public class ContractorsGroupsServiceImpl implements ContractorsGroupsService {
     @RolesAllowed("contractorGroupManagement")
     @Override
     public ContractorGroupDTO getContractorGroup(Long id) {
-    	ContractorGroup contractorGroup = contractorsGroupsDao.findOne(id);
+    	ContractorGroup contractorGroup = contractorGroupDao.findOne(id);
         return contractorGroupConverter.convertEntity(contractorGroup);
     }
 
@@ -51,7 +51,7 @@ public class ContractorsGroupsServiceImpl implements ContractorsGroupsService {
     @Override
     public Long add(ContractorGroupDTO contractorGroupDTO) {
     	ContractorGroup contractorGroup = contractorGroupConverter.convertDTO(contractorGroupDTO);
-        contractorsGroupsDao.save(contractorGroup);
+        contractorGroupDao.save(contractorGroup);
         return contractorGroup.getId();
     }
 
@@ -59,14 +59,14 @@ public class ContractorsGroupsServiceImpl implements ContractorsGroupsService {
     @Override
     public void edit(ContractorGroupDTO contractorGroupDTO) {
     	ContractorGroup contractorGroup = contractorGroupConverter.convertDTO(contractorGroupDTO);
-        contractorsGroupsDao.save(contractorGroup);
+        contractorGroupDao.save(contractorGroup);
     }
 
     @RolesAllowed("contractorGroupManagement")
     @Override
     public void remove(ContractorGroupDTO contractorGroupDTO) {
     	ContractorGroup contractorGroup = contractorGroupConverter.convertDTO(contractorGroupDTO);
-        contractorsGroupsDao.delete(contractorGroup);
+        contractorGroupDao.delete(contractorGroup);
     }
 
 }

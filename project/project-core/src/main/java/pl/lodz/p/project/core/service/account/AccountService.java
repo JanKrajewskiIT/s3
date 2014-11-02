@@ -16,9 +16,9 @@ public interface AccountService {
 
     List<RoleDTO> getAllRoles();
 
-    RoleDTO getRoleByName(String roleName);
+    RoleDTO getRoleByName(String name);
 
-    void sendInvitation(String registrationURL, String email, RoleDTO roleDTO);
+    void sendInvitation(String url, String email, RoleDTO roleDTO);
 
     PendingInvitationDTO getPendingInvitationByToken(String token);
 

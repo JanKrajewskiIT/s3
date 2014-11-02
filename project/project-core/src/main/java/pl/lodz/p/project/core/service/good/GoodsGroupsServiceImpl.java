@@ -24,7 +24,7 @@ import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 public class GoodsGroupsServiceImpl implements GoodsGroupsService {
 
     @Autowired
-    GoodGroupDao goodsGroupsDao;
+    GoodGroupDao goodGroupDao;
     
     @Autowired
     GoodGroupConverter goodGroupConverter;
@@ -33,7 +33,7 @@ public class GoodsGroupsServiceImpl implements GoodsGroupsService {
     @Override
     public List<GoodGroupDTO> getGoodsGroups() {
         List<GoodGroupDTO> goodsGroupsList = new ArrayList<>();
-        for(GoodGroup goodGroup : goodsGroupsDao.findAll()) {
+        for(GoodGroup goodGroup : goodGroupDao.findAll()) {
         	GoodGroupDTO goodGroupDTO = goodGroupConverter.convertEntity(goodGroup);
         	goodsGroupsList.add(goodGroupDTO);
         }
@@ -43,7 +43,7 @@ public class GoodsGroupsServiceImpl implements GoodsGroupsService {
     @RolesAllowed("goodsGroupManagement")
     @Override
     public GoodGroupDTO getGroup(Long id) {
-        GoodGroup goodGroup = goodsGroupsDao.findOne(id);
+        GoodGroup goodGroup = goodGroupDao.findOne(id);
         return goodGroupConverter.convertEntity(goodGroup);
     }
 
@@ -51,7 +51,7 @@ public class GoodsGroupsServiceImpl implements GoodsGroupsService {
     @Override
     public Long add(GoodGroupDTO goodGroupDTO) {
         GoodGroup goodGroup = goodGroupConverter.convertDTO(goodGroupDTO);
-        goodsGroupsDao.save(goodGroup);
+        goodGroupDao.save(goodGroup);
         return goodGroup.getId();
     }
 
@@ -59,13 +59,13 @@ public class GoodsGroupsServiceImpl implements GoodsGroupsService {
     @Override
     public void edit(GoodGroupDTO goodGroupDTO) {
         GoodGroup goodGroup = goodGroupConverter.convertDTO(goodGroupDTO);
-        goodsGroupsDao.save(goodGroup);
+        goodGroupDao.save(goodGroup);
     }
 
     @RolesAllowed("goodsGroupManagement")
     @Override
     public void remove(GoodGroupDTO goodGroupDTO) {
         GoodGroup goodGroup = goodGroupConverter.convertDTO(goodGroupDTO);
-        goodsGroupsDao.delete(goodGroup);
+        goodGroupDao.delete(goodGroup);
     }
 }
