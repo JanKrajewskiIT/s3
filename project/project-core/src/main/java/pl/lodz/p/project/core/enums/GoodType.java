@@ -2,10 +2,9 @@ package pl.lodz.p.project.core.enums;
 
 /**
  *
- * @author Łukasz
+ * @author Łukasz, Janiu
  */
 public enum GoodType {
 
-    Towar,
-    Usługa;
+    GOOD, SERVICE;
 }

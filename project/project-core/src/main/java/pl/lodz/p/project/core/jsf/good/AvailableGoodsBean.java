@@ -56,7 +56,8 @@ public class AvailableGoodsBean {
     }
 
     private List<GoodDTO> getDataFromWebService() {
-            /*WebResource webResource = client
+            /* TODO need to delete
+            WebResource webResource = client
                     .resource("http://10.31.62.214:8080/was04-headoffice-web/rest/goods/list");
             ClientResponse response = webResource.accept("application/json")
                     .get(ClientResponse.class);

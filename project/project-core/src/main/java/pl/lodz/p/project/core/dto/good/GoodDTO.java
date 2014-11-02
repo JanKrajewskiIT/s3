@@ -21,7 +21,7 @@ public class GoodDTO implements Serializable, Comparable<GoodDTO> {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-    private GoodType type = GoodType.Towar;
+    private GoodType type = GoodType.GOOD;
     private String pkwiu;   
     private String description;
     private double weight;

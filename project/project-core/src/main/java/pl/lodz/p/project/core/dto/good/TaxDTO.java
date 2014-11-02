@@ -20,7 +20,14 @@ public class TaxDTO implements Serializable, Comparable<TaxDTO> {
     private String name;
     private BigDecimal value;
 
-    public Long getId() {
+    public TaxDTO() { }
+    
+    public TaxDTO(TaxDTO tax) {
+    	this.name = tax.getName();
+    	this.value = tax.getValue();
+	}
+
+	public Long getId() {
 		return id;
 	}
 

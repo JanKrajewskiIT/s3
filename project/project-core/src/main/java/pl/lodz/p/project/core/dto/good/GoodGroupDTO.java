@@ -18,7 +18,13 @@ public class GoodGroupDTO implements Serializable, Comparable<GoodGroupDTO> {
 	private Long id;
     private String name;
 
-    public Long getId() {
+    public GoodGroupDTO() { }
+    
+    public GoodGroupDTO(GoodGroupDTO goodGroup) {
+    	this.name = goodGroup.getName();
+	}
+
+	public Long getId() {
 		return id;
 	}
 

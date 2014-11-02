@@ -96,7 +96,7 @@ public class SettingsGoodsPageBean implements Serializable {
     }
 
     public void saveNewTax() {
-        TaxDTO taxToSave = null; //TODO new TaxDTO(newTax);
+        TaxDTO taxToSave = new TaxDTO(newTax);
         System.out.println("New tax: " + taxToSave);
         taxesManagementEndpointLocal.add(taxToSave);
         loadTaxes();
@@ -124,7 +124,7 @@ public class SettingsGoodsPageBean implements Serializable {
     }
 
     public void saveNewUnit() {
-        UnitDTO unitToSave = null; //TODO new UnitDTO(newUnit);
+        UnitDTO unitToSave = new UnitDTO(newUnit);
         System.out.println("Zapisz: " + unitToSave);
         unitsManagementEndpointLocal.add(unitToSave);
         loadUnits();
@@ -152,10 +152,11 @@ public class SettingsGoodsPageBean implements Serializable {
     }
 
     public void saveNewGoodGroup() {
-        GoodGroupDTO groupToSave = null; //TODO new GoodGroupDTO(newGoodGroup);
+        GoodGroupDTO groupToSave = new GoodGroupDTO(newGoodGroup);
         System.out.println("New goodGroup: " + groupToSave);
         goodsGroupsManagementEndpointLocal.add(newGoodGroup);
         loadGoodGroups();
         newGoodGroup = new GoodGroupDTO();
     }
+    
 }

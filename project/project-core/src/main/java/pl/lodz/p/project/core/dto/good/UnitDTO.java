@@ -19,7 +19,14 @@ public class UnitDTO implements Serializable, Comparable<UnitDTO> {
     private String name;
     private Short zeroPlaces;
 
-    public Long getId() {
+    public UnitDTO() { }
+    
+    public UnitDTO(UnitDTO unit) {
+    	this.name = unit.getName();
+    	this.zeroPlaces = unit.getZeroPlaces();
+	}
+
+	public Long getId() {
 		return id;
 	}
 

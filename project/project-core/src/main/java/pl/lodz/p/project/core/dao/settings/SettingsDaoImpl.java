@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.lodz.p.project.core.domain.settings.SettingsEntry;
-import pl.lodz.p.project.core.dto.setting.SettingsPropertyType;
+import pl.lodz.p.project.core.dto.settings.SettingsPropertyType;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;

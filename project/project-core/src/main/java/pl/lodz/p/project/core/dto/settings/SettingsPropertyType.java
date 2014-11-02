@@ -1,4 +1,4 @@
-package pl.lodz.p.project.core.dto.setting;
+package pl.lodz.p.project.core.dto.settings;
 
 /**
  *
