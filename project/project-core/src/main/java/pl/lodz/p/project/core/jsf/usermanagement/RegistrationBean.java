@@ -72,7 +72,6 @@ public class RegistrationBean implements Serializable {
         try {
             userDTO.setEmail(pendingInvitationDTO.getEmail());
             userDTO.getRoleSet().add(pendingInvitationDTO.getRole());
-            //TODO userDTO.setActive(true);
             accountManagementService.createUser(userDTO);
             accountManagementService.removePendingInvitation(pendingInvitationDTO.getId());
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "registrationSuccess");

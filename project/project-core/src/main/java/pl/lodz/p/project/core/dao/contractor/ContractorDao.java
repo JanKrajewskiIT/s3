@@ -10,8 +10,6 @@ import pl.lodz.p.project.core.domain.contractor.Contractor;
  * @author Janiu
  */
 public interface ContractorDao extends CrudDao<Contractor, Long> {
-
-    void remove(Long id);
         
     Page<Contractor> search(String searchQuery, PageRequest pageRequest);
     

@@ -18,7 +18,13 @@ public class ContractorGroupDTO implements Serializable, Comparable<ContractorGr
 	private Long id;
     private String name;
 
-    public Long getId() {
+    public ContractorGroupDTO() { }
+    
+    public ContractorGroupDTO(ContractorGroupDTO contractorGroupDTO) {
+    	this.name = contractorGroupDTO.getName();
+	}
+
+	public Long getId() {
         return id;
     }
 

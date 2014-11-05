@@ -41,7 +41,7 @@ public class SettingsClientsPageBean implements Serializable {
     }
     
     public void saveNewClientGroup() {
-        ContractorGroupDTO clientGroupToSave = null;//TODO = new ContractorGroupDTO(newClientGroup);
+        ContractorGroupDTO clientGroupToSave = new ContractorGroupDTO(newClientGroup);
         System.out.println("New client group: " + clientGroupToSave);
         
         clientsGroupsManagement.save(clientGroupToSave);

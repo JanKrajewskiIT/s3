@@ -23,21 +23,8 @@ import pl.lodz.p.project.core.domain.contractor.Contractor;
 @Transactional
 public class ContractorDaoImpl extends AbstractPageableDao<Contractor, Long> implements ContractorDao {
 
-    private CriteriaBuilder cb;
-
-    public ContractorDaoImpl() {
+	public ContractorDaoImpl() {
         super(Contractor.class);
-    }
-
-	@Override
-	@Transactional(readOnly = true)
-    public void remove(Long id) {
-        this.cb = getEntityManager().getCriteriaBuilder();
-        /* TODO CriteriaDelete<Contractor> delete = cb.createCriteriaDelete(Contractor.class);
-        Root<Contractor> e = delete.from(Contractor.class);
-        delete.where(cb.equal(e.get("id"), id));
-        Query query = getEntityManager().createQuery(delete);
-        query.executeUpdate();*/
     }
 
 	@Override
