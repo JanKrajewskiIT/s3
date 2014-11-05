@@ -8,9 +8,10 @@ import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
  *
  * @author Janiu
  */
-public interface PostalCodesService {
+public interface PostalCodeService {
 
-    List<PostalCodeDTO> getPostalCodes();
+    List<PostalCodeDTO> getAll();
     
-    PostalCodeDTO getPostalCode(Long id);
+    PostalCodeDTO getOneById(Long id);
+    
 }

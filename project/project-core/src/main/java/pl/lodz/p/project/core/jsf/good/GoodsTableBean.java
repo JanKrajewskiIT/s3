@@ -14,7 +14,7 @@ import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
-import pl.lodz.p.project.core.service.good.GoodsService;
+import pl.lodz.p.project.core.service.good.GoodService;
 
 /**
  *
@@ -30,7 +30,7 @@ public class GoodsTableBean implements Serializable {
     private static final String DEFAULT_SORT_PROPERTY = "name";
     
     @Autowired
-    private GoodsService goodsManagementEndpointLocal;
+    private GoodService goodsManagementEndpointLocal;
 
     private Page<GoodDTO> page;
     private PageRequest pageRequest = new PageRequest(0, PAGE_SIZE, new Sort(DEFAULT_SORT_PROPERTY));
@@ -49,7 +49,7 @@ public class GoodsTableBean implements Serializable {
 
     public void removeGood(GoodDTO good) {
         getGoodsList().remove(good);
-        goodsManagementEndpointLocal.removeGood(good);
+        goodsManagementEndpointLocal.delete(good);
     }
 
     /**

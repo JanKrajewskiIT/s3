@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.PaymentMethodDTO;
 import pl.lodz.p.project.core.service.document.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.DocumentSettingsService;
-import pl.lodz.p.project.core.service.document.PaymentMethodsService;
+import pl.lodz.p.project.core.service.document.PaymentMethodService;
 
 /**
  *
@@ -32,7 +32,7 @@ public class SettingsDocumentsPageBean implements Serializable {
     private DocumentNumeratorService documentNumeratorEndpoint;
     
     @Autowired
-    private PaymentMethodsService paymentMethodsManagentEndpoint;
+    private PaymentMethodService paymentMethodsManagentEndpoint;
     
     @Autowired
     private DocumentSettingsService documentSettingsEnpoint;
@@ -58,7 +58,7 @@ public class SettingsDocumentsPageBean implements Serializable {
     }
     
     private void loadPaymentMethods() {
-        paymentMethods = paymentMethodsManagentEndpoint.getPaymentMethods();
+        paymentMethods = paymentMethodsManagentEndpoint.getAll();
     }
     
     public String getCurrentDocumentSymbolFormat() {
@@ -81,7 +81,7 @@ public class SettingsDocumentsPageBean implements Serializable {
     
     public void onPaymentMethodEdit(RowEditEvent event) {
         PaymentMethodDTO editedPaymentMethod = (PaymentMethodDTO) event.getObject();
-        paymentMethodsManagentEndpoint.edit(editedPaymentMethod);
+        paymentMethodsManagentEndpoint.save(editedPaymentMethod);
         loadPaymentMethods();
 
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Zapisano metodę płatności: ", editedPaymentMethod.getName());
@@ -89,7 +89,7 @@ public class SettingsDocumentsPageBean implements Serializable {
     }
 
     public void removePaymentMethod(PaymentMethodDTO paymentMethod) {
-        paymentMethodsManagentEndpoint.remove(paymentMethod);
+        paymentMethodsManagentEndpoint.delete(paymentMethod);
         loadPaymentMethods();
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usunięto metodę płatności: ", paymentMethod.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -97,7 +97,7 @@ public class SettingsDocumentsPageBean implements Serializable {
 
     public void saveNewPaymentMethod() {
         System.out.println("Zapisz: " + newPaymentMethod);
-        paymentMethodsManagentEndpoint.add(newPaymentMethod);
+        paymentMethodsManagentEndpoint.save(newPaymentMethod);
         loadPaymentMethods();
         newPaymentMethod = new PaymentMethodDTO();
     }

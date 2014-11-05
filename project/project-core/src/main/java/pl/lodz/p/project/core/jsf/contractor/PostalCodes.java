@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
-import pl.lodz.p.project.core.service.contractor.PostalCodesService;
+import pl.lodz.p.project.core.service.contractor.PostalCodeService;
 
 /**
  *
@@ -24,7 +24,7 @@ public class PostalCodes implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private PostalCodesService postalCodesManagementEndpointLocal;
+    private PostalCodeService postalCodesManagementEndpointLocal;
     
     private List<PostalCodeDTO> postalCodesList;
 
@@ -33,7 +33,7 @@ public class PostalCodes implements Serializable {
     
     @PostConstruct
     public void init() {
-        postalCodesList = postalCodesManagementEndpointLocal.getPostalCodes();
+        postalCodesList = postalCodesManagementEndpointLocal.getAll();
     }
 
     public void fillCity(ContractorDTO contractor) {

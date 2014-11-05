@@ -8,9 +8,10 @@ import pl.lodz.p.project.core.dto.document.TransportMeanDTO;
  *
  * @author Janiu
  */
-public interface TransportMeansService {
+public interface TransportMeanService {
     
-    TransportMeanDTO getById(Long id);
+    TransportMeanDTO getOneById(Long id);
 
-    List<TransportMeanDTO> getTransportMeans();
+    List<TransportMeanDTO> getAll();
+    
 }

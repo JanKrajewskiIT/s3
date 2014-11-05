@@ -1,12 +1,9 @@
 package pl.lodz.p.project.core.dao.contractor;
 
-import java.util.Set;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.validation.ConstraintViolation;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
@@ -41,24 +38,6 @@ public class ContractorDaoImpl extends AbstractPageableDao<Contractor, Long> imp
         delete.where(cb.equal(e.get("id"), id));
         Query query = getEntityManager().createQuery(delete);
         query.executeUpdate();*/
-    }
-
-	@Override
-	@Transactional(readOnly = true)
-    public void save(Contractor contractor, boolean edit) {
-        try {
-            if (edit) {
-                getEntityManager().merge(contractor);
-            } else {
-                getEntityManager().persist(contractor);
-            }
-        } catch (javax.validation.ConstraintViolationException cve) {
-            Set<ConstraintViolation<?>> cvs = cve.getConstraintViolations();
-
-            for (ConstraintViolation<?> cv : cvs) {
-                System.out.println(cv.getMessage());
-            }
-        }
     }
 
 	@Override

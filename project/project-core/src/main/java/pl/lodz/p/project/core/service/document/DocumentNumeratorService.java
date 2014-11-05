@@ -17,4 +17,5 @@ public interface DocumentNumeratorService {
     String currentFormat();
     
     void updateDocumentFormat(String newDocumentFormat);
+    
 }

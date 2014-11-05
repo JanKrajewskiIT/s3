@@ -10,4 +10,5 @@ public interface DocumentSettingsService {
     String findDefaultDocumentPlace();
     
     void updateDefaultDocumentPlace(String newDocumentPlace);
+    
 }

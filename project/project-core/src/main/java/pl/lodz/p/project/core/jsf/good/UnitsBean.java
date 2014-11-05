@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.good.UnitDTO;
-import pl.lodz.p.project.core.service.good.UnitsService;
+import pl.lodz.p.project.core.service.good.UnitService;
 
 /**
  *
@@ -23,7 +23,7 @@ public class UnitsBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private UnitsService unitsManagementEndpointLocal;
+    private UnitService unitsManagementEndpointLocal;
 
     private List<UnitDTO> unitsList;
 
@@ -34,7 +34,7 @@ public class UnitsBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        setUnitsList(unitsManagementEndpointLocal.getUnits());
+        setUnitsList(unitsManagementEndpointLocal.getAll());
     }
 
     /**

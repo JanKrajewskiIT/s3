@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.contractor.ContractorGroupDTO;
-import pl.lodz.p.project.core.service.contractor.ContractorsGroupsService;
+import pl.lodz.p.project.core.service.contractor.ContractorGroupService;
 
 /**
  *
@@ -23,7 +23,7 @@ public class ContractorsGroupsBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private ContractorsGroupsService contractorsGroupsManagementEndpointLocal;
+    private ContractorGroupService contractorsGroupsManagementEndpointLocal;
     
     private List<ContractorGroupDTO> contractorsGroupsList;
     
@@ -32,7 +32,7 @@ public class ContractorsGroupsBean implements Serializable {
     
     @PostConstruct
     public void init() {
-        contractorsGroupsList = contractorsGroupsManagementEndpointLocal.getContractorsGroups();
+        contractorsGroupsList = contractorsGroupsManagementEndpointLocal.getAll();
     }
 
     public List<ContractorGroupDTO> getContractorsGroupsList() {

@@ -22,6 +22,8 @@ import pl.lodz.p.project.core.service.settings.SettingsPropertyService;
 @Component
 @Interceptors({TrackerInterceptor.class})
 public class DocumentNumeratorServiceImpl implements DocumentNumeratorService {
+
+	private final static String ACCESS_LEVEL = "documentManagement";
 	
     private DocumentSymbolBuilder documentSymbolBuilder = new DocumentSymbolBuilder();
 
@@ -31,7 +33,7 @@ public class DocumentNumeratorServiceImpl implements DocumentNumeratorService {
     @Autowired
     private DocumentNumeratorDao documentNumeratorDao;
 
-    @RolesAllowed("documentManagement")
+    @RolesAllowed(ACCESS_LEVEL)
     @Override
     public String nextNumber(String documentType) {
     	String previousSymbol = findPrevious(documentType);
@@ -44,6 +46,30 @@ public class DocumentNumeratorServiceImpl implements DocumentNumeratorService {
 	    }
     }
     
+    @RolesAllowed(ACCESS_LEVEL)
+    @Override
+    public boolean isAvailable(String symbol, String documentType) {
+        return documentNumeratorDao.isAvailable(symbol, documentType);
+    }
+
+    @RolesAllowed(ACCESS_LEVEL)
+    @Override
+    public List<String> availableFormats() {
+        return DocumentFormat.availableFormats();
+    }
+
+    @RolesAllowed(ACCESS_LEVEL)
+    @Override
+    public void updateDocumentFormat(String newDocumentFormat) {
+        settingsPropertyManager.editScalarProperty(SettingsPropertyKeys.DOCUMENT_SYMBOL_FORMAT, newDocumentFormat);
+    }
+
+    @RolesAllowed(ACCESS_LEVEL)
+    @Override
+    public String currentFormat() {
+        return settingsPropertyManager.findScalarProperty(SettingsPropertyKeys.DOCUMENT_SYMBOL_FORMAT);
+    }
+    
     protected boolean hasPattern(String number, String pattern) {
         // TODO
         return true;
@@ -53,28 +79,4 @@ public class DocumentNumeratorServiceImpl implements DocumentNumeratorService {
        return documentNumeratorDao.findPrevious(documentType);
     }
     
-    @RolesAllowed("documentManagement")
-    @Override
-    public boolean isAvailable(String symbol, String documentType) {
-        return documentNumeratorDao.isAvailable(symbol, documentType);
-    }
-
-    @RolesAllowed("documentManagement")
-    @Override
-    public List<String> availableFormats() {
-        return DocumentFormat.availableFormats();
-    }
-
-    @RolesAllowed("documentManagement")
-    @Override
-    public void updateDocumentFormat(String newDocumentFormat) {
-        settingsPropertyManager.editScalarProperty(SettingsPropertyKeys.DOCUMENT_SYMBOL_FORMAT, newDocumentFormat);
-    }
-
-    @RolesAllowed("documentManagement")
-    @Override
-    public String currentFormat() {
-        return settingsPropertyManager.findScalarProperty(SettingsPropertyKeys.DOCUMENT_SYMBOL_FORMAT);
-    }
-
 }

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.contractor.ContractorContactDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
-import pl.lodz.p.project.core.service.contractor.ContractorsContactsService;
+import pl.lodz.p.project.core.service.contractor.ContractorContactService;
 
 /**
  *
@@ -25,7 +25,7 @@ public class ContractorsContacts implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private ContractorsContactsService contractorsContactsManagementEndpointLocal;
+    private ContractorContactService contractorsContactsManagementEndpointLocal;
     
     private List<ContractorContactDTO> contactsList;
     
@@ -38,7 +38,7 @@ public class ContractorsContacts implements Serializable {
     }
     
     public List<ContractorContactDTO> initContractorContracts(ContractorDTO contractor) {
-        contactsList = contractorsContactsManagementEndpointLocal.getContractorsContacts();
+        contactsList = contractorsContactsManagementEndpointLocal.getAll();
         return contactsList;
     }
 

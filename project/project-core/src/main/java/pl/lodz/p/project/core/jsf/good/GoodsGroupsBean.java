@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.good.GoodGroupDTO;
-import pl.lodz.p.project.core.service.good.GoodsGroupsService;
+import pl.lodz.p.project.core.service.good.GoodGroupService;
 
 /**
  *
@@ -23,7 +23,7 @@ public class GoodsGroupsBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private GoodsGroupsService goodsGroupsManagementEndpointLocal;
+    private GoodGroupService goodsGroupsManagementEndpointLocal;
 
     private List<GoodGroupDTO> goodsGroupsList;
 
@@ -35,7 +35,7 @@ public class GoodsGroupsBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        setGoodsGroupsList(goodsGroupsManagementEndpointLocal.getGoodsGroups());
+        setGoodsGroupsList(goodsGroupsManagementEndpointLocal.getAll());
     }
 
     /**

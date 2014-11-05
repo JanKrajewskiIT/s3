@@ -10,17 +10,15 @@ import pl.lodz.p.project.core.dto.good.GoodDTO;
  *
  * @author Janiu, Milczu
  */
-public interface GoodsService {
+public interface GoodService {
 
-    List<GoodDTO> getAllGoods();
-
-    void removeGood(GoodDTO goodId);
-
-    Long add(GoodDTO goodDTO);
+    List<GoodDTO> getAll();
     
-    void edit(GoodDTO goodDTO);
+    GoodDTO getOneById(Long id);
     
-    GoodDTO findById(Long id);
+    void delete(GoodDTO goodDTO);
+
+    void save(GoodDTO goodDTO);
     
     Page<GoodDTO> search(String searchQuery, PageRequest pageRequest);
 

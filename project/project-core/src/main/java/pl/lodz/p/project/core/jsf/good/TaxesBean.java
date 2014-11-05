@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.good.TaxDTO;
-import pl.lodz.p.project.core.service.good.TaxesService;
+import pl.lodz.p.project.core.service.good.TaxService;
 
 /**
  *
@@ -23,7 +23,7 @@ public class TaxesBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private TaxesService taxesManagementEndpointLocal;
+    private TaxService taxesManagementEndpointLocal;
 
     private List<TaxDTO> taxesList;
 
@@ -35,7 +35,7 @@ public class TaxesBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        setTaxesList(taxesManagementEndpointLocal.getTaxes());
+        setTaxesList(taxesManagementEndpointLocal.getAll());
     }
 
     /**

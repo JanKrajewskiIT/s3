@@ -10,17 +10,15 @@ import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
  *
  * @author Janiu, Milczu
  */
-public interface ContractorsService {
+public interface ContractorService {
 
-    List<ContractorDTO> getAllContractors();
+    List<ContractorDTO> getAll();
 
-    void removeContractor(Long id);
+    void delete(Long id);
 
-    void addContractor(ContractorDTO contractorDTO);
-    
-    void editContractor(ContractorDTO contractorDTO);
+    void save(ContractorDTO contractorDTO);    
 
-    ContractorDTO findById(Long id);
+    ContractorDTO getOneById(Long id);
     
     Page<ContractorDTO> search(String searchQuery, PageRequest pageRequest);
 

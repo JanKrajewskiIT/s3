@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
-import pl.lodz.p.project.core.service.contractor.ContractorsGroupsService;
-import pl.lodz.p.project.core.service.contractor.ContractorsService;
+import pl.lodz.p.project.core.service.contractor.ContractorGroupService;
+import pl.lodz.p.project.core.service.contractor.ContractorService;
 
 /**
  *
@@ -25,10 +25,10 @@ public class ContractorAddEditBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private ContractorsService contractorsManagementEndpointLocal;
+    private ContractorService contractorsManagementEndpointLocal;
     
     @Autowired
-    private ContractorsGroupsService contractorsGroupsManagementEndpointLocal;
+    private ContractorGroupService contractorsGroupsManagementEndpointLocal;
     
     private ContractorDTO selectedContractor;
     
@@ -38,7 +38,7 @@ public class ContractorAddEditBean implements Serializable {
         if (StringUtils.isBlank(id)) {
             selectedContractor = new ContractorDTO();
         } else {
-            selectedContractor = contractorsManagementEndpointLocal.findById(Long.parseLong(id));
+            selectedContractor = contractorsManagementEndpointLocal.getOneById(Long.parseLong(id));
         }
     }
     
@@ -48,14 +48,10 @@ public class ContractorAddEditBean implements Serializable {
     }
 
     public String saveContractor() {
-        getSelectedContractor().setGroup(contractorsGroupsManagementEndpointLocal.getContractorGroup(getSelectedContractor().getGroup().getId()));
+        getSelectedContractor().setGroup(contractorsGroupsManagementEndpointLocal.getOneById(getSelectedContractor().getGroup().getId()));
         //TODO id changed from string to long, we need to check logic
         //if (StringUtils.isBlank(selectedContractor.getId())) {
-        if(selectedContractor.getId() == null) {
-        	contractorsManagementEndpointLocal.addContractor(selectedContractor);
-        } else {
-            contractorsManagementEndpointLocal.editContractor(selectedContractor);
-        }
+        contractorsManagementEndpointLocal.save(selectedContractor);
         return "contractorsTable.xhtml?faces-redirect=true";
     }
     

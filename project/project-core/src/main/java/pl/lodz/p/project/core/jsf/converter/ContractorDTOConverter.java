@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
-import pl.lodz.p.project.core.service.contractor.ContractorsService;
+import pl.lodz.p.project.core.service.contractor.ContractorService;
 
 /**
  *
@@ -32,7 +32,7 @@ public class ContractorDTOConverter implements Converter {
     public ContractorDTOConverter() { }
     
     @Autowired
-    ContractorsService contractorsManagementEndpointLocal;
+    ContractorService contractorsManagementEndpointLocal;
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -42,7 +42,7 @@ public class ContractorDTOConverter implements Converter {
         if (!value.contains("null")){
             //TODO changed from string to long, we need to chek it
             Long id = Long.parseLong(value);
-        	return contractorsManagementEndpointLocal.findById(id);
+        	return contractorsManagementEndpointLocal.getOneById(id);
         }
         return new ContractorDTO();
     }

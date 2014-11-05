@@ -14,7 +14,7 @@ import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
-import pl.lodz.p.project.core.service.contractor.ContractorsService;
+import pl.lodz.p.project.core.service.contractor.ContractorService;
 
 /**
  *
@@ -29,7 +29,7 @@ public class ContractorsTableBean implements Serializable {
     private static final String DEFAULT_SORT_PROPERTY = "name";
 
     @Autowired
-    private ContractorsService contractorsManagementEndpointLocal;
+    private ContractorService contractorsManagementEndpointLocal;
 
     private Page<ContractorDTO> page;
     private PageRequest pageRequest = new PageRequest(0, PAGE_SIZE, new Sort(DEFAULT_SORT_PROPERTY));
@@ -51,7 +51,7 @@ public class ContractorsTableBean implements Serializable {
 
     public void removeContractor(ContractorDTO contractor) {
         getContractorsList().remove(contractor);
-        contractorsManagementEndpointLocal.removeContractor(contractor.getId());
+        contractorsManagementEndpointLocal.delete(contractor.getId());
     }
 
     public List<ContractorDTO> getContractorsList() {

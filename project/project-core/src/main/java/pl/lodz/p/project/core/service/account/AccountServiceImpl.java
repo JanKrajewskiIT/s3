@@ -28,10 +28,7 @@ import pl.lodz.p.project.core.dto.account.RoleDTO;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.exception.UniqueConstraintViolationException;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
-import pl.lodz.p.project.core.service.Transformer;
 import pl.lodz.p.project.core.util.MailSender;
-
-import com.google.common.collect.Lists;
 
 /**
  *
@@ -40,7 +37,13 @@ import com.google.common.collect.Lists;
 @Component
 @Interceptors({ TrackerInterceptor.class })
 public class AccountServiceImpl implements AccountService {
-
+	
+	@Autowired 
+	private RoleService roleService;
+	
+	@Autowired 
+	private UserService userService;
+	
 	@Autowired
 	private UserDao userDao;
 
@@ -70,28 +73,15 @@ public class AccountServiceImpl implements AccountService {
 	
 	private User originalUser;
 
-	/**
-	 * Retrieves all roles from the DB and creates a list of DTO representing
-	 * those roles. Invokes {@link AccountManagerLocal#getAllRoles()
-     * }.
-	 *
-	 * @return the list of DTO represeting all roles found in the DB.
-	 */
-	@RolesAllowed("accountManagement")
+
 	@Override
 	public List<RoleDTO> getAllRoles() {
-    	Transformer<Role, RoleDTO> transformer = new Transformer<>(roleConverter);
-    	return Lists.transform(roleDao.findAll(), transformer);
+		return roleService.getAll();
 	}
 
-	@PermitAll
 	@Override
 	public RoleDTO getRoleByName(String name) {
-		Role role = roleDao.findByName(name);
-		if (role != null) {
-			return roleConverter.convertEntity(role);
-		}
-		return null;
+		return roleService.getRoleByName(name);
 	}
 
 	/**
@@ -160,8 +150,7 @@ public class AccountServiceImpl implements AccountService {
 	@RolesAllowed("accountManagement")
 	@Override
 	public List<UserDTO> getAllUsers() {
-    	Transformer<User, UserDTO> transformer = new Transformer<>(userConverter);
-    	return Lists.transform(userDao.findAll(), transformer);
+		return userService.getAll();
 	}
 
 	/**

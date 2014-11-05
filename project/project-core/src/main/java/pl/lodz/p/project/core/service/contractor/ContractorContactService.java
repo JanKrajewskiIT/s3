@@ -8,9 +8,10 @@ import pl.lodz.p.project.core.dto.contractor.ContractorContactDTO;
  *
  * @author Janiu
  */
-public interface ContractorsContactsService {
+public interface ContractorContactService {
 
-    public List<ContractorContactDTO> getContractorsContacts();
+    List<ContractorContactDTO> getAll();
     
-    public ContractorContactDTO getContractorContact(Long id);
+    ContractorContactDTO getOneById(Long id);
+    
 }

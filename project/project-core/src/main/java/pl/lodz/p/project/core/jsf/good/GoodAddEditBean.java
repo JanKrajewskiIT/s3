@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.good.GoodDTO;
-import pl.lodz.p.project.core.service.good.GoodsGroupsService;
-import pl.lodz.p.project.core.service.good.GoodsService;
-import pl.lodz.p.project.core.service.good.TaxesService;
-import pl.lodz.p.project.core.service.good.UnitsService;
+import pl.lodz.p.project.core.service.good.GoodGroupService;
+import pl.lodz.p.project.core.service.good.GoodService;
+import pl.lodz.p.project.core.service.good.TaxService;
+import pl.lodz.p.project.core.service.good.UnitService;
 
 /**
  *
@@ -28,16 +28,16 @@ public class GoodAddEditBean implements Serializable {
 	private static final long serialVersionUID = -5504508900103108521L;
 
 	@Autowired
-    private GoodsService goodsManagementEndpointLocal;
+    private GoodService goodsManagementEndpointLocal;
 
     @Autowired
-    private GoodsGroupsService goodsGroupsManagementEndpointLocal;
+    private GoodGroupService goodsGroupsManagementEndpointLocal;
 
     @Autowired
-    private TaxesService taxesManagementEndpointLocal;
+    private TaxService taxesManagementEndpointLocal;
 
     @Autowired
-    private UnitsService unitsManagementEndpointLocal;
+    private UnitService unitsManagementEndpointLocal;
 
     private GoodDTO good;
     private String breadcrumb;
@@ -47,7 +47,7 @@ public class GoodAddEditBean implements Serializable {
         String goodId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
         if (StringUtils.isBlank(goodId)) {
             good = new GoodDTO();
-            getGood().setTax(taxesManagementEndpointLocal.getTaxes().get(0));
+            getGood().setTax(taxesManagementEndpointLocal.getAll().get(0));
             breadcrumb = "Dodaj";
         } else {
         	// TODO id from string to long
@@ -65,9 +65,9 @@ public class GoodAddEditBean implements Serializable {
     }
 
     public String saveGood() {
-        getGood().setUnit(unitsManagementEndpointLocal.getUnit(getGood().getUnit().getId()));
-        getGood().setGroup(goodsGroupsManagementEndpointLocal.getGroup(getGood().getGroup().getId()));
-        getGood().setTax(taxesManagementEndpointLocal.getTax(getGood().getTax().getId()));
+        getGood().setUnit(unitsManagementEndpointLocal.getOneById(getGood().getUnit().getId()));
+        getGood().setGroup(goodsGroupsManagementEndpointLocal.getOneById(getGood().getGroup().getId()));
+        getGood().setTax(taxesManagementEndpointLocal.getOneById(getGood().getTax().getId()));
 
         if(getGood().getId() != null) {  
         	//  TODO currently we dont need warehouses
@@ -82,7 +82,7 @@ public class GoodAddEditBean implements Serializable {
             }
             */
         } else {
-            goodsManagementEndpointLocal.edit(getGood());
+            goodsManagementEndpointLocal.save(getGood());
         }
         return "goodsTable.xhtml?faces-redirect=true";
     }

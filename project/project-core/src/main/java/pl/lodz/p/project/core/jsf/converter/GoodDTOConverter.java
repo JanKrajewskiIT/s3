@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.good.GoodDTO;
-import pl.lodz.p.project.core.service.good.GoodsService;
+import pl.lodz.p.project.core.service.good.GoodService;
 
 /**
  *
@@ -23,7 +23,7 @@ public class GoodDTOConverter implements Converter {
     public GoodDTOConverter() { }
     
     @Autowired
-    GoodsService goodsManagementEndpointLocal;
+    GoodService goodsManagementEndpointLocal;
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -33,7 +33,7 @@ public class GoodDTOConverter implements Converter {
         if (!value.contains("null")) {
             //TODO changed from string to long, we need to chek it
             Long id = Long.parseLong(value);
-            return goodsManagementEndpointLocal.findById(id);
+            return goodsManagementEndpointLocal.getOneById(id);
         } else {
             return new GoodDTO();
         }

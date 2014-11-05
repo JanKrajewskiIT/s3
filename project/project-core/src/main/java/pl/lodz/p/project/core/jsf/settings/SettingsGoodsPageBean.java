@@ -15,9 +15,9 @@ import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.good.GoodGroupDTO;
 import pl.lodz.p.project.core.dto.good.TaxDTO;
 import pl.lodz.p.project.core.dto.good.UnitDTO;
-import pl.lodz.p.project.core.service.good.GoodsGroupsService;
-import pl.lodz.p.project.core.service.good.TaxesService;
-import pl.lodz.p.project.core.service.good.UnitsService;
+import pl.lodz.p.project.core.service.good.GoodGroupService;
+import pl.lodz.p.project.core.service.good.TaxService;
+import pl.lodz.p.project.core.service.good.UnitService;
 
 /**
  *
@@ -37,13 +37,13 @@ public class SettingsGoodsPageBean implements Serializable {
     private List<GoodGroupDTO> goodGroups;
 
     @Autowired
-    private TaxesService taxesManagementEndpointLocal;
+    private TaxService taxesManagementEndpointLocal;
 
     @Autowired
-    private GoodsGroupsService goodsGroupsManagementEndpointLocal;
+    private GoodGroupService goodsGroupsManagementEndpointLocal;
 
     @Autowired
-    private UnitsService unitsManagementEndpointLocal;
+    private UnitService unitsManagementEndpointLocal;
 
     @PostConstruct
     public void init() {
@@ -53,15 +53,15 @@ public class SettingsGoodsPageBean implements Serializable {
     }
 
     private void loadTaxes() {
-        taxes = taxesManagementEndpointLocal.getTaxes();
+        taxes = taxesManagementEndpointLocal.getAll();
     }
 
     private void loadUnits() {
-        units = unitsManagementEndpointLocal.getUnits();
+        units = unitsManagementEndpointLocal.getAll();
     }
 
     private void loadGoodGroups() {
-        goodGroups = goodsGroupsManagementEndpointLocal.getGoodsGroups();
+        goodGroups = goodsGroupsManagementEndpointLocal.getAll();
     }
 
     public List<TaxDTO> getTaxes() {
@@ -78,14 +78,14 @@ public class SettingsGoodsPageBean implements Serializable {
 
     public void onTaxEdit(RowEditEvent event) {
         TaxDTO editedTax = ((TaxDTO) event.getObject());
-        taxesManagementEndpointLocal.edit(editedTax);
+        taxesManagementEndpointLocal.save(editedTax);
         loadTaxes();
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Zapisano stawkę vat: ", editedTax.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void removeTax(TaxDTO tax) {
-        taxesManagementEndpointLocal.remove(tax);
+        taxesManagementEndpointLocal.delete(tax);
         loadTaxes();
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usunięto stawkę vat: ", tax.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -98,14 +98,14 @@ public class SettingsGoodsPageBean implements Serializable {
     public void saveNewTax() {
         TaxDTO taxToSave = new TaxDTO(newTax);
         System.out.println("New tax: " + taxToSave);
-        taxesManagementEndpointLocal.add(taxToSave);
+        taxesManagementEndpointLocal.save(taxToSave);
         loadTaxes();
         newTax = new TaxDTO();
     }
 
     public void onUnitEdit(RowEditEvent event) {
         UnitDTO editedUnit = (UnitDTO) event.getObject();
-        unitsManagementEndpointLocal.edit(editedUnit);
+        unitsManagementEndpointLocal.save(editedUnit);
         loadUnits();
 
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Zapisano jednostkę miary: ", editedUnit.getName());
@@ -113,7 +113,7 @@ public class SettingsGoodsPageBean implements Serializable {
     }
 
     public void removeUnit(UnitDTO unit) {
-        unitsManagementEndpointLocal.remove(unit);
+        unitsManagementEndpointLocal.delete(unit);
         loadUnits();
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usunięto jednostkę miary: ", unit.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -126,21 +126,21 @@ public class SettingsGoodsPageBean implements Serializable {
     public void saveNewUnit() {
         UnitDTO unitToSave = new UnitDTO(newUnit);
         System.out.println("Zapisz: " + unitToSave);
-        unitsManagementEndpointLocal.add(unitToSave);
+        unitsManagementEndpointLocal.save(unitToSave);
         loadUnits();
         newUnit = new UnitDTO();
     }
 
     public void onGoodGroupEdit(RowEditEvent event) {
         GoodGroupDTO editedGroup = (GoodGroupDTO) event.getObject();
-        goodsGroupsManagementEndpointLocal.edit(editedGroup);
+        goodsGroupsManagementEndpointLocal.save(editedGroup);
         loadGoodGroups();
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Zapisano grupę: ", editedGroup.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void removeGoodGroup(GoodGroupDTO goodGroup) {
-        goodsGroupsManagementEndpointLocal.remove(goodGroup);
+        goodsGroupsManagementEndpointLocal.delete(goodGroup);
         loadGoodGroups();
         
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usunięto grupę: ", goodGroup.getName());
@@ -154,7 +154,7 @@ public class SettingsGoodsPageBean implements Serializable {
     public void saveNewGoodGroup() {
         GoodGroupDTO groupToSave = new GoodGroupDTO(newGoodGroup);
         System.out.println("New goodGroup: " + groupToSave);
-        goodsGroupsManagementEndpointLocal.add(newGoodGroup);
+        goodsGroupsManagementEndpointLocal.save(newGoodGroup);
         loadGoodGroups();
         newGoodGroup = new GoodGroupDTO();
     }

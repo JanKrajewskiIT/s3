@@ -10,7 +10,7 @@
 	<context:annotation-config/>
 	<context:component-scan base-package="pl.lodz.p.project.core" />
 	
-	<beans:bean id="userDetailsService" class="pl.lodz.p.project.core.service.account.UserDetailsServiceImpl"/>
+	<beans:bean id="userDetailsService" class="pl.lodz.p.project.core.service.account.UserDetailServiceImpl"/>
 	
 	<authentication-manager>
 		<authentication-provider user-service-ref="userDetailsService">

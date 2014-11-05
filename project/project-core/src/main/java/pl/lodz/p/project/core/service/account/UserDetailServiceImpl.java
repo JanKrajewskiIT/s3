@@ -18,9 +18,9 @@ import pl.lodz.p.project.core.domain.account.User;
  *
  */
 @Named
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailServiceImpl implements UserDetailsService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailServiceImpl.class);
 
 	@Inject
 	private UserDao userDao;

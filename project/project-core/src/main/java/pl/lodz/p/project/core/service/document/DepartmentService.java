@@ -8,9 +8,10 @@ import pl.lodz.p.project.core.dto.document.DepartmentDTO;
  *
  * @author Janiu
  */
-public interface DepartmentsService {
+public interface DepartmentService {
     
-    DepartmentDTO getById(Long id);
+    DepartmentDTO getOneById(Long id);
 
-    List<DepartmentDTO> getDepartments();
+    List<DepartmentDTO> getAll();
+    
 }
