@@ -20,29 +20,28 @@ import pl.lodz.p.project.core.service.contractor.ContractorService;
  *
  * @author Janiu
  */
-@Named(value = "contractorsTableBean")
+@Named(value = "contractorTableBean")
 @Scope("request")
-public class ContractorsTableBean implements Serializable {
+public class ContractorTableBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final int PAGE_SIZE = 5;
     private static final String DEFAULT_SORT_PROPERTY = "name";
 
     @Autowired
-    private ContractorService contractorsManagementEndpointLocal;
+    private ContractorService contractorService;
 
     private Page<ContractorDTO> page;
     private PageRequest pageRequest = new PageRequest(0, PAGE_SIZE, new Sort(DEFAULT_SORT_PROPERTY));
     private String searchQuery = StringUtils.EMPTY;
 
-    public ContractorsTableBean() {
-    }
+    public ContractorTableBean() { }
 
     @PostConstruct
     public void init() {
         //setContractorsList(contractorsManagementEndpointLocal.getAllContractors());
         //Collections.sort(getContractorsList());
-        page = contractorsManagementEndpointLocal.search(searchQuery, pageRequest);
+        page = contractorService.search(searchQuery, pageRequest);
     }
 
     public String editContractor(String id) {
@@ -50,11 +49,11 @@ public class ContractorsTableBean implements Serializable {
     }
 
     public void removeContractor(ContractorDTO contractor) {
-        getContractorsList().remove(contractor);
-        contractorsManagementEndpointLocal.delete(contractor.getId());
+        getContractorList().remove(contractor);
+        contractorService.delete(contractor.getId());
     }
 
-    public List<ContractorDTO> getContractorsList() {
+    public List<ContractorDTO> getContractorList() {
         return page.getContent();
     }
 
@@ -73,17 +72,17 @@ public class ContractorsTableBean implements Serializable {
     public void search() {
         System.out.println("Search: " + searchQuery);
         pageRequest = new PageRequest(0, pageRequest.getPageSize(), pageRequest.getSort());
-        page = contractorsManagementEndpointLocal.search(searchQuery, pageRequest);
+        page = contractorService.search(searchQuery, pageRequest);
     }
 
     public void nextPage() {
         pageRequest = new PageRequest(pageRequest.getPageNumber() + 1, pageRequest.getPageSize(), pageRequest.getSort());
-        page = contractorsManagementEndpointLocal.search(searchQuery, pageRequest);
+        page = contractorService.search(searchQuery, pageRequest);
     }
 
     public void prevPage() {
         pageRequest = new PageRequest(pageRequest.getPageNumber() - 1, pageRequest.getPageSize(), pageRequest.getSort());
-        page = contractorsManagementEndpointLocal.search(searchQuery, pageRequest);
+        page = contractorService.search(searchQuery, pageRequest);
     }
 
     /**
@@ -92,6 +91,7 @@ public class ContractorsTableBean implements Serializable {
      */
     public void goToPage(int number) {
         pageRequest = new PageRequest(number, pageRequest.getPageSize(), pageRequest.getSort());
-        page = contractorsManagementEndpointLocal.search(searchQuery, pageRequest);
+        page = contractorService.search(searchQuery, pageRequest);
     }
+    
 }

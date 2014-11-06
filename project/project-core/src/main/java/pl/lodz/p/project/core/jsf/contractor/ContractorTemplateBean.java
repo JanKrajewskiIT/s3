@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
+import pl.lodz.p.project.core.dto.contractor.ContractorGroupDTO;
 import pl.lodz.p.project.core.service.contractor.ContractorGroupService;
 import pl.lodz.p.project.core.service.contractor.ContractorService;
 
@@ -19,16 +20,16 @@ import pl.lodz.p.project.core.service.contractor.ContractorService;
  * @author Janiu
  */
 @Scope("request")
-@Named(value = "contractorAddEditBean")
-public class ContractorAddEditBean implements Serializable {
+@Named(value = "contractorTemplateBean")
+public class ContractorTemplateBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-    private ContractorService contractorsManagementEndpointLocal;
+    private ContractorService contractorService;
     
     @Autowired
-    private ContractorGroupService contractorsGroupsManagementEndpointLocal;
+    private ContractorGroupService contractorGroupService;
     
     private ContractorDTO selectedContractor;
     
@@ -38,20 +39,19 @@ public class ContractorAddEditBean implements Serializable {
         if (StringUtils.isBlank(id)) {
             selectedContractor = new ContractorDTO();
         } else {
-            selectedContractor = contractorsManagementEndpointLocal.getOneById(Long.parseLong(id));
+            selectedContractor = contractorService.getOneById(Long.parseLong(id));
         }
-    }
-    
+    }    
    
     public void clear() {
-        setSelectedContractor(new ContractorDTO());
+    	selectedContractor = new ContractorDTO();
     }
 
     public String saveContractor() {
-        getSelectedContractor().setGroup(contractorsGroupsManagementEndpointLocal.getOneById(getSelectedContractor().getGroup().getId()));
-        //TODO id changed from string to long, we need to check logic
-        //if (StringUtils.isBlank(selectedContractor.getId())) {
-        contractorsManagementEndpointLocal.save(selectedContractor);
+    	Long groupId = selectedContractor.getGroup().getId();
+    	ContractorGroupDTO group = contractorGroupService.getOneById(groupId);
+    	selectedContractor.setGroup(group);
+        contractorService.save(selectedContractor);
         return "contractorsTable.xhtml?faces-redirect=true";
     }
     

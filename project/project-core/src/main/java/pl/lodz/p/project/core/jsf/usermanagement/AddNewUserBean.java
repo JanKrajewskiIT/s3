@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.account.RoleDTO;
-import pl.lodz.p.project.core.service.account.AccountService;
+import pl.lodz.p.project.core.service.account.PendingInvitationService;
+import pl.lodz.p.project.core.service.account.RoleService;
+import pl.lodz.p.project.core.service.account.UserService;
 
 /**
  *
@@ -26,9 +28,15 @@ public class AddNewUserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
-    private AccountService accountManagementEndpoint;
+	@Autowired 
+	private UserService userService;
 
+	@Autowired 
+	private RoleService roleService;
+
+	@Autowired 
+	private PendingInvitationService pendingInvitationService;
+	
     private List<RoleDTO> roleList;
     private RoleDTO selectedRole;
     private String email;
@@ -39,7 +47,7 @@ public class AddNewUserBean implements Serializable {
 
     @PostConstruct
     public void initRoleList() {
-        roleList = accountManagementEndpoint.getAllRoles();
+        roleList = roleService.getAll();
     }
 
     /**
@@ -57,13 +65,13 @@ public class AddNewUserBean implements Serializable {
                 facesContext.addMessage(null, new FacesMessage("Błąd", "Należy podać adres e-mail!"));
                 return;
             }
-            if (accountManagementEndpoint.getUserByEmail(email) != null) {
+            if (userService.getUserByEmail(email) != null) {
                 facesContext.addMessage(null, new FacesMessage("Błąd", "Konto o takim adresie e-mail już istnieje!"));
                 return;
             }
             String registrationURL = ((HttpServletRequest) facesContext.getExternalContext().getRequest()).getRequestURL().toString();
             registrationURL = registrationURL.replace("admin/add-new-user.xhtml", "registration/registration.xhtml");
-            accountManagementEndpoint.sendInvitation(registrationURL, email, selectedRole);
+            pendingInvitationService.sendInvitation(registrationURL, email, selectedRole);
             facesContext.addMessage(null, new FacesMessage("Sukces", "Wysłano zaproszenie do rejestracji!"));
         } catch (Exception e) {
             facesContext.addMessage(null, new FacesMessage("Błąd", "Operacja nie powiodła się!"));

@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,12 +30,19 @@ import pl.lodz.p.project.core.domain.BasePersistable;
 
 /**
  *
- * @author Łukasz Gadomski
+ * @author Łukasz Gadomski, Janiu
  */
 @Entity
 @Table(name = "pending_invitations")
+@NamedQueries({
+    @NamedQuery(name = PendingInvitation.NAMED_QUERY_FIND_BY_EMAIL, query = "SELECT p FROM PendingInvitation p WHERE p.email = :email"),
+    @NamedQuery(name = PendingInvitation.NAMED_QUERY_FIND_BY_TOKEN, query = "SELECT p FROM PendingInvitation p WHERE p.token = :token")})
 public class PendingInvitation implements Serializable, BasePersistable {
 
+	public static final String NAMED_QUERY_FIND_BY_EMAIL = "PendingInvitation.findByEmail";
+
+	public static final String NAMED_QUERY_FIND_BY_TOKEN = "PendingInvitation.findByToken";
+	
     private static final long serialVersionUID = 1L;
     
     @Id

@@ -36,10 +36,8 @@ public class DocumentPositionServiceImpl extends AbstractService<DocumentPositio
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
-    public void edit(List<DocumentPositionDTO> documentPositionList) {
-    	for(DocumentPositionDTO documentPositionDTO : documentPositionList) {
-    		super.save(documentPositionDTO);
-    	}
+    public void save(List<DocumentPositionDTO> documentPositionList) {
+    	super.save(documentPositionList);
     }
     
 }

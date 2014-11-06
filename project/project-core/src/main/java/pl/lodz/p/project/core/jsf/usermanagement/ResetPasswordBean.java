@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.account.PasswordChangeRequestDTO;
 import pl.lodz.p.project.core.dto.account.UserDTO;
-import pl.lodz.p.project.core.service.account.AccountService;
+import pl.lodz.p.project.core.service.account.PasswordChangeRequestService;
+import pl.lodz.p.project.core.service.account.UserService;
 
 /**
  *
@@ -20,8 +21,11 @@ import pl.lodz.p.project.core.service.account.AccountService;
 @Scope("request")
 public class ResetPasswordBean {
 
-    @Autowired
-    private AccountService accountManagementService;
+	@Autowired 
+	private UserService userService;
+
+	@Autowired 
+	private PasswordChangeRequestService passwordChangeRequestService;
 
     private UserDTO userDTO;
     private PasswordChangeRequestDTO passwordChangeRequestDTO;
@@ -54,8 +58,8 @@ public class ResetPasswordBean {
         }
         try {
             userDTO.setPassword(newPassword);
-            accountManagementService.editUserPassword(userDTO);
-            accountManagementService.removePasswordChangeRequest(passwordChangeRequestDTO.getId());
+            userService.editUserPassword(userDTO);
+            passwordChangeRequestService.delete(passwordChangeRequestDTO.getId());
             return "passwordresetsuccess";
         } catch (Exception e) {
             facesContext.addMessage(null, new FacesMessage("Zmiana hasła nie powiodłą się!"));

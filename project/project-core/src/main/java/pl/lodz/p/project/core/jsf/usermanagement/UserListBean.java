@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.account.UserDTO;
-import pl.lodz.p.project.core.service.account.AccountService;
+import pl.lodz.p.project.core.service.account.UserService;
 
 /**
  *
@@ -26,8 +26,8 @@ public class UserListBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
-    private AccountService accountManagementEndpoint;
+	@Autowired 
+	private UserService userService;
 
     private List<UserDTO> userList;
 
@@ -37,13 +37,13 @@ public class UserListBean implements Serializable {
 
     @PostConstruct
     public void initUserList() {
-        userList = accountManagementEndpoint.getAllUsers();
+        userList = userService.getAll();
     }
 
     public void onEdit(RowEditEvent event) {
         UserDTO userDTO = (UserDTO) event.getObject();
         try {
-            accountManagementEndpoint.editUser(userDTO);
+        	userService.editUser(userDTO);
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Błąd", "Edycja nie powiodła się!"));
         }

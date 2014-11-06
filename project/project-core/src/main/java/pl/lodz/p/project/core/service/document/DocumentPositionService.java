@@ -14,6 +14,6 @@ public interface DocumentPositionService {
 
     List<DocumentPositionDTO> getAll();
 
-    void edit(List<DocumentPositionDTO> documentPositionList);
+    void save(List<DocumentPositionDTO> documentPositionList);
 
 }

@@ -27,13 +27,13 @@
                                             <h3 class="box-title">Kontrahenci</h3>
                                             <div class="box-tools">
                                                 <div class="input-group">
-                                                    <p:inputText id="searchQuery" type="text" value="#{contractorsTableBean.searchQuery}" styleClass="form-control input-sm pull-right" placeholder="Szukaj" style="width: 300px;">
-                                                        <p:ajax event="blur" listener="#{contractorsTableBean.search()}" update=":table-form" />
+                                                    <p:inputText id="searchQuery" type="text" value="#{contractorTableBean.searchQuery}" styleClass="form-control input-sm pull-right" placeholder="Szukaj" style="width: 300px;">
+                                                        <p:ajax event="blur" listener="#{contractorTableBean.search()}" update=":table-form" />
                                                     </p:inputText>
                                                     <div class="input-group-btn">
                                                         <p:commandLink styleClass="btn btn-sm btn-default">
                                                             <i class="fa fa-search"></i>
-                                                            <p:ajax listener="#{contractorsTableBean.search()}" update=":table-form" />
+                                                            <p:ajax listener="#{contractorTableBean.search()}" update=":table-form" />
                                                         </p:commandLink>
                                                     </div>
                                                 </div>
@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="box-body table-responsive"> 
 
-                                            <p:dataTable id="contractorTableId" var="contractor" value="#{contractorsTableBean.contractorsList}"  tableStyleClass="table table-bordered dataTable">  
+                                            <p:dataTable id="contractorTableId" var="contractor" value="#{contractorTableBean.contractorList}"  tableStyleClass="table table-bordered dataTable">  
                                                 <p:column headerText="Symbol" sortBy="symbol">
                                                     <h:outputText value="#{contractor.symbol}" />  
                                                 </p:column>  
@@ -67,10 +67,10 @@
                                                 </p:column>  
 
                                                 <p:column headerText="Akcja" style="width: 165px">
-                                                    <p:commandLink style="margin-right: 10px;" styleClass="btn btn-success btn-xs" action="#{contractorsTableBean.editContractor(contractor.id)}">
+                                                    <p:commandLink style="margin-right: 10px;" styleClass="btn btn-success btn-xs" action="#{contractorTableBean.editContractor(contractor.id)}">
                                                         <i class="glyphicon glyphicon-pencil"></i> Edytuj
                                                     </p:commandLink>
-                                                    <p:commandLink styleClass="btn btn-danger btn-xs" update="contractorTableId" ajax="true" action="#{contractorsTableBean.removeContractor(contractor)}">
+                                                    <p:commandLink styleClass="btn btn-danger btn-xs" update="contractorTableId" ajax="true" action="#{contractorTableBean.removeContractor(contractor)}">
                                                         <i class="glyphicon glyphicon-minus"></i> Usuń
                                                     </p:commandLink>
                                                 </p:column>   
@@ -78,28 +78,28 @@
                                         </div>
                                         <div class="box-footer clearfix">
                                             <ul class="pagination pagination-sm no-margin pull-right">
-                                                <c:if test="#{contractorsTableBean.page.hasPreviousPage()}">
+                                                <c:if test="#{contractorTableBean.page.hasPreviousPage()}">
                                                     <li>
                                                         <p:commandLink value="« Poprzednia">
-                                                            <p:ajax listener="#{contractorsTableBean.prevPage()}" update=":table-form" />
+                                                            <p:ajax listener="#{contractorTableBean.prevPage()}" update=":table-form" />
                                                         </p:commandLink>
                                                     </li>
                                                 </c:if>
-                                                <c:forEach begin="1" step="1" end="#{contractorsTableBean.page.totalPages}" varStatus="status">
+                                                <c:forEach begin="1" step="1" end="#{contractorTableBean.page.totalPages}" varStatus="status">
                                                     <!--<ui:param name="activeClass" value="" />
-                                                    <c:if test="#{contractorsTableBean.page.number == (status.index-1)}">
+                                                    <c:if test="#{contractorTableBean.page.number == (status.index-1)}">
                                                         <ui:param name="activeClass" value="active" />
                                                     </c:if>-->
                                                     <li class="#{activeClass}">
                                                         <p:commandLink value="#{status.index}">
-                                                            <p:ajax listener="#{contractorsTableBean.goToPage(status.index-1)}" update=":table-form" />
+                                                            <p:ajax listener="#{contractorTableBean.goToPage(status.index-1)}" update=":table-form" />
                                                         </p:commandLink>
                                                     </li>
                                                 </c:forEach>
-                                                <c:if test="#{contractorsTableBean.page.hasNextPage()}">
+                                                <c:if test="#{contractorTableBean.page.hasNextPage()}">
                                                     <li>
                                                         <p:commandLink value="Następna »">
-                                                            <p:ajax listener="#{contractorsTableBean.nextPage()}" update=":table-form" />
+                                                            <p:ajax listener="#{contractorTableBean.nextPage()}" update=":table-form" />
                                                         </p:commandLink>
                                                     </li>
                                                 </c:if>

@@ -8,11 +8,11 @@
     </menu-item>
     <menu-item name="Klienci" styleClass="fa fa-bar-chart-o" hasAnyRole="admin,user">
         <activeDefinitions>
-            <activeNode requestPath="/contractors" compare="STARTS_WITH" />
+            <activeNode requestPath="/contractor" compare="STARTS_WITH" />
         </activeDefinitions>
         <menu-items>
-            <menu-item name="Wyświetl" targetUrl="/contractors/contractorsTable.xhtml" />
-            <menu-item name="Dodaj" targetUrl="/contractors/addEditContractor.xhtml" />
+            <menu-item name="Wyświetl" targetUrl="/contractor/contractorTable.xhtml" />
+            <menu-item name="Dodaj" targetUrl="/contractor/contractorTemplate.xhtml" />
         </menu-items>
     </menu-item>
     <menu-item name="Produkty" styleClass="fa fa-laptop" hasAnyRole="admin,user">

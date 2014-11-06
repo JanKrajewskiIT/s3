@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,11 +25,14 @@ import pl.lodz.p.project.core.domain.BasePersistable;
 
 /**
  *
- * @author Łukasz Gadomski
+ * @author Łukasz Gadomski, Janiu
  */
 @Entity
 @Table(name = "password_change_requests")
+@NamedQuery(name = PasswordChangeRequest.NAMED_QUERY_FIND_BY_USER, query = "SELECT p FROM PasswordChangeRequest p WHERE p.user = :user")
 public class PasswordChangeRequest implements Serializable, BasePersistable {
+
+	public static final String NAMED_QUERY_FIND_BY_USER = "PasswordChangeRequest.findByUser";
 
     private static final long serialVersionUID = 1L;
     

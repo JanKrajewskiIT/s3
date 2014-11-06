@@ -30,8 +30,7 @@ public class TaxesBean implements Serializable {
     /**
      * Creates a new instance of Units
      */
-    public TaxesBean() {
-    }
+    public TaxesBean() { }
 
     @PostConstruct
     public void init() {

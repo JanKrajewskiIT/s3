@@ -27,7 +27,7 @@ import pl.lodz.p.project.core.domain.account.User;
 import pl.lodz.p.project.core.exception.UniqueConstraintViolationException;
 
 /**
- * EJB stateless session bean responsible for sending mail.
+ * Bean responsible for sending mail.
  *
  * @author Łukasz Gadomski
  */

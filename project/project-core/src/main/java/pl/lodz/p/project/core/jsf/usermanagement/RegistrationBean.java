@@ -13,7 +13,8 @@ import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.account.PendingInvitationDTO;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.exception.UniqueConstraintViolationException;
-import pl.lodz.p.project.core.service.account.AccountService;
+import pl.lodz.p.project.core.service.account.PendingInvitationService;
+import pl.lodz.p.project.core.service.account.UserService;
 
 /**
  * View scoped bean responsible for user registration.
@@ -26,8 +27,11 @@ public class RegistrationBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
-    private AccountService accountManagementService;
+	@Autowired 
+	private UserService userService;
+
+	@Autowired 
+	private PendingInvitationService pendingInvitationService;
 
     private UserDTO userDTO;
     private PendingInvitationDTO pendingInvitationDTO;
@@ -52,7 +56,7 @@ public class RegistrationBean implements Serializable {
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "404");
             return;
         }
-        pendingInvitationDTO = accountManagementService.getPendingInvitationByToken(token);
+        pendingInvitationDTO = pendingInvitationService.getOneByToken(token);
         if (pendingInvitationDTO == null) {
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "404");
         }
@@ -72,8 +76,8 @@ public class RegistrationBean implements Serializable {
         try {
             userDTO.setEmail(pendingInvitationDTO.getEmail());
             userDTO.getRoleSet().add(pendingInvitationDTO.getRole());
-            accountManagementService.createUser(userDTO);
-            accountManagementService.removePendingInvitation(pendingInvitationDTO.getId());
+            userService.createUser(userDTO);
+            pendingInvitationService.delete(pendingInvitationDTO.getId());
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "registrationSuccess");
         } catch (UniqueConstraintViolationException e) {
             facesContext.addMessage(null, new FacesMessage("Istnieje już konto o danym adresie e-mail!"));

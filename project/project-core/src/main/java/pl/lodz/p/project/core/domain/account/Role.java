@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -26,12 +27,15 @@ import pl.lodz.p.project.core.domain.BasePersistable;
 
 /**
  *
- * @author Łukasz Gadomski
+ * @author Łukasz Gadomski, Janiu
  */
 @Entity
 @Table(name = "roles")
+@NamedQuery(name = Role.NAMED_QUERY_FIND_BY_EMAIL, query = "SELECT r FROM Role r WHERE r.name = :name")
 public class Role implements Serializable, BasePersistable {
 
+	public static final String NAMED_QUERY_FIND_BY_EMAIL = "Role.findByRoleName";
+	
     private static final long serialVersionUID = 1L;
     
     @Id

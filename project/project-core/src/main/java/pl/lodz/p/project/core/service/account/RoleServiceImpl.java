@@ -21,15 +21,16 @@ import pl.lodz.p.project.core.service.AbstractService;
 @Component
 @Interceptors({TrackerInterceptor.class})
 public class RoleServiceImpl extends AbstractService<Role, RoleDTO> implements RoleService {
+
+	private final static String ACCESS_LEVEL = "accountManagement";
 	
 	/**
 	 * Retrieves all roles from the DB and creates a list of DTO representing
-	 * those roles. Invokes {@link AccountManagerLocal#getAllRoles()
-     * }.
+	 * those roles. Invokes {@link AccountManagerLocal#getAllRoles()}.
 	 *
 	 * @return the list of DTO represeting all roles found in the DB.
 	 */
-	@RolesAllowed("accountManagement")
+	@RolesAllowed(ACCESS_LEVEL)
 	@Override
 	public List<RoleDTO> getAll() {
 		return super.getAll();

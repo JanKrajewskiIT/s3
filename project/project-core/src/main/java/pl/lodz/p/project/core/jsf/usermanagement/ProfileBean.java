@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.exception.OptLockException;
-import pl.lodz.p.project.core.service.account.AccountService;
+import pl.lodz.p.project.core.service.account.UserService;
 
 /**
  *
@@ -24,8 +24,8 @@ public class ProfileBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
-    private AccountService accountManagementEndpoint;
+	@Autowired 
+	private UserService userService;
 
     private UserDTO userDTO;
     private String userName;
@@ -41,7 +41,7 @@ public class ProfileBean implements Serializable {
 
     public String initProfile(String userName) {
         this.userName = userName;
-        userDTO = accountManagementEndpoint.getUserByEmail(userName);
+        userDTO = userService.getUserByEmail(userName);
         return "profile";
     }
 
@@ -60,8 +60,8 @@ public class ProfileBean implements Serializable {
         }
         try {
             userDTO.setPassword(newPassword);
-            accountManagementEndpoint.editUserPassword(userDTO);
-            userDTO = accountManagementEndpoint.getUserByEmail(userName);
+            userService.editUserPassword(userDTO);
+            userDTO = userService.getUserByEmail(userName);
             facesContext.addMessage(null, new FacesMessage("Sukces", "Hasło zostało zmienione!"));
         } catch (Exception e) {
             facesContext.addMessage(null, new FacesMessage("Błąd", "Edycja nie powiodłą się!"));
@@ -80,8 +80,8 @@ public class ProfileBean implements Serializable {
         }
         try {
             userDTO.setEmail(newEmail);
-            accountManagementEndpoint.editUserEmailAddress(userDTO);
-            userDTO = accountManagementEndpoint.getUserByEmail(userName);
+            userService.editUserEmailAddress(userDTO);
+            userDTO = userService.getUserByEmail(userName);
             facesContext.addMessage(null, new FacesMessage("Sukces", "Adres e-mail został zmieniony!"));
         } catch (OptLockException ole) {
             facesContext.addMessage(null, new FacesMessage("Błąd", "Edycja nie powiodła się z powodu równoległej edycji!"));

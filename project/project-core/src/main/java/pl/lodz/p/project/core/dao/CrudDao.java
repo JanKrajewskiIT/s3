@@ -19,4 +19,7 @@ public interface CrudDao<T extends Persistable<ID>, ID extends Serializable> ext
 
 	@Override
 	List<T> findAll(Iterable<ID> ids);
+
+	void flush();	
+	
 }

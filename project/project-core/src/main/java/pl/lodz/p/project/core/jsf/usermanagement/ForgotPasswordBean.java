@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.account.UserDTO;
-import pl.lodz.p.project.core.service.account.AccountService;
+import pl.lodz.p.project.core.service.account.PasswordChangeRequestService;
+import pl.lodz.p.project.core.service.account.UserService;
 
 /**
  *
@@ -19,8 +20,11 @@ import pl.lodz.p.project.core.service.account.AccountService;
 @Scope("request")
 public class ForgotPasswordBean {
 
-    @Autowired
-    private AccountService accountManagementEndpoint;
+	@Autowired 
+	private UserService userService;
+
+	@Autowired 
+	private PasswordChangeRequestService passwordChangeRequestService;
 
     private String email;
 
@@ -30,7 +34,7 @@ public class ForgotPasswordBean {
             facesContext.addMessage(null, new FacesMessage("Należy podać adres e-mail!"));
             return;
         }
-        UserDTO userDTO = accountManagementEndpoint.getUserByEmail(email);
+        UserDTO userDTO = userService.getUserByEmail(email);
         if (userDTO == null) {
             facesContext.addMessage(null, new FacesMessage("Konto o podanym adresie e-mail nie istnieje!"));
             return;
@@ -39,7 +43,7 @@ public class ForgotPasswordBean {
             String passwordResetURL = ((HttpServletRequest) facesContext.getExternalContext().getRequest()).getRequestURL().toString();
             passwordResetURL = passwordResetURL.replace("forgot-password.xhtml", "reset-password.xhtml");
             facesContext.addMessage(null, new FacesMessage("Na podany adres e-mail wysłano wiadomość z dalszymy instrukcjami!"));
-            accountManagementEndpoint.sendPasswordChangeRequest(passwordResetURL, email);
+            passwordChangeRequestService.sendPasswordChangeRequest(passwordResetURL, email);
         } catch (Exception e) {
             facesContext.addMessage(null, new FacesMessage("Błąd", "Operacja nie powiodła się!"));
         }

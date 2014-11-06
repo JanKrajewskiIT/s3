@@ -30,11 +30,11 @@
                                             <div class="row">
                                                 <div class="col-xs-4">
                                                     <label>Symbol</label>
-                                                    <p:inputText id ="symbolInputText" value="#{contractorAddEditBean.selectedContractor.symbol}" type="text" styleClass="form-control" placeholder="Wprowadz symbol"/>        
+                                                    <p:inputText id ="symbolInputText" value="#{contractorTemplateBean.selectedContractor.symbol}" type="text" styleClass="form-control" placeholder="Wprowadz symbol"/>        
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Typ</label> 
-                                                    <h:selectOneRadio id="typeSelectOneRadio" styleClass="typeSelectOneRadio" value="#{contractorAddEditBean.selectedContractor.contractorType}">  
+                                                    <h:selectOneRadio id="typeSelectOneRadio" styleClass="typeSelectOneRadio" value="#{contractorTemplateBean.selectedContractor.type}">  
                                                         <f:selectItem itemLabel="&emsp;Firma &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" itemValue="Firma"/>
                                                         <f:selectItem itemLabel="&emsp;Osoba fizyczna" itemValue="Osoba fizyczna"/>   
                                                         <f:ajax render="only-company-component"/>
@@ -42,7 +42,7 @@
                                                 </div>  
                                                 <div class="col-xs-4">                                                
                                                     <label>Rola</label> 
-                                                    <h:selectOneRadio id="roleSelectOneRadio" styleClass="roleSelectOneRadio" value="#{contractorAddEditBean.selectedContractor.roleType}">  
+                                                    <h:selectOneRadio id="roleSelectOneRadio" styleClass="roleSelectOneRadio" value="#{contractorTemplateBean.selectedContractor.role}">  
                                                         <f:selectItem itemLabel="&emsp;Dostawca &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" itemValue="Dostawca"/>
                                                         <f:selectItem itemLabel="&emsp;Nabywca" itemValue="Nabywca"/>   
                                                     </h:selectOneRadio> 
@@ -51,61 +51,61 @@
                                             <div class="row"> 
                                                 <div class="col-xs-4">
                                                     <label>Nazwa</label>
-                                                    <p:inputText id ="nameInputText1" type="text" value="#{contractorAddEditBean.selectedContractor.name}" styleClass="form-control" placeholder="Wprowadz nazwe"/>
+                                                    <p:inputText id ="nameInputText1" type="text" value="#{contractorTemplateBean.selectedContractor.name}" styleClass="form-control" placeholder="Wprowadz nazwe"/>
                                                 </div>            
-                                                <p:layout id="only-company-component" rendered="#{contractorAddEditBean.isViewCompany()}">                
+                                                <p:layout id="only-company-component" rendered="#{contractorTemplateBean.isViewCompany()}">                
                                                     <div class="col-xs-4">
                                                         <label>Reprezentant</label>
-                                                        <p:inputText id ="representativeInputText" type="text" value="#{contractorAddEditBean.selectedContractor.representative}" styleClass="form-control" placeholder="Wprowadz nazwe reprezentanta"/>       
+                                                        <p:inputText id ="representativeInputText" type="text" value="#{contractorTemplateBean.selectedContractor.representative}" styleClass="form-control" placeholder="Wprowadz nazwe reprezentanta"/>       
                                                     </div>                                                     
                                                 </p:layout>
                                                 <div class="col-xs-4">
                                                     <label>Grupa Kontrahencka</label>
-                                                    <h:selectOneMenu id="contractorsGroupsSelectMenu" value="#{contractorAddEditBean.selectedContractor.group.id}" styleClass="form-control">  
-                                                        <f:selectItems value="#{contractorsGroupsBean.contractorsGroupsList}" var="group" itemLabel="#{group.name}" itemValue="#{group.id}"/> 
+                                                    <h:selectOneMenu id="contractorGroupsSelectMenu" value="#{contractorTemplateBean.selectedContractor.group.id}" styleClass="form-control">  
+                                                        <f:selectItems value="#{contractorGroupsBean.contractorGroupsList}" var="group" itemLabel="#{group.name}" itemValue="#{group.id}"/> 
                                                     </h:selectOneMenu> 
                                                 </div>  
                                                 <div class="col-xs-4">
                                                     <label>Kod pocztowy</label>
-                                                    <p:inputMask id ="postCodeInputText" value="#{contractorAddEditBean.selectedContractor.postCode}" mask="99-999" styleClass="form-control" placeholder="Wprowadz kod pocztowy"/>
+                                                    <p:inputMask id ="postCodeInputText" value="#{contractorTemplateBean.selectedContractor.postalCode}" mask="99-999" styleClass="form-control" placeholder="Wprowadz kod pocztowy"/>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Miasto</label>
-                                                    <p:inputText id ="cityInputText" type="text" value="#{contractorAddEditBean.selectedContractor.city}" styleClass="form-control" placeholder="Wprowadz miasto"/>
+                                                    <p:inputText id ="cityInputText" type="text" value="#{contractorTemplateBean.selectedContractor.city}" styleClass="form-control" placeholder="Wprowadz miasto"/>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Adres</label>
-                                                    <p:inputText id ="adressInputText" type="text" value="#{contractorAddEditBean.selectedContractor.adress}" styleClass="form-control" placeholder="Wprowadz adres"/>
+                                                    <p:inputText id ="adressInputText" type="text" value="#{contractorTemplateBean.selectedContractor.adress}" styleClass="form-control" placeholder="Wprowadz adres"/>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>NIP</label>
-                                                    <p:inputMask id ="nipInputText" value="#{contractorAddEditBean.selectedContractor.nip}" mask="999-999-99-99" styleClass="form-control" placeholder="Wprowadz NIP"/>
+                                                    <p:inputMask id ="nipInputText" value="#{contractorTemplateBean.selectedContractor.nip}" mask="999-999-99-99" styleClass="form-control" placeholder="Wprowadz NIP"/>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Numer konta</label>
-                                                    <p:inputMask id ="accountNumberInputText" value="#{contractorAddEditBean.selectedContractor.accountNumber}" mask="99 9999 9999 9999 9999 9999 9999 9999 9999" styleClass="form-control" placeholder="Wprowadz numer konta"/>
+                                                    <p:inputMask id ="accountNumberInputText" value="#{contractorTemplateBean.selectedContractor.accountNumber}" mask="99 9999 9999 9999 9999 9999 9999 9999 9999" styleClass="form-control" placeholder="Wprowadz numer konta"/>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Rabat</label>
-                                                    <p:inputText id ="discountInputText" value="#{contractorAddEditBean.selectedContractor.discount}" styleClass="form-control" placeholder="Wprowadz rabat"/>
+                                                    <p:inputText id ="discountInputText" value="#{contractorTemplateBean.selectedContractor.discount}" styleClass="form-control" placeholder="Wprowadz rabat"/>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Strona internetowa</label>
-                                                    <p:inputText id ="websiteInputText" type="text" value="#{contractorAddEditBean.selectedContractor.website}" styleClass="form-control" placeholder="Wprowadz adres strony internetowej"/>
+                                                    <p:inputText id ="websiteInputText" type="text" value="#{contractorTemplateBean.selectedContractor.website}" styleClass="form-control" placeholder="Wprowadz adres strony internetowej"/>
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <label>Email</label>
-                                                    <p:inputText id ="emailInputText" type="text" value="#{contractorAddEditBean.selectedContractor.email}" styleClass="form-control" placeholder="Wprowadz email"/>
+                                                    <p:inputText id ="emailInputText" type="text" value="#{contractorTemplateBean.selectedContractor.email}" styleClass="form-control" placeholder="Wprowadz email"/>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-6">
                                                     <label>Opis</label>
-                                                    <p:inputTextarea id ="commentsTextArea" rows="8" value="#{contractorAddEditBean.selectedContractor.description}" styleClass="form-control" placeholder="Wprowadz komentarz"/>
+                                                    <p:inputTextarea id ="commentsTextArea" rows="8" value="#{contractorTemplateBean.selectedContractor.description}" styleClass="form-control" placeholder="Wprowadz komentarz"/>
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <br/>
-                                                    <p:dataTable var="contact" value="#{contractorsContactsBean.contactsList}" id="phonesTable" styleClass="table table-bordered dataTable">
+                                                    <p:dataTable var="contact" value="#{contractorContactBean.contractorContactList}" id="phonesTable" styleClass="table table-bordered dataTable">
                                                         <p:column headerText="Nazwa">
                                                             <h:outputText value="#{contact.name}"/> 
                                                         </p:column>  
@@ -118,8 +118,8 @@
                                             <br/>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <p:commandButton value="Zapisz" styleClass="btn btn-primary btn-lg pull-right" ajax="true" action="#{contractorAddEditBean.saveContractor()}"/> 
-                                                    <p:commandButton value="Wyczyść" styleClass="btn btn-primary btn-lg pull-right" style="margin-right:  10px" ajax="true" update="@(form :not(.typeSelectOneRadio))" action="#{contractorAddEditBean.clear()}"/> 
+                                                    <p:commandButton value="Zapisz" styleClass="btn btn-primary btn-lg pull-right" ajax="true" action="#{contractorTemplateBean.saveContractor()}"/> 
+                                                    <p:commandButton value="Wyczyść" styleClass="btn btn-primary btn-lg pull-right" style="margin-right:  10px" ajax="true" update="@(form :not(.typeSelectOneRadio))" action="#{contractorTemplateBean.clear()}"/> 
                                                 </div>
                                             </div>
                                         </h:form>
