@@ -26,7 +26,7 @@ public abstract class AbstractCrudDao<T extends Persistable<ID>, ID extends Seri
 	private static final String DELETE_ALL_QUERY_STRING = "delete from %s x";
 
 	@PersistenceContext
-	private EntityManager entityManager;
+	protected EntityManager entityManager;
 
 	private final Class<T> domainClass;
 

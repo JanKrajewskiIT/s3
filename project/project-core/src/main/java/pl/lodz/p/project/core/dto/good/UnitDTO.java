@@ -14,16 +14,17 @@ import com.google.common.collect.ComparisonChain;
 public class UnitDTO implements Serializable, Comparable<UnitDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-    private String name;
-    private Short zeroPlaces;
 
-    public UnitDTO() { }
-    
-    public UnitDTO(UnitDTO unit) {
-    	this.name = unit.getName();
-    	this.zeroPlaces = unit.getZeroPlaces();
+	private Long id;
+	private String name;
+	private Short zeroPlaces;
+
+	public UnitDTO() {
+	}
+
+	public UnitDTO(UnitDTO unit) {
+		this.name = unit.getName();
+		this.zeroPlaces = unit.getZeroPlaces();
 	}
 
 	public Long getId() {
@@ -51,13 +52,13 @@ public class UnitDTO implements Serializable, Comparable<UnitDTO> {
 	}
 
 	@Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	}
 
 	@Override
 	public int compareTo(UnitDTO o) {
 		return ComparisonChain.start().compare(this.id, o.getId()).result();
 	}
-	
+
 }
