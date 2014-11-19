@@ -37,6 +37,19 @@
             </menu-item>
         </menu-items>
     </menu-item>
+    <menu-item name="Raporty" styleClass="fa fa-edit" hasAnyRole="admin,user">
+        <activeDefinitions>
+            <activeNode requestPath="/documents/financialReports" compare="STARTS_WITH" />
+        </activeDefinitions>
+        <menu-items>
+            <menu-item name="Raporty Finansowe" styleClass="fa fa-edit">
+                <menu-items>
+                    <menu-item name="Wyświetl" targetUrl="/documents/financialReports/financialReportsTable.xhtml" />
+
+                </menu-items>
+            </menu-item>
+        </menu-items>
+    </menu-item>
     <menu-item name="Magazyn" styleClass="fa fa-edit" hasAnyRole="admin,user">
         <activeDefinitions>
             <activeNode requestPath="/documents/warehouseDocuments" compare="STARTS_WITH" />
