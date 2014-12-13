@@ -44,12 +44,12 @@ public class FinancialReport implements Serializable, Activable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "average_sale_amount")
-    private int averageSaleAmount;
+    private double averageSaleAmount;
 
     @Basic(optional = false)
     @NotNull
     @Column(name = "total_sales_amount")
-    private int totalSalesAmount;
+    private double totalSalesAmount;
 
     @Basic(optional = false)
     @NotNull
@@ -99,19 +99,19 @@ public class FinancialReport implements Serializable, Activable {
         this.numberOfSales = numberOfSales;
     }
 
-    public int getAverageSaleAmount() {
+    public double getAverageSaleAmount() {
         return averageSaleAmount;
     }
 
-    public void setAverageSaleAmount(int averageSaleAmount) {
+    public void setAverageSaleAmount(double averageSaleAmount) {
         this.averageSaleAmount = averageSaleAmount;
     }
 
-    public int getTotalSalesAmount() {
+    public double getTotalSalesAmount() {
         return totalSalesAmount;
     }
 
-    public void setTotalSalesAmount(int totalSalesAmount) {
+    public void setTotalSalesAmount(double totalSalesAmount) {
         this.totalSalesAmount = totalSalesAmount;
     }
 

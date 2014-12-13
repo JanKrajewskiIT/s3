@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="../../layout/main-template.xhtml">
+            <ui:define name="content">
+                <!-- Right side column. Contains the navbar and content of the page -->
+                <aside class="right-side">                
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Kokpit</a></li>
+                            <li><a href="#">Raporty</a></li>
+                            <li class="active">Dodaj</li>
+                        </ol>
+                    </section>
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box">                                   
+                                    <div class="box-header">
+                                        <h3 class="box-title">Dodaj raport</h3>
+                                    </div> 
+                                    <div class="box-body">                                       
+                                        <h:form id="addReportFormId">
+                                            <p:messages autoUpdate="true"/>
+                                            <div class="row" >
+                                                <div class="col-xs-4">
+                                                    <label>Data początkowa</label>
+                                                    <p:inputText id ="startDate" binding="#{startDateComponent}" value="#{addFinancialReportBean.financialReport.reportStartDate}" p:type="date" styleClass="form-control" placeholder="Wprowadz symbol">
+                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                        <f:validateRequired />
+                                                    </p:inputText>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label>Data końcowa</label>
+                                                    <p:inputText id ="endDate" p:type="date" value="#{addFinancialReportBean.financialReport.reportEndDate}" styleClass="form-control" placeholder="Wprowadz nazwe">
+                                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                        <f:attribute name="startDateComponent" value="#{startDateComponent}" />
+                                                        <f:validateRequired />
+                                                        <f:validator validatorId="dateRangeValidator" />
+                                                    </p:inputText>
+                                                </div>
+
+                                            </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <p:commandButton value="Zapisz" styleClass="btn btn-primary btn-lg pull-right" action="#{addFinancialReportBean.saveReport()}"/>
+                                                    <p:commandButton value="Wyczyść" styleClass="btn btn-primary btn-lg pull-right" style="margin-right:  10px" ajax="true" update="@(form :not(.typeSelectOneRadio))" action="#{addFinancialReportBean.clear()}"/>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div>
+                        </div>
+                    </section><!-- /.content -->                
+                </aside><!-- /.right-side -->
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

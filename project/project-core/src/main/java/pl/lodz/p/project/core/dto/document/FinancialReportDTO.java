@@ -14,8 +14,8 @@ public class FinancialReportDTO implements Serializable, Comparable<SaleDocument
     private Date reportStartDate;
     private Date reportEndDate;
     private int numberOfSales;
-    private int averageSaleAmount;
-    private int totalSalesAmount;
+    private double averageSaleAmount;
+    private double totalSalesAmount;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -61,19 +61,19 @@ public class FinancialReportDTO implements Serializable, Comparable<SaleDocument
         this.numberOfSales = numberOfSales;
     }
 
-    public int getAverageSaleAmount() {
+    public double getAverageSaleAmount() {
         return averageSaleAmount;
     }
 
-    public void setAverageSaleAmount(int averageSaleAmount) {
+    public void setAverageSaleAmount(double averageSaleAmount) {
         this.averageSaleAmount = averageSaleAmount;
     }
 
-    public int getTotalSalesAmount() {
+    public double getTotalSalesAmount() {
         return totalSalesAmount;
     }
 
-    public void setTotalSalesAmount(int totalSalesAmount) {
+    public void setTotalSalesAmount(double totalSalesAmount) {
         this.totalSalesAmount = totalSalesAmount;
     }
 

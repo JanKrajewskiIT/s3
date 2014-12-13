@@ -45,7 +45,7 @@
             <menu-item name="Raporty Finansowe" styleClass="fa fa-edit">
                 <menu-items>
                     <menu-item name="Wyświetl" targetUrl="/documents/financialReports/financialReportsTable.xhtml" />
-
+                    <menu-item name="Dodaj" targetUrl="/documents/financialReports/addFinancialReport.xhtml" />
                 </menu-items>
             </menu-item>
         </menu-items>
