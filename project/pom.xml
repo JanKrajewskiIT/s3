@@ -18,7 +18,6 @@
 
 	<modules>
 		<module>project-db</module>
-		<module>project-commons</module>
 		<module>project-core</module>
 	</modules>
 
