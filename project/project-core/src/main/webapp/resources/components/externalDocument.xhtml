@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cc="http://java.sun.com/jsf/composite/components">
+
+	<composite:interface>
+	</composite:interface>
+
+	<composite:implementation>
+		<div class="col-xs-12">		
+			<div class="row">
+				<div class="row">		
+					<div class="col-xs-6">
+						<label>Nazwa</label>
+						<p:inputText styleClass="form-control" />
+					</div>	
+					<div class="col-xs-6">
+						<label>Data wystawienia</label>
+						<p:inputText styleClass="form-control" />
+					</div>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="row">	
+					<div class="col-xs-6">
+						<label>Ulica</label>
+						<p:inputText styleClass="form-control" />
+					</div>	
+					<div class="col-xs-6">
+						<label>Numer faktury</label>
+						<p:inputText styleClass="form-control" />
+					</div>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="row">		
+					<div class="col-xs-6">
+						<label>Kod, miejscowość</label>
+						<p:inputText styleClass="form-control" />
+					</div>		
+					<div class="col-xs-6">
+						<label>Numer zamówienia</label>
+						<p:inputText styleClass="form-control" />
+					</div>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="row">
+					<div class="col-xs-6">
+						<label>NIP</label>
+						<p:inputText styleClass="form-control" />
+					</div>		
+					<div class="col-xs-6">
+						<label>Środek transportu</label>
+						<p:inputText styleClass="form-control" />
+					</div>	
+				</div>
+			</div>				
+		</div>
+		<p:spacer style="width: 10px" />
+		<cc:internalDocument />
+	</composite:implementation>
+</ui:composition>
