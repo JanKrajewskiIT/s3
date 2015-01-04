@@ -8,6 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<composite:interface>
+        <composite:attribute name="controller"/>
 	</composite:interface>
 
 	<composite:implementation>
@@ -41,7 +42,8 @@
 		<div class="row">
 			<div class="col-xs-8">
 				<label>Adnotacje</label>
-				<p:inputTextarea styleClass="form-control" />
+				<p:inputTextarea styleClass="form-control"
+					value="#{cc.attrs.controller.sourceObject.deliverPerson}" />
 			</div>
 
 			<div class="col-sm-4 pull-right">

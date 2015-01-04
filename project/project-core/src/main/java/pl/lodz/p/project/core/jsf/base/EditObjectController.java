@@ -14,4 +14,20 @@ public abstract class EditObjectController<T extends Serializable> extends CanBe
 	protected T currentObject;
 	protected Mode mode = Mode.EDIT;
 	
+	public T getSourceObject() {
+		return sourceObject;
+	}
+	
+	public void setSourceObject(T sourceObject) {
+		this.sourceObject = sourceObject;
+	}
+	
+	public T getCurrentObject() {
+		return currentObject;
+	}
+	
+	public void setCurrentObject(T currentObject) {
+		this.currentObject = currentObject;
+	}
+	
 }
