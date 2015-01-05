@@ -68,8 +68,8 @@
             <activeNode requestPath="/documents/service" compare="STARTS_WITH" />
         </activeDefinitions>
     	<menu-items>
-            <menu-item name="Wyświetl dokumenty serwisowe" targetUrl="/documents/service/list.xhtml" />
-            <menu-item name="Dodaj zgłoszenie serwisowe" targetUrl="/documents/service/serviceRepairOrder.xhtml" />
+            <menu-item name="Wyświetl dokumenty serwisowe" targetUrl="/documents/service/serviceDocumentsTable.xhtml" />
+            <menu-item name="Dodaj zgłoszenie serwisowe" targetUrl="/documents/service/repairOrder.xhtml" />
             <menu-item name="Dodaj zapotrzebowanie serwisowe" targetUrl="/documents/service/serviceProductRequest.xhtml" />
             <menu-item name="Dodaj podsumowanie naprawy" targetUrl="/documents/service/serviceFixSummary.xhtml" />
         </menu-items>
