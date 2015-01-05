@@ -18,9 +18,6 @@
 
 	<modules>
 		<module>project-db</module>
-		<module>project-commons</module>
-		<module>project-invoicing</module>
-		<module>project-warehouse</module>
 		<module>project-core</module>
 	</modules>
 
@@ -44,16 +41,6 @@
 			<dependency>
 				<groupId>pl.lodz.p.project</groupId>
 				<artifactId>project-commons</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>pl.lodz.p.project</groupId>
-				<artifactId>project-invoicing</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>pl.lodz.p.project</groupId>
-				<artifactId>project-warehouse</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

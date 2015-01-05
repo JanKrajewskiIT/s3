@@ -10,10 +10,12 @@ import pl.lodz.p.project.core.dto.document.DocumentPositionDTO;
  */
 public interface DocumentPositionService {
 
-    DocumentPositionDTO getOneById(Long id);
+	DocumentPositionDTO getOneById(Long id);
 
-    List<DocumentPositionDTO> getAll();
+	List<DocumentPositionDTO> getAll();
 
-    void save(List<DocumentPositionDTO> documentPositionList);
+	void save(List<DocumentPositionDTO> documentPositionList);
+
+	List<DocumentPositionDTO> getDocumentPositions(String documentSymbol);
 
 }

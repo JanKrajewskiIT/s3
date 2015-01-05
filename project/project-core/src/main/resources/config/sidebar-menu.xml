@@ -37,17 +37,30 @@
             </menu-item>
         </menu-items>
     </menu-item>
-    <menu-item name="Magazyn" styleClass="fa fa-edit" hasAnyRole="admin,user">
+    <menu-item name="Raporty" styleClass="fa fa-edit" hasAnyRole="admin,user">
         <activeDefinitions>
-            <activeNode requestPath="/documents/warehouseDocuments" compare="STARTS_WITH" />
+            <activeNode requestPath="/documents/financialReports" compare="STARTS_WITH" />
         </activeDefinitions>
         <menu-items>
-            <menu-item name="Wydanie Zęwnetrzne" styleClass="fa fa-edit">
+            <menu-item name="Raporty Finansowe" styleClass="fa fa-edit">
                 <menu-items>
-                    <menu-item name="Wyświetl" targetUrl="/documents/warehouseDocuments/wzTable.xhtml" />
-                    <menu-item name="Dodaj" targetUrl="/documents/warehouseDocuments/wzAddEdit.xhtml" />
+                    <menu-item name="Wyświetl" targetUrl="/documents/financialReports/financialReportsTable.xhtml" />
+                    <menu-item name="Dodaj" targetUrl="/documents/financialReports/addFinancialReport.xhtml" />
                 </menu-items>
             </menu-item>
+        </menu-items>
+    </menu-item>
+    <menu-item name="Magazyn" styleClass="fa fa-edit" hasAnyRole="admin,user">
+        <activeDefinitions>
+            <activeNode requestPath="/documents/warehouse" compare="STARTS_WITH" />
+        </activeDefinitions>
+        <menu-items>
+        	<menu-item name="Dokumenty wewnętrzne" targetUrl="/documents/warehouse/internalDocumentList.xhtml" styleClass="fa fa-edit"/>
+            <menu-item name="Rozchód wewnętrzny (RW)" targetUrl="/documents/warehouse/internalOutgoing.xhtml" />
+            <menu-item name="Przyjęcie wewnętrzne (PW)" targetUrl="/documents/warehouse/internalIncoming.xhtml" />        		
+            <menu-item name="Dokumenty zewnętrzne" targetUrl="/documents/warehouse/externalDocumentList.xhtml" styleClass="fa fa-edit"/>        		
+            <menu-item name="Wydanie zewnętrzne (WZ)" targetUrl="/documents/warehouse/externalOutgoing.xhtml" />
+            <menu-item name="Przyjęcie zewnętrzne (PZ)" targetUrl="/documents/warehouse/externalIncoming.xhtml" />            	
         </menu-items>
     </menu-item>
     <menu-item name="Raporty" styleClass="fa fa-edit" hasAnyRole="manager">

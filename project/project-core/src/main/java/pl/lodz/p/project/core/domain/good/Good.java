@@ -127,7 +127,7 @@ public class Good implements Serializable, Activable {
     
     @Version
     private Long version = 1L;
-    
+            
     public Long getId() {
 		return id;
 	}
@@ -288,7 +288,7 @@ public class Good implements Serializable, Activable {
 		this.version = version;
 	}
 
-    @Override
+	@Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
     }

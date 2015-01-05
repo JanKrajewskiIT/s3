@@ -128,7 +128,7 @@ public class SaleDocument implements Serializable, Activable {
     private boolean active;
     
     @Version
-    private long version;
+    private long version = 1L;
     
     public Long getId() {
 		return id;
