@@ -1,5 +1,8 @@
 package pl.lodz.p.project.core.jsf.base;
 
+/**
+ * @author Jan Krajewski
+ */
 public class CanBeReadOnlyImpl implements CanBeReadOnly {
 
 	private boolean readOnly = false;

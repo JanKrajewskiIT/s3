@@ -16,7 +16,7 @@ import pl.lodz.p.project.core.domain.BaseEntity;
  *
  */
 @Entity
-@Table(name = "internal_invoice_goods")
+@Table(name = "internal_invoices_goods")
 public class InternalInvoiceGood extends BaseEntity<InvoiceGoodKey<InternalInvoice>> {
 
 	private static final long serialVersionUID = 4953126124258975050L;

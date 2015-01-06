@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * @author Jan Krajewski
+ */
 public abstract class EditListController<T extends Serializable> extends CanBeReadOnlyImpl implements Serializable {
 
 	private static final long serialVersionUID = 5723219866142777750L;

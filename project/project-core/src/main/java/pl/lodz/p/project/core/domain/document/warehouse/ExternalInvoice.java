@@ -18,7 +18,7 @@ import pl.lodz.p.project.core.domain.document.TransportMean;
  *
  */
 @Entity
-@Table(name = "external_invoice")
+@Table(name = "external_invoices")
 public class ExternalInvoice extends WarehouseInvoice { 
 
 	private static final long serialVersionUID = 4420769465498341864L;

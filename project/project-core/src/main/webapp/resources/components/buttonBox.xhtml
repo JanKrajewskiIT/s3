@@ -8,16 +8,18 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<composite:interface>
+		<composite:attribute name="controller"/>
 	</composite:interface>
 
 	<composite:implementation>
 		<div class="row">
 			<div class="col-xs-12">
-				<p:commandButton value="Zapisz"
-					styleClass="btn btn-primary btn-lg pull-right"/>
-				<p:commandButton value="Wyczyść"
-					styleClass="btn btn-primary btn-lg pull-right"
-					style="margin-right:  10px" ajax="true"/>
+				<ui:repeat value="#{cc.attrs.controller.actions}" var="action" >
+					<p:commandButton value="#{action.name}" update="#{action.update}"
+									 styleClass="btn btn-primary btn-lg pull-right"
+							 		 action="#{action.call}"/>
+					<p:spacer style="width : 10px"/>
+				</ui:repeat>
 			</div>
 		</div>
 	</composite:implementation>

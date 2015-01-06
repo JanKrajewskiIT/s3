@@ -33,9 +33,12 @@ public class DocumentNumeratorDaoImpl implements DocumentNumeratorDao {
     private String determineTableName(String documentType) {
         if ("FV".equals(documentType)) {
             return "sale_documents";
-        } else {
-            return "warehouse_documents";
+        } else if("RW".equals(documentType) || "PW".equals(documentType)) {
+            return "internal_invoices";
+        } else if("WZ".equals(documentType) || "PZ".equals(documentType)) {
+            return "external_invoices";
         }
+        throw new RuntimeException("Not defined document: " + documentType);
     }
 
 	@Override

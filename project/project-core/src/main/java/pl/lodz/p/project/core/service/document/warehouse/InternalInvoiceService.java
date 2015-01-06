@@ -10,8 +10,10 @@ import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
  */
 public interface InternalInvoiceService {
 
-	InternalInvoiceDTO getOneById(Long id);
+    InternalInvoiceDTO getOneById(Long id);
 
     List<InternalInvoiceDTO> getAll();
-    
+
+    void save(InternalInvoiceDTO invoice);
+
 }
