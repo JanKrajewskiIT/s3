@@ -33,15 +33,17 @@
 									</div>									
 									<div class="box-body">
 										<h:form>
-											<p:panel>
+											<ui:param name="visible" value="#{invoiceGoodListController.visible}" />
+											<p:panel id="dupa" visible="#{visible}" styleClass="ui-panel-content">
 												<cc:invoiceGoodList controller="#{invoiceGoodListController}" />
 												<p:spacer style="height : 10px"/>
 												<cc:internalDocument controller="#{internalInvoiceController}" />
 												<p:spacer style="height : 10px"/>
 												<cc:buttonBox controller="#{internalInvoiceController}"/>
 											</p:panel>
-											<p:spacer style="height : 20px"/>
-											<cc:chooseGoodList controller="#{goodListController}" action="#{internalInvoiceController.addGood()}"/>
+											<p:panel visible="#{not visible}">
+												<cc:chooseGoodList controller="#{goodListController}" action="#{internalInvoiceController.addGood()}"/>
+											</p:panel>
 										</h:form>
 									</div>
 								</div>

@@ -34,16 +34,16 @@
 									<div class="box-body">
 										<h:form>
 											<ui:param name="visible" value="#{invoiceGoodListController.visible}" />
-											<c:if test="#{visible}" >
+											<p:panel id="dupa" visible="#{visible}" styleClass="ui-panel-content">
 												<cc:invoiceGoodList controller="#{invoiceGoodListController}" />
 												<p:spacer style="height : 10px"/>
 												<cc:internalDocument controller="#{internalInvoiceController}" />
 												<p:spacer style="height : 10px"/>
 												<cc:buttonBox controller="#{internalInvoiceController}"/>
-											</c:if>
-											<c:if test="#{not visible}" >
+											</p:panel>
+											<p:panel visible="#{not visible}">
 												<cc:chooseGoodList controller="#{goodListController}" action="#{internalInvoiceController.addGood()}"/>
-											</c:if>
+											</p:panel>
 										</h:form>
 									</div>
 								</div>

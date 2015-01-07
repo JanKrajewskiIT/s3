@@ -1,6 +1,7 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @Named
-@Scope("request")
+@ViewScoped
 public class ExternalInvoiceController extends EditObjectController<ExternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 6806332655702953164L;

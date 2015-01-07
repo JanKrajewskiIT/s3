@@ -1,11 +1,11 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
@@ -51,13 +51,15 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 
 	@Override
 	public void save() {
-		System.out.println("dupa " + goodListController.getSingleSelection().getName());
-		//getSourceObject().setGoodList(invoiceGoodListController.getItems());
-		//getSourceObject().setDocumentDate(DateUtil.getCurrentDate());
-		//service.save(getSourceObject());
+		getSourceObject().setGoodList(invoiceGoodListController.getItems());
+		getSourceObject().setDocumentDate(DateUtil.getCurrentDate());
+		service.save(getSourceObject());
 	}
 
 	public void addGood() {
+		invoiceGoodListController.setVisible(true);
+		goodListController.setVisible(false);
+
 		InternalInvoiceGoodDTO invoiceGood = new InternalInvoiceGoodDTO();
 		invoiceGood.setGood(goodListController.getSingleSelection());
 		invoiceGood.setQuantity(new BigDecimal(goodListController.getQuantity()));

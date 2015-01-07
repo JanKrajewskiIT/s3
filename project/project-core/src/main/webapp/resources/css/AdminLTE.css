@@ -2802,3 +2802,9 @@ Component: timeline
 .pace-inactive {
   display: none;
 }
+
+.ui-panel .ui-panel-content {
+  border: 0;
+  background: none;
+  padding: 0em 0em !important;
+}

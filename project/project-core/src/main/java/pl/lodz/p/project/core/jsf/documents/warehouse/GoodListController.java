@@ -7,13 +7,14 @@ import pl.lodz.p.project.core.jsf.base.EditListController;
 import pl.lodz.p.project.core.service.good.GoodService;
 
 import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
  * @author Jan Krajewski
  */
 @Named
-@Scope("request")
+@ViewScoped
 public class GoodListController extends EditListController<GoodDTO> {
 
     @Autowired
@@ -27,7 +28,6 @@ public class GoodListController extends EditListController<GoodDTO> {
     }
 
     public void onSelect(GoodDTO selected) {
-        System.out.println("Wyszelektowano");
         setSingleSelection(selected);
     }
 
