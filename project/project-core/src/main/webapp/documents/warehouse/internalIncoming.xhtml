@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:cc="http://java.sun.com/jsf/composite/components">
+	xmlns:cc="http://java.sun.com/jsf/composite/components"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 	<h:body>
 		<ui:composition template="../../layout/main-template.xhtml">
@@ -32,16 +33,21 @@
 									</div>									
 									<div class="box-body">
 										<h:form>
-
-											<cc:internalDocument controller="#{internalInvoiceController}"/>
-											<p:spacer style="height : 10px"/>
-											<cc:buttonBox controller="#{internalInvoiceController}"/>
+											<p:panel>
+												<cc:invoiceGoodList controller="#{invoiceGoodListController}" />
+												<p:spacer style="height : 10px"/>
+												<cc:internalDocument controller="#{internalInvoiceController}" />
+												<p:spacer style="height : 10px"/>
+												<cc:buttonBox controller="#{internalInvoiceController}"/>
+											</p:panel>
+											<p:spacer style="height : 20px"/>
+											<cc:chooseGoodList controller="#{goodListController}" action="#{internalInvoiceController.addGood()}"/>
 										</h:form>
 									</div>
 								</div>
 							</div>
 						</div>
-					</section> 
+					</section>
 				</aside>
 			</ui:define>
 		</ui:composition>

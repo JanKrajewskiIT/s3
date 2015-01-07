@@ -11,6 +11,7 @@ import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.dto.good.UnitDTO;
+import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
 import pl.lodz.p.project.core.service.document.TransportMeanService;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
@@ -25,6 +26,12 @@ import java.util.List;
 public class ExternalInvoiceController extends EditObjectController<ExternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 6806332655702953164L;
+
+	@Autowired
+	private InvoiceGoodListController invoiceGoodListController;
+
+	@Autowired
+	private GoodListController goodListController;
 
 	@Autowired
 	private ExternalInvoiceService service;
@@ -94,6 +101,13 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 
 	@Override
 	public void save() {
+		//getSourceObject().setDocumentDate(DateUtil.getCurrentDate());
+		//service.save(getSourceObject());
+	}
+
+	public void addGood() {
+		//invoiceGoodListController.setVisible(true);
+		//goodListController.setVisible(false);
 	}
 
 }

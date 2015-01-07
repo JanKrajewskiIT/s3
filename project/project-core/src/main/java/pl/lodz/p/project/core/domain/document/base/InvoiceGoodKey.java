@@ -1,4 +1,4 @@
-package pl.lodz.p.project.core.domain.document.warehouse;
+package pl.lodz.p.project.core.domain.document.base;
 
 import java.io.Serializable;
 
@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import pl.lodz.p.project.core.domain.document.warehouse.WarehouseInvoice;
 import pl.lodz.p.project.core.domain.good.Good;
 
 /**
@@ -14,7 +15,7 @@ import pl.lodz.p.project.core.domain.good.Good;
  *
  */
 @Embeddable
-public class InvoiceGoodKey<T extends WarehouseInvoice> implements Serializable { 
+public class InvoiceGoodKey<T extends WarehouseInvoice> implements Serializable {
 
 	private static final long serialVersionUID = -800145815758759917L;
 

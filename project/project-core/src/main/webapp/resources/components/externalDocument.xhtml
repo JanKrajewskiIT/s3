@@ -5,8 +5,7 @@
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:cc="http://java.sun.com/jsf/composite/components">
+	xmlns:p="http://primefaces.org/ui">
 
 	<composite:interface>
 		<composite:attribute name="controller"/>
@@ -60,11 +59,10 @@
 	
 				<label>Środek transportu</label>                                                    
 				<h:selectOneMenu styleClass="form-control">
-	            	<f:selectItems itemValue="#{transportMean.id}" itemLabel="#{transportMean.name}" var="transportMean" value="#{cc.attrs.controller.transportMeanList}"/>
+	            	<f:selectItems itemValue="#{transportMean.id}" itemLabel="#{transportMean.name}"
+								   var="transportMean" value="#{cc.attrs.controller.transportMeanList}"/>
 	            </h:selectOneMenu>
 			</div>
 		</div>
-		<p:spacer style="width: 10px" />
-		<cc:internalDocument controller="#{cc.attrs.controller}" />
 	</composite:implementation>
 </ui:composition>

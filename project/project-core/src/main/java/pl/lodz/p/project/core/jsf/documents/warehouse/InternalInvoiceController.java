@@ -3,24 +3,17 @@ package pl.lodz.p.project.core.jsf.documents.warehouse;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoice;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
-import pl.lodz.p.project.core.dto.good.GoodDTO;
-import pl.lodz.p.project.core.dto.good.UnitDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
 import pl.lodz.p.project.core.service.document.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.warehouse.InternalInvoiceService;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Named
 @Scope("request")
@@ -31,6 +24,12 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	private enum Type {
 		ANY, WZ, PZ
 	}
+
+	@Autowired
+	private InvoiceGoodListController invoiceGoodListController;
+
+	@Autowired
+	private GoodListController goodListController;
 
 	@Autowired
 	private InternalInvoiceService service;
@@ -52,7 +51,17 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 
 	@Override
 	public void save() {
-		getSourceObject().setDocumentDate(DateUtil.getCurrentDate());
-		service.save(getSourceObject());
+		System.out.println("dupa " + goodListController.getSingleSelection().getName());
+		//getSourceObject().setGoodList(invoiceGoodListController.getItems());
+		//getSourceObject().setDocumentDate(DateUtil.getCurrentDate());
+		//service.save(getSourceObject());
 	}
+
+	public void addGood() {
+		InternalInvoiceGoodDTO invoiceGood = new InternalInvoiceGoodDTO();
+		invoiceGood.setGood(goodListController.getSingleSelection());
+		invoiceGood.setQuantity(new BigDecimal(goodListController.getQuantity()));
+		invoiceGoodListController.getItems().add(invoiceGood);
+	}
+
 }

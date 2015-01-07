@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Jan Krajewski
  */
-public abstract class EditObjectController<T extends Serializable> extends CanBeReadOnlyImpl implements Serializable {
+public abstract class EditObjectController<T extends Serializable> extends UIObject implements Serializable {
 
 	private static final long serialVersionUID = -5022126225567406058L;
 
