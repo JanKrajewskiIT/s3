@@ -27,22 +27,23 @@
 								<div class="box">
 									<div class="box-header">
 										<h3 class="page-header col-xs-12">
-											Przyjęcie wewnętrzne (PW) : #{internalInvoiceController.sourceObject.symbol}
+											Przyjęcie wewnętrzne (RW) : #{internalInvoiceController.sourceObject.symbol}
 											<small class="pull-right">Data: #{internalInvoiceController.currentDate}</small>
 										</h3>
 									</div>
 									<div class="box-body">
 										<h:form>
-											<ui:param name="visible" value="#{invoiceGoodListController.visible}" />
-											<p:panel id="dupa" visible="#{visible}" styleClass="ui-panel-content">
+											<p:panel visible="#{invoiceGoodListController.visible}">
 												<cc:invoiceGoodList controller="#{invoiceGoodListController}" />
 												<p:spacer style="height : 10px"/>
 												<cc:internalDocument controller="#{internalInvoiceController}" />
 												<p:spacer style="height : 10px"/>
 												<cc:buttonBox controller="#{internalInvoiceController}"/>
 											</p:panel>
-											<p:panel visible="#{not visible}">
-												<cc:chooseGoodList controller="#{goodListController}" action="#{internalInvoiceController.addGood()}"/>
+											<p:panel visible="#{not invoiceGoodListController.visible}">
+												<cc:goodChooser controller="#{goodListController}"
+																action="#{internalInvoiceController.addGood()}"
+																editable="false"/>
 											</p:panel>
 										</h:form>
 									</div>

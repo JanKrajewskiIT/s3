@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<composite:interface>
+		<composite:attribute name="controller" />
+		<composite:attribute name="editable" />
+	</composite:interface>
+
+	<composite:implementation>
+		<div class="row">
+			<div class="col-xs-12 table-responsive">
+				<p:dataTable tableStyleClass="table table-bordered table-hover"
+							 var="contractor" value="#{cc.attrs.controller.items}"
+							 selectionMode="single" selection="#{cc.attrs.controller.singleSelection}" rowKey="#{contractor.id}"
+							 id="contractorTable">
+
+					<p:ajax event="rowSelect" listener="#{cc.attrs.controller.onSelect(contractor)}" />
+
+					<p:column headerText="Symbol" sortBy="symbol">
+						<p:outputLabel value="#{contractor.symbol}" />
+					</p:column>
+
+					<p:column headerText="Nazwa" sortBy="name"  style="width: 300px">
+						<p:outputLabel value="#{contractor.name}" />
+					</p:column>
+
+					<p:column headerText="Grupa" sortBy="group.name">
+						<p:outputLabel value="#{contractor.group.name}"/>
+					</p:column>
+
+					<p:column headerText="Miasto" sortBy="city">
+						<p:outputLabel value="#{contractor.city}" />
+					</p:column>
+
+					<p:column headerText="Adres" sortBy="adress">
+						<p:outputLabel value="#{contractor.adress}" />
+					</p:column>
+
+					<p:column headerText="NIP" sortBy="nip">
+						<p:outputLabel value="#{contractor.nip}" />
+					</p:column>
+
+					<p:column headerText="Akcja" style="width: 165px" rendered="#{cc.attrs.editable}">
+						<p:commandLink styleClass="btn btn-success btn-xs"
+									   action="#{cc.attrs.controller.edit(contractor.id)}">
+							<i class="glyphicon glyphicon-pencil"></i> Edytuj
+						</p:commandLink>
+						<p:spacer style="width: 10px" />
+						<p:commandLink styleClass="btn btn-danger btn-xs" update="contractorTable"
+									   action="#{cc.attrs.controller.remove(contractor)}">
+							<i class="glyphicon glyphicon-minus"></i> Usuń
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</div>
+		</div>
+	</composite:implementation>
+</ui:composition>

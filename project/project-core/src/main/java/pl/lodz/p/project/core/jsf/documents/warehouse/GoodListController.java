@@ -27,10 +27,6 @@ public class GoodListController extends EditListController<GoodDTO> {
         setItems(goodService.getAll());
     }
 
-    public void onSelect(GoodDTO selected) {
-        setSingleSelection(selected);
-    }
-
     public Integer getQuantity() {
         return quantity;
     }

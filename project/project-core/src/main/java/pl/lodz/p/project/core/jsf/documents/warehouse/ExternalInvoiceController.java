@@ -3,23 +3,17 @@ package pl.lodz.p.project.core.jsf.documents.warehouse;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-
+import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.document.TransportMeanDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
-import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;
-import pl.lodz.p.project.core.dto.good.GoodDTO;
-import pl.lodz.p.project.core.dto.good.UnitDTO;
+import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
+import pl.lodz.p.project.core.service.document.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.TransportMeanService;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Named
@@ -28,6 +22,10 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 
 	private static final long serialVersionUID = 6806332655702953164L;
 
+	private enum Type {
+		ANY, RW, PW
+	}
+
 	@Autowired
 	private InvoiceGoodListController invoiceGoodListController;
 
@@ -35,61 +33,60 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	private GoodListController goodListController;
 
 	@Autowired
+	private ContractorListController contractorListController;
+
+	@Autowired
 	private ExternalInvoiceService service;
 
 	@Autowired
 	private TransportMeanService transportMeanService;
 
+	@Autowired
+	private DocumentNumeratorService documentNumeratorService;
+
 	private List<TransportMeanDTO> transportMeanList;
 
 	@PostConstruct
 	private void init() {
-		setExampleData();
+		contractorListController.setVisible(false);
+
+		setSourceObject(new ExternalInvoiceDTO());
+		getSourceObject().setTotal(12d);
+		getSourceObject().setType(Type.RW.name());
+		getSourceObject().setSymbol(documentNumeratorService.nextNumber(Type.RW.name()));
+
 		transportMeanList = transportMeanService.getAll();
 	}
 
-	private void setExampleData() {
-		UnitDTO unit = new UnitDTO();
-		unit.setName("kg");
+	@Override
+	public void save() {
+		//getSourceObject().setGoodList(invoiceGoodListController.getItems());
+		getSourceObject().setDocumentDate(DateUtil.getCurrentDate());
+		service.save(getSourceObject());
+	}
 
-		GoodDTO good = new GoodDTO();
-		good.setName("Komputer");
-		good.setPkwiu("PKWIU");
-		good.setPriceMagGross(BigDecimal.TEN);
-		good.setUnit(unit);
+	public void addGood() {
+		invoiceGoodListController.setVisible(true);
 
-		List<ExternalInvoiceGoodDTO> goodList = new ArrayList<>();
-		ExternalInvoiceGoodDTO invoiceGood = new ExternalInvoiceGoodDTO();
-		invoiceGood.setVersion(1L);
-		invoiceGood.setQuantity(BigDecimal.valueOf(3));
-		invoiceGood.setGood(good);
+		InternalInvoiceGoodDTO invoiceGood = new InternalInvoiceGoodDTO();
+		invoiceGood.setGood(goodListController.getSingleSelection());
+		invoiceGood.setQuantity(new BigDecimal(goodListController.getQuantity()));
+		invoiceGoodListController.getItems().add(invoiceGood);
+	}
 
-		ExternalInvoiceGoodDTO invoiceGood2 = new ExternalInvoiceGoodDTO();
-		invoiceGood2.setVersion(1L);
-		invoiceGood2.setQuantity(BigDecimal.valueOf(3));
-		invoiceGood2.setGood(good);
+	public void addContractor() {
+		contractorListController.setVisible(false);
+		setVisible(true);
+		getSourceObject().setContractor(contractorListController.getSingleSelection());
+	}
 
-		ExternalInvoiceDTO invoice = new ExternalInvoiceDTO();
-		invoice.setId(1l);
-		invoice.setDeliverPerson("Jan Krajewski");
-		invoice.setIssuePerson("Łukasz Gadomski");
-		invoice.setReceivePerson("Bartosz Milczarek");
-		invoice.setDocumentDate(new Date());
-		invoice.setSymbol("WZ01/03/13");
-		invoice.setAnnotation("Przykładowa faktura magazynowa");
-		invoice.setTotal(123d);
-		invoice.setVersion(1l);
+	public void selectContractor() {
+		contractorListController.setVisible(true);
+		setVisible(false);
+	}
 
-		invoice.setOrderSymbol("Order Symbol");
-		//TODO dosetowac reszte
-
-		invoiceGood.setInvoice(invoice);
-		invoiceGood2.setInvoice(invoice);
-
-		goodList.add(invoiceGood);
-		goodList.add(invoiceGood2);
-		invoice.setGoodList(goodList);
-		setSourceObject(invoice);
+	public String getCurrentDate() {
+		return DateUtil.getCurrentDateValue();
 	}
 
 	public List<TransportMeanDTO> getTransportMeanList() {
@@ -98,17 +95,6 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 
 	public void setTransportMeanList(List<TransportMeanDTO> transportMeanList) {
 		this.transportMeanList = transportMeanList;
-	}
-
-	@Override
-	public void save() {
-		//getSourceObject().setDocumentDate(DateUtil.getCurrentDate());
-		//service.save(getSourceObject());
-	}
-
-	public void addGood() {
-		//invoiceGoodListController.setVisible(true);
-		//goodListController.setVisible(false);
 	}
 
 }

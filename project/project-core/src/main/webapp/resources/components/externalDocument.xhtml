@@ -5,7 +5,8 @@
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">>
 
 	<composite:interface>
 		<composite:attribute name="controller"/>
@@ -34,18 +35,21 @@
 				<div class="small-box bg-blue">
 					<div class="inner">
 						<h3>Nabywca</h3>
-						<address>
-							<strong>Empty</strong><br/>
-							Empty<br /> 
-							Empty<br /> 
-							Empty<br /> 
-							Empty
-						</address>
+						<c:if test="#{not empty cc.attrs.controller.sourceObject.contractor}" >
+							<address>
+								<strong>#{cc.attrs.controller.sourceObject.contractor.name}</strong><br/>
+								#{cc.attrs.controller.sourceObject.contractor.adress}<br />
+								#{cc.attrs.controller.sourceObject.contractor.postalCode.city},
+								#{cc.attrs.controller.sourceObject.contractor.postalCode.code}<br />
+								NIP: #{cc.attrs.controller.sourceObject.contractor.nip}<br />
+								Email: #{cc.attrs.controller.sourceObject.contractor.email}
+							</address>
+						</c:if>
 					</div>
 					<div class="icon">
-						<h:commandLink>
+						<p:commandLink action="#{cc.attrs.controller.selectContractor}" update="@form">
 							<i class="ion ion-person-add" />
-						</h:commandLink>
+						</p:commandLink>
 					</div>
 					<a href="#" class="small-box-footer"> More info 
 						<i class="fa fa-arrow-circle-right" />

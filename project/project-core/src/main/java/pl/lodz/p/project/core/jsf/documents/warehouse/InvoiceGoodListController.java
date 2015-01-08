@@ -15,8 +15,6 @@ import javax.inject.Named;
 @ViewScoped
 public class InvoiceGoodListController extends EditListController<InternalInvoiceGoodDTO> {
 
-    private boolean inAddState = false;
-
     @PostConstruct
     private void init() { }
 

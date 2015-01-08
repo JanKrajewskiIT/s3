@@ -1,5 +1,7 @@
 package pl.lodz.p.project.core.jsf.base;
 
+import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,6 +17,14 @@ public abstract class EditListController<T extends Serializable> extends UIObjec
 	protected List<T> items = new ArrayList<T>();
 	protected List<T> selection = new ArrayList<T>();
 	protected T singleSelection;
+
+	public void remove(T object) { }
+
+	public void edit(Long id) { }
+
+	public void onSelect(T selected) {
+		setSingleSelection(selected);
+	}
 
 	public List<T> getItems() {
 		return items;
