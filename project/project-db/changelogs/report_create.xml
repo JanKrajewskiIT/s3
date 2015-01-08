@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="init_changeset_reports" author="krzysztof.zych">
+        <sql>
+            CREATE SEQUENCE FINANCIAL_REPORTS_SEQ
+            START WITH 1
+            INCREMENT BY 1
+            NO MINVALUE
+            NO MAXVALUE
+            CACHE 1;
+        </sql>
+        <sql>
+            CREATE TABLE FINANCIAL_REPORTS (
+            FINANCIAL_REPORT_ID BIGINT DEFAULT NEXTVAL('FINANCIAL_REPORTS_SEQ'::REGCLASS) NOT NULL,
+            REPORT_DATE DATE NOT NULL,
+            REPORT_START_DATE DATE NOT NULL,
+            REPORT_END_DATE DATE NOT NULL,
+            NUMBER_OF_SALES BIGINT NOT NULL,
+            AVERAGE_SALE_AMOUNT NUMERIC(10,2) NOT NULL,
+            TOTAL_SALES_AMOUNT NUMERIC(10,2) NOT NULL,
+            IS_ACTIVE BOOLEAN DEFAULT TRUE NOT NULL,
+            VERSION BIGINT DEFAULT (1)::BIGINT NOT NULL
+            );
+        </sql>
+		<sql>
+			ALTER TABLE ONLY FINANCIAL_REPORTS ADD CONSTRAINT FINANCIAL_REPORTS_PK PRIMARY KEY (FINANCIAL_REPORT_ID);
+		</sql>
+	</changeSet>
+</databaseChangeLog>
