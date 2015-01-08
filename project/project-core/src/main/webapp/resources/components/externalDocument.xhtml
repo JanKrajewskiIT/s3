@@ -5,10 +5,10 @@
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:cc="http://java.sun.com/jsf/composite/components">
+	xmlns:p="http://primefaces.org/ui">
 
 	<composite:interface>
+		<composite:attribute name="controller"/>
 	</composite:interface>
 
 	<composite:implementation>
@@ -54,15 +54,15 @@
 			</div>
 			<div class="col-sm-4 invoice-col">
 				<label>Numer zamówienia</label>
-				<p:inputText styleClass="form-control" />
+				<p:inputText styleClass="form-control"
+						value="#{cc.attrs.controller.sourceObject.orderSymbol}"/>
 	
 				<label>Środek transportu</label>                                                    
-				<h:selectOneMenu styleClass="form-control">  
-	            	<f:selectItems /> 
-	            </h:selectOneMenu> 
+				<h:selectOneMenu styleClass="form-control">
+	            	<f:selectItems itemValue="#{transportMean.id}" itemLabel="#{transportMean.name}"
+								   var="transportMean" value="#{cc.attrs.controller.transportMeanList}"/>
+	            </h:selectOneMenu>
 			</div>
 		</div>
-		<p:spacer style="width: 10px" />
-		<cc:internalDocument />
 	</composite:implementation>
 </ui:composition>

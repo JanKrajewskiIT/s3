@@ -27,6 +27,12 @@ public abstract class WarehouseInvoice extends BaseEntity<Long> {
     @Column(name = "symbol")
 	private String symbol;
 
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 3)
+	@Column(name = "type")
+	private String type;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "document_date")
@@ -54,7 +60,11 @@ public abstract class WarehouseInvoice extends BaseEntity<Long> {
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "deliver_person")
-	private String deliverPerson;	
+	private String deliverPerson;
+
+	@Basic(optional = false)
+	@Column(name = "annotation")
+	private String annotation;
 	
 	public String getSymbol() {
 		return symbol;
@@ -62,6 +72,14 @@ public abstract class WarehouseInvoice extends BaseEntity<Long> {
 
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Date getDocumentDate() {
@@ -103,5 +121,13 @@ public abstract class WarehouseInvoice extends BaseEntity<Long> {
 	public void setDeliverPerson(String deliverPerson) {
 		this.deliverPerson = deliverPerson;
 	}
-	
+
+	public String getAnnotation() {
+		return annotation;
+	}
+
+	public void setAnnotation(String annotation) {
+		this.annotation = annotation;
+	}
+
 }

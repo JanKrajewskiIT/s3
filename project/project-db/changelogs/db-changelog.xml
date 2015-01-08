@@ -18,4 +18,6 @@
 	<include file="changelogs/document_create.xml" />
 	<include file="changelogs/document_insert.xml" />
 
+	<include file="changelogs/report_create.xml" />
+
 </databaseChangeLog>

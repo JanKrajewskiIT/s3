@@ -31,5 +31,10 @@ public class ExternalInvoiceServiceImpl extends AbstractService<ExternalInvoice,
     public List<ExternalInvoiceDTO> getAll() {
     	return super.getAll();
     }
-    
+
+    @RolesAllowed(ACCESS_LEVEL)
+    @Override
+    public void save(ExternalInvoiceDTO invoice) {
+        super.save(invoice);
+    }
 }

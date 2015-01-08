@@ -13,5 +13,7 @@ public interface ExternalInvoiceService {
 	ExternalInvoiceDTO getOneById(Long id);
 
     List<ExternalInvoiceDTO> getAll();
+
+    void save(ExternalInvoiceDTO invoice);
     
 }

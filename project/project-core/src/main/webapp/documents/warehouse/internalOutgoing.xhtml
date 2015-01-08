@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:cc="http://java.sun.com/jsf/composite/components">
+	xmlns:cc="http://java.sun.com/jsf/composite/components"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 	<h:body>
 		<ui:composition template="../../layout/main-template.xhtml">
@@ -26,21 +27,29 @@
 								<div class="box">
 									<div class="box-header">
 										<h3 class="page-header col-xs-12">
-											Przyjęcie wewnętrzne (PW)
-											<small class="pull-right">Data: 2/10/2014</small>
+											Przyjęcie wewnętrzne (PW) : #{internalInvoiceController.sourceObject.symbol}
+											<small class="pull-right">Data: #{internalInvoiceController.currentDate}</small>
 										</h3>
 									</div>
 									<div class="box-body">
 										<h:form>
-											<cc:internalDocument />
-											<p:spacer style="height : 10px"/>
-											<cc:buttonBox />
+											<ui:param name="visible" value="#{invoiceGoodListController.visible}" />
+											<p:panel id="dupa" visible="#{visible}" styleClass="ui-panel-content">
+												<cc:invoiceGoodList controller="#{invoiceGoodListController}" />
+												<p:spacer style="height : 10px"/>
+												<cc:internalDocument controller="#{internalInvoiceController}" />
+												<p:spacer style="height : 10px"/>
+												<cc:buttonBox controller="#{internalInvoiceController}"/>
+											</p:panel>
+											<p:panel visible="#{not visible}">
+												<cc:chooseGoodList controller="#{goodListController}" action="#{internalInvoiceController.addGood()}"/>
+											</p:panel>
 										</h:form>
 									</div>
 								</div>
 							</div>
 						</div>
-					</section> 
+					</section>
 				</aside>
 			</ui:define>
 		</ui:composition>

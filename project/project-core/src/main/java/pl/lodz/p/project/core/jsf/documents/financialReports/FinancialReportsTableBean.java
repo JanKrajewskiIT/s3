@@ -42,7 +42,7 @@ public class FinancialReportsTableBean {
     }
 
 
-    public void setReports(List<FinancialReportDTO> invoices) {
+    public void setReports(List<FinancialReportDTO> reports) {
         this.reports = reports;
     }
 }

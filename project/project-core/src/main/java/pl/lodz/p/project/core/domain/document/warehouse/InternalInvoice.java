@@ -9,7 +9,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "internal_invoice")
+@Table(name = "internal_invoices")
 public class InternalInvoice extends WarehouseInvoice { 
 
 	private static final long serialVersionUID = 6038834702678528570L;

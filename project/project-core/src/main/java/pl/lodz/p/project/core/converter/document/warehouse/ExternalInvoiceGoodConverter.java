@@ -8,7 +8,7 @@ import pl.lodz.p.project.core.converter.Converter;
 import pl.lodz.p.project.core.converter.good.GoodConverter;
 import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoice;
 import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoiceGood;
-import pl.lodz.p.project.core.domain.document.warehouse.InvoiceGoodKey;
+import pl.lodz.p.project.core.domain.document.base.InvoiceGoodKey;
 import pl.lodz.p.project.core.domain.good.Good;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;

@@ -2,6 +2,8 @@ package pl.lodz.p.project.core.dto.document.warehouse;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.document.TransportMeanDTO;
 
@@ -15,13 +17,16 @@ public class ExternalInvoiceDTO implements Serializable, Comparable<ExternalInvo
 	private static final long serialVersionUID = 5643355468874031693L;
 
 	private Long id;
-	private Long version;	
+	private Long version = 1L;
 	private String symbol;
+	private String type;
 	private Date documentDate;
 	private Double total;	
 	private String issuePerson;
 	private String receivePerson;
 	private String deliverPerson;
+	private String annotation;
+	private List<ExternalInvoiceGoodDTO> goodList;
 	
     private ContractorDTO contractor;
     private TransportMeanDTO transportMean;
@@ -49,6 +54,14 @@ public class ExternalInvoiceDTO implements Serializable, Comparable<ExternalInvo
 
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Date getDocumentDate() {
@@ -89,6 +102,22 @@ public class ExternalInvoiceDTO implements Serializable, Comparable<ExternalInvo
 
 	public void setDeliverPerson(String deliverPerson) {
 		this.deliverPerson = deliverPerson;
+	}
+
+	public String getAnnotation() {
+		return annotation;
+	}
+
+	public void setAnnotation(String annotation) {
+		this.annotation = annotation;
+	}
+
+	public List<ExternalInvoiceGoodDTO> getGoodList() {
+		return goodList;
+	}
+
+	public void setGoodList(List<ExternalInvoiceGoodDTO> goodList) {
+		this.goodList = goodList;
 	}
 
 	public ContractorDTO getContractor() {

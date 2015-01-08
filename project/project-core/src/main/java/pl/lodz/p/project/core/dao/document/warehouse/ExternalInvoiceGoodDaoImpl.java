@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.project.core.dao.AbstractCrudDao;
 import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoice;
 import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoiceGood;
-import pl.lodz.p.project.core.domain.document.warehouse.InvoiceGoodKey;
+import pl.lodz.p.project.core.domain.document.base.InvoiceGoodKey;
 
 /**
  * 

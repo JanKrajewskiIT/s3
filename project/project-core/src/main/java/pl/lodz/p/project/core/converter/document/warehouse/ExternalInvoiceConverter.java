@@ -38,11 +38,13 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		entity.setId(objectDTO.getId());
 		entity.setVersion(objectDTO.getVersion());
 		entity.setSymbol(objectDTO.getSymbol());
+		entity.setType(objectDTO.getType());
 		entity.setTotal(objectDTO.getTotal());
 		entity.setDocumentDate(objectDTO.getDocumentDate());
 		entity.setDeliverPerson(objectDTO.getDeliverPerson());
 		entity.setIssuePerson(objectDTO.getIssuePerson());
 		entity.setReceivePerson(objectDTO.getReceivePerson());
+		entity.setAnnotation(objectDTO.getAnnotation());
 		entity.setOrderSymbol(objectDTO.getOrderSymbol());		
 		entity.setContractor(contractor);
 		entity.setTransportMean(transportMean);
@@ -58,11 +60,13 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		objectDTO.setId(entity.getId());
 		objectDTO.setVersion(entity.getVersion());
 		objectDTO.setSymbol(entity.getSymbol());
+		objectDTO.setType(entity.getType());
 		objectDTO.setTotal(entity.getTotal());
 		objectDTO.setDocumentDate(entity.getDocumentDate());
 		objectDTO.setDeliverPerson(entity.getDeliverPerson());
 		objectDTO.setIssuePerson(entity.getIssuePerson());
 		objectDTO.setReceivePerson(entity.getReceivePerson());
+		objectDTO.setAnnotation(entity.getAnnotation());
 		objectDTO.setOrderSymbol(entity.getOrderSymbol());
 		objectDTO.setContractor(contractor);
 		objectDTO.setTransportMean(transportMean);
