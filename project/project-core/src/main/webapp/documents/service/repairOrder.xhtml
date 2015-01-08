@@ -1,74 +1,120 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:cc="http://java.sun.com/jsf/composite/components">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns="http://www.w3.org/1999/xhtml">
 
-	<h:body>
-		<ui:composition template="../../layout/main-template.xhtml">
-			<ui:define name="content">
-				<aside class="right-side"> 
-					<section class="content-header">
-						<ol class="breadcrumb">
-							<li><a href="#"><i class="fa fa-dashboard"></i>Kokpit</a></li>
-							<li><a href="#">Dokumenty serwisowe</a></li>
-							<li class="active">Zgłoszenie serwisowe</li>
-						</ol>
-					</section> 
-					
-					<section class="content">
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="box">
-									<div class="box-header">
-										<h3 class="page-header col-xs-12">
-											Zgłoszenie serwisowe (SRO) : SRO/15/01/2015
-											<small class="pull-right">Data: 5/05/2015</small>
-										</h3>
-									</div>
-									<div class="box-body">
-										<h:form>
-											<div class="row">
-												<div class="col-sm-4">
-													<label>Symbol</label>
-													<p:inputText styleClass="form-control" value="#{serviceRepairOrderTemplateBean.document.symbol}" />
-												</div>												
-												<div class="col-sm-4">
-													<label>Status</label>
-													<div><h4><span class="label label-info"><h:outputText value="#{serviceRepairOrderTemplateBean.document.state.label}" /></span></h4></div>
-												</div>
-												<div class="col-sm-4">
-													<label for="creationDate">Data dokumentu</label>
-													<p:inputText value="#{serviceRepairOrderTemplateBean.document.creationDate}" styleClass="form-control">
-														<f:convertDateTime pattern="dd-MM-yyyy" />
-													</p:inputText>
-												</div>
-												
-											</div>
-											<div class="row">
-												<div class="col-sm-12">
-													<label>Nazwa sprzętu <em>(typ, producent, model)</em></label>
-													<p:inputText styleClass="form-control" value="#{serviceRepairOrderTemplateBean.document.equipentInfo}" />
-												</div>	
-											</div>
-											<p:spacer style="height: 10px"/>
-											<div class="row">
-												<div class="col-xs-12">
-													<p:commandButton value="Zapisz" styleClass="btn btn-primary btn-lg pull-right"/>
-													<p:commandButton update="@(form)" action="#{serviceRepairOrderTemplateBean.clear()}" value="Wyczyść" styleClass="btn btn-primary btn-lg pull-right" style="margin-right:  10px" ajax="true"/>
-												</div>
-											</div>
-										</h:form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</section> 
-				</aside>
-			</ui:define>
-		</ui:composition>
-	</h:body>
+
+<h:body>
+
+    <ui:composition template="../../layout/main-template.xhtml">
+        <ui:define name="content">
+            <aside class="right-side">
+                <section class="content-header">
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i>Kokpit</a></li>
+                        <li><a href="#">Dokumenty serwisowe</a></li>
+                        <li class="active">Zgłoszenie serwisowe</li>
+                    </ol>
+                </section>
+
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="page-header col-xs-12">
+                                        Zgłoszenie serwisowe: <h:outputText
+                                            value="#{serviceRepairOrderTemplateBean.document.symbol}"/>
+                                        <small class="pull-right">Data: <h:outputText
+                                                value="#{serviceRepairOrderTemplateBean.document.creationDate}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                        </small>
+                                    </h3>
+                                </div>
+                                <div class="box-body">
+                                    <h:form>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="symbol">Symbol</label>
+                                                <p:inputText id="symbol" styleClass="form-control"
+                                                             value="#{serviceRepairOrderTemplateBean.document.symbol}"/>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label>Status</label>
+
+                                                <div>
+                                                    <span class="label label-info font14"><h:outputText
+                                                            value="#{serviceRepairOrderTemplateBean.document.state.label}"/></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label for="creationDate">Data dokumentu</label>
+                                                <p:inputText id="creationDate"
+                                                             value="#{serviceRepairOrderTemplateBean.document.creationDate}"
+                                                             styleClass="form-control">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                </p:inputText>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label>Nazwa sprzętu <em>(typ, producent, model)</em></label>
+                                                <p:inputText styleClass="form-control"
+                                                             value="#{serviceRepairOrderTemplateBean.document.equipentInfo}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="symbol">Gwarancja</label>
+                                                <h:selectBooleanCheckbox
+                                                        value="#{serviceRepairOrderTemplateBean.document.guarantee}"
+                                                        styleClass="form-control"/>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label for="guaranteeNo">Nr karty gwarancyjnej</label>
+                                                <p:inputText id="guaranteeNo" styleClass="form-control"
+                                                             value="#{serviceRepairOrderTemplateBean.document.guaranteeNo}"/>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label for="saleDocumentNo">Potwierdzenie zakupu</label>
+                                                <p:inputText id="saleDocumentNo" styleClass="form-control"
+                                                             value="#{serviceRepairOrderTemplateBean.document.saleDocumentNo}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label for="description">Opis usterki</label>
+                                                <p:inputTextarea id="description" styleClass="form-control"
+                                                                 value="#{serviceRepairOrderTemplateBean.document.description}"/>
+                                            </div>
+                                        </div>
+                                        <p:spacer style="height: 10px"/>
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <p:commandButton value="Zapisz"
+                                                                 styleClass="btn btn-primary btn-lg pull-right"/>
+                                                <p:commandButton update="@(form)"
+                                                                 action="#{serviceRepairOrderTemplateBean.clear()}"
+                                                                 value="Wyczyść"
+                                                                 styleClass="btn btn-primary btn-lg pull-right"
+                                                                 style="margin-right:  10px" ajax="true"/>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>
