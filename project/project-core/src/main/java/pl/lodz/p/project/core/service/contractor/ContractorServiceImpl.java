@@ -55,7 +55,7 @@ public class ContractorServiceImpl extends AbstractService<Contractor, Contracto
     @RolesAllowed(ACCESS_LEVEL)
     @Override
     public Page<ContractorDTO> search(String searchQuery, PageRequest pageRequest) {
-        Page<Contractor> pageGoods = ((ContractorDao) dao).search(searchQuery, pageRequest);       
+        Page<Contractor> pageGoods = ((ContractorDao) dao).search(searchQuery, pageRequest);
         List<ContractorDTO> contractorList = Lists.transform(pageGoods.getContent(), transformer);
         return new PageImpl<>(contractorList, pageRequest, pageGoods.getTotalElements());
     }

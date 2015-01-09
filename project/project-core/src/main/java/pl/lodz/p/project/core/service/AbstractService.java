@@ -10,6 +10,8 @@ import pl.lodz.p.project.core.dao.CrudDao;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import pl.lodz.p.project.core.dao.pagingandsearching.Page;
+import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 
 /**
  * 
@@ -79,7 +81,11 @@ public abstract class AbstractService<E extends Persistable<Long>, D> {
     public void deleteAll() {
     	dao.deleteAll();
     }
-    
+
+    public Page<D> search(String searchQuery, PageRequest pageRequest) {
+        return (Page<D>) new Object();
+    }
+
     private class Transformer implements Function<E, D> {
     	
     	@Override

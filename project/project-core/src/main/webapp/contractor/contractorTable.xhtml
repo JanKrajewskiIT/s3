@@ -3,17 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:cc="http://java.sun.com/jsf/composite/components">
 
     <h:body>
-        <ui:composition template="../layout/main-template.xhtml">            
+        <ui:composition template="../layout/main-template.xhtml">
             <ui:define name="content">
                 <aside class="right-side">
                     <section class="content-header">
                         <ol class="breadcrumb">
-                            <li><a href="#"><i class="fa fa-dashboard"></i> Kokpit</a></li>
-                            <li><a href="#">Klienci</a></li>
+                            <li><a href="#"><i class="fa fa-dashboard"></i>Kokpit</a></li>
+                            <li><a href="#">Kontrahenci</a></li>
                             <li class="active">Wyświetl</li>
                         </ol>
                     </section>
@@ -22,96 +21,23 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="box">
-                                    <h:form id="table-form"> 
-                                        <div class="box-header">
-                                            <h3 class="box-title">Kontrahenci</h3>
-                                            <div class="box-tools">
-                                                <div class="input-group">
-                                                    <p:inputText id="searchQuery" type="text" value="#{contractorTableBean.searchQuery}" styleClass="form-control input-sm pull-right" placeholder="Szukaj" style="width: 300px;">
-                                                        <p:ajax event="blur" listener="#{contractorTableBean.search()}" update=":table-form" />
-                                                    </p:inputText>
-                                                    <div class="input-group-btn">
-                                                        <p:commandLink styleClass="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i>
-                                                            <p:ajax listener="#{contractorTableBean.search()}" update=":table-form" />
-                                                        </p:commandLink>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="box-body table-responsive"> 
-
-                                            <p:dataTable id="contractorTableId" var="contractor" value="#{contractorTableBean.contractorList}"  tableStyleClass="table table-bordered dataTable">  
-                                                <p:column headerText="Symbol" sortBy="symbol">
-                                                    <h:outputText value="#{contractor.symbol}" />  
-                                                </p:column>  
-
-                                                <p:column headerText="Nazwa" sortBy="name"  style="width: 300px">
-                                                    <h:outputText value="#{contractor.name}" />  
-                                                </p:column>  
-
-                                                <p:column headerText="Grupa" sortBy="group.name">  
-                                                    <h:outputText value="#{contractor.group.name}"/>  
-                                                </p:column> 
-
-                                                <p:column headerText="Miasto" sortBy="city">  
-                                                    <h:outputText value="#{contractor.city}" />  
-                                                </p:column>  
-
-                                                <p:column headerText="Adres" sortBy="adress">  
-                                                    <h:outputText value="#{contractor.adress}" />  
-                                                </p:column>  
-
-                                                <p:column headerText="NIP" sortBy="nip">   
-                                                    <h:outputText value="#{contractor.nip}" />  
-                                                </p:column>  
-
-                                                <p:column headerText="Akcja" style="width: 165px">
-                                                    <p:commandLink style="margin-right: 10px;" styleClass="btn btn-success btn-xs" action="#{contractorTableBean.editContractor(contractor.id)}">
-                                                        <i class="glyphicon glyphicon-pencil"></i> Edytuj
-                                                    </p:commandLink>
-                                                    <p:commandLink styleClass="btn btn-danger btn-xs" update="contractorTableId" ajax="true" action="#{contractorTableBean.removeContractor(contractor)}">
-                                                        <i class="glyphicon glyphicon-minus"></i> Usuń
-                                                    </p:commandLink>
-                                                </p:column>   
-                                            </p:dataTable>  
-                                        </div>
-                                        <div class="box-footer clearfix">
-                                            <ul class="pagination pagination-sm no-margin pull-right">
-                                                <c:if test="#{contractorTableBean.page.hasPreviousPage()}">
-                                                    <li>
-                                                        <p:commandLink value="« Poprzednia">
-                                                            <p:ajax listener="#{contractorTableBean.prevPage()}" update=":table-form" />
-                                                        </p:commandLink>
-                                                    </li>
-                                                </c:if>
-                                                <c:forEach begin="1" step="1" end="#{contractorTableBean.page.totalPages}" varStatus="status">
-                                                    <!--<ui:param name="activeClass" value="" />
-                                                    <c:if test="#{contractorTableBean.page.number == (status.index-1)}">
-                                                        <ui:param name="activeClass" value="active" />
-                                                    </c:if>-->
-                                                    <li class="#{activeClass}">
-                                                        <p:commandLink value="#{status.index}">
-                                                            <p:ajax listener="#{contractorTableBean.goToPage(status.index-1)}" update=":table-form" />
-                                                        </p:commandLink>
-                                                    </li>
-                                                </c:forEach>
-                                                <c:if test="#{contractorTableBean.page.hasNextPage()}">
-                                                    <li>
-                                                        <p:commandLink value="Następna »">
-                                                            <p:ajax listener="#{contractorTableBean.nextPage()}" update=":table-form" />
-                                                        </p:commandLink>
-                                                    </li>
-                                                </c:if>
-                                            </ul>
-                                        </div>
-                                    </h:form>
+                                    <div class="box-header">
+                                        <h3 class="page-header col-xs-12">
+                                            Kontrahenci
+                                            <small class="pull-right">Data: 02/02/2013</small>
+                                        </h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <h:form>
+                                            <cc:contractorList controller="#{contractorListController}" editable="true"/>
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
                 </aside>
-            </ui:define>           
-        </ui:composition>        
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>

@@ -2,16 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:cc="http://java.sun.com/jsf/composite/components">
+
     <h:body>
-        <ui:param name="root" value="#{request.contextPath}" />
         <ui:composition template="../layout/main-template.xhtml">
             <ui:define name="content">
-                <!-- Right side column. Contains the navbar and content of the page -->
                 <aside class="right-side">
-                    <!-- Content Header (Page header) -->
                     <section class="content-header">
                         <ol class="breadcrumb">
                             <li><a href="#"><i class="fa fa-dashboard"></i> Kokpit</a></li>
@@ -20,150 +16,26 @@
                         </ol>
                     </section>
 
-                    <!-- Main content -->
                     <section class="content">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="box">
-                                    <h:form id="table-form">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Produkty</h3>
-                                            <div class="box-tools">
-                                                <div class="input-group">
-                                                    <p:inputText id="searchQuery" type="text" value="#{goodsTableBean.searchQuery}" styleClass="form-control input-sm pull-right" placeholder="Szukaj" style="width: 300px;">
-                                                        <p:ajax event="blur" listener="#{goodsTableBean.search()}" update=":table-form" />
-                                                    </p:inputText>
-                                                    <div class="input-group-btn">
-                                                        <p:commandLink styleClass="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i>
-                                                            <p:ajax listener="#{goodsTableBean.search()}" update=":table-form" />
-                                                        </p:commandLink>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body table-responsive">
-
-                                            <p:dataTable id="goodTableId" var="good" tableStyleClass="table table-bordered dataTable" value="#{goodsTableBean.goodsList}">
-                                                <p:column headerText="Symbol" sortBy="symbol" >
-                                                    <h:outputText value="#{good.symbol}" />
-                                                </p:column>
-
-                                                <p:column headerText="Nazwa" sortBy="name" style="max-width: 500px">
-                                                    <h:outputText value="#{good.name}" />
-                                                </p:column>
-                                                <p:column headerText="j.m" sortBy="unit.name">
-                                                    <h:outputText value="#{good.unit.name}" />
-                                                </p:column>
-
-                                                <p:column headerText="VAT" sortBy="tax.value" styleClass="text-right">
-                                                    <h:outputText value="#{good.tax.value}">
-                                                        <f:convertNumber type="number" groupingUsed="true" minFractionDigits="1" pattern="#0.00"/>
-                                                    </h:outputText>
-                                                    <h:outputText value="%" />
-                                                </p:column>
-
-                                                <p:column headerText="Grupa Towarowa" sortBy="goodGroup.name">
-                                                    <h:outputText value="#{good.goodGroup.name}" />
-                                                </p:column>
-
-                                                <p:column headerText="Cena A netto" sortBy="priceANet" styleClass="text-right">
-                                                    <h:outputText value="#{good.priceANet}">
-                                                        <f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00" />
-                                                    </h:outputText>
-                                                </p:column>
-
-                                                <p:column headerText="Cena A Brutto" sortBy="priceAGross" styleClass="text-right">
-                                                    <h:outputText value="#{good.priceAGross}">
-                                                        <f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00" />
-                                                    </h:outputText>
-                                                </p:column>
-
-                                                <p:column headerText="Akcja" style="width: 155px" styleClass="text-center">
-                                                    <p:commandLink style="margin-right: 10px;" styleClass="btn btn-success btn-xs" action="#{goodAddEditBean.editGood(good.id)}">
-                                                        <i class="glyphicon glyphicon-pencil"></i> Edytuj
-                                                    </p:commandLink>
-                                                    <p:commandLink styleClass="btn btn-danger btn-xs" update="goodTableId" ajax="true" action="#{goodsTableBean.removeGood(good)}">
-                                                        <i class="glyphicon glyphicon-minus"></i> Usuń
-                                                    </p:commandLink>
-                                                </p:column>
-                                            </p:dataTable>
-
-                                        </div><!-- /.box-body -->
-                                        <div class="box-footer clearfix">
-                                            <p:panel id="pagination-panel">
-                                                <ul class="pagination pagination-sm no-margin pull-right">
-                                                    <c:if test="#{goodsTableBean.page.hasPreviousPage()}">
-                                                        <li>
-                                                            <p:commandLink value="« Poprzednia">
-                                                                <p:ajax listener="#{goodsTableBean.prevPage()}" update=":table-form" />
-                                                            </p:commandLink>
-                                                        </li>
-                                                    </c:if>
-                                                    <c:forEach begin="1" step="1" end="#{goodsTableBean.page.totalPages}" varStatus="status">
-                                                        <!--<ui:param name="activeClass" value="" />
-                                                        <c:if test="#{goodsTableBean.page.number == (status.index-1)}">
-                                                            <ui:param name="activeClass" value="active" />
-                                                        </c:if>-->
-                                                        <li class="#{activeClass}">
-                                                            <p:commandLink value="#{status.index}">
-                                                                <p:ajax listener="#{goodsTableBean.goToPage(status.index-1)}" update=":table-form" />
-                                                            </p:commandLink>
-                                                        </li>
-                                                    </c:forEach>
-                                                    <c:if test="#{goodsTableBean.page.hasNextPage()}">
-                                                        <li>
-                                                            <p:commandLink value="Następna »">
-                                                                <p:ajax listener="#{goodsTableBean.nextPage()}" update=":table-form" />
-                                                            </p:commandLink>
-                                                        </li>
-                                                    </c:if>
-                                                </ul>
-                                            </p:panel>
-                                        </div>
-                                    </h:form>
-                                </div>
-                                <div class="box">
                                     <div class="box-header">
-                                        <h3 class="box-title">Możliwość sprowadzenia z innej placówki</h3>
-                                    </div><!-- /.box-header -->
-                                    <div class="box-body table-responsive">
+                                        <h3 class="page-header col-xs-12">
+                                            Produkty
+                                            <small class="pull-right">Data: 02/02/2013</small>
+                                        </h3>
+                                    </div>
+                                    <div class="box-body">
                                         <h:form>
-                                            <p:dataTable id="availableGoodsTable" var="good" tableStyleClass="table table-bordered dataTable" value="#{availableGoodsBean.goodList}">
-                                                <p:column headerText="Symbol" sortBy="symbol" >
-                                                    <h:outputText value="#{good.symbol}" />
-                                                </p:column>
-
-                                                <p:column headerText="Nazwa" sortBy="name" style="max-width: 500px">
-                                                    <h:outputText value="#{good.name}" />
-                                                </p:column>
-                                                <p:column headerText="j.m" sortBy="unit.name">
-                                                    <h:outputText value="#{good.unit.name}" />
-                                                </p:column>
-
-                                                <p:column headerText="VAT" sortBy="tax.value" styleClass="text-right">
-                                                    <h:outputText value="#{good.tax.value}%" />
-                                                </p:column>
-
-                                                <p:column headerText="Grupa Towarowa" sortBy="goodGroup.name">
-                                                    <h:outputText value="#{good.goodGroup.name}" />
-                                                </p:column>
-
-                                                <p:column headerText="Cena A netto" sortBy="priceANet" styleClass="text-right">
-                                                    <h:outputText value="#{good.priceANet}" />
-                                                </p:column>
-
-                                                <p:column headerText="Cena A Brutto" sortBy="priceAGross" styleClass="text-right">
-                                                    <h:outputText value="#{good.priceAGross}" />
-                                                </p:column>
-                                            </p:dataTable>
+                                            <cc:goodList controller="#{goodListController}" editable="true"/>
                                         </h:form>
                                     </div>
-                                </div><!-- /.box -->
+                                </div>
                             </div>
                         </div>
-                    </section><!-- /.content -->
-                </aside><!-- /.right-side -->
+                    </section>
+                </aside>
             </ui:define>
         </ui:composition>
     </h:body>

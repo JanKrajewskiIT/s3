@@ -4,7 +4,8 @@
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:cc="http://java.sun.com/jsf/composite/components">
 
 	<composite:interface>
 		<composite:attribute name="controller" />
@@ -13,55 +14,63 @@
 
 	<composite:implementation>
 		<div class="row">
-			<div class="col-xs-12 table-responsive">
-				<p:dataTable tableStyleClass="table table-bordered table-hover"
-							 var="good" value="#{cc.attrs.controller.items}"
-							 selectionMode="single" selection="#{cc.attrs.controller.singleSelection}" rowKey="#{good.id}"
-							 id="goodsTable">
+			<div class="col-xs-12">
+				<div class="box-header">
+					<cc:browser controller="#{cc.attrs.controller}" update="@form:#{cc.clientId}:table-form" />
+				</div>
+				<div class="box-body table-responsive">
+					<p:dataTable tableStyleClass="table table-bordered table-hover"
+								 var="good" value="#{cc.attrs.controller.items}"
+								 selectionMode="single" selection="#{cc.attrs.controller.singleSelection}"
+								 rowKey="#{good.id}" id="table-form">
 
-					<p:ajax event="rowSelect" listener="#{cc.attrs.controller.onSelect(good)}" />
+						<p:ajax event="rowSelect" listener="#{cc.attrs.controller.onSelect(good)}" />
 
-					<p:column headerText="Symbol" sortBy="symbol" style="width: 10%;" >
-						<p:outputLabel value="#{good.symbol}" />
-					</p:column>
+						<p:column headerText="Symbol" sortBy="symbol">
+							<p:outputLabel value="#{good.symbol}" />
+						</p:column>
 
-					<p:column headerText="Nazwa asortymentu" sortBy="name"  style="width: 40%;">
-						<p:outputLabel value="#{good.name}"/>
-					</p:column>
+						<p:column headerText="Nazwa asortymentu" sortBy="name"  style="width: 300px;">
+							<p:outputLabel value="#{good.name}"/>
+						</p:column>
 
-					<p:column headerText="Grupa Towarowa" sortBy="group.name" style="width: 10%;">
-						<p:outputLabel value="#{good.group.name}" />
-					</p:column>
+						<p:column headerText="Grupa Towarowa" sortBy="group.name">
+							<p:outputLabel value="#{good.group.name}" />
+						</p:column>
 
-					<p:column headerText="J.m." sortBy="unit.name" style="width: 10%;" >
-						<p:outputLabel value="#{good.unit.name}" />
-					</p:column>
+						<p:column headerText="J.m." sortBy="unit.name">
+							<p:outputLabel value="#{good.unit.name}" />
+						</p:column>
 
-					<p:column headerText="VAT" sortBy="tax.value" style="width: 10%;">
-						<p:outputLabel value="#{good.tax.value}" >
-							<f:convertNumber type="number" groupingUsed="true" minFractionDigits="1" pattern="#0.00"/>
-						</p:outputLabel>
-						<p:outputLabel value="%" />
-					</p:column>
+						<p:column headerText="VAT" sortBy="tax.value">
+							<p:outputLabel value="#{good.tax.value}" >
+								<f:convertNumber type="number" groupingUsed="true" minFractionDigits="1" pattern="#0.00"/>
+							</p:outputLabel>
+							<p:outputLabel value="%" />
+						</p:column>
 
-					<p:column headerText="Cena A Brutto" sortBy="priceAGross" style="width: 10%;" >
-						<p:outputLabel value="#{good.priceAGross}" >
-							<f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00" />
-						</p:outputLabel>
-					</p:column>
+						<p:column headerText="Cena A Brutto" sortBy="priceAGross">
+							<p:outputLabel value="#{good.priceAGross}" >
+								<f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00" />
+							</p:outputLabel>
+						</p:column>
 
-					<p:column headerText="Akcja" rendered="#{cc.attrs.editable}" style="width: 10%" >
-						<p:commandLink styleClass="btn btn-success btn-xs"
-									   action="#{cc.attrs.controller.edit(good.id)}">
-							<i class="glyphicon glyphicon-pencil"></i> Edytuj
-						</p:commandLink>
-						<p:spacer style="width: 10px" />
-						<p:commandLink styleClass="btn btn-danger btn-xs" update="goodsTable"
-									   action="#{cc.attrs.controller.remove(good)}">
-							<i class="glyphicon glyphicon-minus"></i> Usuń
-						</p:commandLink>
-					</p:column>
-				</p:dataTable>
+						<p:column headerText="Akcja" rendered="#{cc.attrs.editable}" style="width: 140px">
+							<p:commandLink styleClass="btn btn-success btn-xs"
+										   action="#{cc.attrs.controller.edit(good.id)}">
+								<i class="glyphicon glyphicon-pencil"></i> Edytuj
+							</p:commandLink>
+							<p:spacer style="width: 10px" />
+							<p:commandLink styleClass="btn btn-danger btn-xs" update="table-form"
+										   action="#{cc.attrs.controller.remove(good)}">
+								<i class="glyphicon glyphicon-minus"></i> Usuń
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</div>
+				<div class="box-footer clearfix">
+					<cc:pager controller="#{cc.attrs.controller}" update="@form:#{cc.clientId}:table-form" />
+				</div>
 			</div>
 		</div>
 	</composite:implementation>

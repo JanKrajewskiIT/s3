@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+	<composite:interface>
+		<composite:attribute name="controller"/>
+		<composite:attribute name="update" default=":table-form"/>
+	</composite:interface>
+
+	<composite:implementation>
+			<ul class="pagination pagination-sm no-margin pull-right">
+				<c:if test="#{cc.attrs.controller.page.hasPreviousPage()}">
+					<li>
+						<p:commandLink value="« Poprzednia">
+							<p:ajax listener="#{cc.attrs.controller.prevPage()}" update="#{cc.attrs.update}" />
+						</p:commandLink>
+					</li>
+				</c:if>
+				<c:forEach begin="1" step="1" end="#{cc.attrs.controller.page.totalPages}" varStatus="status">
+					<!--<ui:param name="activeClass" value="" />
+                    <c:if test="#{contractorTableBean.page.number == (status.index-1)}">
+                        <ui:param name="activeClass" value="active" />
+                    </c:if>-->
+					<li class="#{activeClass}">
+						<p:commandLink value="#{status.index}">
+							<p:ajax listener="#{cc.attrs.controller.goToPage(status.index-1)}" update="#{cc.attrs.update}" />
+						</p:commandLink>
+					</li>
+				</c:forEach>
+				<c:if test="#{cc.attrs.controller.page.hasNextPage()}">
+					<li>
+						<p:commandLink value="Następna »">
+							<p:ajax listener="#{cc.attrs.controller.nextPage()}" update="#{cc.attrs.update}" />
+						</p:commandLink>
+					</li>
+				</c:if>
+			</ul>
+	</composite:implementation>
+</ui:composition>

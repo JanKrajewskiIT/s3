@@ -225,4 +225,7 @@ public abstract class AbstractPageableDao<T extends Persistable<ID>, ID extends 
 
         return order.isAscending() ? cb.asc(expression) : cb.desc(expression);
     }
+
+    public abstract Page<T> search(String searchQuery, PageRequest pageRequest);
+
 }
