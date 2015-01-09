@@ -63,6 +63,7 @@
                                                 <h:selectOneMenu id="unitSelectMenu"
                                                                  value="#{goodAddEditBean.good.unit.id}"
                                                                  styleClass="form-control">
+                                                    <f:selectItem itemLabel="---" itemValue="#{null}"/>
                                                     <f:selectItems value="#{goodAddEditBean.units}" var="unit"
                                                                    itemLabel="#{unit.name}" itemValue="#{unit.id}"/>
                                                 </h:selectOneMenu>
@@ -72,6 +73,7 @@
                                                 <h:selectOneMenu id="goodsGroupsSelectMenu"
                                                                  value="#{goodAddEditBean.good.group.id}"
                                                                  styleClass="form-control">
+                                                    <f:selectItem itemLabel="---" itemValue="#{null}"/>
                                                     <f:selectItems value="#{goodAddEditBean.goodsGroups}"
                                                                    var="group" itemLabel="#{group.name}"
                                                                    itemValue="#{group.id}"/>
@@ -82,6 +84,7 @@
                                                 <h:selectOneMenu id="taxesSelectMenu"
                                                                  value="#{goodAddEditBean.good.tax.id}"
                                                                  styleClass="form-control">
+                                                    <f:selectItem itemLabel="---" itemValue="#{null}"/>
                                                     <f:selectItems value="#{goodAddEditBean.taxes}" var="tax"
                                                                    itemLabel="#{tax.name}" itemValue="#{tax.id}"/>
                                                 </h:selectOneMenu>

@@ -73,7 +73,6 @@ public class GoodAddEditBean implements Serializable {
         GoodDTO good = new GoodDTO();
         good.setType(GoodType.GOOD);
         good.setTax(taxes.isEmpty() ? null : taxes.get(0));
-        good.setGroup(goodsGroups.isEmpty() ? null : goodsGroups.get(0));
         good.setUnit(units.isEmpty() ? null : units.get(0));
         return good;
     }
@@ -83,9 +82,9 @@ public class GoodAddEditBean implements Serializable {
     }
 
     public String saveGood() {
-        getGood().setUnit(unitService.getOneById(getGood().getUnit().getId()));
-        getGood().setGroup(goodsGroupsService.getOneById(getGood().getGroup().getId()));
-        getGood().setTax(taxService.getOneById(getGood().getTax().getId()));
+        good.setUnit(unitService.getOneById(getGood().getUnit().getId()));
+        good.setGroup(goodsGroupsService.getOneById(getGood().getGroup().getId()));
+        good.setTax(taxService.getOneById(getGood().getTax().getId()));
 
         if (getGood().getId() != null) {
             //  TODO currently we dont need warehouses
