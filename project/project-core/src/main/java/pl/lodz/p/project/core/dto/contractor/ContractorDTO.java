@@ -1,12 +1,11 @@
 package pl.lodz.p.project.core.dto.contractor;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.google.common.collect.ComparisonChain;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  *

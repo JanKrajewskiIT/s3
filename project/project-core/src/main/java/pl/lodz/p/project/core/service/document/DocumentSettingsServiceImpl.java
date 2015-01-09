@@ -1,25 +1,23 @@
 package pl.lodz.p.project.core.service.document;
 
-import javax.annotation.security.RolesAllowed;
-import javax.interceptor.Interceptors;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
+import org.springframework.stereotype.Service;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 import pl.lodz.p.project.core.service.settings.SettingsPropertyKeys;
 import pl.lodz.p.project.core.service.settings.SettingsPropertyService;
 
+import javax.annotation.security.RolesAllowed;
+import javax.interceptor.Interceptors;
+
 /**
- *
  * @author Milczu, Janiu
  */
-@Component
+@Service
 @Interceptors({TrackerInterceptor.class})
 public class DocumentSettingsServiceImpl implements DocumentSettingsService {
 
-	private final static String ACCESS_LEVEL = "documentManagement";
-	
+    private final static String ACCESS_LEVEL = "documentManagement";
+
     @Autowired
     private SettingsPropertyService settingsPropertyManager;
 

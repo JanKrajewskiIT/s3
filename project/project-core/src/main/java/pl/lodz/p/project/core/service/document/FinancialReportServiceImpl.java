@@ -1,7 +1,7 @@
 package pl.lodz.p.project.core.service.document;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.lodz.p.project.core.dao.document.SaleDocumentDao;
 import pl.lodz.p.project.core.domain.document.FinancialReport;
 import pl.lodz.p.project.core.domain.document.SaleDocument;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-@Component
+@Service
 @Interceptors({TrackerInterceptor.class})
 public class FinancialReportServiceImpl extends AbstractService<FinancialReport, FinancialReportDTO> implements FinancialReportService {
 
@@ -47,9 +47,9 @@ public class FinancialReportServiceImpl extends AbstractService<FinancialReport,
     private void fillAdditionInformation(FinancialReportDTO financialReportDTO) {
         int numberOfSales = 0;
         BigDecimal totalSalesAmount = BigDecimal.ZERO;
-        List<SaleDocument> allSalesDocument =  saleDocumentDao.findAll();
+        List<SaleDocument> allSalesDocument = saleDocumentDao.findAll();
         for (SaleDocument saleDocument : allSalesDocument) {
-            if(saleDocument.getDocumentDate().before(financialReportDTO.getReportEndDate())
+            if (saleDocument.getDocumentDate().before(financialReportDTO.getReportEndDate())
                     && saleDocument.getDocumentDate().after(financialReportDTO.getReportStartDate())) {
                 numberOfSales++;
                 totalSalesAmount = totalSalesAmount.add(saleDocument.getPaidTotal());
@@ -57,7 +57,7 @@ public class FinancialReportServiceImpl extends AbstractService<FinancialReport,
         }
         financialReportDTO.setTotalSalesAmount(totalSalesAmount.doubleValue());
         financialReportDTO.setNumberOfSales(numberOfSales);
-        if(numberOfSales != 0) {
+        if (numberOfSales != 0) {
             financialReportDTO.setAverageSaleAmount(totalSalesAmount.divide(new BigDecimal(numberOfSales)).doubleValue());
         } else {
             financialReportDTO.setAverageSaleAmount(0.0);

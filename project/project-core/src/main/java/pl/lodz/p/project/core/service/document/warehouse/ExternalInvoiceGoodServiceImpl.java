@@ -1,33 +1,32 @@
 package pl.lodz.p.project.core.service.document.warehouse;
 
-import java.util.List;
-import javax.annotation.security.RolesAllowed;
-import javax.interceptor.Interceptors;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 
+import javax.annotation.security.RolesAllowed;
+import javax.interceptor.Interceptors;
+import java.util.List;
+
 /**
- * 
  * @author Jan Krajewski
- *
  */
-@Component
+@Service
 @Interceptors({TrackerInterceptor.class})
 public class ExternalInvoiceGoodServiceImpl implements ExternalInvoiceGoodService {
 
-	private final static String ACCESS_LEVEL = "documentManagement";
-	
+    private final static String ACCESS_LEVEL = "documentManagement";
+
     @RolesAllowed(ACCESS_LEVEL)
     @Override
     public ExternalInvoiceGoodDTO getOneById(Long id) {
-    	return null;
+        return null;
     }
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
     public List<ExternalInvoiceGoodDTO> getAll() {
-    	return null;
+        return null;
     }
-    
+
 }

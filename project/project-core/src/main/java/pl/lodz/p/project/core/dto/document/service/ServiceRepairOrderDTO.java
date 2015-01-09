@@ -11,6 +11,7 @@ public class ServiceRepairOrderDTO extends BaseServiceDocumentDTO {
     private String guaranteeNo;
     private String saleDocumentNo;
     private String description;
+
     public ServiceRepairOrderDTO() {
         super(ServiceDocumentType.REPAIR_ORDER);
     }

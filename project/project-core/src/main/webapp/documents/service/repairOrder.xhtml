@@ -94,10 +94,17 @@
                                                                  value="#{serviceRepairOrderTemplateBean.document.description}"/>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 col-sm-offset-8">
+                                                <label for="documentCreator">Wystawił</label>
+                                                <p:inputText id="documentCreator" styleClass="form-control"
+                                                             value="#{serviceRepairOrderTemplateBean.document.documentCreator.firstName} #{serviceRepairOrderTemplateBean.document.documentCreator.secondName}"/>
+                                            </div>
+                                        </div>
                                         <p:spacer style="height: 10px"/>
 
                                         <div class="row">
-                                            <div class="col-xs-12">
+                                            <div class="col-sm-12">
                                                 <p:commandButton value="Zapisz"
                                                                  styleClass="btn btn-primary btn-lg pull-right"/>
                                                 <p:commandButton update="@(form)"

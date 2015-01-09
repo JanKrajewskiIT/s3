@@ -1,58 +1,84 @@
 package pl.lodz.p.project.core.dto.document.service;
 
-import java.util.Date;
-
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 
-public class BaseServiceDocumentDTO implements ServiceDocumentDTO {
+import java.io.Serializable;
+import java.util.Date;
 
-	private String symbol;
-	private Date creationDate;
-	private UserDTO documentCreator;
-	private final ServiceDocumentType serviceDocumentType;
-	private ServiceDocumentState state;
-	
-	public BaseServiceDocumentDTO(ServiceDocumentType serviceDocumentType) {
-		this.serviceDocumentType = serviceDocumentType;
-	}
+public class BaseServiceDocumentDTO implements ServiceDocumentDTO, Serializable {
 
-	public String getSymbol() {
-		return symbol;
-	}
+    private final ServiceDocumentType serviceDocumentType;
+    private Long id;
+    private Long version = 1L;
+    private String symbol;
+    private Date creationDate;
+    private UserDTO documentCreator;
+    private ServiceDocumentState state;
+    private boolean active;
 
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
-	}
+    public BaseServiceDocumentDTO(ServiceDocumentType serviceDocumentType) {
+        this.serviceDocumentType = serviceDocumentType;
+    }
 
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    public String getSymbol() {
+        return symbol;
+    }
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
 
-	public UserDTO getDocumentCreator() {
-		return documentCreator;
-	}
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-	public void setDocumentCreator(UserDTO documentCreator) {
-		this.documentCreator = documentCreator;
-	}
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
-	public ServiceDocumentType getServiceDocumentType() {
-		return serviceDocumentType;
-	}
+    public UserDTO getDocumentCreator() {
+        return documentCreator;
+    }
 
-	public ServiceDocumentState getState() {
-		return state;
-	}
+    public void setDocumentCreator(UserDTO documentCreator) {
+        this.documentCreator = documentCreator;
+    }
 
-	public void setState(ServiceDocumentState state) {
-		this.state = state;
-	}
-	
-	
+    public ServiceDocumentType getServiceDocumentType() {
+        return serviceDocumentType;
+    }
+
+    public ServiceDocumentState getState() {
+        return state;
+    }
+
+    public void setState(ServiceDocumentState state) {
+        this.state = state;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 }

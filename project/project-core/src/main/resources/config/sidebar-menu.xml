@@ -2,98 +2,102 @@
 <menu>
     <menu-item name="Dashboard" styleClass="fa fa-dashboard" targetUrl="/">
         <activeDefinitions>
-            <activeNode requestPath="/" compare="EQUALS" />
-            <activeNode requestPath="/index.xhtml" compare="EQUALS" />
+            <activeNode requestPath="/" compare="EQUALS"/>
+            <activeNode requestPath="/index.xhtml" compare="EQUALS"/>
         </activeDefinitions>
     </menu-item>
     <menu-item name="Klienci" styleClass="fa fa-bar-chart-o" hasAnyRole="admin,user">
         <activeDefinitions>
-            <activeNode requestPath="/contractor" compare="STARTS_WITH" />
+            <activeNode requestPath="/contractor" compare="STARTS_WITH"/>
         </activeDefinitions>
         <menu-items>
-            <menu-item name="Wyświetl" targetUrl="/contractor/contractorTable.xhtml" />
-            <menu-item name="Dodaj" targetUrl="/contractor/contractorTemplate.xhtml" />
+            <menu-item name="Wyświetl" targetUrl="/contractor/contractorTable.xhtml"/>
+            <menu-item name="Dodaj" targetUrl="/contractor/contractorTemplate.xhtml"/>
         </menu-items>
     </menu-item>
     <menu-item name="Produkty" styleClass="fa fa-laptop" hasAnyRole="admin,user">
         <activeDefinitions>
-            <activeNode requestPath="/goods" compare="STARTS_WITH" />
+            <activeNode requestPath="/goods" compare="STARTS_WITH"/>
         </activeDefinitions>
         <menu-items>
-            <menu-item name="Wyświetl" targetUrl="/goods/goodsTable.xhtml" />
-            <menu-item name="Dodaj" targetUrl="/goods/addEditGood.xhtml" />
+            <menu-item name="Wyświetl" targetUrl="/goods/goodsTable.xhtml"/>
+            <menu-item name="Dodaj" targetUrl="/goods/addEditGood.xhtml"/>
         </menu-items>
     </menu-item>
     <menu-item name="Sprzedaż" styleClass="fa fa-edit" hasAnyRole="admin,user">
         <activeDefinitions>
-            <activeNode requestPath="/documents/saleDocuments" compare="STARTS_WITH" />
+            <activeNode requestPath="/documents/saleDocuments" compare="STARTS_WITH"/>
         </activeDefinitions>
         <menu-items>
             <menu-item name="Faktura Vat" styleClass="fa fa-edit">
                 <menu-items>
-                    <menu-item name="Wyświetl" targetUrl="/documents/saleDocuments/vatInvoicesTable.xhtml" />
-                    <menu-item name="Dodaj" targetUrl="/documents/saleDocuments/vatInvoiceAddEdit.xhtml" />
+                    <menu-item name="Wyświetl" targetUrl="/documents/saleDocuments/vatInvoicesTable.xhtml"/>
+                    <menu-item name="Dodaj" targetUrl="/documents/saleDocuments/vatInvoiceAddEdit.xhtml"/>
                 </menu-items>
             </menu-item>
         </menu-items>
     </menu-item>
     <menu-item name="Raporty" styleClass="fa fa-edit" hasAnyRole="admin,user">
         <activeDefinitions>
-            <activeNode requestPath="/documents/financialReports" compare="STARTS_WITH" />
+            <activeNode requestPath="/documents/financialReports" compare="STARTS_WITH"/>
         </activeDefinitions>
         <menu-items>
             <menu-item name="Raporty Finansowe" styleClass="fa fa-edit">
                 <menu-items>
-                    <menu-item name="Wyświetl" targetUrl="/documents/financialReports/financialReportsTable.xhtml" />
-                    <menu-item name="Dodaj" targetUrl="/documents/financialReports/addFinancialReport.xhtml" />
+                    <menu-item name="Wyświetl" targetUrl="/documents/financialReports/financialReportsTable.xhtml"/>
+                    <menu-item name="Dodaj" targetUrl="/documents/financialReports/addFinancialReport.xhtml"/>
                 </menu-items>
             </menu-item>
         </menu-items>
     </menu-item>
     <menu-item name="Magazyn" styleClass="fa fa-edit" hasAnyRole="admin,user">
         <activeDefinitions>
-            <activeNode requestPath="/documents/warehouse" compare="STARTS_WITH" />
+            <activeNode requestPath="/documents/warehouse" compare="STARTS_WITH"/>
         </activeDefinitions>
         <menu-items>
-        	<menu-item name="Dokumenty wewnętrzne" targetUrl="/documents/warehouse/internalDocumentList.xhtml" styleClass="fa fa-edit"/>
-            <menu-item name="Rozchód wewnętrzny (RW)" targetUrl="/documents/warehouse/internalOutgoing.xhtml" />
-            <menu-item name="Przyjęcie wewnętrzne (PW)" targetUrl="/documents/warehouse/internalIncoming.xhtml" />        		
-            <menu-item name="Dokumenty zewnętrzne" targetUrl="/documents/warehouse/externalDocumentList.xhtml" styleClass="fa fa-edit"/>        		
-            <menu-item name="Wydanie zewnętrzne (WZ)" targetUrl="/documents/warehouse/externalOutgoing.xhtml" />
-            <menu-item name="Przyjęcie zewnętrzne (PZ)" targetUrl="/documents/warehouse/externalIncoming.xhtml" />            	
+            <menu-item name="Dokumenty wewnętrzne" targetUrl="/documents/warehouse/internalDocumentList.xhtml"
+                       styleClass="fa fa-edit"/>
+            <menu-item name="Rozchód wewnętrzny (RW)" targetUrl="/documents/warehouse/internalOutgoing.xhtml"/>
+            <menu-item name="Przyjęcie wewnętrzne (PW)" targetUrl="/documents/warehouse/internalIncoming.xhtml"/>
+            <menu-item name="Dokumenty zewnętrzne" targetUrl="/documents/warehouse/externalDocumentList.xhtml"
+                       styleClass="fa fa-edit"/>
+            <menu-item name="Wydanie zewnętrzne (WZ)" targetUrl="/documents/warehouse/externalOutgoing.xhtml"/>
+            <menu-item name="Przyjęcie zewnętrzne (PZ)" targetUrl="/documents/warehouse/externalIncoming.xhtml"/>
         </menu-items>
     </menu-item>
     <menu-item name="Serwis" styleClass="fa fa-edit" hasAnyRole="admin,user">
-    	<activeDefinitions>
-            <activeNode requestPath="/documents/service" compare="STARTS_WITH" />
+        <activeDefinitions>
+            <activeNode requestPath="/documents/service" compare="STARTS_WITH"/>
         </activeDefinitions>
-    	<menu-items>
-            <menu-item name="Wyświetl dokumenty serwisowe" targetUrl="/documents/service/serviceDocumentsTable.xhtml" />
-            <menu-item name="Dodaj zgłoszenie serwisowe" targetUrl="/documents/service/repairOrder.xhtml" />
-            <menu-item name="Dodaj zapotrzebowanie serwisowe" targetUrl="/documents/service/serviceProductRequest.xhtml" />
-            <menu-item name="Dodaj podsumowanie naprawy" targetUrl="/documents/service/serviceFixSummary.xhtml" />
+        <menu-items>
+            <menu-item name="Wyświetl dokumenty serwisowe" targetUrl="/documents/service/serviceDocumentsTable.xhtml"/>
+            <menu-item name="Dodaj zgłoszenie serwisowe" targetUrl="/documents/service/repairOrder.xhtml"/>
+            <menu-item name="Dodaj zapotrzebowanie serwisowe"
+                       targetUrl="/documents/service/serviceProductsRequest.xhtml"/>
+            <menu-item name="Dodaj podsumowanie naprawy" targetUrl="/documents/service/serviceFixSummary.xhtml"/>
         </menu-items>
     </menu-item>
     <menu-item name="Raporty" styleClass="fa fa-edit" hasAnyRole="manager">
         <activeDefinitions>
-            <activeNode requestPath="/reports" compare="STARTS_WITH" />
+            <activeNode requestPath="/reports" compare="STARTS_WITH"/>
         </activeDefinitions>
         <menu-items>
-            <menu-item name="Wyświetl" targetUrl="/reports/list.xhtml" />
+            <menu-item name="Wyświetl" targetUrl="/reports/list.xhtml"/>
         </menu-items>
     </menu-item>
     <menu-item name="Użytkownicy" styleClass="fa fa-table" hasAnyRole="admin">
         <activeDefinitions>
-            <activeNode requestPath="/admin" compare="STARTS_WITH" />
+            <activeNode requestPath="/admin" compare="STARTS_WITH"/>
         </activeDefinitions>
         <menu-items>
-            <menu-item name="Zarządzaj" targetUrl="/admin/user-list.xhtml" />
-            <menu-item name="Dodaj" targetUrl="/admin/add-new-user.xhtml" />
+            <menu-item name="Zarządzaj" targetUrl="/admin/user-list.xhtml"/>
+            <menu-item name="Dodaj" targetUrl="/admin/add-new-user.xhtml"/>
         </menu-items>
     </menu-item>
-    <menu-item name="Ustawienia" styleClass="fa fa-dashboard" targetUrl="/settings/settings.xhtml" hasAnyRole="admin,manager">
+    <menu-item name="Ustawienia" styleClass="fa fa-dashboard" targetUrl="/settings/settings.xhtml"
+               hasAnyRole="admin,manager">
         <activeDefinitions>
-            <activeNode requestPath="/settings/settings.xhtml" compare="EQUALS" />
+            <activeNode requestPath="/settings/settings.xhtml" compare="EQUALS"/>
         </activeDefinitions>
     </menu-item>
 </menu>

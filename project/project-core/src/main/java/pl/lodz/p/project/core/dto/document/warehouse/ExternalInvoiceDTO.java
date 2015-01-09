@@ -1,152 +1,150 @@
 package pl.lodz.p.project.core.dto.document.warehouse;
 
+import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
+import pl.lodz.p.project.core.dto.document.TransportMeanDTO;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
-import pl.lodz.p.project.core.dto.document.TransportMeanDTO;
-
 /**
- * 
  * @author Jan Krajewski
- *
  */
 public class ExternalInvoiceDTO implements Serializable, Comparable<ExternalInvoiceDTO> {
 
-	private static final long serialVersionUID = 5643355468874031693L;
+    private static final long serialVersionUID = 5643355468874031693L;
 
-	private Long id;
-	private Long version = 1L;
-	private String symbol;
-	private String type;
-	private Date documentDate;
-	private Double total;	
-	private String issuePerson;
-	private String receivePerson;
-	private String deliverPerson;
-	private String annotation;
-	private List<ExternalInvoiceGoodDTO> goodList;
-	
+    private Long id;
+    private Long version = 1L;
+    private String symbol;
+    private String type;
+    private Date documentDate;
+    private Double total;
+    private String issuePerson;
+    private String receivePerson;
+    private String deliverPerson;
+    private String annotation;
+    private List<ExternalInvoiceGoodDTO> goodList;
+
     private ContractorDTO contractor;
     private TransportMeanDTO transportMean;
     private String orderSymbol;
-    
-	public Long getId() {
-		return id;
-	}	
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
 
-	public Long getVersion() {
-		return version;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setVersion(Long version) {
-		this.version = version;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getSymbol() {
-		return symbol;
-	}
+    public Long getVersion() {
+        return version;
+    }
 
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
-	}
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getSymbol() {
+        return symbol;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
 
-	public Date getDocumentDate() {
-		return documentDate;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setDocumentDate(Date documentDate) {
-		this.documentDate = documentDate;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public Double getTotal() {
-		return total;
-	}
+    public Date getDocumentDate() {
+        return documentDate;
+    }
 
-	public void setTotal(Double total) {
-		this.total = total;
-	}
+    public void setDocumentDate(Date documentDate) {
+        this.documentDate = documentDate;
+    }
 
-	public String getIssuePerson() {
-		return issuePerson;
-	}
+    public Double getTotal() {
+        return total;
+    }
 
-	public void setIssuePerson(String issuePerson) {
-		this.issuePerson = issuePerson;
-	}
+    public void setTotal(Double total) {
+        this.total = total;
+    }
 
-	public String getReceivePerson() {
-		return receivePerson;
-	}
+    public String getIssuePerson() {
+        return issuePerson;
+    }
 
-	public void setReceivePerson(String receivePerson) {
-		this.receivePerson = receivePerson;
-	}
+    public void setIssuePerson(String issuePerson) {
+        this.issuePerson = issuePerson;
+    }
 
-	public String getDeliverPerson() {
-		return deliverPerson;
-	}
+    public String getReceivePerson() {
+        return receivePerson;
+    }
 
-	public void setDeliverPerson(String deliverPerson) {
-		this.deliverPerson = deliverPerson;
-	}
+    public void setReceivePerson(String receivePerson) {
+        this.receivePerson = receivePerson;
+    }
 
-	public String getAnnotation() {
-		return annotation;
-	}
+    public String getDeliverPerson() {
+        return deliverPerson;
+    }
 
-	public void setAnnotation(String annotation) {
-		this.annotation = annotation;
-	}
+    public void setDeliverPerson(String deliverPerson) {
+        this.deliverPerson = deliverPerson;
+    }
 
-	public List<ExternalInvoiceGoodDTO> getGoodList() {
-		return goodList;
-	}
+    public String getAnnotation() {
+        return annotation;
+    }
 
-	public void setGoodList(List<ExternalInvoiceGoodDTO> goodList) {
-		this.goodList = goodList;
-	}
+    public void setAnnotation(String annotation) {
+        this.annotation = annotation;
+    }
 
-	public ContractorDTO getContractor() {
-		return contractor;
-	}
+    public List<ExternalInvoiceGoodDTO> getGoodList() {
+        return goodList;
+    }
 
-	public void setContractor(ContractorDTO contractor) {
-		this.contractor = contractor;
-	}
+    public void setGoodList(List<ExternalInvoiceGoodDTO> goodList) {
+        this.goodList = goodList;
+    }
 
-	public TransportMeanDTO getTransportMean() {
-		return transportMean;
-	}
+    public ContractorDTO getContractor() {
+        return contractor;
+    }
 
-	public void setTransportMean(TransportMeanDTO transportMean) {
-		this.transportMean = transportMean;
-	}
+    public void setContractor(ContractorDTO contractor) {
+        this.contractor = contractor;
+    }
 
-	public String getOrderSymbol() {
-		return orderSymbol;
-	}
+    public TransportMeanDTO getTransportMean() {
+        return transportMean;
+    }
 
-	public void setOrderSymbol(String orderSymbol) {
-		this.orderSymbol = orderSymbol;
-	}    
-	
-	@Override
-	public int compareTo(ExternalInvoiceDTO o) {
-		return 0;
-	}
+    public void setTransportMean(TransportMeanDTO transportMean) {
+        this.transportMean = transportMean;
+    }
+
+    public String getOrderSymbol() {
+        return orderSymbol;
+    }
+
+    public void setOrderSymbol(String orderSymbol) {
+        this.orderSymbol = orderSymbol;
+    }
+
+    @Override
+    public int compareTo(ExternalInvoiceDTO o) {
+        return 0;
+    }
 
 }
