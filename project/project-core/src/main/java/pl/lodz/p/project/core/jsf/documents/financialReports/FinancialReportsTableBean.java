@@ -6,7 +6,10 @@ import pl.lodz.p.project.core.dto.document.FinancialReportDTO;
 import pl.lodz.p.project.core.service.document.FinancialReportService;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import java.io.IOException;
 import java.util.List;
 
 @Named(value = "financialReportsTableBean")
@@ -32,6 +35,12 @@ public class FinancialReportsTableBean {
     public void removeReport(FinancialReportDTO invoice) {
         getReports().remove(invoice);
         financialReportService.delete(invoice);
+    }
+
+    public void generatePdfReport(FinancialReportDTO report) throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.getSessionMap().put("document", report);
+        externalContext.redirect("/document.pdf");
     }
 
     /**

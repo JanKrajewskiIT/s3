@@ -62,6 +62,9 @@
                                                     <p:commandLink styleClass="btn btn-danger btn-xs" update="financialReportsTableId" ajax="true" action="#{financialReportsTableBean.removeReport(report)}">
                                                         <i class="glyphicon glyphicon-minus"></i> Usuń
                                                     </p:commandLink>
+                                                    <p:commandLink styleClass="btn btn-success btn-xs" update="financialReportsTableId" ajax="true" action="#{financialReportsTableBean.generatePdfReport(report)}">
+                                                        Generuj PDF
+                                                    </p:commandLink>
                                                 </p:column>
                                             </p:dataTable>
                                         </h:form>
