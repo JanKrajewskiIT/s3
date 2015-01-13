@@ -15,7 +15,7 @@ import javax.inject.Named;
  * @author Jan Krajewski
  */
 @Named
-@ViewScoped
+@Scope("request")
 public class GoodListController extends EditListController<GoodDTO> {
 
     @Autowired

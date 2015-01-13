@@ -1,6 +1,6 @@
 package pl.lodz.p.project.core.dao.account;
 
-import pl.lodz.p.project.core.dao.CrudDao;
+import pl.lodz.p.project.core.dao.base.CrudDao;
 import pl.lodz.p.project.core.domain.account.PasswordChangeRequest;
 import pl.lodz.p.project.core.domain.account.User;
 

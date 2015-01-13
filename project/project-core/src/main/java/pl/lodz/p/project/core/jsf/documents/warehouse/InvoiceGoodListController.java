@@ -12,7 +12,7 @@ import javax.inject.Named;
  * @author Jan Krajewski
  */
 @Named
-@ViewScoped
+@Scope("request")
 public class InvoiceGoodListController extends EditListController<InternalInvoiceGoodDTO> {
 
     @PostConstruct

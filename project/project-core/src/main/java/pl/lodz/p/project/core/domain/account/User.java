@@ -26,7 +26,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import pl.lodz.p.project.core.domain.BasePersistable;
+import pl.lodz.p.project.core.domain.base.BasePersistable;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import pl.lodz.p.project.core.domain.good.Tax;
 import pl.lodz.p.project.core.dto.good.TaxDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
-import pl.lodz.p.project.core.service.AbstractService;
+import pl.lodz.p.project.core.service.base.AbstractService;
 
 /**
  *

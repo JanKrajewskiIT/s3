@@ -3,8 +3,7 @@ package pl.lodz.p.project.core.domain.document.warehouse;
 import pl.lodz.p.project.core.domain.document.base.InvoiceGood;
 import pl.lodz.p.project.core.domain.document.base.InvoiceGoodKey;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 

@@ -13,10 +13,10 @@ import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.project.core.dto.document.PaymentMethodDTO;
-import pl.lodz.p.project.core.service.document.DocumentNumeratorService;
-import pl.lodz.p.project.core.service.document.DocumentSettingsService;
-import pl.lodz.p.project.core.service.document.PaymentMethodService;
+import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
+import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
+import pl.lodz.p.project.core.service.document.items.DocumentSettingsService;
+import pl.lodz.p.project.core.service.document.items.PaymentMethodService;
 
 /**
  *

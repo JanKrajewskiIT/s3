@@ -16,7 +16,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
-import pl.lodz.p.project.core.dao.AbstractCrudDao;
+import pl.lodz.p.project.core.dao.base.AbstractCrudDao;
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort.Order;
 import pl.lodz.p.project.core.util.Assert;
 

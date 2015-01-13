@@ -14,7 +14,7 @@ import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.domain.good.Good;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
-import pl.lodz.p.project.core.service.AbstractService;
+import pl.lodz.p.project.core.service.base.AbstractService;
 
 import com.google.common.collect.Lists;
 

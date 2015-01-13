@@ -12,7 +12,7 @@ import pl.lodz.p.project.core.dao.account.RoleDao;
 import pl.lodz.p.project.core.domain.account.Role;
 import pl.lodz.p.project.core.dto.account.RoleDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
-import pl.lodz.p.project.core.service.AbstractService;
+import pl.lodz.p.project.core.service.base.AbstractService;
 
 /**
  *

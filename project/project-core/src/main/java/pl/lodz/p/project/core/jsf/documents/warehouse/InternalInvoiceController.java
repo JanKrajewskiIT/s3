@@ -1,20 +1,20 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
-import pl.lodz.p.project.core.service.document.DocumentNumeratorService;
+import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.warehouse.InternalInvoiceService;
 
 import java.math.BigDecimal;
 
 @Named
-@ViewScoped
+@Scope("request")
 public class InternalInvoiceController extends EditObjectController<InternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 7763768017180337728L;

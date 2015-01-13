@@ -1,23 +1,22 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
-import pl.lodz.p.project.core.dto.document.TransportMeanDTO;
+import org.springframework.context.annotation.Scope;
+import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
-import pl.lodz.p.project.core.service.document.DocumentNumeratorService;
-import pl.lodz.p.project.core.service.document.TransportMeanService;
+import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
+import pl.lodz.p.project.core.service.document.items.TransportMeanService;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Named
-@ViewScoped
+@Scope("request")
 public class ExternalInvoiceController extends EditObjectController<ExternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 6806332655702953164L;

@@ -1,15 +1,11 @@
 package pl.lodz.p.project.core.domain.document.warehouse;
 
-import java.util.Date;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import pl.lodz.p.project.core.domain.BaseEntity;
+import javax.xml.bind.annotation.XmlTransient;
+
+import pl.lodz.p.project.core.domain.document.base.Document;
 
 /**
  * 
@@ -17,39 +13,15 @@ import pl.lodz.p.project.core.domain.BaseEntity;
  *
  */
 @MappedSuperclass
-public abstract class WarehouseInvoice extends BaseEntity<Long> {
+public abstract class WarehouseInvoice extends Document<Long> {
 
 	private static final long serialVersionUID = 1469119918661275184L;
-    	
-	@Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 16)
-    @Column(name = "symbol")
-	private String symbol;
-
-	@Basic(optional = false)
-	@NotNull
-	@Size(min = 1, max = 3)
-	@Column(name = "type")
-	private String type;
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "document_date")
-    @Temporal(TemporalType.DATE)
-	private Date documentDate;
 
     @Basic(optional = false)
     @NotNull
     @Column(name = "total")
 	private Double total;	
-    
-	@Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "issue_person")
-	private String issuePerson;
-	
+
 	@Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -65,30 +37,6 @@ public abstract class WarehouseInvoice extends BaseEntity<Long> {
 	@Basic(optional = false)
 	@Column(name = "annotation")
 	private String annotation;
-	
-	public String getSymbol() {
-		return symbol;
-	}
-
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Date getDocumentDate() {
-		return documentDate;
-	}
-
-	public void setDocumentDate(Date documentDate) {
-		this.documentDate = documentDate;
-	}
 
 	public Double getTotal() {
 		return total;
@@ -96,14 +44,6 @@ public abstract class WarehouseInvoice extends BaseEntity<Long> {
 
 	public void setTotal(Double total) {
 		this.total = total;
-	}
-
-	public String getIssuePerson() {
-		return issuePerson;
-	}
-
-	public void setIssuePerson(String issuePerson) {
-		this.issuePerson = issuePerson;
 	}
 
 	public String getReceivePerson() {

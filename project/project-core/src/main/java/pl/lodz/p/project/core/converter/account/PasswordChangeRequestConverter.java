@@ -4,7 +4,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import pl.lodz.p.project.core.converter.Converter;
+import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.domain.account.PasswordChangeRequest;
 import pl.lodz.p.project.core.domain.account.User;
 import pl.lodz.p.project.core.dto.account.PasswordChangeRequestDTO;

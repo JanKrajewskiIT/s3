@@ -3,8 +3,8 @@ package pl.lodz.p.project.core.jsf.documents.financialReports;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import pl.lodz.p.project.core.dto.document.FinancialReportDTO;
-import pl.lodz.p.project.core.service.document.FinancialReportService;
+import pl.lodz.p.project.core.dto.document.report.FinancialReportDTO;
+import pl.lodz.p.project.core.service.document.report.FinancialReportService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -20,6 +20,7 @@ public class AddFinancialReportBean implements Serializable {
     private FinancialReportService financialReportServiceLocal;
 
     private FinancialReportDTO financialReport;
+
     private String breadcrumb;
 
     @PostConstruct

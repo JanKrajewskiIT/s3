@@ -4,7 +4,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import pl.lodz.p.project.core.converter.Converter;
+import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.domain.contractor.Contractor;
 import pl.lodz.p.project.core.domain.contractor.ContractorGroup;
 import pl.lodz.p.project.core.domain.contractor.PostalCode;

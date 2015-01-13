@@ -2,6 +2,8 @@ package pl.lodz.p.project.core.domain.document.warehouse;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import pl.lodz.p.project.core.domain.document.base.Document;
 import pl.lodz.p.project.core.domain.document.base.InvoiceGood;
 import pl.lodz.p.project.core.domain.document.base.InvoiceGoodKey;
 

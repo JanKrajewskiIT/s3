@@ -21,7 +21,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import pl.lodz.p.project.core.domain.Activable;
+import pl.lodz.p.project.core.domain.base.Activable;
 
 /**
  *

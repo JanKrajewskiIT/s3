@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.lodz.p.project.core.dao.AbstractCrudDao;
+import pl.lodz.p.project.core.dao.base.AbstractCrudDao;
 import pl.lodz.p.project.core.domain.account.User;
 import pl.lodz.p.project.core.exception.OptLockException;
 import pl.lodz.p.project.core.exception.UniqueConstraintViolationException;

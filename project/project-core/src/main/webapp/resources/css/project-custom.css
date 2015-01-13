@@ -55,3 +55,14 @@
 .font14 {
     font-size: 14px;
 }
+
+
+.ui-panel .ui-panel-content {
+    border: 0;
+    background: none;
+    padding: 0em 0em !important;
+}
+
+.ui-state-highlight {
+    background: red !important;
+}

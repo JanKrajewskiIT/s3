@@ -1,6 +1,6 @@
 package pl.lodz.p.project.core.domain.document.base;
 
-import pl.lodz.p.project.core.domain.BaseEntity;
+import pl.lodz.p.project.core.domain.base.BaseEntity;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

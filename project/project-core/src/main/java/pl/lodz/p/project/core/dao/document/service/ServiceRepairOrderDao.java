@@ -1,6 +1,6 @@
 package pl.lodz.p.project.core.dao.document.service;
 
-import pl.lodz.p.project.core.dao.CrudDao;
+import pl.lodz.p.project.core.dao.base.CrudDao;
 import pl.lodz.p.project.core.domain.document.service.ServiceRepairOrder;
 
 /**

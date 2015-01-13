@@ -1,16 +1,11 @@
 package pl.lodz.p.project.core.domain.document.warehouse;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import pl.lodz.p.project.core.domain.contractor.Contractor;
-import pl.lodz.p.project.core.domain.document.TransportMean;
+import pl.lodz.p.project.core.domain.document.items.TransportMean;
+import java.util.Collection;
 
 /**
  * 
@@ -59,7 +54,7 @@ public class ExternalInvoice extends WarehouseInvoice {
 
 	public void setOrderSymbol(String orderSymbol) {
 		this.orderSymbol = orderSymbol;
-	}    
-    
+	}
+
 }
 

@@ -2,6 +2,8 @@ package pl.lodz.p.project.core.dto.document.warehouse;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoice;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 
 /**

@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort;
-import pl.lodz.p.project.core.service.AbstractService;
+import pl.lodz.p.project.core.service.base.AbstractService;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,9 +28,14 @@ public abstract class EditListController<T extends Serializable> extends UIObjec
 	protected PageRequest pageRequest = new PageRequest(0, PAGE_SIZE, new Sort(DEFAULT_SORT_PROPERTY));
 	protected String searchQuery = StringUtils.EMPTY;
 
-	public void remove(T object) { }
+	public void remove(T object) {
+		getItems().remove(object);
+		service.delete(object);
+	}
 
-	public void edit(Long id) { }
+	public String edit(String id) {
+		return null;
+	}
 
 	public void search() {
 		pageRequest = new PageRequest(0, pageRequest.getPageSize(), pageRequest.getSort());

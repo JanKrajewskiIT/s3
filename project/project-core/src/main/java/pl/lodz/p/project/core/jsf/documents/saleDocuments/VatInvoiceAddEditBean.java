@@ -18,17 +18,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
-import pl.lodz.p.project.core.dto.document.DocumentPositionDTO;
-import pl.lodz.p.project.core.dto.document.PaymentMethodDTO;
-import pl.lodz.p.project.core.dto.document.SaleDocumentDTO;
+import pl.lodz.p.project.core.dto.document.items.DocumentPositionDTO;
+import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
+import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.service.account.UserService;
 import pl.lodz.p.project.core.service.contractor.ContractorService;
-import pl.lodz.p.project.core.service.document.DocumentNumeratorService;
-import pl.lodz.p.project.core.service.document.DocumentPositionService;
-import pl.lodz.p.project.core.service.document.DocumentSettingsService;
-import pl.lodz.p.project.core.service.document.PaymentMethodService;
-import pl.lodz.p.project.core.service.document.SaleDocumentService;
+import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
+import pl.lodz.p.project.core.service.document.items.DocumentPositionService;
+import pl.lodz.p.project.core.service.document.items.DocumentSettingsService;
+import pl.lodz.p.project.core.service.document.items.PaymentMethodService;
+import pl.lodz.p.project.core.service.document.sale.SaleDocumentService;
 import pl.lodz.p.project.core.service.good.GoodService;
 
 /**

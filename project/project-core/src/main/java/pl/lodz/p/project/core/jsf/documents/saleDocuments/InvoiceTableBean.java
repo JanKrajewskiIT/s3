@@ -9,8 +9,8 @@ import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import pl.lodz.p.project.core.dto.document.SaleDocumentDTO;
-import pl.lodz.p.project.core.service.document.SaleDocumentService;
+import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
+import pl.lodz.p.project.core.service.document.sale.SaleDocumentService;
 
 /**
  *

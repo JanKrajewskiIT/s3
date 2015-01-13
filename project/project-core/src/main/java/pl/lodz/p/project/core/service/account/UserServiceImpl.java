@@ -16,7 +16,7 @@ import pl.lodz.p.project.core.domain.account.Role;
 import pl.lodz.p.project.core.domain.account.User;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
-import pl.lodz.p.project.core.service.AbstractService;
+import pl.lodz.p.project.core.service.base.AbstractService;
 
 /**
  *

@@ -4,7 +4,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import pl.lodz.p.project.core.converter.Converter;
+import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.good.GoodConverter;
 import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoice;
 import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoiceGood;
@@ -44,7 +44,7 @@ public class ExternalInvoiceGoodConverter implements Converter<ExternalInvoiceGo
 	public ExternalInvoiceGoodDTO convertEntity(ExternalInvoiceGood entity) {
 		GoodDTO good = goodConverter.convertEntity(entity.getId().getGood());
 		ExternalInvoiceDTO invoice = invoiceConverter.convertEntity(entity.getId().getInvoice());
-		
+
 		ExternalInvoiceGoodDTO objectDTO = new ExternalInvoiceGoodDTO();
 		objectDTO.setGood(good);
 		objectDTO.setInvoice(invoice);

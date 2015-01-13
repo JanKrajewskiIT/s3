@@ -1,6 +1,6 @@
 package pl.lodz.p.project.core.converter.document.service;
 
-import pl.lodz.p.project.core.converter.Converter;
+import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.account.UserConverter;
 import pl.lodz.p.project.core.converter.contractor.ContractorConverter;
 import pl.lodz.p.project.core.domain.account.User;

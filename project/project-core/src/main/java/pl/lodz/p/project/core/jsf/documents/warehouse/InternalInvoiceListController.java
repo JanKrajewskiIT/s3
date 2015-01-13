@@ -9,7 +9,7 @@ import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoice;
 import pl.lodz.p.project.core.jsf.base.EditListController;
 
 @Named
-@ViewScoped
+@Scope("request")
 public class InternalInvoiceListController extends EditListController<InternalInvoice> {
 
 	private static final long serialVersionUID = -5147461464856795798L;

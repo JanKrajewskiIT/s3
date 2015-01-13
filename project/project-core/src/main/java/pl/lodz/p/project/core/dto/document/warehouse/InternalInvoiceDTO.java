@@ -1,5 +1,7 @@
 package pl.lodz.p.project.core.dto.document.warehouse;
 
+import pl.lodz.p.project.core.dto.account.UserDTO;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +21,7 @@ public class InternalInvoiceDTO implements Serializable, Comparable<InternalInvo
 	private String type;
 	private Date documentDate;
 	private Double total;	
-	private String issuePerson;
+	private UserDTO issuePerson;
 	private String receivePerson;
 	private String deliverPerson;
 	private String annotation;
@@ -73,11 +75,11 @@ public class InternalInvoiceDTO implements Serializable, Comparable<InternalInvo
 		this.total = total;
 	}
 
-	public String getIssuePerson() {
+	public UserDTO getIssuePerson() {
 		return issuePerson;
 	}
 
-	public void setIssuePerson(String issuePerson) {
+	public void setIssuePerson(UserDTO issuePerson) {
 		this.issuePerson = issuePerson;
 	}
 

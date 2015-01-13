@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import pl.lodz.p.project.core.domain.contractor.PostalCode;
 import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
-import pl.lodz.p.project.core.service.AbstractService;
+import pl.lodz.p.project.core.service.base.AbstractService;
 
 /**
  *
