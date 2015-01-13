@@ -1,7 +1,7 @@
 package pl.lodz.p.project.core.util.pdf.view.template.factory;
 
 import org.springframework.stereotype.Component;
-import pl.lodz.p.project.core.dto.document.FinancialReportDTO;
+import pl.lodz.p.project.core.dto.document.report.FinancialReportDTO;
 import pl.lodz.p.project.core.util.pdf.view.template.TemplateProcessor;
 import pl.lodz.p.project.core.util.pdf.view.template.impl.FinancialReportTemplateProcessor;
 

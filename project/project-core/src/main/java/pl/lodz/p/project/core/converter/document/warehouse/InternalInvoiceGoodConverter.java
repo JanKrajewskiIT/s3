@@ -13,6 +13,11 @@ import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 
+/**
+ *
+ * @author Jan Krajewski
+ *
+ */
 @Named
 @ApplicationScoped
 public class InternalInvoiceGoodConverter implements Converter<InternalInvoiceGood, InternalInvoiceGoodDTO> {

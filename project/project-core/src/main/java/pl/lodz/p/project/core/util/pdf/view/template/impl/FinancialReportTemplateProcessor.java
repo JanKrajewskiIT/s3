@@ -1,7 +1,7 @@
 package pl.lodz.p.project.core.util.pdf.view.template.impl;
 
 import com.itextpdf.text.*;
-import pl.lodz.p.project.core.dto.document.FinancialReportDTO;
+import pl.lodz.p.project.core.dto.document.report.FinancialReportDTO;
 import pl.lodz.p.project.core.util.pdf.view.template.TemplateProcessor;
 
 import java.text.MessageFormat;

@@ -14,7 +14,6 @@ public class ExternalInvoiceDTO extends DocumentDTO<Long> implements Comparable<
 
     private static final long serialVersionUID = 5643355468874031693L;
 
-    private Long id;
     private Double total;
     private String receivePerson;
     private String deliverPerson;
@@ -24,14 +23,6 @@ public class ExternalInvoiceDTO extends DocumentDTO<Long> implements Comparable<
     private ContractorDTO contractor;
     private TransportMeanDTO transportMean;
     private String orderSymbol;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Double getTotal() {
         return total;
