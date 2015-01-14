@@ -7,8 +7,9 @@ import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
-import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
+import pl.lodz.p.project.core.jsf.base.GUI;
+import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.items.TransportMeanService;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
@@ -43,24 +44,31 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	@Autowired
 	private DocumentNumeratorService documentNumeratorService;
 
+	@Autowired
+	private ConstantElements constantElements;
+
+	@Autowired
+	private GUI gui;
+
 	private List<TransportMeanDTO> transportMeanList;
 
 	@PostConstruct
 	private void init() {
 		contractorListController.setVisible(false);
-
 		setSourceObject(new ExternalInvoiceDTO());
-		getSourceObject().setTotal(12d);
-		getSourceObject().setType(Type.RW.name());
-		getSourceObject().setSymbol(documentNumeratorService.nextNumber(Type.RW.name()));
-
 		transportMeanList = transportMeanService.getAll();
+	}
+
+	public void afterObjectSet(String type) {
+		getSourceObject().setType(type);
+		getSourceObject().setSymbol(documentNumeratorService.nextNumber(type));
 	}
 
 	@Override
 	public void save() {
 		//getSourceObject().setGoodList(invoiceGoodListController.getItems());
-		getSourceObject().setDocumentDate(DateUtil.getCurrentDate());
+		getSourceObject().setIssuePerson(constantElements.getUser());
+		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
 		service.save(getSourceObject());
 	}
 
@@ -71,6 +79,8 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 		invoiceGood.setGood(goodListController.getSingleSelection());
 		invoiceGood.setQuantity(new BigDecimal(goodListController.getQuantity()));
 		invoiceGoodListController.getItems().add(invoiceGood);
+
+		setTotal();
 	}
 
 	public void addContractor() {
@@ -84,8 +94,13 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 		setVisible(false);
 	}
 
-	public String getCurrentDate() {
-		return DateUtil.getCurrentDateValue();
+	public String forwardContractor() {
+		String id = getSourceObject().getContractor().getId().toString();
+		return gui.redirect("contractorTemplate", id);
+	}
+
+	public void setTotal() {
+		getSourceObject().setTotal(1.0);
 	}
 
 	public List<TransportMeanDTO> getTransportMeanList() {
@@ -95,5 +110,6 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	public void setTransportMeanList(List<TransportMeanDTO> transportMeanList) {
 		this.transportMeanList = transportMeanList;
 	}
+
 
 }

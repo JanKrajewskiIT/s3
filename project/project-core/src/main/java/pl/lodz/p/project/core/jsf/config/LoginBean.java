@@ -1,4 +1,4 @@
-package pl.lodz.p.project.core.jsf;
+package pl.lodz.p.project.core.jsf.config;
 
 import java.io.IOException;
 

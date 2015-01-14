@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
-import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
+import pl.lodz.p.project.core.jsf.base.GUI;
+import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.warehouse.InternalInvoiceService;
 
@@ -18,10 +19,6 @@ import java.math.BigDecimal;
 public class InternalInvoiceController extends EditObjectController<InternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 7763768017180337728L;
-
-	private enum Type {
-		ANY, WZ, PZ
-	}
 
 	@Autowired
 	private InvoiceGoodListController invoiceGoodListController;
@@ -35,18 +32,27 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	@Autowired
 	private DocumentNumeratorService documentNumeratorService;
 
+	@Autowired
+	private ConstantElements constantElements;
+
+	@Autowired
+	private GUI gui;
+
 	@PostConstruct
 	private void init() {
 		setSourceObject(new InternalInvoiceDTO());
-		getSourceObject().setTotal(12d);
-		getSourceObject().setType(Type.WZ.name());
-		getSourceObject().setSymbol(documentNumeratorService.nextNumber(Type.WZ.name()));
+	}
+
+	public void afterObjectSet(String type) {
+		getSourceObject().setType(type);
+		getSourceObject().setSymbol(documentNumeratorService.nextNumber(type));
 	}
 
 	@Override
 	public void save() {
 		getSourceObject().setGoodList(invoiceGoodListController.getItems());
-		getSourceObject().setDocumentDate(DateUtil.getCurrentDate());
+		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
+		getSourceObject().setIssuePerson(constantElements.getUser());
 		service.save(getSourceObject());
 	}
 
@@ -57,10 +63,11 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 		invoiceGood.setGood(goodListController.getSingleSelection());
 		invoiceGood.setQuantity(new BigDecimal(goodListController.getQuantity()));
 		invoiceGoodListController.getItems().add(invoiceGood);
+
+		setTotal();
 	}
 
-	public String getCurrentDate() {
-		return DateUtil.getCurrentDateValue();
+	public void setTotal() {
+		getSourceObject().setTotal(1.0);
 	}
-
 }

@@ -3,7 +3,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 	<composite:interface>
         <composite:attribute name="controller"/>
@@ -19,8 +20,9 @@
 
 			<div class="col-sm-4 pull-right">
 				<label>Razem</label>
-				<p:inputText styleClass="form-control" disabled="true"
-							 value="#{cc.attrs.controller.sourceObject.total}" />
+				<p:inputText styleClass="form-control" disabled="true" value="#{cc.attrs.controller.sourceObject.total}" >
+					<f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00"/>
+				</p:inputText>
 			</div>
 		</div>
 

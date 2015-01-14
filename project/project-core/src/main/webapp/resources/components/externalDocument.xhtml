@@ -19,11 +19,12 @@
 					<div class="inner">
 						<h3>Sprzedawca</h3>
 						<address>
-							<strong>Admin, Inc.</strong><br /> 
-							795 Folsom Ave, Suite 600<br />
-							San Francisco, CA 94107<br /> 
-							Phone: (804) 123-5432<br /> 
-							Email:info@almasaeedstudio.com
+							<strong>#{constantElements.userData.name}</strong><br/>
+							#{constantElements.userData.adress}<br />
+							#{constantElements.userData.postalCode.city},
+							#{constantElements.userData.postalCode.code}<br />
+							NIP: #{constantElements.userData.nip}<br />
+							Email: #{constantElements.userData.email}
 						</address>
 					</div>
 					<a href="#" class="small-box-footer"> More info <i
@@ -51,9 +52,11 @@
 							<i class="ion ion-person-add" />
 						</p:commandLink>
 					</div>
-					<a href="#" class="small-box-footer"> More info 
-						<i class="fa fa-arrow-circle-right" />
-					</a>
+					<p:commandLink action="#{cc.attrs.controller.forwardContractor}">
+						<a href="#" class="small-box-footer"> More info
+							<i class="fa fa-arrow-circle-right" />
+						</a>
+					</p:commandLink>
 				</div>
 			</div>
 			<div class="col-sm-4 invoice-col">

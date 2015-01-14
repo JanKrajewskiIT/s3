@@ -5,10 +5,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:cc="http://java.sun.com/jsf/composite/components"
-	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	xmlns:cc="http://java.sun.com/jsf/composite/components">
 
 	<h:body>
+		<f:metadata>
+			<f:viewAction action="#{externalInvoiceController.afterObjectSet('WZ')}" />
+		</f:metadata>
+
 		<ui:composition template="../../layout/main-template.xhtml">
 			<ui:define name="content">
 				<aside class="right-side"> 
@@ -28,7 +31,7 @@
 									<div class="box-header">
 										<h3 class="page-header col-xs-12">
 											Wydanie zewnętrzne (WZ) : #{externalInvoiceController.sourceObject.symbol}
-											<small class="pull-right">Data: #{externalInvoiceController.currentDate}</small>
+											<small class="pull-right">Data: #{constantElements.currentDateValue}</small>
 										</h3>
 									</div>
 									<div class="box-body">
