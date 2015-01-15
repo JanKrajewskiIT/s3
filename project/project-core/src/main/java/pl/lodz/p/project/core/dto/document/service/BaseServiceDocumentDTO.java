@@ -1,49 +1,19 @@
 package pl.lodz.p.project.core.dto.document.service;
 
+import com.google.common.collect.ComparisonChain;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
-import pl.lodz.p.project.core.dto.account.UserDTO;
+import pl.lodz.p.project.core.dto.document.base.DocumentDTO;
 
-import java.io.Serializable;
-import java.util.Date;
-
-public class BaseServiceDocumentDTO implements ServiceDocumentDTO, Serializable {
+public class BaseServiceDocumentDTO extends DocumentDTO<Long> implements ServiceDocumentDTO, Comparable<BaseServiceDocumentDTO> {
 
     private final ServiceDocumentType serviceDocumentType;
-    private Long id;
-    private Long version = 1L;
-    private String symbol;
-    private Date creationDate;
-    private UserDTO documentCreator;
     private ServiceDocumentState state;
-    private boolean active;
 
     public BaseServiceDocumentDTO(ServiceDocumentType serviceDocumentType) {
         this.serviceDocumentType = serviceDocumentType;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public UserDTO getDocumentCreator() {
-        return documentCreator;
-    }
-
-    public void setDocumentCreator(UserDTO documentCreator) {
-        this.documentCreator = documentCreator;
     }
 
     public ServiceDocumentType getServiceDocumentType() {
@@ -58,27 +28,14 @@ public class BaseServiceDocumentDTO implements ServiceDocumentDTO, Serializable 
         this.state = state;
     }
 
-    public boolean isActive() {
-        return active;
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    @Override
+    public int compareTo(BaseServiceDocumentDTO o) {
+        return ComparisonChain.start().compare(this.getId(), o.getId()).result();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
 }

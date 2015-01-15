@@ -1,44 +1,23 @@
 package pl.lodz.p.project.core.dto.contractor;
 
-import java.io.Serializable;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import com.google.common.collect.ComparisonChain;
+import pl.lodz.p.project.core.dto.base.NamedDTO;
 
 /**
  *
  * @author Janiu
  */
-public class ContractorGroupDTO implements Serializable, Comparable<ContractorGroupDTO> {
+public class ContractorGroupDTO extends NamedDTO<Long> implements Comparable<ContractorGroupDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-    private String name;
 
     public ContractorGroupDTO() { }
     
     public ContractorGroupDTO(ContractorGroupDTO contractorGroupDTO) {
-    	this.name = contractorGroupDTO.getName();
+    	setName(contractorGroupDTO.getName());
 	}
-
-	public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
 	@Override
     public String toString() {
@@ -47,7 +26,7 @@ public class ContractorGroupDTO implements Serializable, Comparable<ContractorGr
 
 	@Override
 	public int compareTo(ContractorGroupDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
     
 }

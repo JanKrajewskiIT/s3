@@ -1,7 +1,7 @@
 package pl.lodz.p.project.core.domain.document.base;
 
-import pl.lodz.p.project.core.domain.base.BaseEntity;
 import pl.lodz.p.project.core.domain.account.User;
+import pl.lodz.p.project.core.domain.base.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -36,7 +36,7 @@ public class Document<T extends Serializable> extends BaseEntity<T> {
     private Date documentDate;
 
     @NotNull
-    @JoinColumn(name = "issue_person", referencedColumnName = "user_id")
+    @JoinColumn(name = "issue_person", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User issuePerson;
 

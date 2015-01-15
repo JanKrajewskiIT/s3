@@ -8,7 +8,6 @@ import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.contractor.ContractorServiceImpl;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**

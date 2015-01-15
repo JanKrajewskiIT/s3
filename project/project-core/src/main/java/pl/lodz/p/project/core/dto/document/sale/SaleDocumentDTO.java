@@ -1,46 +1,33 @@
 package pl.lodz.p.project.core.dto.document.sale;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-
-import javax.validation.constraints.NotNull;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
-
-import com.google.common.collect.ComparisonChain;
+import pl.lodz.p.project.core.dto.document.base.DocumentDTO;
 import pl.lodz.p.project.core.dto.document.items.DocumentPositionDTO;
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
+
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author Janiu
  */
-public class SaleDocumentDTO implements Serializable, Comparable<SaleDocumentDTO> {
+public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<SaleDocumentDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-    private String type;
-    private BigDecimal paidTotal = BigDecimal.ZERO;
-    private BigDecimal discount = BigDecimal.ZERO;
+
+    private Double paidTotal = 0d;
+    private Double discount = 0d;
     private String orderSymbol;
-    private boolean warehouseResult = true;
-    private boolean paid;
+    private Boolean warehouseResult = true;
+    private Boolean paid;
     private PaymentMethodDTO paymentMethod;
     private List<DocumentPositionDTO> goodsPositions;
-	
-	@NotNull(message = "Symbol nie może być pusty!")
-    private String symbol;	
-    
-    @NotNull(message = "Data wystawienia dokumentu nie może być pusta!")
-    private Date documentDate;
-    
+
     @NotNull(message = "Data sprzedaży nie może być pusta!")
     private Date saleDate;
     
@@ -48,11 +35,8 @@ public class SaleDocumentDTO implements Serializable, Comparable<SaleDocumentDTO
     private Date paymentDate;
     
     @NotNull(message = "Wartość Brutto po rabacie nie może być pusta!")
-    private BigDecimal total = BigDecimal.ZERO;
-    
-    @NotNull(message = "Pole Odebrał nie może być puste!")
-    private UserDTO issuePerson;
-        
+    private Double total = 0d;
+
     @NotNull(message = "Miejsce wystawienia nie może być puste!")
     private String documentPlace;
     
@@ -62,35 +46,19 @@ public class SaleDocumentDTO implements Serializable, Comparable<SaleDocumentDTO
     @NotNull(message = "Pole Nabywca nie może być puste!")
     private ContractorDTO contractor;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public BigDecimal getPaidTotal() {
+	public Double getPaidTotal() {
 		return paidTotal;
 	}
 
-	public void setPaidTotal(BigDecimal paidTotal) {
+	public void setPaidTotal(Double paidTotal) {
 		this.paidTotal = paidTotal;
 	}
 
-	public BigDecimal getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(BigDecimal discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 
@@ -102,19 +70,19 @@ public class SaleDocumentDTO implements Serializable, Comparable<SaleDocumentDTO
 		this.orderSymbol = orderSymbol;
 	}
 
-	public boolean isWarehouseResult() {
+	public Boolean isWarehouseResult() {
 		return warehouseResult;
 	}
 
-	public void setWarehouseResult(boolean warehouseResult) {
+	public void setWarehouseResult(Boolean warehouseResult) {
 		this.warehouseResult = warehouseResult;
 	}
 
-	public boolean isPaid() {
+	public Boolean isPaid() {
 		return paid;
 	}
 
-	public void setPaid(boolean paid) {
+	public void setPaid(Boolean paid) {
 		this.paid = paid;
 	}
 
@@ -134,22 +102,6 @@ public class SaleDocumentDTO implements Serializable, Comparable<SaleDocumentDTO
 		this.goodsPositions = goodsPositions;
 	}
 
-	public String getSymbol() {
-		return symbol;
-	}
-
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
-	}
-
-	public Date getDocumentDate() {
-		return documentDate;
-	}
-
-	public void setDocumentDate(Date documentDate) {
-		this.documentDate = documentDate;
-	}
-
 	public Date getSaleDate() {
 		return saleDate;
 	}
@@ -166,20 +118,12 @@ public class SaleDocumentDTO implements Serializable, Comparable<SaleDocumentDTO
 		this.paymentDate = paymentDate;
 	}
 
-	public BigDecimal getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void setTotal(BigDecimal total) {
+	public void setTotal(Double total) {
 		this.total = total;
-	}
-
-	public UserDTO getIssuePerson() {
-		return issuePerson;
-	}
-
-	public void setIssuePerson(UserDTO issuePerson) {
-		this.issuePerson = issuePerson;
 	}
 
 	public String getDocumentPlace() {
@@ -213,7 +157,7 @@ public class SaleDocumentDTO implements Serializable, Comparable<SaleDocumentDTO
 
 	@Override
 	public int compareTo(SaleDocumentDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
    
 }

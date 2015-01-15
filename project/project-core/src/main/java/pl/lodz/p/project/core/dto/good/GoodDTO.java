@@ -1,64 +1,32 @@
 package pl.lodz.p.project.core.dto.good;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
-import javax.validation.constraints.NotNull;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+import pl.lodz.p.project.core.dto.base.NamedDTO;
 import pl.lodz.p.project.core.enums.GoodType;
 
-import com.google.common.collect.ComparisonChain;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Janiu, Łukasz Gadomski
  */
-public class GoodDTO implements Serializable, Comparable<GoodDTO> {
+public class GoodDTO extends NamedDTO<Long> implements Comparable<GoodDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
+
+	@NotNull(message = "Symbol nie może być pusty!")
+	private String symbol;
+
     private GoodType type = GoodType.GOOD;
     private String pkwiu;   
     private String description;
-    private double weight;
+    private Double weight;
     private UnitDTO unit;
     private TaxDTO tax;
     private GoodGroupDTO group;
-    
-    @NotNull(message = "Symbol nie może być pusty!")
-    private String symbol;
-    
-    @NotNull(message = "Nazwa nie może być pusta!")
-    private String name;
-    
-    @NotNull(message = "Cena A Netto nie może być pusta!")
-    private BigDecimal priceANet;
-    
-    @NotNull(message = "Cena A Brutto nie może być pusta!")
-    private BigDecimal priceAGross;
-    
-    @NotNull(message = "Cena Magazynowa Netto nie może być pusta!")
-    private BigDecimal priceMagNet;
-    
-    @NotNull(message = "Cena Magazynowa  Brutto nie może być pusta!")
-    private BigDecimal priceMagGross;
-
-    private BigDecimal priceBNet;
-    private BigDecimal priceBGross;
-    private BigDecimal priceCNet;
-    private BigDecimal priceCGross;
-	
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	private PricesDTO prices;
 
 	public GoodType getType() {
 		return type;
@@ -84,11 +52,11 @@ public class GoodDTO implements Serializable, Comparable<GoodDTO> {
 		this.description = description;
 	}
 
-	public double getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(double weight) {
+	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 
@@ -124,86 +92,22 @@ public class GoodDTO implements Serializable, Comparable<GoodDTO> {
 		this.symbol = symbol;
 	}
 
-	public String getName() {
-		return name;
+	public PricesDTO getPrices() {
+		return prices;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPrices(PricesDTO prices) {
+		this.prices = prices;
 	}
 
-	public BigDecimal getPriceANet() {
-		return priceANet;
-	}
-
-	public void setPriceANet(BigDecimal priceANet) {
-		this.priceANet = priceANet;
-	}
-
-	public BigDecimal getPriceAGross() {
-		return priceAGross;
-	}
-
-	public void setPriceAGross(BigDecimal priceAGross) {
-		this.priceAGross = priceAGross;
-	}
-
-	public BigDecimal getPriceMagNet() {
-		return priceMagNet;
-	}
-
-	public void setPriceMagNet(BigDecimal priceMagNet) {
-		this.priceMagNet = priceMagNet;
-	}
-
-	public BigDecimal getPriceMagGross() {
-		return priceMagGross;
-	}
-
-	public void setPriceMagGross(BigDecimal priceMagGross) {
-		this.priceMagGross = priceMagGross;
-	}
-
-	public BigDecimal getPriceBNet() {
-		return priceBNet;
-	}
-
-	public void setPriceBNet(BigDecimal priceBNet) {
-		this.priceBNet = priceBNet;
-	}
-
-	public BigDecimal getPriceBGross() {
-		return priceBGross;
-	}
-
-	public void setPriceBGross(BigDecimal priceBGross) {
-		this.priceBGross = priceBGross;
-	}
-
-	public BigDecimal getPriceCNet() {
-		return priceCNet;
-	}
-
-	public void setPriceCNet(BigDecimal priceCNet) {
-		this.priceCNet = priceCNet;
-	}
-
-	public BigDecimal getPriceCGross() {
-		return priceCGross;
-	}
-
-	public void setPriceCGross(BigDecimal priceCGross) {
-		this.priceCGross = priceCGross;
-	}
-
-    @Override
+	@Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
 	@Override
     public int compareTo(GoodDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
     }
 
 }

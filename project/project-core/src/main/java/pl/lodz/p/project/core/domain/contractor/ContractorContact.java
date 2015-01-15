@@ -1,25 +1,14 @@
 package pl.lodz.p.project.core.domain.contractor;
 
-import java.io.Serializable;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import pl.lodz.p.project.core.domain.base.NamedEntity;
 
-import pl.lodz.p.project.core.domain.base.BasePersistable;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -27,21 +16,10 @@ import pl.lodz.p.project.core.domain.base.BasePersistable;
  */
 @Entity
 @Table(name = "contractors_contacts")
-public class ContractorContact implements Serializable, BasePersistable {
+public class ContractorContact extends NamedEntity<Long> {
 	
     private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contractor_contact_id")
-    private Long id;
-    
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 60)
-    @Column(name = "name")
-    private String name;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -49,28 +27,11 @@ public class ContractorContact implements Serializable, BasePersistable {
     private String number;
     
     @Column(name = "is_default")
-    private boolean isDefault;
+    private Boolean isDefault;
     
-    @JoinColumn(name = "contractor_id", referencedColumnName = "contractor_id")
+    @JoinColumn(name = "contractor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Contractor contractor;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getNumber() {
         return number;
@@ -111,9 +72,4 @@ public class ContractorContact implements Serializable, BasePersistable {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
-	@Override
-	public boolean isNew() {
-		return id == null;
-	}
-    
 }

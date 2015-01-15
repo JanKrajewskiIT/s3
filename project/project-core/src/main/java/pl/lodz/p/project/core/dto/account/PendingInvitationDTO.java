@@ -1,36 +1,26 @@
 package pl.lodz.p.project.core.dto.account;
 
-import java.io.Serializable;
-import java.util.Date;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import pl.lodz.p.project.core.dto.base.BaseDTO;
 
-import com.google.common.collect.ComparisonChain;
+import java.util.Date;
 
 /**
  *
  * @author Łukasz Gadomski, Janiu
  */
-public class PendingInvitationDTO implements Serializable, Comparable<PendingInvitationDTO> {
+public class PendingInvitationDTO extends BaseDTO<Long> implements Comparable<PendingInvitationDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
+
     private String email;
     private String token;
     private Date creationDate;
     private RoleDTO role;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -81,7 +71,7 @@ public class PendingInvitationDTO implements Serializable, Comparable<PendingInv
 
 	@Override
 	public int compareTo(PendingInvitationDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
 }

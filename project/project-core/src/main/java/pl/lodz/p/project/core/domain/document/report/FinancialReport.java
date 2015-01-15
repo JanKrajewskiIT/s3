@@ -1,22 +1,16 @@
 package pl.lodz.p.project.core.domain.document.report;
 
-import pl.lodz.p.project.core.domain.base.Activable;
+import pl.lodz.p.project.core.domain.base.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "financial_reports")
-public class FinancialReport implements Serializable, Activable {
+public class FinancialReport extends BaseEntity<Long> {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "financial_report_id")
-    private Long id;
 
     @Basic(optional = false)
     @NotNull
@@ -39,32 +33,20 @@ public class FinancialReport implements Serializable, Activable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "number_of_sales")
-    private int numberOfSales;
+    private Integer numberOfSales;
 
     @Basic(optional = false)
     @NotNull
     @Column(name = "average_sale_amount")
-    private double averageSaleAmount;
+    private Double averageSaleAmount;
 
     @Basic(optional = false)
     @NotNull
     @Column(name = "total_sales_amount")
-    private double totalSalesAmount;
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "is_active")
-    private boolean active;
-
-    @Version
-    private long version;
+    private Double totalSalesAmount;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Date getReportDate() {
@@ -91,53 +73,28 @@ public class FinancialReport implements Serializable, Activable {
         this.reportEndDate = reportEndDate;
     }
 
-    public int getNumberOfSales() {
+    public Integer getNumberOfSales() {
         return numberOfSales;
     }
 
-    public void setNumberOfSales(int numberOfSales) {
+    public void setNumberOfSales(Integer numberOfSales) {
         this.numberOfSales = numberOfSales;
     }
 
-    public double getAverageSaleAmount() {
+    public Double getAverageSaleAmount() {
         return averageSaleAmount;
     }
 
-    public void setAverageSaleAmount(double averageSaleAmount) {
+    public void setAverageSaleAmount(Double averageSaleAmount) {
         this.averageSaleAmount = averageSaleAmount;
     }
 
-    public double getTotalSalesAmount() {
+    public Double getTotalSalesAmount() {
         return totalSalesAmount;
     }
 
-    public void setTotalSalesAmount(double totalSalesAmount) {
+    public void setTotalSalesAmount(Double totalSalesAmount) {
         this.totalSalesAmount = totalSalesAmount;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public boolean isNew() {
-        return id == null;
-    }
 }

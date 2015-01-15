@@ -1,10 +1,10 @@
 package pl.lodz.p.project.core.dao.document.items;
 
-import java.util.ArrayList;
-
 import pl.lodz.p.project.core.dao.base.CrudDao;
 import pl.lodz.p.project.core.domain.document.items.DocumentPosition;
 import pl.lodz.p.project.core.dto.document.items.DocumentPositionDTO;
+
+import java.util.ArrayList;
 
 /**
  *

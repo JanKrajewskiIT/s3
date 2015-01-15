@@ -11,7 +11,6 @@ import pl.lodz.p.project.core.service.base.AbstractService;
 
 import javax.annotation.security.RolesAllowed;
 import javax.interceptor.Interceptors;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -46,19 +45,19 @@ public class FinancialReportServiceImpl extends AbstractService<FinancialReport,
 
     private void fillAdditionInformation(FinancialReportDTO financialReportDTO) {
         int numberOfSales = 0;
-        BigDecimal totalSalesAmount = BigDecimal.ZERO;
+        Double totalSalesAmount = 0d;
         List<SaleDocument> allSalesDocument = saleDocumentDao.findAll();
         for (SaleDocument saleDocument : allSalesDocument) {
             if (saleDocument.getDocumentDate().before(financialReportDTO.getReportEndDate())
                     && saleDocument.getDocumentDate().after(financialReportDTO.getReportStartDate())) {
                 numberOfSales++;
-                totalSalesAmount = totalSalesAmount.add(saleDocument.getPaidTotal());
+                totalSalesAmount = totalSalesAmount + saleDocument.getPaidTotal();
             }
         }
         financialReportDTO.setTotalSalesAmount(totalSalesAmount.doubleValue());
         financialReportDTO.setNumberOfSales(numberOfSales);
         if (numberOfSales != 0) {
-            financialReportDTO.setAverageSaleAmount(totalSalesAmount.divide(new BigDecimal(numberOfSales)).doubleValue());
+            financialReportDTO.setAverageSaleAmount(totalSalesAmount / numberOfSales);
         } else {
             financialReportDTO.setAverageSaleAmount(0.0);
         }

@@ -1,31 +1,20 @@
 package pl.lodz.p.project.core.dto.contractor;
 
-import java.io.Serializable;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import com.google.common.collect.ComparisonChain;
+import pl.lodz.p.project.core.dto.base.BaseDTO;
 
 /**
  *
  * @author Janiu
  */
-public class PostalCodeDTO implements Serializable, Comparable<PostalCodeDTO> {
+public class PostalCodeDTO extends BaseDTO<Long> implements Comparable<PostalCodeDTO> {
 
 	private static final long serialVersionUID = 1L;
-	 
-    private Long id;
+
 	private String code;
     private String city;
-
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getCode() {
         return code;
@@ -50,7 +39,7 @@ public class PostalCodeDTO implements Serializable, Comparable<PostalCodeDTO> {
 
 	@Override
 	public int compareTo(PostalCodeDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
 }

@@ -1,16 +1,15 @@
 package pl.lodz.p.project.core.service.account;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import pl.lodz.p.project.core.dao.account.UserDao;
 import pl.lodz.p.project.core.domain.account.User;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * 

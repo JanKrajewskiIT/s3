@@ -1,8 +1,8 @@
 package pl.lodz.p.project.core.service.document.items;
 
-import java.util.List;
-
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
+
+import java.util.List;
 
 /**
  *

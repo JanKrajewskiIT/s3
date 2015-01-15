@@ -18,6 +18,12 @@
 			<column name="value" type="VARCHAR(255)">
 				<constraints nullable="false" />
 			</column>
+			<column name="is_active" type="BOOLEAN DEFAULT TRUE" >
+				<constraints nullable="false"  />
+			</column>
+			<column name="version" type="BIGINT DEFAULT 1" >
+				<constraints nullable="false" />
+			</column>
 		</createTable>
 	</changeSet>
 </databaseChangeLog>

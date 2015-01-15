@@ -1,10 +1,10 @@
 package pl.lodz.p.project.core.jsf.session;
 
+import org.springframework.context.annotation.Scope;
+
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.context.annotation.Scope;
 
 /**
  * Named bean responsible for user session invalidation.

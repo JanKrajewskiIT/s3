@@ -1,20 +1,18 @@
 package pl.lodz.p.project.core.jsf.usermanagement;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import org.primefaces.event.RowEditEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import pl.lodz.p.project.core.dto.account.UserDTO;
+import pl.lodz.p.project.core.service.account.UserService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-
-import org.primefaces.event.RowEditEvent;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-
-import pl.lodz.p.project.core.dto.account.UserDTO;
-import pl.lodz.p.project.core.service.account.UserService;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

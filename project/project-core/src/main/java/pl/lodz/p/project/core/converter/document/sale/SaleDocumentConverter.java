@@ -1,11 +1,7 @@
 package pl.lodz.p.project.core.converter.document.sale;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.account.UserConverter;
+import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.contractor.ContractorConverter;
 import pl.lodz.p.project.core.converter.document.items.PaymentMethodConverter;
 import pl.lodz.p.project.core.domain.account.User;
@@ -16,6 +12,10 @@ import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
 import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
+
+import javax.faces.bean.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
@@ -43,6 +43,7 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		
 		SaleDocument entity = new SaleDocument();
 		entity.setId(objectDTO.getId());
+		entity.setVersion(objectDTO.getVersion());
 		entity.setContractor(contractor);
 		entity.setDiscount(objectDTO.getDiscount());
 		entity.setDocumentDate(objectDTO.getDocumentDate());
@@ -71,6 +72,7 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		
 		SaleDocumentDTO objectDTO = new SaleDocumentDTO();
 		objectDTO.setId(entity.getId());
+		objectDTO.setVersion(entity.getVersion());
 		objectDTO.setContractor(contractor);
 		objectDTO.setDiscount(entity.getDiscount());
 		objectDTO.setDocumentDate(objectDTO.getDocumentDate());

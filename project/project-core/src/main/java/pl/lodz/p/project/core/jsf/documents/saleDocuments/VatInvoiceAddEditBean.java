@@ -1,22 +1,8 @@
 package pl.lodz.p.project.core.jsf.documents.saleDocuments;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.document.items.DocumentPositionDTO;
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
@@ -30,6 +16,16 @@ import pl.lodz.p.project.core.service.document.items.DocumentSettingsService;
 import pl.lodz.p.project.core.service.document.items.PaymentMethodService;
 import pl.lodz.p.project.core.service.document.sale.SaleDocumentService;
 import pl.lodz.p.project.core.service.good.GoodService;
+
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -72,7 +68,7 @@ public class VatInvoiceAddEditBean implements Serializable {
 	private List<GoodDTO> allGoodsList;
 	private List<DocumentPositionDTO> goodsPositions;
 	private List<PaymentMethodDTO> paymentMethods;
-	private BigDecimal totalNet, totalGross;
+	private Double totalNet, totalGross;
 
 	private String breadcrumb = "Dodaj";
 	private GoodDTO selectedGood;
@@ -91,8 +87,8 @@ public class VatInvoiceAddEditBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		totalNet = new BigDecimal(BigInteger.ZERO);
-		totalGross = new BigDecimal(BigInteger.ZERO);
+		totalNet = 0d;
+		totalGross = 0d;
 		documentSymbol = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 		if (StringUtils.isBlank(documentSymbol)) {
 			documentSymbol = documentNumeratorService.nextNumber(DOCUMENT_TYPE);
@@ -209,19 +205,19 @@ public class VatInvoiceAddEditBean implements Serializable {
 	}
 
 	public void countTotals() {
-		totalNet = BigDecimal.ZERO;
-		totalGross = BigDecimal.ZERO;
+		totalNet = 0d;
+		totalGross = 0d;
 		for (DocumentPositionDTO documentPositionDTO : getGoodsPositions()) {
-			totalNet = totalNet.add(documentPositionDTO.getValueNet());
-			totalGross = totalGross.add(documentPositionDTO.getValueGross());
+			totalNet = totalNet + documentPositionDTO.getValueNet();
+			totalGross = totalGross + documentPositionDTO.getValueGross();
 		}
 
-		if (BigDecimal.ZERO.equals(saleDocumentDTO.getDiscount())) {
+		if (saleDocumentDTO.getDiscount() == 0) {
 			saleDocumentDTO.setTotal(totalGross);
 		} else {
-			BigDecimal hundred = BigDecimal.valueOf(100.00);
-			BigDecimal discountMultiplier = hundred.subtract(saleDocumentDTO.getDiscount()).divide(hundred);
-			saleDocumentDTO.setTotal(totalGross.multiply(discountMultiplier));
+			Double hundred = 100.00;
+			Double discountMultiplier = 100 - (saleDocumentDTO.getDiscount()/ hundred);
+			saleDocumentDTO.setTotal(totalGross * discountMultiplier);
 		}
 
 	}
@@ -244,7 +240,7 @@ public class VatInvoiceAddEditBean implements Serializable {
 	public String buyerToTextAreaString() {
 		if (saleDocumentDTO.getContractor() != null) {
 			return "Symbol: " + saleDocumentDTO.getContractor().getSymbol() + "\r\nNazwa: " + saleDocumentDTO.getContractor().getName() + "\r\nMiasto: "
-					+ saleDocumentDTO.getContractor().getCity() + "\r\nAdress: " + saleDocumentDTO.getContractor().getAdress() + "\r\nNIP: "
+					+ saleDocumentDTO.getContractor().getAddress().getCity() + "\r\nAdress: " + saleDocumentDTO.getContractor().getAddress().getAddress() + "\r\nNIP: "
 					+ saleDocumentDTO.getContractor().getNip();
 		} else {
 			return "";
@@ -288,8 +284,8 @@ public class VatInvoiceAddEditBean implements Serializable {
 			documentPositionDTO.setSymbol(documentSymbol);
 			documentPositionDTO.setTax(selectedGood.getTax());
 			documentPositionDTO.setQuantity(1.0);
-			documentPositionDTO.setPriceNet(selectedGood.getPriceANet());
-			documentPositionDTO.setPriceGross(selectedGood.getPriceAGross());
+			documentPositionDTO.setPriceNet(selectedGood.getPrices().getPriceANet());
+			documentPositionDTO.setPriceGross(selectedGood.getPrices().getPriceAGross());
 			getGoodsPositions().add(documentPositionDTO);
 
 			countTotals();
@@ -298,12 +294,12 @@ public class VatInvoiceAddEditBean implements Serializable {
 
 	public void priceNetChanged(DocumentPositionDTO documentPosition) {
 		GoodDTO good = documentPosition.getGood();
-		if (documentPosition.getPriceNet().equals(good.getPriceANet())) {
-			documentPosition.setPriceGross(good.getPriceAGross());
-		} else if (documentPosition.getPriceNet().equals(good.getPriceBNet())) {
-			documentPosition.setPriceGross(good.getPriceBGross());
-		} else if (documentPosition.getPriceNet().equals(good.getPriceCNet())) {
-			documentPosition.setPriceGross(good.getPriceCGross());
+		if (documentPosition.getPriceNet().equals(good.getPrices().getPriceANet())) {
+			documentPosition.setPriceGross(good.getPrices().getPriceAGross());
+		} else if (documentPosition.getPriceNet().equals(good.getPrices().getPriceBNet())) {
+			documentPosition.setPriceGross(good.getPrices().getPriceBGross());
+		} else if (documentPosition.getPriceNet().equals(good.getPrices().getPriceCNet())) {
+			documentPosition.setPriceGross(good.getPrices().getPriceCGross());
 		} else {
 			throw new IllegalArgumentException("Invalid value of price net");
 		}
@@ -369,7 +365,7 @@ public class VatInvoiceAddEditBean implements Serializable {
 	/**
 	 * @return the totalNet
 	 */
-	public BigDecimal getTotalNet() {
+	public Double getTotalNet() {
 		return totalNet;
 	}
 
@@ -377,14 +373,14 @@ public class VatInvoiceAddEditBean implements Serializable {
 	 * @param totalNet
 	 *            the totalNet to set
 	 */
-	public void setTotalNet(BigDecimal totalNet) {
+	public void setTotalNet(Double totalNet) {
 		this.totalNet = totalNet;
 	}
 
 	/**
 	 * @return the totalGross
 	 */
-	public BigDecimal getTotalGross() {
+	public Double getTotalGross() {
 		return totalGross;
 	}
 
@@ -392,7 +388,7 @@ public class VatInvoiceAddEditBean implements Serializable {
 	 * @param totalGross
 	 *            the totalGross to set
 	 */
-	public void setTotalGross(BigDecimal totalGross) {
+	public void setTotalGross(Double totalGross) {
 		this.totalGross = totalGross;
 	}
 

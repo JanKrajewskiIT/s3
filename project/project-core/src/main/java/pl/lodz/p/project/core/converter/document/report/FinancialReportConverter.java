@@ -13,27 +13,29 @@ public class FinancialReportConverter implements Converter<FinancialReport, Fina
 
     @Override
     public FinancialReport convertDTO(FinancialReportDTO objectDTO) {
-        FinancialReport report = new FinancialReport();
-        report.setId(objectDTO.getId());
-        report.setAverageSaleAmount(objectDTO.getAverageSaleAmount());
-        report.setNumberOfSales(objectDTO.getNumberOfSales());
-        report.setReportDate(objectDTO.getReportDate());
-        report.setReportEndDate(objectDTO.getReportEndDate());
-        report.setReportStartDate(objectDTO.getReportStartDate());
-        report.setTotalSalesAmount(objectDTO.getTotalSalesAmount());
-        return report;
+        FinancialReport entity = new FinancialReport();
+        entity.setId(objectDTO.getId());
+        entity.setVersion(objectDTO.getVersion());
+        entity.setAverageSaleAmount(objectDTO.getAverageSaleAmount());
+        entity.setNumberOfSales(objectDTO.getNumberOfSales());
+        entity.setReportDate(objectDTO.getReportDate());
+        entity.setReportEndDate(objectDTO.getReportEndDate());
+        entity.setReportStartDate(objectDTO.getReportStartDate());
+        entity.setTotalSalesAmount(objectDTO.getTotalSalesAmount());
+        return entity;
     }
 
     @Override
     public FinancialReportDTO convertEntity(FinancialReport entity) {
-        FinancialReportDTO dto = new FinancialReportDTO();
-        dto.setId(entity.getId());
-        dto.setAverageSaleAmount(entity.getAverageSaleAmount());
-        dto.setNumberOfSales(entity.getNumberOfSales());
-        dto.setReportDate(entity.getReportDate());
-        dto.setReportEndDate(entity.getReportEndDate());
-        dto.setReportStartDate(entity.getReportStartDate());
-        dto.setTotalSalesAmount(entity.getTotalSalesAmount());
-        return dto;
+        FinancialReportDTO objectDTO = new FinancialReportDTO();
+        objectDTO.setId(entity.getId());
+        objectDTO.setVersion(entity.getVersion());
+        objectDTO.setAverageSaleAmount(entity.getAverageSaleAmount());
+        objectDTO.setNumberOfSales(entity.getNumberOfSales());
+        objectDTO.setReportDate(entity.getReportDate());
+        objectDTO.setReportEndDate(entity.getReportEndDate());
+        objectDTO.setReportStartDate(entity.getReportStartDate());
+        objectDTO.setTotalSalesAmount(entity.getTotalSalesAmount());
+        return objectDTO;
     }
 }

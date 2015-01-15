@@ -1,7 +1,5 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
@@ -12,7 +10,8 @@ import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.warehouse.InternalInvoiceService;
 
-import java.math.BigDecimal;
+import javax.annotation.PostConstruct;
+import javax.inject.Named;
 
 @Named
 @Scope("request")
@@ -61,7 +60,7 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 
 		InternalInvoiceGoodDTO invoiceGood = new InternalInvoiceGoodDTO();
 		invoiceGood.setGood(goodListController.getSingleSelection());
-		invoiceGood.setQuantity(new BigDecimal(goodListController.getQuantity()));
+		invoiceGood.setQuantity(goodListController.getQuantity());
 		invoiceGoodListController.getItems().add(invoiceGood);
 
 		setTotal();

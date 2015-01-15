@@ -1,18 +1,18 @@
 package pl.lodz.p.project.core.converter.document.warehouse;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.good.GoodConverter;
+import pl.lodz.p.project.core.domain.document.base.InvoiceGoodKey;
 import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoice;
 import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoiceGood;
-import pl.lodz.p.project.core.domain.document.base.InvoiceGoodKey;
 import pl.lodz.p.project.core.domain.good.Good;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
+
+import javax.faces.bean.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *

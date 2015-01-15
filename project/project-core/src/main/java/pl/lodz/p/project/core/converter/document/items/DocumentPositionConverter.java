@@ -1,9 +1,5 @@
 package pl.lodz.p.project.core.converter.document.items;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.good.GoodConverter;
 import pl.lodz.p.project.core.converter.good.TaxConverter;
@@ -13,6 +9,10 @@ import pl.lodz.p.project.core.domain.good.Tax;
 import pl.lodz.p.project.core.dto.document.items.DocumentPositionDTO;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.dto.good.TaxDTO;
+
+import javax.faces.bean.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
 *
@@ -35,6 +35,7 @@ public class DocumentPositionConverter implements Converter<DocumentPosition, Do
 		
 		DocumentPosition entity = new DocumentPosition();
 		entity.setId(objectDTO.getId());
+		entity.setVersion(objectDTO.getVersion());
 		entity.setPriceNet(objectDTO.getPriceNet());
 		entity.setQuantity(objectDTO.getQuantity());
 		entity.setSymbol(objectDTO.getSymbol());
@@ -50,6 +51,7 @@ public class DocumentPositionConverter implements Converter<DocumentPosition, Do
 		
 		DocumentPositionDTO objectDTO = new DocumentPositionDTO();
 		objectDTO.setId(entity.getId());
+		objectDTO.setVersion(entity.getVersion());
 		objectDTO.setPriceNet(entity.getPriceNet());
 		objectDTO.setQuantity(entity.getQuantity());
 		objectDTO.setSymbol(entity.getSymbol());

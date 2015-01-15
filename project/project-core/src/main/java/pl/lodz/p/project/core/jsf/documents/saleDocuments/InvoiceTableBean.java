@@ -1,16 +1,14 @@
 package pl.lodz.p.project.core.jsf.documents.saleDocuments;
 
-import java.io.Serializable;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
+import pl.lodz.p.project.core.service.document.sale.SaleDocumentService;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-
-import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
-import pl.lodz.p.project.core.service.document.sale.SaleDocumentService;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

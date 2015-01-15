@@ -1,32 +1,22 @@
 package pl.lodz.p.project.core.dto.account;
 
-import java.io.Serializable;
-import java.util.Date;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import pl.lodz.p.project.core.dto.base.BaseDTO;
 
-import com.google.common.collect.ComparisonChain;
+import java.util.Date;
 
 /**
  *
  * @author Łukasz Gadomski, Janiu
  */
-public class PasswordChangeRequestDTO implements Serializable, Comparable<PasswordChangeRequestDTO> {
+public class PasswordChangeRequestDTO extends BaseDTO<Long> implements Comparable<PasswordChangeRequestDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
+
     private Date creationDate;
     private UserDTO user;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Date getCreationDate() {
         return creationDate;
@@ -51,7 +41,7 @@ public class PasswordChangeRequestDTO implements Serializable, Comparable<Passwo
 
 	@Override
 	public int compareTo(PasswordChangeRequestDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
 }

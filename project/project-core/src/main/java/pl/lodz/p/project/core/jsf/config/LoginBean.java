@@ -1,6 +1,6 @@
 package pl.lodz.p.project.core.jsf.config;
 
-import java.io.IOException;
+import org.springframework.context.annotation.Scope;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -9,8 +9,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-
-import org.springframework.context.annotation.Scope;
+import java.io.IOException;
 
 @Named(value = "loginBean")
 @Scope("request")

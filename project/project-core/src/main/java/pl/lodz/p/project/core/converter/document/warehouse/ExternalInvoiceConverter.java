@@ -1,11 +1,7 @@
 package pl.lodz.p.project.core.converter.document.warehouse;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.account.UserConverter;
+import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.contractor.ContractorConverter;
 import pl.lodz.p.project.core.converter.document.items.TransportMeanConverter;
 import pl.lodz.p.project.core.domain.account.User;
@@ -16,6 +12,10 @@ import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
+
+import javax.faces.bean.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * 

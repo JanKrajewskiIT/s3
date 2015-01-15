@@ -1,18 +1,12 @@
 package pl.lodz.p.project.core.converter.good;
 
+import pl.lodz.p.project.core.converter.base.Converter;
+import pl.lodz.p.project.core.domain.good.*;
+import pl.lodz.p.project.core.dto.good.*;
+
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import pl.lodz.p.project.core.converter.base.Converter;
-import pl.lodz.p.project.core.domain.good.Good;
-import pl.lodz.p.project.core.domain.good.GoodGroup;
-import pl.lodz.p.project.core.domain.good.Tax;
-import pl.lodz.p.project.core.domain.good.Unit;
-import pl.lodz.p.project.core.dto.good.GoodDTO;
-import pl.lodz.p.project.core.dto.good.GoodGroupDTO;
-import pl.lodz.p.project.core.dto.good.TaxDTO;
-import pl.lodz.p.project.core.dto.good.UnitDTO;
 
 /**
 *
@@ -23,34 +17,32 @@ import pl.lodz.p.project.core.dto.good.UnitDTO;
 public class GoodConverter implements Converter<Good, GoodDTO> {
 
     @Inject
-	GoodGroupConverter goodGroupConverter;
+	private GoodGroupConverter goodGroupConverter;
 
     @Inject
-	TaxConverter taxConverter;
+	private TaxConverter taxConverter;
 
     @Inject
-	UnitConverter unitConverter;
-	
+	private UnitConverter unitConverter;
+
+	@Inject
+	private PricesConverter pricesConverter;
+
 	@Override
 	public Good convertDTO(GoodDTO objectDTO) {
 		GoodGroup goodGroup = goodGroupConverter.convertDTO(objectDTO.getGroup());
 		Unit unit = unitConverter.convertDTO(objectDTO.getUnit());
 		Tax tax = taxConverter.convertDTO(objectDTO.getTax());
+		Prices prices = pricesConverter.convertDTO(objectDTO.getPrices());
 		
 		Good entity = new Good();
 		entity.setId(objectDTO.getId());
+		entity.setVersion(objectDTO.getVersion());
 		entity.setDescription(objectDTO.getDescription());
 		entity.setGroup(goodGroup);
 		entity.setName(objectDTO.getName());
 		entity.setPkwiu(objectDTO.getPkwiu());
-		entity.setPriceAGross(objectDTO.getPriceAGross());
-		entity.setPriceANet(objectDTO.getPriceANet());
-		entity.setPriceBGross(objectDTO.getPriceBGross());
-		entity.setPriceBNet(objectDTO.getPriceBNet());
-		entity.setPriceCGross(objectDTO.getPriceCGross());
-		entity.setPriceCNet(objectDTO.getPriceCNet());
-		entity.setPriceMagGross(objectDTO.getPriceMagGross());
-		entity.setPriceMagNet(objectDTO.getPriceMagNet());
+		entity.setPrices(prices);
 		entity.setSymbol(objectDTO.getSymbol());
 		entity.setTax(tax);
 		entity.setType(objectDTO.getType());
@@ -64,21 +56,16 @@ public class GoodConverter implements Converter<Good, GoodDTO> {
 		GoodGroupDTO goodGroup = goodGroupConverter.convertEntity(entity.getGroup());
 		UnitDTO unit = unitConverter.convertEntity(entity.getUnit());
 		TaxDTO tax = taxConverter.convertEntity(entity.getTax());
+		PricesDTO prices = pricesConverter.convertEntity(entity.getPrices());
 
 		GoodDTO objectDTO = new GoodDTO();
 		objectDTO.setId(entity.getId());
+		objectDTO.setVersion(entity.getVersion());
 		objectDTO.setDescription(entity.getDescription());
 		objectDTO.setGroup(goodGroup);
 		objectDTO.setName(entity.getName());
 		objectDTO.setPkwiu(entity.getPkwiu());
-		objectDTO.setPriceAGross(entity.getPriceAGross());
-		objectDTO.setPriceANet(entity.getPriceANet());
-		objectDTO.setPriceBGross(entity.getPriceBGross());
-		objectDTO.setPriceBNet(entity.getPriceBNet());
-		objectDTO.setPriceCGross(entity.getPriceCGross());
-		objectDTO.setPriceCNet(entity.getPriceCNet());
-		objectDTO.setPriceMagGross(entity.getPriceMagGross());
-		objectDTO.setPriceMagNet(entity.getPriceMagNet());
+		objectDTO.setPrices(prices);
 		objectDTO.setSymbol(entity.getSymbol());
 		objectDTO.setTax(tax);
 		objectDTO.setType(entity.getType());

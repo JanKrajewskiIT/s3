@@ -1,30 +1,16 @@
 package pl.lodz.p.project.core.domain.contractor;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Collection;
-
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import pl.lodz.p.project.core.domain.base.NamedEntity;
 
-import pl.lodz.p.project.core.domain.base.Activable;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.Collection;
 
 /**
  *
@@ -32,53 +18,39 @@ import pl.lodz.p.project.core.domain.base.Activable;
  */
 @Entity
 @Table(name = "contractors")
-public class Contractor implements Serializable, Activable {
+public class Contractor extends NamedEntity<Long> {
     
     private static final long serialVersionUID = 1L;
-   
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contractor_id")    
-    private Long id;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 70)
     @Column(name = "symbol")    
     private String symbol;
-    
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2147483647)
-    @Column(name = "name")    
-    private String name;
-        
-    @Size(min = 1, max = 40)    
-    @Column(name = "city") 
-    private String city;
-    
-    @Size(min = 0, max = 60)  
-    @Column(name = "adress")   
-    private String adress;
+
+	@Embedded
+	private Address address;
     
     @Size(min = 0, max = 13)    
     @Column(name = "nip") 
     private String nip;
     
     @Column(name = "discount") 
-    private BigDecimal discount = BigDecimal.ZERO;
+    private Double discount = 0d;
 
     @Size(min = 0, max = 50)
     @Column(name = "account_number")
     private String accountNumber;
-    
+
     @Size(max = 60)
-    @Column(name = "website") 
+    @Column(name = "website")
     private String website;
-    
-    @Size(max = 60)
-    @Column(name = "email") 
-    private String email;
+
+	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Invalid email")
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 40)
+	private String email;
 
     @Column(name = "description") 
     private String description;
@@ -88,37 +60,17 @@ public class Contractor implements Serializable, Activable {
     private String representative;
     
     @Column(name = "is_supplier")
-    private boolean supplier;
+    private Boolean supplier;
     
     @Column(name = "is_company")
-    private boolean company;
+    private Boolean company;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "contractor")
     private Collection<ContractorContact> contractorsContactsCollection;
     
-    @JoinColumn(name = "contractor_group_id", referencedColumnName = "contractor_group_id")
+    @JoinColumn(name = "contractor_group_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ContractorGroup group;
-    
-    @JoinColumn(name = "postal_code_id", referencedColumnName = "postal_code_id")
-    @ManyToOne(optional = false)
-    private PostalCode postalCode;    
-
-	@Basic(optional = false)
-	@NotNull    
-    @Column(name = "is_active")
-    private boolean active = true;
-    
-    @Version
-    private Long version = 1L;
-    
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getSymbol() {
 		return symbol;
@@ -128,36 +80,12 @@ public class Contractor implements Serializable, Activable {
 		this.symbol = symbol;
 	}
 
-	public String getName() {
-		return name;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public PostalCode getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(PostalCode postalCode) {
-		this.postalCode = postalCode;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getAdress() {
-		return adress;
-	}
-
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public String getNip() {
@@ -168,11 +96,11 @@ public class Contractor implements Serializable, Activable {
 		this.nip = nip;
 	}
 
-	public BigDecimal getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(BigDecimal discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 
@@ -216,44 +144,27 @@ public class Contractor implements Serializable, Activable {
 		this.representative = representative;
 	}
 
-	public boolean isSupplier() {
+	public Boolean isSupplier() {
 		return supplier;
 	}
 
-	public void setSupplier(boolean supplier) {
+	public void setSupplier(Boolean supplier) {
 		this.supplier = supplier;
 	}
 
-	public boolean isCompany() {
+	public Boolean isCompany() {
 		return company;
 	}
 
-	public void setCompany(boolean company) {
+	public void setCompany(Boolean company) {
 		this.company = company;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
 	}
 
 	public Collection<ContractorContact> getContractorsContactsCollection() {
 		return contractorsContactsCollection;
 	}
 
-	public void setContractorsContactsCollection(
-			Collection<ContractorContact> contractorsContactsCollection) {
+	public void setContractorsContactsCollection(Collection<ContractorContact> contractorsContactsCollection) {
 		this.contractorsContactsCollection = contractorsContactsCollection;
 	}
 
@@ -279,10 +190,5 @@ public class Contractor implements Serializable, Activable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
-
-	@Override
-	public boolean isNew() {
-		return id == null;
-	}
 
 }

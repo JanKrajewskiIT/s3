@@ -1,23 +1,21 @@
 package pl.lodz.p.project.core.jsf.settings;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-
 import pl.lodz.p.project.core.dto.good.GoodGroupDTO;
 import pl.lodz.p.project.core.dto.good.TaxDTO;
 import pl.lodz.p.project.core.dto.good.UnitDTO;
 import pl.lodz.p.project.core.service.good.GoodGroupService;
 import pl.lodz.p.project.core.service.good.TaxService;
 import pl.lodz.p.project.core.service.good.UnitService;
+
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

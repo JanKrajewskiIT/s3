@@ -1,19 +1,18 @@
 package pl.lodz.p.project.core.dao.account;
 
-import javax.persistence.NoResultException;
-import javax.persistence.OptimisticLockException;
-import javax.persistence.Query;
-import javax.validation.ConstraintViolationException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import pl.lodz.p.project.core.dao.base.AbstractCrudDao;
 import pl.lodz.p.project.core.domain.account.User;
 import pl.lodz.p.project.core.exception.OptLockException;
 import pl.lodz.p.project.core.exception.UniqueConstraintViolationException;
+
+import javax.persistence.NoResultException;
+import javax.persistence.OptimisticLockException;
+import javax.persistence.Query;
+import javax.validation.ConstraintViolationException;
 
 /**
 *

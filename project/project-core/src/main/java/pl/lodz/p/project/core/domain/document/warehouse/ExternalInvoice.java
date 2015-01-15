@@ -1,28 +1,26 @@
 package pl.lodz.p.project.core.domain.document.warehouse;
 
+import pl.lodz.p.project.core.domain.contractor.Contractor;
+import pl.lodz.p.project.core.domain.document.items.TransportMean;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import pl.lodz.p.project.core.domain.contractor.Contractor;
-import pl.lodz.p.project.core.domain.document.items.TransportMean;
-import java.util.Collection;
 
 /**
- * 
  * @author Jan Krajewski
- *
  */
 @Entity
 @Table(name = "external_invoices")
 public class ExternalInvoice extends WarehouseInvoice { 
 
-	private static final long serialVersionUID = 4420769465498341864L;
-    
-    @JoinColumn(name = "contractor_id", referencedColumnName = "contractor_id")
+	private static final long serialVersionUID = 1L;
+
+    @JoinColumn(name = "contractor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Contractor contractor;
 
-    @JoinColumn(name = "transport_id", referencedColumnName = "transport_id")
+    @JoinColumn(name = "transport_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private TransportMean transportMean;
     

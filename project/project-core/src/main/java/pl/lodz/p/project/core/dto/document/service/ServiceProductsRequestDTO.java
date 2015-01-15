@@ -1,9 +1,9 @@
 package pl.lodz.p.project.core.dto.document.service;
 
+import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
 
 public class ServiceProductsRequestDTO extends BaseServiceDocumentDTO {
 	

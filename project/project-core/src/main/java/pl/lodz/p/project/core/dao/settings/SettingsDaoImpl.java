@@ -1,21 +1,18 @@
 package pl.lodz.p.project.core.dao.settings;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import pl.lodz.p.project.core.domain.settings.SettingsEntry;
+import pl.lodz.p.project.core.dto.settings.SettingsPropertyType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
-import pl.lodz.p.project.core.domain.settings.SettingsEntry;
-import pl.lodz.p.project.core.dto.settings.SettingsPropertyType;
-
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *

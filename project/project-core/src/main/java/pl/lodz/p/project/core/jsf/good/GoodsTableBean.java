@@ -1,20 +1,18 @@
 package pl.lodz.p.project.core.jsf.good;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Named;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.service.good.GoodService;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *

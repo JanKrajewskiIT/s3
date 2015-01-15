@@ -1,14 +1,13 @@
 package pl.lodz.p.project.core.dto.document.base;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeFieldType;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
-
 import pl.lodz.p.project.core.dto.document.base.DocumentFormat.DocumentFormatItem;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *

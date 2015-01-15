@@ -2,20 +2,16 @@ package pl.lodz.p.project.core.domain.document.service;
 
 import pl.lodz.p.project.core.domain.contractor.Contractor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
- * Created by milczu on 09.01.15.
+ * @author Milczu
  */
 @Entity
 @Table(name = "service_repair_orders")
 public class ServiceRepairOrder extends BaseDocumentService {
 
-    @JoinColumn(name = "contractor_id", referencedColumnName = "contractor_id")
+    @JoinColumn(name = "contractor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Contractor contractor;
 

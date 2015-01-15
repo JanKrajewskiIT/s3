@@ -1,5 +1,8 @@
 package pl.lodz.p.project.core.domain.document.service;
 
+/**
+ * @author Milczu
+ */
 public enum ServiceDocumentState {
 
 	NEW("Nowy"), IN_PROGRESS("W realizacji"), DONE("Zakończony");

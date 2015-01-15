@@ -25,4 +25,5 @@ public class BaseDTO<T extends Serializable> implements Serializable {
     public void setId(T id) {
         this.id = id;
     }
+
 }

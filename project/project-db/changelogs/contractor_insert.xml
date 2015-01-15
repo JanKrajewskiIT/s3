@@ -19,5 +19,17 @@
 			<column name="version" value="1" />
 		</insert>
 	</changeSet>
-	
+
+	<changeSet id="sample_contractors" author="jan.krajewski">
+		<sql>
+			INSERT INTO CONTRACTORS VALUES (1,'Jan Krajewski','JK',1,1,'Warszawa','ul. Jakobinów 25a', '312-131-12-12', 12.2, 'Fajny ziomuś', '123123123123123', 'smiesznastronka.pl', 'fajny.koleszka@gmail.com', 'Representative', false, false, true, 1);
+			INSERT INTO CONTRACTORS VALUES (2,'Łukasz Gadomski','ŁG',1,1,'Warszawa','ul. Jakobinów 25a', '312-131-12-12', 12.2, 'Fajny ziomuś', '123123123123123', 'smiesznastronka.pl', 'fajny.koleszka@gmail.com', 'Representative', false, false, true, 1);
+			INSERT INTO CONTRACTORS VALUES (3,'Bartosz Milczarek','BM',1,1,'Warszawa','ul. Jakobinów 25a', '312-131-12-12', 12.2, 'Fajny ziomuś', '123123123123123', 'smiesznastronka.pl', 'fajny.koleszka@gmail.com', 'Representative', false, false, true, 1);
+			INSERT INTO CONTRACTORS VALUES (4,'Krzychu Zychu','KZ',1,1,'Warszawa','ul. Jakobinów 25a', '312-131-12-12', 12.2, 'Fajny ziomuś', '123123123123123', 'smiesznastronka.pl', 'fajny.koleszka@gmail.com', 'Representative', false, false, true, 1);
+			INSERT INTO CONTRACTORS VALUES (5,'Pan Wołodyjowski','PW',1,1,'Warszawa','ul. Jakobinów 25a', '312-131-12-12', 12.2, 'Fajny ziomuś', '123123123123123', 'smiesznastronka.pl', 'fajny.koleszka@gmail.com', 'Representative', false, false, true, 1);
+			INSERT INTO CONTRACTORS VALUES (6,'Jan Matejko','JM',1,1,'Warszawa','ul. Jakobinów 25a', '312-131-12-12', 12.2, 'Fajny ziomuś', '123123123123123', 'smiesznastronka.pl', 'fajny.koleszka@gmail.com', 'Representative', false, false, true, 1);
+			INSERT INTO CONTRACTORS VALUES (7,'Pan Kowalski','PK',1,1,'Warszawa','ul. Jakobinów 25a', '312-131-12-12', 12.2, 'Fajny ziomuś', '123123123123123', 'smiesznastronka.pl', 'fajny.koleszka@gmail.com', 'Representative', false, false, true, 1);
+			INSERT INTO CONTRACTORS VALUES (8,'Zygmunt Hajszer','ZH',1,1,'Warszawa','ul. Jakobinów 25a', '312-131-12-12', 12.2, 'Fajny ziomuś', '123123123123123', 'smiesznastronka.pl', 'fajny.koleszka@gmail.com', 'Representative', false, false, true, 1);
+		</sql>
+	</changeSet>
 </databaseChangeLog>

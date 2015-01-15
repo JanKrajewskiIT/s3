@@ -1,23 +1,22 @@
 package pl.lodz.p.project.core.domain.document.warehouse;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
-
 import pl.lodz.p.project.core.domain.document.base.Document;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
- * 
  * @author Jan Krajewski
- *
  */
 @MappedSuperclass
 public abstract class WarehouseInvoice extends Document<Long> {
 
-	private static final long serialVersionUID = 1469119918661275184L;
+	private static final long serialVersionUID = 1L;
 
-    @Basic(optional = false)
+	@Basic(optional = false)
     @NotNull
     @Column(name = "total")
 	private Double total;	

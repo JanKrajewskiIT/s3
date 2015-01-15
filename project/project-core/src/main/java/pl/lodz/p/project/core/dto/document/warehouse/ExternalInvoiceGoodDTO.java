@@ -1,7 +1,9 @@
 package pl.lodz.p.project.core.dto.document.warehouse;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
+import com.google.common.collect.ComparisonChain;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import pl.lodz.p.project.core.dto.base.BaseDTO;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 
 /**
@@ -9,14 +11,13 @@ import pl.lodz.p.project.core.dto.good.GoodDTO;
  * @author Jan Krajewski
  *
  */
-public class ExternalInvoiceGoodDTO implements Serializable, Comparable<ExternalInvoiceGoodDTO> {
+public class ExternalInvoiceGoodDTO extends BaseDTO<Long> implements Comparable<ExternalInvoiceGoodDTO> {
 
-	private static final long serialVersionUID = -1671475480826805077L;
+	private static final long serialVersionUID = 1L;
 	
 	private GoodDTO good;
 	private ExternalInvoiceDTO invoice;
-    private BigDecimal quantity;
-	private Long version;	
+    private Double quantity;
         
 	public GoodDTO getGood() {
 		return good;
@@ -34,25 +35,21 @@ public class ExternalInvoiceGoodDTO implements Serializable, Comparable<External
 		this.invoice = invoice;
 	}
 
-	public BigDecimal getQuantity() {
+	public Double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(BigDecimal quantity) {
+	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
-	
-	public Long getVersion() {
-		return version;
-	}
 
-	public void setVersion(Long version) {
-		this.version = version;
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 	@Override
 	public int compareTo(ExternalInvoiceGoodDTO o) {
-		return 0;
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
-
 }

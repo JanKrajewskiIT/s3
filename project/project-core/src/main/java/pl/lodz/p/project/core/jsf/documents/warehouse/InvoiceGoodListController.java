@@ -5,7 +5,6 @@ import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.jsf.base.EditListController;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**

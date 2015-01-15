@@ -1,16 +1,14 @@
 package pl.lodz.p.project.core.service.good;
 
-import java.util.List;
-
-import javax.annotation.security.RolesAllowed;
-import javax.interceptor.Interceptors;
-
 import org.springframework.stereotype.Component;
-
 import pl.lodz.p.project.core.domain.good.Tax;
 import pl.lodz.p.project.core.dto.good.TaxDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 import pl.lodz.p.project.core.service.base.AbstractService;
+
+import javax.annotation.security.RolesAllowed;
+import javax.interceptor.Interceptors;
+import java.util.List;
 
 /**
  *

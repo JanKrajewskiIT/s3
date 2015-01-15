@@ -1,19 +1,17 @@
 package pl.lodz.p.project.core.jsf.contractor;
 
-import java.io.Serializable;
-
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorGroupDTO;
 import pl.lodz.p.project.core.service.contractor.ContractorGroupService;
 import pl.lodz.p.project.core.service.contractor.ContractorService;
+
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import java.io.Serializable;
 
 /**
  *

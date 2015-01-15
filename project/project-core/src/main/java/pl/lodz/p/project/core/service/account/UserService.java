@@ -1,9 +1,9 @@
 package pl.lodz.p.project.core.service.account;
 
-import java.util.List;
-
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.exception.UniqueConstraintViolationException;
+
+import java.util.List;
 
 /**
  *

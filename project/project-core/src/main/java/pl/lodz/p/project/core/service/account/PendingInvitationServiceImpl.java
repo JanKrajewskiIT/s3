@@ -1,12 +1,7 @@
 package pl.lodz.p.project.core.service.account;
 
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
-import javax.interceptor.Interceptors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import pl.lodz.p.project.core.converter.account.RoleConverter;
 import pl.lodz.p.project.core.dao.account.PendingInvitationDao;
 import pl.lodz.p.project.core.domain.account.PendingInvitation;
@@ -16,6 +11,10 @@ import pl.lodz.p.project.core.dto.account.RoleDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 import pl.lodz.p.project.core.service.base.AbstractService;
 import pl.lodz.p.project.core.util.MailSender;
+
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.interceptor.Interceptors;
 
 /**
  *

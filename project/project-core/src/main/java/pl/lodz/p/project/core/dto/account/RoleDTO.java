@@ -5,44 +5,22 @@
  */
 package pl.lodz.p.project.core.dto.account;
 
-import java.io.Serializable;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
 import pl.lodz.p.project.core.domain.account.Role;
-
-import com.google.common.collect.ComparisonChain;
+import pl.lodz.p.project.core.dto.base.NamedDTO;
 
 /**
  * DTO class mapping entities of type {@link Role}
  *
  * @author Łukasz Gadomski, Janiu
  */
-public class RoleDTO implements Serializable, Comparable<RoleDTO> {
+public class RoleDTO extends NamedDTO<Long> implements Comparable<RoleDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-	private String name;
-
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
     @Override
     public int hashCode() {
@@ -61,7 +39,7 @@ public class RoleDTO implements Serializable, Comparable<RoleDTO> {
 
 	@Override
 	public int compareTo(RoleDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 	
 }

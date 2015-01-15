@@ -1,46 +1,25 @@
 package pl.lodz.p.project.core.dto.good;
 
-import java.io.Serializable;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import com.google.common.collect.ComparisonChain;
+import pl.lodz.p.project.core.dto.base.NamedDTO;
 
 /**
  *
  * @author Janiu
  */
-public class UnitDTO implements Serializable, Comparable<UnitDTO> {
+public class UnitDTO extends NamedDTO<Long> implements Comparable<UnitDTO> {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
-	private String name;
 	private Short zeroPlaces;
 
-	public UnitDTO() {
-	}
+	public UnitDTO() { }
 
 	public UnitDTO(UnitDTO unit) {
-		this.name = unit.getName();
+		setName(unit.getName());
 		this.zeroPlaces = unit.getZeroPlaces();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Short getZeroPlaces() {
@@ -58,7 +37,7 @@ public class UnitDTO implements Serializable, Comparable<UnitDTO> {
 
 	@Override
 	public int compareTo(UnitDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
 }

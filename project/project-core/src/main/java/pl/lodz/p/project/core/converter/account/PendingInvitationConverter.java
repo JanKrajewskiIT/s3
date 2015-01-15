@@ -1,14 +1,14 @@
 package pl.lodz.p.project.core.converter.account;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.domain.account.PendingInvitation;
 import pl.lodz.p.project.core.domain.account.Role;
 import pl.lodz.p.project.core.dto.account.PendingInvitationDTO;
 import pl.lodz.p.project.core.dto.account.RoleDTO;
+
+import javax.faces.bean.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
 *
@@ -27,6 +27,7 @@ public class PendingInvitationConverter implements Converter<PendingInvitation, 
 		
 		PendingInvitation entity = new PendingInvitation();
 		entity.setId(objectDTO.getId());
+		entity.setVersion(objectDTO.getVersion());
 		entity.setEmail(objectDTO.getEmail());
 		entity.setRole(role);
 		entity.setToken(objectDTO.getToken());
@@ -40,6 +41,7 @@ public class PendingInvitationConverter implements Converter<PendingInvitation, 
 				
 		PendingInvitationDTO objectDTO = new PendingInvitationDTO();
 		objectDTO.setId(entity.getId());
+		objectDTO.setVersion(entity.getVersion());
 		objectDTO.setEmail(entity.getEmail());
 		objectDTO.setRole(roleDTO);
 		objectDTO.setToken(entity.getToken());

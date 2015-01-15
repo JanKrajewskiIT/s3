@@ -1,23 +1,8 @@
 package pl.lodz.p.project.core.util;
 
-import java.util.Date;
-import java.util.Properties;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import pl.lodz.p.project.core.dao.account.PasswordChangeRequestDao;
 import pl.lodz.p.project.core.dao.account.PendingInvitationDao;
 import pl.lodz.p.project.core.domain.account.PasswordChangeRequest;
@@ -25,6 +10,15 @@ import pl.lodz.p.project.core.domain.account.PendingInvitation;
 import pl.lodz.p.project.core.domain.account.Role;
 import pl.lodz.p.project.core.domain.account.User;
 import pl.lodz.p.project.core.exception.UniqueConstraintViolationException;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Date;
+import java.util.Properties;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Bean responsible for sending mail.

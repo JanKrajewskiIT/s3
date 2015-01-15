@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.jsf.base.EditListController;
-import pl.lodz.p.project.core.service.good.GoodService;
 import pl.lodz.p.project.core.service.good.GoodServiceImpl;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
@@ -21,7 +19,7 @@ public class GoodListController extends EditListController<GoodDTO> {
     @Autowired
     private GoodServiceImpl goodService;
 
-    private Integer quantity;
+    private Double quantity;
 
     @PostConstruct
     private void init() {
@@ -30,11 +28,11 @@ public class GoodListController extends EditListController<GoodDTO> {
         setItems(page.getContent());
     }
 
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 }

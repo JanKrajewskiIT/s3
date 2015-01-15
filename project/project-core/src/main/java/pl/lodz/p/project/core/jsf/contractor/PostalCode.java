@@ -1,17 +1,15 @@
 package pl.lodz.p.project.core.jsf.contractor;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Named;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
 import pl.lodz.p.project.core.service.contractor.PostalCodeService;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -36,7 +34,7 @@ public class PostalCode implements Serializable {
 	}
 
 	public void fillCity(ContractorDTO contractor) {
-		if (contractor.getPostalCode() != null) {
+		if (contractor.getAddress().getPostalCode() != null) {
 			// TODO change from code to id
 			// String code = contractor.getPostCode();
 			// PostalCodeDTO postalCode =

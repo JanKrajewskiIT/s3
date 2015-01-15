@@ -1,14 +1,12 @@
 package pl.lodz.p.project.core.domain.document.base;
 
-import java.io.Serializable;
+import pl.lodz.p.project.core.domain.good.Good;
 
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import pl.lodz.p.project.core.domain.document.warehouse.WarehouseInvoice;
-import pl.lodz.p.project.core.domain.good.Good;
+import java.io.Serializable;
 
 /**
  * 
@@ -24,7 +22,7 @@ public class InvoiceGoodKey<T extends Document> implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private T invoice;
 	
-    @JoinColumn(name = "good_id", referencedColumnName = "good_id")
+    @JoinColumn(name = "good_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
 	private Good good;    
     

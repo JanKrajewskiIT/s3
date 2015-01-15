@@ -67,4 +67,18 @@
 			<column name="version" value="1" />
 		</insert>
 	</changeSet>
+
+	<changeSet id="sample_goods" author="jan.krajewski">
+		<sql>
+			INSERT INTO GOODS VALUES (1,'CPU','Zacny komputer','GOOD',1,1,1,'PKWIU',12.0,12.0,12.0,12.0,12.0,12.0,12.0,12.0,'Zacny towar',11.2,	true,1);
+			INSERT INTO GOODS VALUES (2,'LAP','Laptop','GOOD',1,1,1,'PKWIU',12.0,12.0,12.0,12.0,12.0,12.0,12.0,12.0,'Zacny towar',11.2,	true,1);
+			INSERT INTO GOODS VALUES (3,'HD','Twardy dyszczak','GOOD',1,1,1,'PKWIU',12.0,12.0,12.0,12.0,12.0,12.0,12.0,12.0,'Zacny towar',11.2,	true,1);
+			INSERT INTO GOODS VALUES (4,'REC','Twój rekorder','GOOD',1,1,1,'PKWIU',12.0,12.0,12.0,12.0,12.0,12.0,12.0,12.0,'Zacny towar',11.2,	true,1);
+			INSERT INTO GOODS VALUES (5,'CAM','Kamereczka','GOOD',1,1,1,'PKWIU',12.0,12.0,12.0,12.0,12.0,12.0,12.0,12.0,'Zacny towar',11.2,	true,1);
+			INSERT INTO GOODS VALUES (6,'AP','Aparat 3D','GOOD',1,1,1,'PKWIU',12.0,12.0,12.0,12.0,12.0,12.0,12.0,12.0,'Zacny towar',11.2,	true,1);
+			INSERT INTO GOODS VALUES (7,'TV','Telewizor kineskopowy','GOOD',1,1,1,'PKWIU',12.0,12.0,12.0,12.0,12.0,12.0,12.0,12.0,'Zacny towar',11.2,	true,1);
+			INSERT INTO GOODS VALUES (8,'PR','Projektor','GOOD',1,1,1,'PKWIU',12.0,12.0,12.0,12.0,12.0,12.0,12.0,12.0,'Zacny towar',11.2,	true,1);
+			INSERT INTO GOODS VALUES (9,'AN','Aluminiowy notebook','GOOD',1,1,1,'PKWIU',12.0,12.0,12.0,12.0,12.0,12.0,12.0,12.0,'Zacny towar',11.2,	true,1);
+		</sql>
+	</changeSet>
 </databaseChangeLog>

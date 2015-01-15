@@ -1,15 +1,8 @@
 package pl.lodz.p.project.core.service.account;
 
-import java.util.List;
-
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
-import javax.interceptor.Interceptors;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import pl.lodz.p.project.core.dao.account.RoleDao;
 import pl.lodz.p.project.core.dao.account.UserDao;
 import pl.lodz.p.project.core.domain.account.Role;
@@ -17,6 +10,11 @@ import pl.lodz.p.project.core.domain.account.User;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 import pl.lodz.p.project.core.service.base.AbstractService;
+
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.interceptor.Interceptors;
+import java.util.List;
 
 /**
  *

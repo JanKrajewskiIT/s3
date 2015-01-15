@@ -1,12 +1,7 @@
 package pl.lodz.p.project.core.service.contractor;
 
-import java.util.List;
-
-import javax.annotation.security.RolesAllowed;
-import javax.interceptor.Interceptors;
-
+import com.google.common.collect.Lists;
 import org.springframework.stereotype.Component;
-
 import pl.lodz.p.project.core.dao.contractor.ContractorDao;
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageImpl;
@@ -16,7 +11,9 @@ import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 import pl.lodz.p.project.core.service.base.AbstractService;
 
-import com.google.common.collect.Lists;
+import javax.annotation.security.RolesAllowed;
+import javax.interceptor.Interceptors;
+import java.util.List;
 
 /**
  *

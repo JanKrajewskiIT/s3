@@ -3,28 +3,22 @@ package pl.lodz.p.project.core.dto.contractor;
 import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
+import pl.lodz.p.project.core.dto.base.NamedDTO;
 
 /**
  *
  * @author Janiu
  */
-public class ContractorDTO implements Serializable, Comparable<ContractorDTO> {
+public class ContractorDTO extends NamedDTO<Long> implements Comparable<ContractorDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
+
     private String symbol;
-    private String name;
     private String type;
     private String role;
-    private PostalCodeDTO postalCode;
-    private String city;
-    private String adress;
+    private AddressDTO address;
     private String nip;
-    private BigDecimal discount = BigDecimal.ZERO;
+    private Double discount = 0d;
     private String accountNumber;
     private String website;
     private String email;
@@ -32,28 +26,12 @@ public class ContractorDTO implements Serializable, Comparable<ContractorDTO> {
     private String representative;
     private ContractorGroupDTO group;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getSymbol() {
         return symbol;
     }
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getType() {
@@ -72,28 +50,12 @@ public class ContractorDTO implements Serializable, Comparable<ContractorDTO> {
         this.role = role;
     }
 
-    public PostalCodeDTO getPostalCode() {
-        return postalCode;
+    public AddressDTO getAddress() {
+        return address;
     }
 
-    public void setPostalCode(PostalCodeDTO postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(AddressDTO address) {
+        this.address = address;
     }
 
     public String getNip() {
@@ -104,11 +66,11 @@ public class ContractorDTO implements Serializable, Comparable<ContractorDTO> {
         this.nip = nip;
     }
 
-    public BigDecimal getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
@@ -167,7 +129,7 @@ public class ContractorDTO implements Serializable, Comparable<ContractorDTO> {
 
 	@Override
 	public int compareTo(ContractorDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
 }

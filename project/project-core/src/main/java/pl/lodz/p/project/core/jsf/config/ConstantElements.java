@@ -1,8 +1,8 @@
 package pl.lodz.p.project.core.jsf.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.lodz.p.project.core.domain.contractor.PostalCode;
 import pl.lodz.p.project.core.dto.account.UserDTO;
+import pl.lodz.p.project.core.dto.contractor.AddressDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
@@ -31,14 +31,17 @@ public class ConstantElements {
         contractor.setId(1l);
         contractor.setSymbol("ADMIN");
         contractor.setName("Admin Admiński");
-        contractor.setCity("Warszawa");
-        contractor.setAdress("ul. Jakobinów 25a");
 
         PostalCodeDTO postalCode = new PostalCodeDTO();
         postalCode.setCity("Warszawa");
         postalCode.setCode("55-555");
 
-        contractor.setPostalCode(postalCode);
+        AddressDTO address = new AddressDTO();
+        address.setCity("Warszawa");
+        address.setAddress("ul. Jakobinów 25a");
+        address.setPostalCode(postalCode);
+
+        contractor.setAddress(address);
         contractor.setNip("312-312-12-32");
         contractor.setEmail("admin.adminski@gmail.com");
         return contractor;

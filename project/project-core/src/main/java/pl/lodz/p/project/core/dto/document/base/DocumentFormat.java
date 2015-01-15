@@ -1,10 +1,9 @@
 package pl.lodz.p.project.core.dto.document.base;
 
 import com.google.common.collect.Lists;
+import org.springframework.util.Assert;
 
 import java.util.List;
-
-import org.springframework.util.Assert;
 
 /**
  *

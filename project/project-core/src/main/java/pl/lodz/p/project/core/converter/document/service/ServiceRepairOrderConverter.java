@@ -1,7 +1,7 @@
 package pl.lodz.p.project.core.converter.document.service;
 
-import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.account.UserConverter;
+import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.contractor.ContractorConverter;
 import pl.lodz.p.project.core.domain.account.User;
 import pl.lodz.p.project.core.domain.contractor.Contractor;
@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * Created by milczu on 09.01.15.
+ * @author Milczu
  */
 @Named
 @ApplicationScoped
@@ -32,21 +32,20 @@ public class ServiceRepairOrderConverter implements Converter<ServiceRepairOrder
         if (objectDTO == null) {
             return null;
         }
-        User user = userConverter.convertDTO(objectDTO.getDocumentCreator());
+        User user = userConverter.convertDTO(objectDTO.getIssuePerson());
         Contractor contractor = contractorConverter.convertDTO(objectDTO.getContractor());
 
         ServiceRepairOrder entity = new ServiceRepairOrder();
-        entity.setDocumentCreator(user);
+        entity.setIssuePerson(user);
         entity.setContractor(contractor);
         entity.setDescription(objectDTO.getDescription());
         entity.setEquipentInfo(objectDTO.getEquipentInfo());
         entity.setGuarantee(objectDTO.isGuarantee());
         entity.setGuaranteeNo(objectDTO.getGuaranteeNo());
         entity.setSaleDocumentNo(objectDTO.getSaleDocumentNo());
-        entity.setActive(objectDTO.isActive());
         entity.setId(objectDTO.getId());
         entity.setVersion(objectDTO.getVersion());
-        entity.setCreationDate(objectDTO.getCreationDate());
+        entity.setDocumentDate(objectDTO.getDocumentDate());
         entity.setServiceDocumentType(objectDTO.getServiceDocumentType());
         entity.setState(objectDTO.getState());
         entity.setSymbol(objectDTO.getSymbol());
@@ -60,24 +59,23 @@ public class ServiceRepairOrderConverter implements Converter<ServiceRepairOrder
         if (entity == null) {
             return null;
         }
-        UserDTO user = userConverter.convertEntity(entity.getDocumentCreator());
+        UserDTO user = userConverter.convertEntity(entity.getIssuePerson());
         ContractorDTO contractor = contractorConverter.convertEntity(entity.getContractor());
 
-        ServiceRepairOrderDTO dto = new ServiceRepairOrderDTO();
-        dto.setDocumentCreator(user);
-        dto.setContractor(contractor);
-        dto.setDescription(entity.getDescription());
-        dto.setEquipentInfo(entity.getEquipentInfo());
-        dto.setGuarantee(entity.isGuarantee());
-        dto.setGuaranteeNo(entity.getGuaranteeNo());
-        dto.setSaleDocumentNo(entity.getSaleDocumentNo());
-        dto.setActive(entity.isActive());
-        dto.setId(entity.getId());
-        dto.setVersion(entity.getVersion());
-        dto.setCreationDate(entity.getCreationDate());
-        dto.setState(entity.getState());
-        dto.setSymbol(entity.getSymbol());
+        ServiceRepairOrderDTO objectDTO = new ServiceRepairOrderDTO();
+        objectDTO.setIssuePerson(user);
+        objectDTO.setContractor(contractor);
+        objectDTO.setDescription(entity.getDescription());
+        objectDTO.setEquipentInfo(entity.getEquipentInfo());
+        objectDTO.setGuarantee(entity.isGuarantee());
+        objectDTO.setGuaranteeNo(entity.getGuaranteeNo());
+        objectDTO.setSaleDocumentNo(entity.getSaleDocumentNo());
+        objectDTO.setId(entity.getId());
+        objectDTO.setVersion(entity.getVersion());
+        objectDTO.setDocumentDate(entity.getDocumentDate());
+        objectDTO.setState(entity.getState());
+        objectDTO.setSymbol(entity.getSymbol());
 
-        return dto;
+        return objectDTO;
     }
 }

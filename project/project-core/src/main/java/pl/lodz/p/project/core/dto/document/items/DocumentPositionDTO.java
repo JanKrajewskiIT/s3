@@ -1,41 +1,28 @@
 package pl.lodz.p.project.core.dto.document.items;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+import pl.lodz.p.project.core.dto.base.BaseDTO;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.dto.good.TaxDTO;
-
-import com.google.common.collect.ComparisonChain;
 
 /**
  *
  * @author Janiu
  */
-public class DocumentPositionDTO implements Serializable, Comparable<DocumentPositionDTO> {
+public class DocumentPositionDTO extends BaseDTO<Long> implements Comparable<DocumentPositionDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-    private Long id;
+
 	private String symbol;
     private Double quantity;
     private TaxDTO tax;
     private GoodDTO good;
-    private BigDecimal priceNet = BigDecimal.ZERO;
-    private BigDecimal priceGross = BigDecimal.ZERO;
-    private BigDecimal valueNet = BigDecimal.ZERO;
-    private BigDecimal valueGross = BigDecimal.ZERO;
-    
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private Double priceNet = 0d;
+    private Double priceGross = 0d;
+    private Double valueNet = 0d;
+    private Double valueGross = 0d;
 
 	public String getSymbol() {
 		return symbol;
@@ -47,10 +34,6 @@ public class DocumentPositionDTO implements Serializable, Comparable<DocumentPos
 
 	public Double getQuantity() {
 		return quantity;
-	}
-
-	public void setQuantity(Double quantity) {
-		this.quantity = quantity;
 	}
 
 	public TaxDTO getTax() {
@@ -69,44 +52,44 @@ public class DocumentPositionDTO implements Serializable, Comparable<DocumentPos
 		this.good = good;
 	}
 
-	public BigDecimal getValueNet() {
-		return valueNet;
-	}
-
-	public void setValueNet(BigDecimal valueNet) {
-		this.valueNet = valueNet;
-	}
-
-	public BigDecimal getValueGross() {
-		return valueGross;
-	}
-
-	public void setValueGross(BigDecimal valueGross) {
-		this.valueGross = valueGross;
-	}
-
-	public BigDecimal getPriceNet() {
+	public Double getPriceNet() {
 		return priceNet;
 	}
 
-	public BigDecimal getPriceGross() {
+	public Double getPriceGross() {
 		return priceGross;
 	}
 
-	public void setQuantity(double quantity) {
+	public Double getValueNet() {
+		return valueNet;
+	}
+
+	public void setValueNet(Double valueNet) {
+		this.valueNet = valueNet;
+	}
+
+	public Double getValueGross() {
+		return valueGross;
+	}
+
+	public void setValueGross(Double valueGross) {
+		this.valueGross = valueGross;
+	}
+
+	public void setQuantity(Double quantity) {
         this.quantity = quantity;
-        this.valueNet = priceNet.multiply(BigDecimal.valueOf(quantity));
-        this.valueGross = priceGross.multiply(BigDecimal.valueOf(quantity));
+        this.valueNet = priceNet * quantity;
+        this.valueGross = priceGross * quantity;
     }
 
-    public void setPriceGross(BigDecimal priceGross) {
+    public void setPriceGross(Double priceGross) {
         this.priceGross = priceGross;
-        this.valueGross = priceGross.multiply(BigDecimal.valueOf(quantity));
+        this.valueGross = priceGross * quantity;
     }
     
-    public void setPriceNet(BigDecimal priceNet) {
+    public void setPriceNet(Double priceNet) {
         this.priceNet = priceNet;
-        this.valueNet = priceNet.multiply(BigDecimal.valueOf(quantity));
+        this.valueNet = priceNet * quantity;
     }
 
 	@Override
@@ -116,7 +99,7 @@ public class DocumentPositionDTO implements Serializable, Comparable<DocumentPos
 
 	@Override
 	public int compareTo(DocumentPositionDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
 }

@@ -48,10 +48,10 @@ public class ServiceRepairOrderTemplateBean implements Serializable {
     private ServiceRepairOrderDTO createNew() {
         ServiceRepairOrderDTO document = new ServiceRepairOrderDTO();
         document.setState(ServiceDocumentState.NEW);
-        document.setCreationDate(new Date());
+        document.setDocumentDate(new Date());
         String remoteUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
         UserDTO documentCreator = userService.getUserByEmail(remoteUser);
-        document.setDocumentCreator(documentCreator);
+        document.setIssuePerson(documentCreator);
 
         return document;
     }

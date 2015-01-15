@@ -17,7 +17,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -133,50 +132,50 @@ public class GoodAddEditBean implements Serializable {
     }
 
     public void handlePriceMagNetChange() {
-        if (good.getPriceMagNet() != null) {
-            good.setPriceMagGross(new BigDecimal(good.getPriceMagNet().doubleValue() * ((100.00 + good.getTax().getValue().doubleValue()) / 100.00)));
+        if (good.getPrices().getPriceMagNet() != null) {
+            good.getPrices().setPriceMagGross(good.getPrices().getPriceMagNet() * ((100.00 + good.getTax().getValue().doubleValue()) / 100.00));
         }
     }
 
     public void handlePriceMagGrossChange() {
-        if (good.getPriceMagGross() != null) {
-            good.setPriceMagNet(new BigDecimal((good.getPriceMagGross().doubleValue() * 100.00) / (100.00 + good.getTax().getValue().doubleValue())));
+        if (good.getPrices().getPriceMagGross() != null) {
+            good.getPrices().setPriceMagNet((good.getPrices().getPriceMagGross() * 100.00) / (100.00 + good.getTax().getValue().doubleValue()));
         }
     }
 
     public void handlePriceANetChange() {
-        if (good.getPriceANet() != null) {
-            good.setPriceAGross(new BigDecimal(good.getPriceANet().doubleValue() * ((100.00 + good.getTax().getValue().doubleValue()) / 100.00)));
+        if (good.getPrices().getPriceANet() != null) {
+            good.getPrices().setPriceAGross(good.getPrices().getPriceANet() * ((100.00 + good.getTax().getValue().doubleValue()) / 100.00));
         }
     }
 
     public void handlePriceAGrossChange() {
-        if (good.getPriceAGross() != null) {
-            good.setPriceANet(new BigDecimal((good.getPriceAGross().doubleValue() * 100.00) / (100.00 + good.getTax().getValue().doubleValue())));
+        if (good.getPrices().getPriceAGross() != null) {
+            good.getPrices().setPriceANet((good.getPrices().getPriceAGross() * 100.00) / (100.00 + good.getTax().getValue().doubleValue()));
         }
     }
 
     public void handlePriceBNetChange() {
-        if (good.getPriceBNet() != null) {
-            good.setPriceBGross(new BigDecimal(good.getPriceBNet().doubleValue() * ((100.00 + good.getTax().getValue().doubleValue()) / 100.00)));
+        if (good.getPrices().getPriceBNet() != null) {
+            good.getPrices().setPriceBGross(good.getPrices().getPriceBNet() * ((100.00 + good.getTax().getValue().doubleValue()) / 100.00));
         }
     }
 
     public void handlePriceBGrossChange() {
-        if (good.getPriceBGross() != null) {
-            good.setPriceBNet(new BigDecimal((good.getPriceBGross().doubleValue() * 100.00) / (100.00 + good.getTax().getValue().doubleValue())));
+        if (good.getPrices().getPriceBGross() != null) {
+            good.getPrices().setPriceBNet((good.getPrices().getPriceBGross() * 100.00) / (100.00 + good.getTax().getValue()));
         }
     }
 
     public void handlePriceCNetChange() {
-        if (good.getPriceCNet() != null) {
-            good.setPriceCGross(new BigDecimal(good.getPriceCNet().doubleValue() * ((100.00 + good.getTax().getValue().doubleValue()) / 100.00)));
+        if (good.getPrices().getPriceCNet() != null) {
+            good.getPrices().setPriceCGross(good.getPrices().getPriceCNet() * ((100.00 + good.getTax().getValue().doubleValue()) / 100.00));
         }
     }
 
     public void handlePriceCGrossChange() {
-        if (good.getPriceCGross() != null) {
-            good.setPriceCNet(new BigDecimal((good.getPriceCGross().doubleValue() * 100.00) / (100.00 + good.getTax().getValue().doubleValue())));
+        if (good.getPrices().getPriceCGross() != null) {
+            good.getPrices().setPriceCNet((good.getPrices().getPriceCGross() * 100.00) / (100.00 + good.getTax().getValue()));
         }
     }
 

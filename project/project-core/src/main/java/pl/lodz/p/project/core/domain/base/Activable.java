@@ -1,10 +1,9 @@
 package pl.lodz.p.project.core.domain.base;
 
 /**
- *
  * @author Milczu
  */
-public interface Activable extends BasePersistable {
+public interface Activable {
     
     boolean isActive();
     

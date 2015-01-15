@@ -1,24 +1,17 @@
 package pl.lodz.p.project.core.dao.pagingandsearching;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-
 import pl.lodz.p.project.core.dao.base.AbstractCrudDao;
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort.Order;
 import pl.lodz.p.project.core.util.Assert;
+
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

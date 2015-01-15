@@ -5,22 +5,22 @@
 
 	<changeSet id="insert_required_data_for_users" author="bartosz.milczarek">
 		<insert tableName="roles">
-			<column name="ROLE_ID" value="1" />
+			<column name="ID" value="1" />
 			<column name="NAME" value="admin" />
 			<column name="version" value="1" />
 		</insert>
 		<insert tableName="roles">
-			<column name="ROLE_ID" value="2" />
+			<column name="ID" value="2" />
 			<column name="NAME" value="manager" />
 			<column name="version" value="1" />
 		</insert>
 		<insert tableName="roles">
-			<column name="ROLE_ID" value="3" />
+			<column name="ID" value="3" />
 			<column name="NAME" value="user" />
 			<column name="version" value="1" />
 		</insert>
 		<insert tableName="users">
-			<column name="USER_ID" valueComputed="nextval('USERS_SEQ')" />
+			<column name="ID" valueComputed="nextval('USERS_SEQ')" />
 			<column name="PASSWORD"
 				value="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" />
 			<column name="FIRST_NAME" value="Admin" />
@@ -43,7 +43,7 @@
 		</preConditions>
 
 		<insert tableName="users">
-			<column name="USER_ID" valueComputed="nextval('USERS_SEQ')" />
+			<column name="ID" valueComputed="nextval('USERS_SEQ')" />
 			<column name="PASSWORD" value="6ee4a469cd4e91053847f5d3fcb61dbcc91e8f0ef10be7748da4c4a1ba382d17" />
 			<column name="FIRST_NAME" value="Manager" />
 			<column name="SECOND_NAME" value="Managerski" />
@@ -57,7 +57,7 @@
 		</insert>
 
 		<insert tableName="users">
-			<column name="USER_ID" valueComputed="nextval('USERS_SEQ')" />
+			<column name="ID" valueComputed="nextval('USERS_SEQ')" />
 			<column name="PASSWORD" value="04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb" />
 			<column name="FIRST_NAME" value="User" />
 			<column name="SECOND_NAME" value="Userski" />

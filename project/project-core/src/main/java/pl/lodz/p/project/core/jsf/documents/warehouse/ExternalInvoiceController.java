@@ -1,7 +1,5 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
@@ -13,7 +11,9 @@ import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.items.TransportMeanService;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
-import java.math.BigDecimal;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Named;
 import java.util.List;
 
 @Named
@@ -21,10 +21,6 @@ import java.util.List;
 public class ExternalInvoiceController extends EditObjectController<ExternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 6806332655702953164L;
-
-	private enum Type {
-		ANY, RW, PW
-	}
 
 	@Autowired
 	private InvoiceGoodListController invoiceGoodListController;
@@ -77,7 +73,7 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 
 		InternalInvoiceGoodDTO invoiceGood = new InternalInvoiceGoodDTO();
 		invoiceGood.setGood(goodListController.getSingleSelection());
-		invoiceGood.setQuantity(new BigDecimal(goodListController.getQuantity()));
+		invoiceGood.setQuantity(goodListController.getQuantity());
 		invoiceGoodListController.getItems().add(invoiceGood);
 
 		setTotal();

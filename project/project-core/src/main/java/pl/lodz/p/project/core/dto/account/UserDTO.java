@@ -1,31 +1,26 @@
 package pl.lodz.p.project.core.dto.account;
 
-import java.io.Serializable;
-import java.util.Set;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
 import pl.lodz.p.project.core.domain.account.User;
+import pl.lodz.p.project.core.dto.base.BaseDTO;
 
-import com.google.common.collect.ComparisonChain;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * DTO class mapping entities of type {@link User}.
  *
  * @author Łukasz Gadomski, Janiu
  */
-public class UserDTO implements Serializable, Comparable<UserDTO> {
+public class UserDTO extends BaseDTO<Long> implements Comparable<UserDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-	
+
 	@NotNull(message = "Hasło nie może być puste!")
     @Size(min = 6, max = 64, message = "Hasło musi zawierać minimum 6 znaków!")
     private String password;
@@ -45,14 +40,6 @@ public class UserDTO implements Serializable, Comparable<UserDTO> {
     private boolean manager;
     private boolean user;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
-	
 	public String getPassword() {
         return password;
     }
@@ -134,7 +121,7 @@ public class UserDTO implements Serializable, Comparable<UserDTO> {
 
 	@Override
 	public int compareTo(UserDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 	
 }

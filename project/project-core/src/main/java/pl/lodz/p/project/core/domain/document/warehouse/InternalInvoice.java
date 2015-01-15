@@ -4,14 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * 
  * @author Jan Krajewski
- *
  */
 @Entity
 @Table(name = "internal_invoices")
-public class InternalInvoice extends WarehouseInvoice { 
+public class InternalInvoice extends WarehouseInvoice {
 
-	private static final long serialVersionUID = 6038834702678528570L;
+	private static final long serialVersionUID = 1L;
 
 }

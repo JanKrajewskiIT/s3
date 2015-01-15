@@ -1,10 +1,9 @@
 package pl.lodz.p.project.core.interceptor;
 
-import java.io.Serializable;
-import java.util.logging.Logger;
-
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
+import java.io.Serializable;
+import java.util.logging.Logger;
 
 /**
  * Responsible for tracking method invocations and logging.

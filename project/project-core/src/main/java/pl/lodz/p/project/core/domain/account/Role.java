@@ -1,29 +1,14 @@
 package pl.lodz.p.project.core.domain.account;
 
-import java.io.Serializable;
-import java.util.Collection;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import pl.lodz.p.project.core.domain.base.NamedEntity;
 
-import pl.lodz.p.project.core.domain.base.BasePersistable;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.Collection;
 
 /**
  *
@@ -32,57 +17,16 @@ import pl.lodz.p.project.core.domain.base.BasePersistable;
 @Entity
 @Table(name = "roles")
 @NamedQuery(name = Role.NAMED_QUERY_FIND_BY_EMAIL, query = "SELECT r FROM Role r WHERE r.name = :name")
-public class Role implements Serializable, BasePersistable {
+public class Role extends NamedEntity<Long> {
 
-	public static final String NAMED_QUERY_FIND_BY_EMAIL = "Role.findByRoleName";
-	
     private static final long serialVersionUID = 1L;
-    
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "role_id")
-    private Long id;
-    
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "name")
-    private String name;
+	public static final String NAMED_QUERY_FIND_BY_EMAIL = "Role.findByRoleName";
 
     @JoinTable(name = "users_roles", joinColumns = {
-        @JoinColumn(name = "role_id", referencedColumnName = "role_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "user_id", referencedColumnName = "user_id")})
+        @JoinColumn(name = "role_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "user_id", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<User> usersCollection;
-
-	@Version
-	private Long version = 1L;
-	
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
-	}
 
 	@XmlTransient
     public Collection<User> getUsersCollection() {
@@ -107,10 +51,5 @@ public class Role implements Serializable, BasePersistable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
-
-	@Override
-	public boolean isNew() {
-		return id == null;
-	}
 
 }

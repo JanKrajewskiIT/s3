@@ -1,13 +1,10 @@
 package pl.lodz.p.project.core.dao.pagingandsearching;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * Sort option for queries. You have to provide at least a list of properties to sort for that must not include

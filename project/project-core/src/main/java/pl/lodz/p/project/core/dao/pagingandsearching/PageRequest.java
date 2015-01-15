@@ -1,8 +1,8 @@
 package pl.lodz.p.project.core.dao.pagingandsearching;
 
-import java.io.Serializable;
-
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort.Direction;
+
+import java.io.Serializable;
 
 /**
  * Basic Java Bean implementation of {@code Pageable}.

@@ -1,11 +1,12 @@
 package pl.lodz.p.project.core.jsf.primefaces;
 
-import java.io.IOException;
+import org.primefaces.component.datatable.DataTable;
+import org.primefaces.component.roweditor.RowEditorRenderer;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
-import org.primefaces.component.datatable.DataTable;
-import org.primefaces.component.roweditor.RowEditorRenderer;
+import java.io.IOException;
 
 public class BootstrapRowEditorRenderer extends RowEditorRenderer {
     

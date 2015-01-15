@@ -1,53 +1,32 @@
 package pl.lodz.p.project.core.dto.good;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
+import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import com.google.common.collect.ComparisonChain;
+import pl.lodz.p.project.core.dto.base.NamedDTO;
 
 /**
  *
  * @author Janiu
  */
-public class TaxDTO implements Serializable, Comparable<TaxDTO> {
+public class TaxDTO extends NamedDTO<Long> implements Comparable<TaxDTO> {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-    private String name;
-    private BigDecimal value;
+
+    private Double value;
 
     public TaxDTO() { }
     
     public TaxDTO(TaxDTO tax) {
-    	this.name = tax.getName();
+    	setName(tax.getName());
     	this.value = tax.getValue();
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public BigDecimal getValue() {
+	public Double getValue() {
 		return value;
 	}
 
-	public void setValue(BigDecimal value) {
+	public void setValue(Double value) {
 		this.value = value;
 	}
 
@@ -58,7 +37,7 @@ public class TaxDTO implements Serializable, Comparable<TaxDTO> {
 
 	@Override
 	public int compareTo(TaxDTO o) {
-		return ComparisonChain.start().compare(this.id, o.getId()).result();
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
 }

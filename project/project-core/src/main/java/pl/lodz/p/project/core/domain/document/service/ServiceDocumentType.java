@@ -1,5 +1,8 @@
 package pl.lodz.p.project.core.domain.document.service;
 
+/**
+ * @author Milczu
+ */
 public enum ServiceDocumentType {
 
 	REPAIR_ORDER("Zgłoszenie serwisowe"), PRODUCTS_REQUEST("Zapotrzebowanie serwisowe"), FIX_SUMMARY("Podsumowanie naprawy");

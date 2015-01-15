@@ -1,8 +1,8 @@
 package pl.lodz.p.project.core.service.good;
 
-import java.util.List;
-
 import pl.lodz.p.project.core.dto.good.TaxDTO;
+
+import java.util.List;
 
 /**
  *

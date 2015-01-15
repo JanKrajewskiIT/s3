@@ -1,12 +1,11 @@
 package pl.lodz.p.project.core.service.settings;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import pl.lodz.p.project.core.dao.settings.SettingsDao;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  *
