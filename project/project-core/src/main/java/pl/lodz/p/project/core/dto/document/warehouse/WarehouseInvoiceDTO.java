@@ -8,7 +8,7 @@ import pl.lodz.p.project.core.dto.document.base.DocumentDTO;
 /**
  * @author Jan Krajewski
  */
-public class WarehouseInvoiceDTO extends DocumentDTO<Long> implements Comparable<WarehouseInvoiceDTO> {
+public abstract class WarehouseInvoiceDTO extends DocumentDTO<Long> implements Comparable<WarehouseInvoiceDTO> {
 
     private static final long serialVersionUID = 1L;
 

@@ -18,7 +18,7 @@ import javax.inject.Named;
 public class GoodListController extends EditListController<GoodDTO> {
 
     @Autowired
-    private GoodServiceImpl goodService;
+    private GoodServiceImpl service;
 
     @Autowired
     private GUI gui;
@@ -27,9 +27,9 @@ public class GoodListController extends EditListController<GoodDTO> {
 
     @PostConstruct
     private void init() {
-        setService(goodService);
-        page = goodService.search(searchQuery, pageRequest);
-        setItems(page.getContent());
+        setService(service);
+        initStartPage(5, "name");
+        search();
     }
 
     public Double getQuantity() {

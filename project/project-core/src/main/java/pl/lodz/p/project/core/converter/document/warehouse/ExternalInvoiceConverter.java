@@ -1,8 +1,8 @@
 package pl.lodz.p.project.core.converter.document.warehouse;
 
 import pl.lodz.p.project.core.converter.account.UserConverter;
-import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.contractor.ContractorConverter;
+import pl.lodz.p.project.core.converter.document.DocumentConverter;
 import pl.lodz.p.project.core.converter.document.items.TransportMeanConverter;
 import pl.lodz.p.project.core.domain.account.User;
 import pl.lodz.p.project.core.domain.contractor.Contractor;
@@ -24,7 +24,7 @@ import javax.inject.Named;
  */
 @Named
 @ApplicationScoped
-public class ExternalInvoiceConverter implements Converter<ExternalInvoice, ExternalInvoiceDTO> {
+public class ExternalInvoiceConverter extends DocumentConverter<ExternalInvoice, ExternalInvoiceDTO> {
 
 	@Inject
 	private ContractorConverter contractorConverter;
@@ -41,7 +41,7 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		TransportMean transportMean = transportMeanConverter.convertDTO(objectDTO.getTransportMean());
 		User issuePerson = userConverter.convertDTO(objectDTO.getIssuePerson());
 		
-		ExternalInvoice entity = new ExternalInvoice();
+		ExternalInvoice entity = super.convertDTO(objectDTO);
 		entity.setId(objectDTO.getId());
 		entity.setVersion(objectDTO.getVersion());
 		entity.setSymbol(objectDTO.getSymbol());
@@ -64,7 +64,7 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		TransportMeanDTO transportMean = transportMeanConverter.convertEntity(entity.getTransportMean());
 		UserDTO issuePerson = userConverter.convertEntity(entity.getIssuePerson());
 		
-		ExternalInvoiceDTO objectDTO = new ExternalInvoiceDTO();
+		ExternalInvoiceDTO objectDTO = super.convertEntity(entity);
 		objectDTO.setId(entity.getId());
 		objectDTO.setVersion(entity.getVersion());
 		objectDTO.setSymbol(entity.getSymbol());

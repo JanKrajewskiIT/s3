@@ -1,5 +1,7 @@
 package pl.lodz.p.project.core.service.document.warehouse;
 
+import pl.lodz.p.project.core.dao.pagingandsearching.Page;
+import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface ExternalInvoiceService {
     List<ExternalInvoiceDTO> getAll();
 
     void save(ExternalInvoiceDTO invoice);
-    
+
+    Page<ExternalInvoiceDTO> search(String searchQuery, PageRequest pageRequest);
+
 }

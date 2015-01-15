@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort;
+import pl.lodz.p.project.core.domain.base.BaseEntity;
+import pl.lodz.p.project.core.dto.base.BaseDTO;
 import pl.lodz.p.project.core.service.base.AbstractService;
 
 import java.io.Serializable;
@@ -15,27 +17,16 @@ import java.util.List;
  */
 public abstract class EditListController<T extends Serializable> extends UIObject implements Serializable {
 
-	private static final long serialVersionUID = 5723219866142777750L;
-	private static final int PAGE_SIZE = 5;
-	private static final String DEFAULT_SORT_PROPERTY = "name";
+	private static final long serialVersionUID = 1L;
 
 	protected List<T> items = new ArrayList<T>();
 	protected List<T> selection = new ArrayList<T>();
 	protected T singleSelection;
+
 	private AbstractService service;
-
-	protected Page<T> page;
-	protected PageRequest pageRequest = new PageRequest(0, PAGE_SIZE, new Sort(DEFAULT_SORT_PROPERTY));
-	protected String searchQuery = StringUtils.EMPTY;
-
-	public void remove(T object) {
-		getItems().remove(object);
-		service.delete(object);
-	}
-
-	public String edit(String id) {
-		return null;
-	}
+	private Page<T> page;
+	private PageRequest pageRequest;
+	private String searchQuery = StringUtils.EMPTY;
 
 	public void search() {
 		pageRequest = new PageRequest(0, pageRequest.getPageSize(), pageRequest.getSort());
@@ -55,14 +46,23 @@ public abstract class EditListController<T extends Serializable> extends UIObjec
 		setItems(page.getContent());
 	}
 
-	/**
-	 *
-	 * @param number zero indexed number of page
-	 */
 	public void goToPage(int number) {
 		pageRequest = new PageRequest(number, pageRequest.getPageSize(), pageRequest.getSort());
 		page = service.search(searchQuery, pageRequest);
 		setItems(page.getContent());
+	}
+
+	public void initStartPage(Integer pageSize, String sortBy) {
+		pageRequest = new PageRequest(0, pageSize, new Sort(sortBy));
+	}
+
+	public void remove(T object) {
+		getItems().remove(object);
+		service.delete(object);
+	}
+
+	public String edit(String id) {
+		return null;
 	}
 
 	public void onSelect(T selected) {

@@ -6,8 +6,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import pl.lodz.p.project.core.dto.base.BaseDTO;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 
-import java.math.BigDecimal;
-
 /**
  * 
  * @author Jan Krajewski

@@ -20,16 +20,16 @@ public class ContractorListController extends EditListController<ContractorDTO> 
     private static final long serialVersionUID = 1L;
 
     @Autowired
-    private ContractorServiceImpl contractorService;
+    private ContractorServiceImpl service;
 
     @Autowired
     private GUI gui;
 
     @PostConstruct
     private void init() {
-        setService(contractorService);
-        page = contractorService.search(searchQuery, pageRequest);
-        setItems(page.getContent());
+        setService(service);
+        initStartPage(5, "name");
+        search();
     }
 
     @Override

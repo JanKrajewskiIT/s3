@@ -107,5 +107,4 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 		this.transportMeanList = transportMeanList;
 	}
 
-
 }

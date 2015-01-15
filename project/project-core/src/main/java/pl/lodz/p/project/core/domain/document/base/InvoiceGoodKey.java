@@ -11,12 +11,12 @@ import java.io.Serializable;
 /**
  * 
  * @author Jan Krajewski
- *s
+ *
  */
 @Embeddable
 public class InvoiceGoodKey<T extends Document> implements Serializable {
 
-	private static final long serialVersionUID = -800145815758759917L;
+	private static final long serialVersionUID = 1L;
 
 	@JoinColumn(name = "invoice_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

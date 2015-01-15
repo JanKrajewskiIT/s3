@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * @author Jan Krajewski
  */
-public class DocumentDTO<T extends Serializable> extends BaseDTO<T> {
+public abstract class DocumentDTO<T extends Serializable> extends BaseDTO<T> {
 
     private String symbol;
     private String type;

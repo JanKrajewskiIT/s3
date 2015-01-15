@@ -19,9 +19,9 @@
 				</div>
 				<div class="box-body table-responsive">
 					<p:dataTable tableStyleClass="table table-bordered table-hover"
-						var="contractor" value="#{cc.attrs.controller.items}"
-						selectionMode="single" selection="#{cc.attrs.controller.singleSelection}"
-						rowKey="#{contractor.id}" id="table-form">
+								 var="contractor" value="#{cc.attrs.controller.items}"
+								 selectionMode="single" selection="#{cc.attrs.controller.singleSelection}"
+								 rowKey="#{contractor.id}" id="table-form">
 
 						<p:ajax event="rowSelect" listener="#{cc.attrs.controller.onSelect(contractor)}" />
 

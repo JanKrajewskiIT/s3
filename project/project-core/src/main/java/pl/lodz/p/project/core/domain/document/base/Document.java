@@ -13,7 +13,7 @@ import java.util.Date;
  * @author Jan Krajewski
  */
 @MappedSuperclass
-public class Document<T extends Serializable> extends BaseEntity<T> {
+public abstract class Document<T extends Serializable> extends BaseEntity<T> {
 
     private static final long serialVersionUID = 1469119918669875184L;
 

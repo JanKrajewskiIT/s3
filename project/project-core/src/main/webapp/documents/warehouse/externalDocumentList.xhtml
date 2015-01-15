@@ -4,7 +4,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:cc="http://java.sun.com/jsf/composite/components">
 
 	<h:body>
 		<ui:composition template="../../layout/main-template.xhtml">
@@ -17,24 +18,22 @@
 							<li class="active">Wyświetl</li>
 							<li class="active">Lista dokumentów zewnętrznych</li>
 						</ol>
-					</section> 
+					</section>
+
 					<section class="content">
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="box">
 									<div class="box-header">
-										<h3 class="box-title">Lista dokumentów zewnętrznych</h3>
+										<h3 class="page-header col-xs-12">
+											Lista dokumentów zewnętrznych
+											<small class="pull-right">Data: #{constantElements.currentDateValue}</small>
+										</h3>
 									</div>
-									<div class="box-body table-responsive">
-										<p:dataTable tableStyleClass="table table-bordered dataTable">
-											<p:column headerText="Numer" />
-											<p:column headerText="Kontrahent" />
-											<p:column headerText="Data wystawienia" />
-											<p:column headerText="Wartość" />
-											<p:column headerText="Dokument księgowy" />
-											<p:column headerText="Status" />
-											<p:column headerText="Opcje" />
-										</p:dataTable>
+									<div class="box-body">
+										<h:form>
+											<cc:warehouseInvoice controller="#{internalInvoiceListController}" editable="true"/>
+										</h:form>
 									</div>
 								</div>
 							</div>

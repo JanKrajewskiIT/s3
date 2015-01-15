@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author Jan Krajewski
  */
-public class NamedDTO<T extends Serializable> extends BaseDTO<T> {
+public abstract class NamedDTO<T extends Serializable> extends BaseDTO<T> {
 
     private String name;
 

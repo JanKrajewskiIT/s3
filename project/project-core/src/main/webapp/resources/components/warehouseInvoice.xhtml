@@ -4,6 +4,7 @@
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:cc="http://java.sun.com/jsf/composite/components">
 
 	<composite:interface>
@@ -19,44 +20,36 @@
 				</div>
 				<div class="box-body table-responsive">
 					<p:dataTable tableStyleClass="table table-bordered table-hover"
-						var="contractor" value="#{cc.attrs.controller.items}"
-						selectionMode="single" selection="#{cc.attrs.controller.singleSelection}"
-						rowKey="#{contractor.id}" id="table-form">
+								 var="invoice" value="#{cc.attrs.controller.items}"
+								 selectionMode="single" selection="#{cc.attrs.controller.singleSelection}"
+								 rowKey="#{invoice.id}" id="table-form">
 
-						<p:ajax event="rowSelect" listener="#{cc.attrs.controller.onSelect(contractor)}" />
+						<p:ajax event="rowSelect" listener="#{cc.attrs.controller.onSelect(invoice)}" />
 
-						<p:column headerText="Symbol" sortBy="symbol">
-							<p:outputLabel value="#{contractor.symbol}" />
+						<p:column headerText="Symbol" sortBy="symbol" >
+							<p:outputLabel value="#{invoice.symbol}" />
 						</p:column>
 
-						<p:column headerText="Nazwa" sortBy="name"  style="width: 300px">
-							<p:outputLabel value="#{contractor.name}" />
+						<p:column headerText="Wystawił" sortBy="issuePerson.secondName">
+							<p:outputLabel value="#{invoice.issuePerson.secondName}, #{invoice.issuePerson.firstName}" />
 						</p:column>
 
-						<p:column headerText="Grupa" sortBy="group.name">
-							<p:outputLabel value="#{contractor.group.name}"/>
+						<p:column headerText="Data wystawienia" sortBy="documentDate">
+							<p:outputLabel value="#{invoice.documentDate}" />
 						</p:column>
 
-						<p:column headerText="Miasto" sortBy="city">
-							<p:outputLabel value="#{contractor.city}" />
+						<p:column headerText="Wartość" sortBy="total">
+							<p:outputLabel value="#{invoice.total}" />
 						</p:column>
 
-						<p:column headerText="Adres" sortBy="adress">
-							<p:outputLabel value="#{contractor.adress}" />
-						</p:column>
-
-						<p:column headerText="NIP" sortBy="nip">
-							<p:outputLabel value="#{contractor.nip}" />
-						</p:column>
-
-						<p:column headerText="Akcja" rendered="#{cc.attrs.editable}" style="width: 140px;">
+						<p:column headerText="Akcja" rendered="#{cc.attrs.editable}" style="width: 140px">
 							<p:commandLink styleClass="btn btn-success btn-xs"
-										   action="#{cc.attrs.controller.edit(contractor.id)}">
+										   action="#{cc.attrs.controller.edit(invoice.id)}">
 								<i class="glyphicon glyphicon-pencil"></i> Edytuj
 							</p:commandLink>
 							<p:spacer style="width: 10px" />
 							<p:commandLink styleClass="btn btn-danger btn-xs" update="table-form"
-										   action="#{cc.attrs.controller.remove(contractor)}">
+										   action="#{cc.attrs.controller.remove(invoice)}">
 								<i class="glyphicon glyphicon-minus"></i> Usuń
 							</p:commandLink>
 						</p:column>

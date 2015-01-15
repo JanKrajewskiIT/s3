@@ -9,6 +9,7 @@ import pl.lodz.p.project.core.dao.base.CrudDao;
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,11 +19,11 @@ import java.util.List;
  * @param <E>
  * @param <D>
  */
-public abstract class AbstractService<E extends Persistable<Long>, D> {
+public abstract class AbstractService<E extends Persistable<Long>, D extends Serializable> {
 	
     protected final Transformer transformer = new Transformer();
     protected final ReverseTransformer reverseTransformer = new ReverseTransformer();
-	
+
     @Autowired
     protected CrudDao<E, Long> dao;
     
@@ -68,7 +69,7 @@ public abstract class AbstractService<E extends Persistable<Long>, D> {
     
     public void delete(D objectDTO) {
         E entity = converter.convertDTO(objectDTO);
-        dao.delete(entity);    	
+        dao.delete(entity);
     }
     
     public void delete(List<D> objectList) {

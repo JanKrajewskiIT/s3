@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author Jan Krajewski
  */
 @MappedSuperclass
-public class InvoiceGood<T extends Serializable> extends BaseEntity<T> {
+public abstract class InvoiceGood<T extends Serializable> extends BaseEntity<T> {
 
     private static final long serialVersionUID = 4953126124258975050L;
 
