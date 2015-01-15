@@ -20,9 +20,9 @@
 						<h3>Sprzedawca</h3>
 						<address>
 							<strong>#{constantElements.userData.name}</strong><br/>
-							#{constantElements.userData.adress}<br />
-							#{constantElements.userData.postalCode.city},
-							#{constantElements.userData.postalCode.code}<br />
+							#{constantElements.userData.address.address}<br />
+							#{constantElements.userData.address.postalCode.city},
+							#{constantElements.userData.address.postalCode.code}<br />
 							NIP: #{constantElements.userData.nip}<br />
 							Email: #{constantElements.userData.email}
 						</address>
@@ -39,9 +39,9 @@
 						<c:if test="#{not empty cc.attrs.controller.sourceObject.contractor}" >
 							<address>
 								<strong>#{cc.attrs.controller.sourceObject.contractor.name}</strong><br/>
-								#{cc.attrs.controller.sourceObject.contractor.adress}<br />
-								#{cc.attrs.controller.sourceObject.contractor.postalCode.city},
-								#{cc.attrs.controller.sourceObject.contractor.postalCode.code}<br />
+								#{cc.attrs.controller.sourceObject.contractor.address.address}<br />
+								#{cc.attrs.controller.sourceObject.contractor.address.postalCode.city},
+								#{cc.attrs.controller.sourceObject.contractor.address.postalCode.code}<br />
 								NIP: #{cc.attrs.controller.sourceObject.contractor.nip}<br />
 								Email: #{cc.attrs.controller.sourceObject.contractor.email}
 							</address>

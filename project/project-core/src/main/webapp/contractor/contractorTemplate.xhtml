@@ -92,20 +92,20 @@
                                             <div class="col-xs-4">
                                                 <label>Kod pocztowy</label>
                                                 <p:inputMask id="postCodeInputText"
-                                                             value="#{contractorTemplateBean.selectedContractor.postalCode}"
+                                                             value="#{contractorTemplateBean.selectedContractor.address.postalCode}"
                                                              mask="99-999" styleClass="form-control"
                                                              placeholder="Wprowadz kod pocztowy"/>
                                             </div>
                                             <div class="col-xs-4">
                                                 <label>Miasto</label>
                                                 <p:inputText id="cityInputText" type="text"
-                                                             value="#{contractorTemplateBean.selectedContractor.city}"
+                                                             value="#{contractorTemplateBean.selectedContractor.address.city}"
                                                              styleClass="form-control" placeholder="Wprowadz miasto"/>
                                             </div>
                                             <div class="col-xs-4">
                                                 <label>Adres</label>
                                                 <p:inputText id="adressInputText" type="text"
-                                                             value="#{contractorTemplateBean.selectedContractor.adress}"
+                                                             value="#{contractorTemplateBean.selectedContractor.address.address}"
                                                              styleClass="form-control" placeholder="Wprowadz adres"/>
                                             </div>
                                             <div class="col-xs-4">
