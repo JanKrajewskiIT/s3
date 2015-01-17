@@ -3,6 +3,7 @@ package pl.lodz.p.project.core.dto.document.warehouse;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ public class ExternalInvoiceDTO extends WarehouseInvoiceDTO {
 
     private static final long serialVersionUID = 1L;
 
-    private List<ExternalInvoiceGoodDTO> goodList;
+    private List<ExternalInvoiceGoodDTO> goodList = new ArrayList<>();
     private ContractorDTO contractor;
     private TransportMeanDTO transportMean;
     private String orderSymbol;

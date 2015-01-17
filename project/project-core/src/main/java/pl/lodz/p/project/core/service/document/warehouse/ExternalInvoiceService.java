@@ -1,24 +1,12 @@
 package pl.lodz.p.project.core.service.document.warehouse;
 
-import pl.lodz.p.project.core.dao.pagingandsearching.Page;
-import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
+import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoice;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
-
-import java.util.List;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 /**
- * 
  * @author Jan Krajewski
- *
  */
-public interface ExternalInvoiceService {
-
-	ExternalInvoiceDTO getOneById(Long id);
-
-    List<ExternalInvoiceDTO> getAll();
-
-    void save(ExternalInvoiceDTO invoice);
-
-    Page<ExternalInvoiceDTO> search(String searchQuery, PageRequest pageRequest);
+public interface ExternalInvoiceService extends ServiceRepository<ExternalInvoice, ExternalInvoiceDTO> {
 
 }

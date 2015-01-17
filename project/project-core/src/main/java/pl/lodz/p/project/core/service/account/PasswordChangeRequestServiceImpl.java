@@ -15,7 +15,7 @@ import javax.interceptor.Interceptors;
 
 /**
  *
- * @author Janiu
+ * @author Janiu, Łukasz Gadomski
  */
 @Component
 @Interceptors({TrackerInterceptor.class})

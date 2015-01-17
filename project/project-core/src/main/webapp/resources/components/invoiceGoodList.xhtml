@@ -13,7 +13,7 @@
 		<div class="row" style="width: 107%;">
 			<div class="col-xs-11 table-responsive">
 				<p:dataTable tableStyleClass="table table-bordered table-striped"
-							 var="good" value="#{cc.attrs.controller.items}"
+							 var="good" value="#{cc.attrs.controller.sourceObject.goodList}"
 							 id="invoiceGoodTable">
 					<p:column headerText="Nazwa asortymentu" style="width: 40%;">
 						<p:outputLabel value="#{good.good.name}"/>
@@ -43,7 +43,7 @@
 				</div>
 				<div class="row">
 					<p:commandLink styleClass="btn btn-success" type="button"
-								   action="#{cc.attrs.controller.changeState}" update="@form">
+								   action="#{cc.attrs.controller.selectGood}" update="@form">
 						<i class="fa fa-plus" />
 					</p:commandLink>
 				</div>

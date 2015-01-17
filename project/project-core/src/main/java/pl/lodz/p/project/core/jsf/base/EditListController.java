@@ -7,6 +7,7 @@ import pl.lodz.p.project.core.dao.pagingandsearching.Sort;
 import pl.lodz.p.project.core.domain.base.BaseEntity;
 import pl.lodz.p.project.core.dto.base.BaseDTO;
 import pl.lodz.p.project.core.service.base.AbstractService;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public abstract class EditListController<T extends Serializable> extends UIObjec
 	protected List<T> selection = new ArrayList<T>();
 	protected T singleSelection;
 
-	private AbstractService service;
+	private ServiceRepository service;
 	private Page<T> page;
 	private PageRequest pageRequest;
 	private String searchQuery = StringUtils.EMPTY;
@@ -93,11 +94,11 @@ public abstract class EditListController<T extends Serializable> extends UIObjec
 		this.singleSelection = singleSelection;
 	}
 
-	public AbstractService getService() {
+	public ServiceRepository getService() {
 		return service;
 	}
 
-	public void setService(AbstractService service) {
+	public void setService(ServiceRepository service) {
 		this.service = service;
 	}
 

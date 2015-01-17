@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<composite:interface>
+        <composite:attribute name="controller"/>
+	</composite:interface>
+
+	<composite:implementation>
+		<div class="row">
+			<div class="col-sm-4 col-lg-3 invoice-col">
+				<div class="small-box bg-blue">
+					<div class="inner">
+						<h3>Sprzedawca</h3>
+						<address>
+							<strong>#{constantElements.userData.name}</strong><br/>
+							#{constantElements.userData.address.address}<br />
+							#{constantElements.userData.address.postalCode.city},
+							#{constantElements.userData.address.postalCode.code}<br />
+							NIP: #{constantElements.userData.nip}<br />
+							Email: #{constantElements.userData.email}
+						</address>
+					</div>
+					<a href="#" class="small-box-footer"> More info <i
+							class="fa fa-arrow-circle-right"/>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-lg-4">
+				<label>Wydał</label>
+				<p:inputTextarea styleClass="form-control" style="height: 83px;"
+								 value="#{cc.attrs.controller.sourceObject.deliverPerson}" />
+
+				<label>Odebrał</label>
+				<p:inputTextarea styleClass="form-control" style="height: 83px;"
+								 value="#{cc.attrs.controller.sourceObject.receivePerson}" />
+			</div>
+
+			<div class="col-lg-3 pull-right">
+				<label>Razem</label>
+				<p:inputText styleClass="form-control" disabled="true" value="#{cc.attrs.controller.sourceObject.total}" >
+					<f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00"/>
+				</p:inputText>
+			</div>
+
+			<div class="col-lg-5">
+				<label>Adnotacje</label>
+				<p:inputTextarea styleClass="form-control" style="height: 132px;"
+								 value="#{cc.attrs.controller.sourceObject.annotation}" />
+			</div>
+		</div>
+	</composite:implementation>
+</ui:composition>

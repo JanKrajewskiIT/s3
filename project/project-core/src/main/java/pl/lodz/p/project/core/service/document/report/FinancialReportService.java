@@ -1,16 +1,12 @@
 package pl.lodz.p.project.core.service.document.report;
 
+import pl.lodz.p.project.core.domain.document.report.FinancialReport;
 import pl.lodz.p.project.core.dto.document.report.FinancialReportDTO;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 
-import java.util.List;
+/**
+ * @author Jan Krajewski
+ */
+public interface FinancialReportService extends ServiceRepository<FinancialReport, FinancialReportDTO> {
 
-public interface FinancialReportService {
-
-    FinancialReportDTO getOneById(Long id);
-
-    List<FinancialReportDTO> getAll();
-
-    void save(FinancialReportDTO financialReportDTO);
-
-    void delete(FinancialReportDTO financialReportDTO);
 }

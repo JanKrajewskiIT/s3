@@ -2,6 +2,7 @@ package pl.lodz.p.project.core.jsf.base;
 
 import org.springframework.context.annotation.Scope;
 
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -9,7 +10,7 @@ import java.io.Serializable;
  * @author Jan Krajewski
  */
 @Named
-@Scope("request")
+@ViewScoped
 public class GUI implements Serializable {
 
     public String redirect(String xhtml, String id) {

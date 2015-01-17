@@ -14,25 +14,8 @@
 
 	<composite:implementation>
 		<div class="row invoice-info">
-			<div class="col-sm-4 col-lg-3 invoice-col">
-				<div class="small-box bg-blue">
-					<div class="inner">
-						<h3>Sprzedawca</h3>
-						<address>
-							<strong>#{constantElements.userData.name}</strong><br/>
-							#{constantElements.userData.address.address}<br />
-							#{constantElements.userData.address.postalCode.city},
-							#{constantElements.userData.address.postalCode.code}<br />
-							NIP: #{constantElements.userData.nip}<br />
-							Email: #{constantElements.userData.email}
-						</address>
-					</div>
-					<a href="#" class="small-box-footer"> More info <i
-						class="fa fa-arrow-circle-right"></i>
-					</a>
-				</div>
-			</div>
-			<div class="col-sm-4 col-lg-3 invoice-col">
+
+			<div class="col-lg-3 invoice-col">
 				<div class="small-box bg-blue">
 					<div class="inner">
 						<h3>Nabywca</h3>
@@ -59,13 +42,14 @@
 					</p:commandLink>
 				</div>
 			</div>
-			<div class="col-sm-4 invoice-col">
+			<div class="col-lg-3 invoice-col">
 				<label>Numer zamówienia</label>
 				<p:inputText styleClass="form-control"
 						value="#{cc.attrs.controller.sourceObject.orderSymbol}"/>
-	
+			</div>
+			<div class="col-lg-3 invoice-col">
 				<label>Środek transportu</label>                                                    
-				<h:selectOneMenu styleClass="form-control">
+				<h:selectOneMenu styleClass="form-control" value="#{cc.attrs.controller.sourceObject.transportMean}">
 	            	<f:selectItems itemValue="#{transportMean.id}" itemLabel="#{transportMean.name}"
 								   var="transportMean" value="#{cc.attrs.controller.transportMeanList}"/>
 	            </h:selectOneMenu>

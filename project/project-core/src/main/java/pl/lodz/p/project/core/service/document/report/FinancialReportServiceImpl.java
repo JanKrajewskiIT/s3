@@ -14,6 +14,9 @@ import javax.interceptor.Interceptors;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Zychu
+ */
 @Service
 @Interceptors({TrackerInterceptor.class})
 public class FinancialReportServiceImpl extends AbstractService<FinancialReport, FinancialReportDTO> implements FinancialReportService {

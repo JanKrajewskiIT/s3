@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Janiu, Milczu
+ * @author Janiu
  */
 @Component
 @Interceptors({TrackerInterceptor.class})

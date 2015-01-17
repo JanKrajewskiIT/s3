@@ -1,21 +1,13 @@
 package pl.lodz.p.project.core.service.document.items;
 
+import pl.lodz.p.project.core.domain.document.items.PaymentMethod;
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
-
-import java.util.List;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 /**
  *
- * @author Milczu
+ * @author Janiu
  */
-public interface PaymentMethodService {
-    
-    PaymentMethodDTO getOneById(Long id);
+public interface PaymentMethodService extends ServiceRepository<PaymentMethod, PaymentMethodDTO> {
 
-    List<PaymentMethodDTO> getAll();
-        
-    void save(PaymentMethodDTO paymentMethodDTO);
-    
-    void delete(PaymentMethodDTO paymentMethodDTO);
-    
 }

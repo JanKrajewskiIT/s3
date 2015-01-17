@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author Janiu
+ * @author Janiu, Łukasz Gadomski
  */
 @Component
 @Interceptors({TrackerInterceptor.class})

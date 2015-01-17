@@ -20,7 +20,7 @@ import java.util.List;
  * @param <D>
  */
 public abstract class AbstractService<E extends Persistable<Long>, D extends Serializable> {
-	
+
     protected final Transformer transformer = new Transformer();
     protected final ReverseTransformer reverseTransformer = new ReverseTransformer();
 

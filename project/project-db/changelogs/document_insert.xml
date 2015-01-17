@@ -22,4 +22,13 @@
 		</insert>
 	</changeSet>
 
+	<changeSet id="transport_means" author="jan.krajewski">
+		<sql>
+			insert into transport_means(name) values ('Pociag');
+			insert into transport_means(name) values ('Poczta');
+			insert into transport_means(name) values ('Kurier');
+			insert into transport_means(name) values ('Super transport');
+		</sql>
+	</changeSet>
+
 </databaseChangeLog>

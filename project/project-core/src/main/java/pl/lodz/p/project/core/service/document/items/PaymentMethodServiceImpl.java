@@ -11,7 +11,7 @@ import javax.interceptor.Interceptors;
 import java.util.List;
 
 /**
- * @author Milczu, Janiu
+ * @author Janiu
  */
 @Service
 @Interceptors({TrackerInterceptor.class})

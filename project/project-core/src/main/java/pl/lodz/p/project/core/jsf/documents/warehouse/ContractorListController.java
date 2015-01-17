@@ -8,13 +8,14 @@ import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.contractor.ContractorServiceImpl;
 
 import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
  * @author Jan Krajewski
  */
 @Named
-@Scope("request")
+@ViewScoped
 public class ContractorListController extends EditListController<ContractorDTO> {
 
     private static final long serialVersionUID = 1L;

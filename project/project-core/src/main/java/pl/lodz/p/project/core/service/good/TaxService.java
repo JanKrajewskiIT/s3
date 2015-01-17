@@ -1,21 +1,13 @@
 package pl.lodz.p.project.core.service.good;
 
+import pl.lodz.p.project.core.domain.good.Tax;
 import pl.lodz.p.project.core.dto.good.TaxDTO;
-
-import java.util.List;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 /**
  *
- * @author Janiu, Milczu
+ * @author Janiu
  */
-public interface TaxService {
-
-    List<TaxDTO> getAll();
-    
-    TaxDTO getOneById(Long id);
-        
-    void save(TaxDTO taxDTO);
-    
-    void delete(TaxDTO taxDTO);
+public interface TaxService extends ServiceRepository<Tax, TaxDTO> {
     
 }

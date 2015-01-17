@@ -2,6 +2,7 @@ package pl.lodz.p.project.core.jsf.base;
 
 import com.google.common.collect.Lists;
 import pl.lodz.p.project.core.service.base.AbstractService;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +14,7 @@ public abstract class EditObjectController<T extends Serializable> extends UIObj
 
 	private static final long serialVersionUID = -5022126225567406058L;
 
-	private AbstractService service;
+	private ServiceRepository service;
 
 	protected T sourceObject;
 	protected Mode mode = Mode.EDIT;
@@ -54,7 +55,7 @@ public abstract class EditObjectController<T extends Serializable> extends UIObj
 		this.sourceObject = sourceObject;
 	}
 
-	public void setService(AbstractService service) {
+	public void setService(ServiceRepository service) {
 		this.service = service;
 	}
 

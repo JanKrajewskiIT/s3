@@ -1,21 +1,13 @@
 package pl.lodz.p.project.core.service.good;
 
+import pl.lodz.p.project.core.domain.good.Unit;
 import pl.lodz.p.project.core.dto.good.UnitDTO;
-
-import java.util.List;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 /**
  *
- * @author Janiu, Milczu
+ * @author Janiu
  */
-public interface UnitService {
+public interface UnitService extends ServiceRepository<Unit, UnitDTO> {
 
-    List<UnitDTO> getAll();
-    
-    UnitDTO getOneById(Long unitId);
-        
-    void save(UnitDTO unitDTO);
-    
-    void delete(UnitDTO unitDTO);
-    
 }

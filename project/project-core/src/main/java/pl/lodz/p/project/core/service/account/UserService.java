@@ -1,17 +1,15 @@
 package pl.lodz.p.project.core.service.account;
 
+import pl.lodz.p.project.core.domain.account.User;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.exception.UniqueConstraintViolationException;
-
-import java.util.List;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 /**
  *
  * @author Janiu
  */
-public interface UserService {
-
-	List<UserDTO> getAll();
+public interface UserService extends ServiceRepository<User, UserDTO> {
 
 	void createUser(UserDTO userDTO) throws UniqueConstraintViolationException;
 

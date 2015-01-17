@@ -1,17 +1,13 @@
 package pl.lodz.p.project.core.service.document.items;
 
+import pl.lodz.p.project.core.domain.document.items.TransportMean;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
-
-import java.util.List;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 /**
  *
  * @author Janiu
  */
-public interface TransportMeanService {
-    
-    TransportMeanDTO getOneById(Long id);
+public interface TransportMeanService extends ServiceRepository<TransportMean, TransportMeanDTO> {
 
-    List<TransportMeanDTO> getAll();
-    
 }

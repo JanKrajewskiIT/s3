@@ -36,16 +36,16 @@
 									</div>
 									<div class="box-body">
 										<h:form>
-											<p:panel visible="#{externalInvoiceController.visible and invoiceGoodListController.visible}">
-												<cc:externalDocument controller="#{externalInvoiceController}" />
+											<p:panel visible="#{externalInvoiceController.visible}">
+												<cc:warehouseInvoiceTop controller="#{externalInvoiceController}" />
 												<p:spacer style="height : 10px"/>
-												<cc:invoiceGoodList controller="#{invoiceGoodListController}" />
+												<cc:invoiceGoodList controller="#{externalInvoiceController}" />
 												<p:spacer style="height : 10px"/>
-												<cc:internalDocument controller="#{externalInvoiceController}" />
+												<cc:warehouseInvoiceBottom controller="#{externalInvoiceController}" />
 												<p:spacer style="height : 10px"/>
 												<cc:buttonBox controller="#{externalInvoiceController}"/>
 											</p:panel>
-											<p:panel visible="#{not invoiceGoodListController.visible}">
+											<p:panel visible="#{goodListController.visible}">
 												<cc:goodChooser controller="#{goodListController}"
 																action="#{externalInvoiceController.addGood()}"
 																editable="false"/>

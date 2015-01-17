@@ -8,10 +8,11 @@ import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceServiceImpl;
 
 import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 @Named
-@Scope("request")
+@ViewScoped
 public class ExternalInvoiceListController extends EditListController<ExternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 1L;
@@ -31,7 +32,7 @@ public class ExternalInvoiceListController extends EditListController<ExternalIn
 
 	@Override
 	public String edit(String id) {
-		return gui.redirect("", id);
+		return gui.redirect("externalIncoming", id);
 	}
 
 }
