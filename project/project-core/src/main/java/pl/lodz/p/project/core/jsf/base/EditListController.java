@@ -4,9 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort;
-import pl.lodz.p.project.core.domain.base.BaseEntity;
-import pl.lodz.p.project.core.dto.base.BaseDTO;
-import pl.lodz.p.project.core.service.base.AbstractService;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 import java.io.Serializable;

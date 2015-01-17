@@ -1,7 +1,6 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.jsf.base.EditListController;
 import pl.lodz.p.project.core.jsf.base.GUI;

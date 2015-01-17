@@ -1,7 +1,6 @@
 package pl.lodz.p.project.core.domain.document.warehouse;
 
 import pl.lodz.p.project.core.domain.document.base.InvoiceGood;
-import pl.lodz.p.project.core.domain.document.base.InvoiceGoodKey;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,7 +10,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "internal_invoices_goods")
-public class InternalInvoiceGood extends InvoiceGood<InvoiceGoodKey<InternalInvoice>> {
+public class InternalInvoiceGood extends InvoiceGood<InternalInvoice, Long> {
 
 	private static final long serialVersionUID = 1L;
 

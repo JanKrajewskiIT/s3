@@ -6,6 +6,7 @@ import pl.lodz.p.project.core.domain.document.items.TransportMean;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 /**
  * @author Jan Krajewski
@@ -29,6 +30,9 @@ public class ExternalInvoice extends WarehouseInvoice {
     @Size(min = 1, max = 16)
     @Column(name = "order_symbol")
     private String orderSymbol;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
+	private List<ExternalInvoiceGood> goodList;
 
 	public Contractor getContractor() {
 		return contractor;
@@ -54,5 +58,12 @@ public class ExternalInvoice extends WarehouseInvoice {
 		this.orderSymbol = orderSymbol;
 	}
 
+	public List<ExternalInvoiceGood> getGoodList() {
+		return goodList;
+	}
+
+	public void setGoodList(List<ExternalInvoiceGood> goodList) {
+		this.goodList = goodList;
+	}
 }
 

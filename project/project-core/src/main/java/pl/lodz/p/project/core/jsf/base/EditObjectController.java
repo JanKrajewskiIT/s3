@@ -1,7 +1,6 @@
 package pl.lodz.p.project.core.jsf.base;
 
 import com.google.common.collect.Lists;
-import pl.lodz.p.project.core.service.base.AbstractService;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 import java.io.Serializable;

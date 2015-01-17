@@ -48,11 +48,12 @@
 						value="#{cc.attrs.controller.sourceObject.orderSymbol}"/>
 			</div>
 			<div class="col-lg-3 invoice-col">
-				<label>Środek transportu</label>                                                    
-				<h:selectOneMenu styleClass="form-control" value="#{cc.attrs.controller.sourceObject.transportMean}">
-	            	<f:selectItems itemValue="#{transportMean.id}" itemLabel="#{transportMean.name}"
-								   var="transportMean" value="#{cc.attrs.controller.transportMeanList}"/>
-	            </h:selectOneMenu>
+				<label>Środek transportu</label>
+				<h:selectOneMenu styleClass="form-control" value="#{cc.attrs.controller.sourceObject.transportMean.id}">
+					<f:selectItem itemLabel="---" itemValue="#{null}"/>
+					<f:selectItems itemLabel="#{transportMean.name}" var="transportMean" itemValue="#{transportMean.id}"
+								   value="#{cc.attrs.controller.transportMeanList}"/>
+				</h:selectOneMenu>
 			</div>
 		</div>
 	</composite:implementation>

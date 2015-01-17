@@ -7,11 +7,13 @@ import pl.lodz.p.project.core.jsf.base.EditObjectController;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
+import pl.lodz.p.project.core.service.document.warehouse.InternalInvoiceGoodService;
 import pl.lodz.p.project.core.service.document.warehouse.InternalInvoiceService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import java.util.ArrayList;
 
 @Named
 @ViewScoped
@@ -26,6 +28,9 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	private InternalInvoiceService service;
 
 	@Autowired
+	private InternalInvoiceGoodService goodService;
+
+	@Autowired
 	private DocumentNumeratorService documentNumeratorService;
 
 	@Autowired
@@ -37,6 +42,7 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	@PostConstruct
 	private void init() {
 		setSourceObject(new InternalInvoiceDTO());
+		getSourceObject().setGoodList(goodService.getGoodsByInvoice(getSourceObject().getId()));
 		setTotal();
 	}
 
@@ -52,6 +58,7 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
 		getSourceObject().setIssuePerson(constantElements.getUser());
 		service.save(getSourceObject());
+		goodService.save(getSourceObject().getGoodList());
 	}
 
 	public void addGood() {
@@ -60,6 +67,7 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 		InternalInvoiceGoodDTO invoiceGood = new InternalInvoiceGoodDTO();
 		invoiceGood.setGood(goodListController.getSingleSelection());
 		invoiceGood.setQuantity(goodListController.getQuantity());
+		invoiceGood.setInvoice(getSourceObject());
 		getSourceObject().getGoodList().add(invoiceGood);
 
 		setTotal();
