@@ -1,7 +1,7 @@
 package pl.lodz.p.project.core.service.document.warehouse;
 
 import com.google.common.collect.Lists;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import pl.lodz.p.project.core.dao.document.warehouse.ExternalInvoiceDao;
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageImpl;
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author Jan Krajewski
  */
-@Service
+@Component
 @Interceptors({TrackerInterceptor.class})
 public class ExternalInvoiceServiceImpl extends AbstractService<ExternalInvoice, ExternalInvoiceDTO> implements ExternalInvoiceService {
 

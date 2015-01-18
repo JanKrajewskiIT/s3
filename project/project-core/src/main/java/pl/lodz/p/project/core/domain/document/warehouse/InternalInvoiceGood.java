@@ -10,7 +10,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "internal_invoices_goods")
-public class InternalInvoiceGood extends InvoiceGood<InternalInvoice, Long> {
+public class InternalInvoiceGood extends InvoiceGood<InternalInvoice> {
 
 	private static final long serialVersionUID = 1L;
 

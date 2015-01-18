@@ -2,6 +2,7 @@ package pl.lodz.p.project.core.converter.document.warehouse;
 
 import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.good.GoodConverter;
+import pl.lodz.p.project.core.domain.document.base.InvoiceGoodKey;
 import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoice;
 import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoiceGood;
 import pl.lodz.p.project.core.domain.good.Good;
@@ -33,23 +34,23 @@ public class InternalInvoiceGoodConverter implements Converter<InternalInvoiceGo
 		Good good = goodConverter.convertDTO(objectDTO.getGood());
 		InternalInvoice invoice = invoiceConverter.convertDTO(objectDTO.getInvoice());
 
+		InvoiceGoodKey<InternalInvoice> key = new InvoiceGoodKey<InternalInvoice>();
+		key.setInvoice(invoice);
+		key.setGood(good);
+
 		InternalInvoiceGood entity = new InternalInvoiceGood();
-		entity.setId(objectDTO.getId());
 		entity.setVersion(objectDTO.getVersion());
 		entity.setQuantity(objectDTO.getQuantity());
-		entity.setGood(good);
-		entity.setInvoice(invoice);
+		entity.setId(key);
 		return entity;
 	}
 
 	@Override
 	public InternalInvoiceGoodDTO convertEntity(InternalInvoiceGood entity) {
-		GoodDTO good = goodConverter.convertEntity(entity.getGood());
-		InternalInvoiceDTO invoice = new InternalInvoiceDTO();
-		invoice.setId(entity.getInvoice().getId());
+		GoodDTO good = goodConverter.convertEntity(entity.getId().getGood());
+		InternalInvoiceDTO invoice = invoiceConverter.convertEntity(entity.getId().getInvoice());
 		
 		InternalInvoiceGoodDTO objectDTO = new InternalInvoiceGoodDTO();
-		objectDTO.setId(entity.getId());
 		objectDTO.setVersion(entity.getVersion());
 		objectDTO.setQuantity(entity.getQuantity());
 		objectDTO.setGood(good);

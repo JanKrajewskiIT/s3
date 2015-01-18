@@ -6,6 +6,7 @@ import pl.lodz.p.project.core.domain.document.items.TransportMean;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class ExternalInvoice extends WarehouseInvoice {
     @Column(name = "order_symbol")
     private String orderSymbol;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id.invoice", cascade = CascadeType.ALL)
 	private List<ExternalInvoiceGood> goodList;
 
 	public Contractor getContractor() {
@@ -58,6 +59,7 @@ public class ExternalInvoice extends WarehouseInvoice {
 		this.orderSymbol = orderSymbol;
 	}
 
+	@XmlTransient
 	public List<ExternalInvoiceGood> getGoodList() {
 		return goodList;
 	}

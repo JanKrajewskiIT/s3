@@ -1,7 +1,6 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoice;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;
@@ -16,7 +15,6 @@ import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -55,7 +53,7 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	private void init() {
 		setSourceObject(new ExternalInvoiceDTO());
 		getSourceObject().setTransportMean(new TransportMeanDTO());
-		getSourceObject().setGoodList(goodService.getGoodsByInvoice(getSourceObject().getId()));
+		//getSourceObject().setGoodList(goodService.getGoodsByInvoice(getSourceObject().getId()));
 		transportMeanList = transportMeanService.getAll();
 	}
 
@@ -72,7 +70,7 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 		getSourceObject().setIssuePerson(constantElements.getUser());
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
 		service.save(getSourceObject());
-		goodService.save(getSourceObject().getGoodList());
+		//goodService.save(getSourceObject().getGoodList());
 	}
 
 	public void addContractor() {

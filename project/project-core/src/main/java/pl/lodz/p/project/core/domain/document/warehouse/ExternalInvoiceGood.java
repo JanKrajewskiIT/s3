@@ -10,7 +10,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "external_invoices_goods")
-public class ExternalInvoiceGood extends InvoiceGood<ExternalInvoice, Long> {
+public class ExternalInvoiceGood extends InvoiceGood<ExternalInvoice> {
 
 	private static final long serialVersionUID = 1L;
 
