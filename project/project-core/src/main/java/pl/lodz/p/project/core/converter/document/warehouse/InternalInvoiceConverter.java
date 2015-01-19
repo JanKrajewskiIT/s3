@@ -33,7 +33,7 @@ public class InternalInvoiceConverter implements Converter<InternalInvoice, Inte
 	@Override
 	public InternalInvoice convertDTO(InternalInvoiceDTO objectDTO) {
 		User issuePerson = userConverter.convertDTO(objectDTO.getIssuePerson());
-		List<InternalInvoiceGood> invoiceGoodList = Lists.transform(objectDTO.getGoodList(), new InvoiceGoodDTOConverter());
+		//List<InternalInvoiceGood> invoiceGoodList = Lists.transform(objectDTO.getGoodList(), new InvoiceGoodDTOConverter());
 
 		InternalInvoice entity = new InternalInvoice();
 		entity.setId(objectDTO.getId());
@@ -46,14 +46,14 @@ public class InternalInvoiceConverter implements Converter<InternalInvoice, Inte
 		entity.setIssuePerson(issuePerson);
 		entity.setReceivePerson(objectDTO.getReceivePerson());
 		entity.setAnnotation(objectDTO.getAnnotation());
-		entity.setGoodList(invoiceGoodList);
+		//entity.setGoodList(invoiceGoodList);
 		return entity;
 	}
 
 	@Override
 	public InternalInvoiceDTO convertEntity(InternalInvoice entity) {
 		UserDTO issuePerson = userConverter.convertEntity(entity.getIssuePerson());
-		List<InternalInvoiceGoodDTO> invoiceGoodList = Lists.transform(entity.getGoodList(), new InvoiceGoodConverter());
+		//List<InternalInvoiceGoodDTO> invoiceGoodList = Lists.transform(entity.getGoodList(), new InvoiceGoodConverter());
 
 		InternalInvoiceDTO objectDTO = new InternalInvoiceDTO();
 		objectDTO.setId(entity.getId());
@@ -66,10 +66,10 @@ public class InternalInvoiceConverter implements Converter<InternalInvoice, Inte
 		objectDTO.setIssuePerson(issuePerson);
 		objectDTO.setReceivePerson(entity.getReceivePerson());
 		objectDTO.setAnnotation(entity.getAnnotation());
-		objectDTO.setGoodList(invoiceGoodList);
+		//objectDTO.setGoodList(invoiceGoodList);
 		return objectDTO;
 	}
-
+/*
 	private class InvoiceGoodConverter implements Function<InternalInvoiceGood, InternalInvoiceGoodDTO> {
 		@Override
 		public InternalInvoiceGoodDTO apply(InternalInvoiceGood input) {
@@ -83,4 +83,5 @@ public class InternalInvoiceConverter implements Converter<InternalInvoice, Inte
 			return invoiceGoodConverter.convertDTO(input);
 		}
 	}
+*/
 }

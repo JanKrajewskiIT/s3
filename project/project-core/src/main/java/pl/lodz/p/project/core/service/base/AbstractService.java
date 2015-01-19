@@ -30,9 +30,9 @@ public abstract class AbstractService<E extends Persistable<Long>, D extends Ser
     @Autowired
     protected Converter<E, D> converter;
 
-    public void save(D objectDTO) {
+    public E save(D objectDTO) {
         E entity = converter.convertDTO(objectDTO);
-        dao.save(entity);
+        return dao.save(entity);
     }
     
     public void save(List<D> objectList) {

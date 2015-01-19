@@ -48,7 +48,7 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		Contractor contractor = contractorConverter.convertDTO(objectDTO.getContractor());
 		TransportMean transportMean = transportMeanConverter.convertDTO(objectDTO.getTransportMean());
 		User issuePerson = userConverter.convertDTO(objectDTO.getIssuePerson());
-		List<ExternalInvoiceGood> invoiceGoodList = Lists.transform(objectDTO.getGoodList(), new InvoiceGoodDTOConverter());
+		//List<ExternalInvoiceGood> invoiceGoodList = Lists.transform(objectDTO.getGoodList(), new InvoiceGoodDTOConverter());
 
 		ExternalInvoice entity = new ExternalInvoice();
 		entity.setId(objectDTO.getId());
@@ -64,7 +64,7 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		entity.setOrderSymbol(objectDTO.getOrderSymbol());		
 		entity.setContractor(contractor);
 		entity.setTransportMean(transportMean);
-		entity.setGoodList(invoiceGoodList);
+		//entity.setGoodList(invoiceGoodList);
 		return entity;
 	}
 
@@ -73,7 +73,7 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		ContractorDTO contractor = contractorConverter.convertEntity(entity.getContractor());
 		TransportMeanDTO transportMean = transportMeanConverter.convertEntity(entity.getTransportMean());
 		UserDTO issuePerson = userConverter.convertEntity(entity.getIssuePerson());
-		List<ExternalInvoiceGoodDTO> invoiceGoodList = Lists.transform(entity.getGoodList(), new InvoiceGoodConverter());
+		//List<ExternalInvoiceGoodDTO> invoiceGoodList = Lists.transform(entity.getGoodList(), new InvoiceGoodConverter());
 
 		ExternalInvoiceDTO objectDTO = new ExternalInvoiceDTO();
 		objectDTO.setId(entity.getId());
@@ -89,10 +89,10 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		objectDTO.setOrderSymbol(entity.getOrderSymbol());
 		objectDTO.setContractor(contractor);
 		objectDTO.setTransportMean(transportMean);
-		objectDTO.setGoodList(invoiceGoodList);
+		//objectDTO.setGoodList(invoiceGoodList);
 		return objectDTO;
 	}
-
+/*
 	private class InvoiceGoodConverter implements Function<ExternalInvoiceGood, ExternalInvoiceGoodDTO> {
 		@Override
 		public ExternalInvoiceGoodDTO apply(ExternalInvoiceGood input) {
@@ -106,4 +106,5 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 			return invoiceGoodConverter.convertDTO(input);
 		}
 	}
+*/
 }

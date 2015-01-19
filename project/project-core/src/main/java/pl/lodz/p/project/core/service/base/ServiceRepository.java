@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ServiceRepository<E extends Persistable<Long>, D extends Serializable>  {
 
-    public void save(D objectDTO);
+    public E save(D objectDTO);
 
     public void save(List<D> objectList);
 

@@ -33,8 +33,8 @@ public class PaymentMethodServiceImpl extends AbstractService<PaymentMethod, Pay
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
-    public void save(PaymentMethodDTO paymentMethodDTO) {
-        super.save(paymentMethodDTO);
+    public PaymentMethod save(PaymentMethodDTO paymentMethodDTO) {
+        return super.save(paymentMethodDTO);
     }
 
     @RolesAllowed(ACCESS_LEVEL)

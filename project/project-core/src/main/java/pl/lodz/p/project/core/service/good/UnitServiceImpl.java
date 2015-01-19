@@ -35,8 +35,8 @@ public class UnitServiceImpl extends AbstractService<Unit, UnitDTO> implements U
 
     @RolesAllowed(SETTINGS_ACCESS_LEVEL)
     @Override
-    public void save(UnitDTO unitDTO) {
-    	super.save(unitDTO);
+    public Unit save(UnitDTO unitDTO) {
+    	return super.save(unitDTO);
     }
 
     @RolesAllowed(SETTINGS_ACCESS_LEVEL)

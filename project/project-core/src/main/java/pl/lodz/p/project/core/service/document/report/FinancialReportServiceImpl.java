@@ -40,10 +40,10 @@ public class FinancialReportServiceImpl extends AbstractService<FinancialReport,
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
-    public void save(FinancialReportDTO paymentMethodDTO) {
+    public FinancialReport save(FinancialReportDTO paymentMethodDTO) {
         paymentMethodDTO.setReportDate(new Date());
         fillAdditionInformation(paymentMethodDTO);
-        super.save(paymentMethodDTO);
+        return super.save(paymentMethodDTO);
     }
 
     private void fillAdditionInformation(FinancialReportDTO financialReportDTO) {

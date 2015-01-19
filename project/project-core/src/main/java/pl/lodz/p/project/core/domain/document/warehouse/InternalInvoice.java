@@ -12,8 +12,9 @@ import java.util.List;
 public class InternalInvoice extends WarehouseInvoice {
 
 	private static final long serialVersionUID = 1L;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id.invoice", cascade = CascadeType.ALL)
+/*
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id.invoice", insertable = false, updatable = false)
 	private List<InternalInvoiceGood> goodList;
 
 	@XmlTransient
@@ -24,4 +25,5 @@ public class InternalInvoice extends WarehouseInvoice {
 	public void setGoodList(List<InternalInvoiceGood> goodList) {
 		this.goodList = goodList;
 	}
+*/
 }

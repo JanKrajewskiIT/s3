@@ -34,8 +34,8 @@ public class GoodGroupServiceImpl extends AbstractService<GoodGroup, GoodGroupDT
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
-    public void save(GoodGroupDTO goodGroupDTO) {
-    	super.save(goodGroupDTO);
+    public GoodGroup save(GoodGroupDTO goodGroupDTO) {
+    	return super.save(goodGroupDTO);
     }
 
     @RolesAllowed(ACCESS_LEVEL)

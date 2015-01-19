@@ -31,10 +31,10 @@ public class ExternalInvoice extends WarehouseInvoice {
     @Size(min = 1, max = 16)
     @Column(name = "order_symbol")
     private String orderSymbol;
-
+/*
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id.invoice", cascade = CascadeType.ALL)
 	private List<ExternalInvoiceGood> goodList;
-
+*/
 	public Contractor getContractor() {
 		return contractor;
 	}
@@ -58,7 +58,7 @@ public class ExternalInvoice extends WarehouseInvoice {
 	public void setOrderSymbol(String orderSymbol) {
 		this.orderSymbol = orderSymbol;
 	}
-
+/*
 	@XmlTransient
 	public List<ExternalInvoiceGood> getGoodList() {
 		return goodList;
@@ -67,5 +67,6 @@ public class ExternalInvoice extends WarehouseInvoice {
 	public void setGoodList(List<ExternalInvoiceGood> goodList) {
 		this.goodList = goodList;
 	}
+*/
 }
 

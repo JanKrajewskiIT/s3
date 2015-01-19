@@ -9,7 +9,6 @@ import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.items.TransportMeanService;
-import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceGoodService;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
 
 import javax.annotation.PostConstruct;
@@ -31,9 +30,6 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 
 	@Autowired
 	private ExternalInvoiceService service;
-
-	@Autowired
-	private ExternalInvoiceGoodService goodService;
 
 	@Autowired
 	private TransportMeanService transportMeanService;

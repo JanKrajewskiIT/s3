@@ -45,8 +45,8 @@ public class GoodServiceImpl extends AbstractService<Good, GoodDTO> implements G
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
-    public void save(GoodDTO goodDTO) {
-    	super.save(goodDTO);
+    public Good save(GoodDTO goodDTO) {
+    	return super.save(goodDTO);
     }
 
     @RolesAllowed(ACCESS_LEVEL)

@@ -33,8 +33,8 @@ public class SaleDocumentServiceImpl extends AbstractService<SaleDocument, SaleD
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
-    public void save(SaleDocumentDTO saleDocumentDTO) {
-        super.save(saleDocumentDTO);
+    public SaleDocument save(SaleDocumentDTO saleDocumentDTO) {
+        return super.save(saleDocumentDTO);
     }
 
     @RolesAllowed(ACCESS_LEVEL)

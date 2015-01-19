@@ -34,8 +34,8 @@ public class ContractorGroupServiceImpl extends AbstractService<ContractorGroup,
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
-    public void save(ContractorGroupDTO contractorGroupDTO) {
-    	super.save(contractorGroupDTO);
+    public ContractorGroup save(ContractorGroupDTO contractorGroupDTO) {
+    	return super.save(contractorGroupDTO);
     }
 
     @RolesAllowed(ACCESS_LEVEL)

@@ -35,8 +35,8 @@ public class TaxServiceImpl extends AbstractService<Tax, TaxDTO> implements TaxS
 
     @RolesAllowed(SETTINGS_ACCESS_LEVEL)
     @Override
-    public void save(TaxDTO taxDTO) {
-    	super.save(taxDTO);
+    public Tax save(TaxDTO taxDTO) {
+    	return super.save(taxDTO);
     }
 
     @RolesAllowed(SETTINGS_ACCESS_LEVEL)
