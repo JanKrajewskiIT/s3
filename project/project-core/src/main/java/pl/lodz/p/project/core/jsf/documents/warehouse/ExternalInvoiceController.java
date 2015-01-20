@@ -14,6 +14,7 @@ import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -49,6 +50,7 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	private void init() {
 		setSourceObject(new ExternalInvoiceDTO());
 		getSourceObject().setTransportMean(new TransportMeanDTO());
+		getSourceObject().setGoodList(new ArrayList<ExternalInvoiceGoodDTO>());
 		//getSourceObject().setGoodList(goodService.getGoodsByInvoice(getSourceObject().getId()));
 		transportMeanList = transportMeanService.getAll();
 	}
@@ -62,7 +64,6 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 
 	@Override
 	public void save() {
-		//getSourceObject().setGoodList(invoiceGoodListController.getItems());
 		getSourceObject().setIssuePerson(constantElements.getUser());
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
 		service.save(getSourceObject());

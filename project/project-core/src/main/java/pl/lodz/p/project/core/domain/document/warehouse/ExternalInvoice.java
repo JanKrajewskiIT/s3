@@ -6,7 +6,6 @@ import pl.lodz.p.project.core.domain.document.items.TransportMean;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 /**
@@ -25,16 +24,16 @@ public class ExternalInvoice extends WarehouseInvoice {
     @JoinColumn(name = "transport_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private TransportMean transportMean;
-    
+
 	@Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 16)
     @Column(name = "order_symbol")
     private String orderSymbol;
-/*
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id.invoice", cascade = CascadeType.ALL)
-	private List<ExternalInvoiceGood> goodList;
-*/
+
+	@OneToMany(mappedBy = "id.invoice", cascade = CascadeType.ALL)
+	private List<ExternalInvoiceGood> invoiceGoodList;
+
 	public Contractor getContractor() {
 		return contractor;
 	}
@@ -58,15 +57,13 @@ public class ExternalInvoice extends WarehouseInvoice {
 	public void setOrderSymbol(String orderSymbol) {
 		this.orderSymbol = orderSymbol;
 	}
-/*
-	@XmlTransient
-	public List<ExternalInvoiceGood> getGoodList() {
-		return goodList;
+
+	public List<ExternalInvoiceGood> getInvoiceGoodList() {
+		return invoiceGoodList;
 	}
 
-	public void setGoodList(List<ExternalInvoiceGood> goodList) {
-		this.goodList = goodList;
+	public void setInvoiceGoodList(List<ExternalInvoiceGood> invoiceGoodList) {
+		this.invoiceGoodList = invoiceGoodList;
 	}
-*/
 }
 

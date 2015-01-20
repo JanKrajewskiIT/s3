@@ -24,9 +24,9 @@ public class InternalInvoiceListController extends EditListController<InternalIn
 
 	@PostConstruct
 	private void init() {
-		//setService(service);
-		//initStartPage(5, "symbol");
-		//search();
+		setService(service);
+		initStartPage(5, "symbol");
+		search();
 	}
 
 	@Override
