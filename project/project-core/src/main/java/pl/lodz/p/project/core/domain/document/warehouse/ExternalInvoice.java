@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Jan Krajewski
@@ -31,8 +32,8 @@ public class ExternalInvoice extends WarehouseInvoice {
     @Column(name = "order_symbol")
     private String orderSymbol;
 
-	@OneToMany(mappedBy = "id.invoice", cascade = CascadeType.ALL)
-	private List<ExternalInvoiceGood> invoiceGoodList;
+	@OneToMany(mappedBy = "id.invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<ExternalInvoiceGood> invoiceGoodList;
 
 	public Contractor getContractor() {
 		return contractor;
@@ -58,11 +59,11 @@ public class ExternalInvoice extends WarehouseInvoice {
 		this.orderSymbol = orderSymbol;
 	}
 
-	public List<ExternalInvoiceGood> getInvoiceGoodList() {
+	public Set<ExternalInvoiceGood> getInvoiceGoodList() {
 		return invoiceGoodList;
 	}
 
-	public void setInvoiceGoodList(List<ExternalInvoiceGood> invoiceGoodList) {
+	public void setInvoiceGoodList(Set<ExternalInvoiceGood> invoiceGoodList) {
 		this.invoiceGoodList = invoiceGoodList;
 	}
 }

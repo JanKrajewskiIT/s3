@@ -21,6 +21,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 /**
  * @author Jan Krajewski
@@ -61,7 +62,7 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		entity.setOrderSymbol(objectDTO.getOrderSymbol());		
 		entity.setContractor(contractor);
 		entity.setTransportMean(transportMean);
-		entity.setInvoiceGoodList(new ArrayList<ExternalInvoiceGood>());
+		entity.setInvoiceGoodList(new TreeSet<ExternalInvoiceGood>());
 
 		for(ExternalInvoiceGoodDTO invoiceGoodDTO : objectDTO.getGoodList()) {
 			ExternalInvoiceGood invoiceGood = new ExternalInvoiceGood();

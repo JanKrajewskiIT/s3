@@ -55,7 +55,6 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
 		getSourceObject().setIssuePerson(constantElements.getUser());
 		service.save(getSourceObject());
-		//goodService.save(getSourceObject().getGoodList());
 	}
 
 	public void addGood() {

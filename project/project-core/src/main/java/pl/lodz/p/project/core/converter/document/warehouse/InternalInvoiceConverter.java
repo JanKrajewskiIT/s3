@@ -15,6 +15,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 /**
  * @author Jan Krajewski
@@ -43,7 +44,7 @@ public class InternalInvoiceConverter implements Converter<InternalInvoice, Inte
 		entity.setIssuePerson(issuePerson);
 		entity.setReceivePerson(objectDTO.getReceivePerson());
 		entity.setAnnotation(objectDTO.getAnnotation());
-		entity.setInvoiceGoodList(new ArrayList<InternalInvoiceGood>());
+		entity.setInvoiceGoodList(new TreeSet<InternalInvoiceGood>());
 
 		for(InternalInvoiceGoodDTO invoiceGoodDTO : objectDTO.getGoodList()) {
 			InternalInvoiceGood invoiceGood = new InternalInvoiceGood();

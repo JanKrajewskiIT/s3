@@ -51,7 +51,6 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 		setSourceObject(new ExternalInvoiceDTO());
 		getSourceObject().setTransportMean(new TransportMeanDTO());
 		getSourceObject().setGoodList(new ArrayList<ExternalInvoiceGoodDTO>());
-		//getSourceObject().setGoodList(goodService.getGoodsByInvoice(getSourceObject().getId()));
 		transportMeanList = transportMeanService.getAll();
 	}
 
@@ -67,7 +66,6 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 		getSourceObject().setIssuePerson(constantElements.getUser());
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
 		service.save(getSourceObject());
-		//goodService.save(getSourceObject().getGoodList());
 	}
 
 	public void addContractor() {
