@@ -8,14 +8,14 @@ import java.util.Set;
 /**
  * @author Jan Krajewski
  */
-@Entity
-@Table(name = "internal_invoices")
+//@Entity
+//@Table(name = "internal_invoices")
 public class InternalInvoice extends WarehouseInvoice {
 
 	private static final long serialVersionUID = 1L;
 
-	@JoinTable(name = "internal_invoices_goods")
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@JoinTable(name = "internal_invoices_goods")
+	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<InternalInvoiceGood> goodList;
 
 	@XmlTransient
