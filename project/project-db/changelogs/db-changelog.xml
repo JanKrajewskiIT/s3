@@ -21,4 +21,5 @@
 	<include file="changelogs/report_create.xml" />
 	<include file="changelogs/alters.xml"  />
 
+	<include file="changelogs/service_create.xml"/>
 </databaseChangeLog>

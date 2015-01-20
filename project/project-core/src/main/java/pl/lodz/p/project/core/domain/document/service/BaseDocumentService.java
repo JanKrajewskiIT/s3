@@ -14,6 +14,10 @@ import javax.validation.constraints.NotNull;
 @MappedSuperclass
 public abstract class BaseDocumentService extends Document<Long> {
 
+    public BaseDocumentService(ServiceDocumentType serviceDocumentType) {
+        this.serviceDocumentType = serviceDocumentType;
+    }
+
     @NotNull
     @Column(name = "service_document_type")
     @Enumerated(EnumType.STRING)

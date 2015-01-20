@@ -33,13 +33,13 @@ public class ServiceRepairOrderConverter implements Converter<ServiceRepairOrder
             return null;
         }
         User user = userConverter.convertDTO(objectDTO.getIssuePerson());
-        Contractor contractor = contractorConverter.convertDTO(objectDTO.getContractor());
+        Contractor contractor = objectDTO.getContractor() == null ? null : contractorConverter.convertDTO(objectDTO.getContractor());
 
         ServiceRepairOrder entity = new ServiceRepairOrder();
         entity.setIssuePerson(user);
         entity.setContractor(contractor);
         entity.setDescription(objectDTO.getDescription());
-        entity.setEquipentInfo(objectDTO.getEquipentInfo());
+        entity.setEquipmentInfo(objectDTO.getEquipmentInfo());
         entity.setGuarantee(objectDTO.isGuarantee());
         entity.setGuaranteeNo(objectDTO.getGuaranteeNo());
         entity.setSaleDocumentNo(objectDTO.getSaleDocumentNo());
@@ -66,7 +66,7 @@ public class ServiceRepairOrderConverter implements Converter<ServiceRepairOrder
         objectDTO.setIssuePerson(user);
         objectDTO.setContractor(contractor);
         objectDTO.setDescription(entity.getDescription());
-        objectDTO.setEquipentInfo(entity.getEquipentInfo());
+        objectDTO.setEquipmentInfo(entity.getEquipmentInfo());
         objectDTO.setGuarantee(entity.isGuarantee());
         objectDTO.setGuaranteeNo(entity.getGuaranteeNo());
         objectDTO.setSaleDocumentNo(entity.getSaleDocumentNo());

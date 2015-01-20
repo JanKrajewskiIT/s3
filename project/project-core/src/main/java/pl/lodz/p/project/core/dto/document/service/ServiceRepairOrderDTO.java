@@ -6,7 +6,7 @@ import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 public class ServiceRepairOrderDTO extends BaseServiceDocumentDTO {
 
     private ContractorDTO contractor;
-    private String equipentInfo;
+    private String equipmentInfo;
     private boolean guarantee;
     private String guaranteeNo;
     private String saleDocumentNo;
@@ -24,12 +24,12 @@ public class ServiceRepairOrderDTO extends BaseServiceDocumentDTO {
         this.contractor = contractor;
     }
 
-    public String getEquipentInfo() {
-        return equipentInfo;
+    public String getEquipmentInfo() {
+        return equipmentInfo;
     }
 
-    public void setEquipentInfo(String equipentInfo) {
-        this.equipentInfo = equipentInfo;
+    public void setEquipmentInfo(String equipmentInfo) {
+        this.equipmentInfo = equipmentInfo;
     }
 
     public boolean isGuarantee() {

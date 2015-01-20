@@ -1,12 +1,10 @@
-package pl.lodz.p.project.core.dto.document.service;
+package pl.lodz.p.project.core.domain.document.service;
 
-import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
-import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 
 import java.util.Date;
 
-public interface ServiceDocumentDTO {
+public interface ServiceDocument {
 
 	String getSymbol();
 

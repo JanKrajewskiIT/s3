@@ -3,6 +3,7 @@ package pl.lodz.p.project.core.domain.document.service;
 import pl.lodz.p.project.core.domain.contractor.Contractor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 
 /**
  * @author Milczu
@@ -11,12 +12,19 @@ import javax.persistence.*;
 @Table(name = "service_repair_orders")
 public class ServiceRepairOrder extends BaseDocumentService {
 
+    private static final String DOCUMENT_TYPE = "SRO";
+
+    public ServiceRepairOrder() {
+        super(ServiceDocumentType.REPAIR_ORDER);
+        setType(DOCUMENT_TYPE);
+    }
+
     @JoinColumn(name = "contractor_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Contractor contractor;
 
     @Column(name = "equipment_info", length = 255)
-    private String equipentInfo;
+    private String equipmentInfo;
 
     private boolean guarantee;
 
@@ -45,12 +53,12 @@ public class ServiceRepairOrder extends BaseDocumentService {
         this.description = description;
     }
 
-    public String getEquipentInfo() {
-        return equipentInfo;
+    public String getEquipmentInfo() {
+        return equipmentInfo;
     }
 
-    public void setEquipentInfo(String equipentInfo) {
-        this.equipentInfo = equipentInfo;
+    public void setEquipmentInfo(String equipmentInfo) {
+        this.equipmentInfo = equipmentInfo;
     }
 
     public boolean isGuarantee() {

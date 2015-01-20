@@ -3,11 +3,12 @@ package pl.lodz.p.project.core.dto.document.service;
 import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import pl.lodz.p.project.core.domain.document.service.ServiceDocument;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
 import pl.lodz.p.project.core.dto.document.base.DocumentDTO;
 
-public class BaseServiceDocumentDTO extends DocumentDTO<Long> implements ServiceDocumentDTO, Comparable<BaseServiceDocumentDTO> {
+public class BaseServiceDocumentDTO extends DocumentDTO<Long> implements ServiceDocument, Comparable<BaseServiceDocumentDTO> {
 
     private final ServiceDocumentType serviceDocumentType;
     private ServiceDocumentState state;

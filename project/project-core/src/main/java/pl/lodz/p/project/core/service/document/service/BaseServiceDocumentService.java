@@ -1,5 +1,6 @@
 package pl.lodz.p.project.core.service.document.service;
 
+import pl.lodz.p.project.core.domain.document.service.ServiceDocument;
 import pl.lodz.p.project.core.dto.document.service.BaseServiceDocumentDTO;
 
 import java.util.List;
@@ -9,5 +10,5 @@ import java.util.List;
  */
 public interface BaseServiceDocumentService {
 
-    List<BaseServiceDocumentDTO> findAll();
+    List<ServiceDocument> findAll();
 }

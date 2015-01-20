@@ -9,6 +9,7 @@ import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.document.service.ServiceRepairOrderDTO;
 import pl.lodz.p.project.core.service.account.UserService;
+import pl.lodz.p.project.core.service.document.service.ServiceRepairOrderService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -23,7 +24,11 @@ public class ServiceRepairOrderTemplateBean implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceRepairOrderTemplateBean.class);
 
+    @Autowired
+    private ServiceRepairOrderService serviceRepairOrderService;
+
     private ServiceRepairOrderDTO document;
+    private String issuePerson;
 
     @Autowired
     private UserService userService;
@@ -34,15 +39,18 @@ public class ServiceRepairOrderTemplateBean implements Serializable {
         if (StringUtils.isBlank(id)) {
             document = createNew();
         } else {
+            document = serviceRepairOrderService.getOneById(Long.parseLong(id));
+
             // TODO
-            document = createNew();
-            document.setSymbol("SRO/16/01/2015");
-            document.setDescription("Tutaj opis usterki");
-            document.setEquipentInfo("Laptop DELL Inspirion 15");
-            document.setGuarantee(true);
-            document.setGuaranteeNo("1254/2014");
-            document.setSaleDocumentNo("ABC/3213");
+//            document = createNew();
+//            document.setSymbol("SRO/16/01/2015");
+//            document.setDescription("Tutaj opis usterki");
+//            document.setEquipmentInfo("Laptop DELL Inspirion 15");
+//            document.setGuarantee(true);
+//            document.setGuaranteeNo("1254/2014");
+//            document.setSaleDocumentNo("ABC/3213");
         }
+        issuePerson = document.getIssuePerson().getFirstName() + " " + document.getIssuePerson().getSecondName();
     }
 
     private ServiceRepairOrderDTO createNew() {
@@ -68,4 +76,12 @@ public class ServiceRepairOrderTemplateBean implements Serializable {
         this.document = document;
     }
 
+    public String save() {
+        serviceRepairOrderService.save(document);
+        return "/documents/service/serviceDocumentsTable.xhtml";
+    }
+
+    public String getIssuePerson() {
+        return issuePerson;
+    }
 }

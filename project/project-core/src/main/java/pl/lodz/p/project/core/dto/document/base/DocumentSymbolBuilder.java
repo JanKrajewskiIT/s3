@@ -25,10 +25,10 @@ public class DocumentSymbolBuilder {
 
     protected String buildSymbolWithNumber(long number, String documentType, DocumentFormat documentFormat) {
         DateTime now = DateTime.now();
-        String[] documentFortmatPatternItems = documentFormat.getPattern().split("/");
+        String[] documentFormatPatternItems = documentFormat.getPattern().split("/");
 
         StringBuilder symbolBuilder = new StringBuilder();
-        for (String documentFormatItem : documentFortmatPatternItems) {
+        for (String documentFormatItem : documentFormatPatternItems) {
             symbolBuilder.append("/");
             if (documentFormatItem.equals(DocumentFormatItem.PREFIKS.toString())) {
                 symbolBuilder.append(documentType);
@@ -49,7 +49,6 @@ public class DocumentSymbolBuilder {
      * @param previousSymbol must be in pattern given in documentFormat
      * @param documentType type of document
      * @param documentFormat document format
-     * @return
      */
     public String buildNext(String previousSymbol, String documentType, DocumentFormat documentFormat) {
         if (hasActualDateValues(previousSymbol, documentFormat)) {
