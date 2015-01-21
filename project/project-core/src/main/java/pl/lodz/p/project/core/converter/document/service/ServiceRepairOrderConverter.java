@@ -51,7 +51,6 @@ public class ServiceRepairOrderConverter implements Converter<ServiceRepairOrder
         entity.setServiceDocumentType(objectDTO.getServiceDocumentType());
         entity.setState(objectDTO.getState());
         entity.setSymbol(objectDTO.getSymbol());
-        LoggerFactory.getLogger(getClass()).debug("entity ID: {}", entity.getId());
 
         return entity;
     }

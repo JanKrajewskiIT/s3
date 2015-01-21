@@ -33,7 +33,6 @@ public abstract class AbstractService<E extends Persistable<Long>, D extends Ser
 
     public E save(D objectDTO) {
         E entity = converter.convertDTO(objectDTO);
-        LoggerFactory.getLogger(getClass()).debug("Do save with id: {}", entity.getId());
         return dao.save(entity);
     }
     

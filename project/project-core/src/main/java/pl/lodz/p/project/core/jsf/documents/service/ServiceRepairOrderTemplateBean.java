@@ -41,7 +41,6 @@ public class ServiceRepairOrderTemplateBean implements Serializable {
             document = createNew();
         } else {
             document = serviceRepairOrderService.getOneById(Long.parseLong(id));
-            LOGGER.info("Get with id: {}", document.getId());
         }
         issuePerson = document.getIssuePerson().getFirstName() + " " + document.getIssuePerson().getSecondName();
     }
