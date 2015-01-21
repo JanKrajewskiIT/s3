@@ -19,9 +19,6 @@ public class InternalInvoiceListController extends EditListController<InternalIn
 	@Autowired
 	private InternalInvoiceService service;
 
-	@Autowired
-	private GUI gui;
-
 	@PostConstruct
 	private void init() {
 		//setService(service);
@@ -31,7 +28,7 @@ public class InternalInvoiceListController extends EditListController<InternalIn
 
 	@Override
 	public String edit(String id) {
-		return gui.redirect("internalIncoming", id);
+		return GUI.redirect("internalIncoming", id);
 	}
 
 }

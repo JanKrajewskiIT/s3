@@ -9,6 +9,7 @@ public class ServiceFixSummaryDTO extends BaseServiceDocumentDTO {
 	}
 	
 	private String description;
+	private String serviceFixOrderSymbol;
 
 	public String getDescription() {
 		return description;
@@ -16,5 +17,13 @@ public class ServiceFixSummaryDTO extends BaseServiceDocumentDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getServiceFixOrderSymbol() {
+		return serviceFixOrderSymbol;
+	}
+
+	public void setServiceFixOrderSymbol(String serviceFixOrderSymbol) {
+		this.serviceFixOrderSymbol = serviceFixOrderSymbol;
 	}
 }

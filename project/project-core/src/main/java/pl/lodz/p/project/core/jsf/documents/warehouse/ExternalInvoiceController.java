@@ -40,9 +40,6 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	@Autowired
 	private ConstantElements constantElements;
 
-	@Autowired
-	private GUI gui;
-
 	private List<TransportMeanDTO> transportMeanList;
 
 	@PostConstruct
@@ -76,7 +73,7 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 
 	public String forwardContractor() {
 		String id = getSourceObject().getContractor().getId().toString();
-		return gui.redirect("contractorTemplate", id);
+		return GUI.redirect("contractorTemplate", id);
 	}
 
 	public void addGood() {

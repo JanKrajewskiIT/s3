@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
 import pl.lodz.p.project.core.dto.account.UserDTO;
+import pl.lodz.p.project.core.dto.document.service.ServiceFixSummaryDTO;
 import pl.lodz.p.project.core.dto.document.service.ServiceRepairOrderDTO;
-import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.account.UserService;
+import pl.lodz.p.project.core.service.document.service.ServiceFixSummaryService;
 import pl.lodz.p.project.core.service.document.service.ServiceRepairOrderService;
 
 import javax.annotation.PostConstruct;
@@ -19,16 +20,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Scope("request")
-@Named("serviceRepairOrderTemplateBean")
-public class ServiceRepairOrderTemplateBean implements Serializable {
+@Named("serviceFixSummaryTemplateBean")
+public class ServiceFixSummaryTemplateBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceRepairOrderTemplateBean.class);
 
     @Autowired
-    private ServiceRepairOrderService serviceRepairOrderService;
+    private ServiceFixSummaryService serviceFixSummaryService;
 
-    private ServiceRepairOrderDTO document;
+    private ServiceFixSummaryDTO document;
     private String issuePerson;
 
     @Autowired
@@ -40,14 +40,13 @@ public class ServiceRepairOrderTemplateBean implements Serializable {
         if (StringUtils.isBlank(id)) {
             document = createNew();
         } else {
-            document = serviceRepairOrderService.getOneById(Long.parseLong(id));
-            LOGGER.info("Get with id: {}", document.getId());
+            document = serviceFixSummaryService.getOneById(Long.parseLong(id));
         }
         issuePerson = document.getIssuePerson().getFirstName() + " " + document.getIssuePerson().getSecondName();
     }
 
-    private ServiceRepairOrderDTO createNew() {
-        ServiceRepairOrderDTO document = new ServiceRepairOrderDTO();
+    private ServiceFixSummaryDTO createNew() {
+        ServiceFixSummaryDTO document = new ServiceFixSummaryDTO();
         document.setState(ServiceDocumentState.NEW);
         document.setDocumentDate(new Date());
         String remoteUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
@@ -61,18 +60,17 @@ public class ServiceRepairOrderTemplateBean implements Serializable {
         document = createNew();
     }
 
-    public ServiceRepairOrderDTO getDocument() {
+    public ServiceFixSummaryDTO getDocument() {
         return document;
     }
 
-    public void setDocument(ServiceRepairOrderDTO document) {
+    public void setDocument(ServiceFixSummaryDTO document) {
         this.document = document;
     }
 
     public String save() {
-        LOGGER.debug("Save with id: {}", document.getId());
-        serviceRepairOrderService.save(document);
-        return GUI.redirect("/documents/service/serviceDocumentsTable");
+        serviceFixSummaryService.save(document);
+        return "/documents/service/serviceDocumentsTable.xhtml";
     }
 
     public String getIssuePerson() {

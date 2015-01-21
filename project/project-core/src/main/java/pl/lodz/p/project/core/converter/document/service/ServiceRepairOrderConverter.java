@@ -1,5 +1,7 @@
 package pl.lodz.p.project.core.converter.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.lodz.p.project.core.converter.account.UserConverter;
 import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.contractor.ContractorConverter;
@@ -49,7 +51,7 @@ public class ServiceRepairOrderConverter implements Converter<ServiceRepairOrder
         entity.setServiceDocumentType(objectDTO.getServiceDocumentType());
         entity.setState(objectDTO.getState());
         entity.setSymbol(objectDTO.getSymbol());
-
+        LoggerFactory.getLogger(getClass()).debug("entity ID: {}", entity.getId());
 
         return entity;
     }
@@ -60,7 +62,7 @@ public class ServiceRepairOrderConverter implements Converter<ServiceRepairOrder
             return null;
         }
         UserDTO user = userConverter.convertEntity(entity.getIssuePerson());
-        ContractorDTO contractor = contractorConverter.convertEntity(entity.getContractor());
+        ContractorDTO contractor = entity.getContractor() == null ? null : contractorConverter.convertEntity(entity.getContractor());
 
         ServiceRepairOrderDTO objectDTO = new ServiceRepairOrderDTO();
         objectDTO.setIssuePerson(user);

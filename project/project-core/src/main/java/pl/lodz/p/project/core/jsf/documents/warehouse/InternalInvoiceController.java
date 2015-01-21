@@ -33,9 +33,6 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	@Autowired
 	private ConstantElements constantElements;
 
-	@Autowired
-	private GUI gui;
-
 	@PostConstruct
 	private void init() {
 		setSourceObject(new InternalInvoiceDTO());

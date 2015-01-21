@@ -2,6 +2,7 @@ package pl.lodz.p.project.core.service.base;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Persistable;
 import pl.lodz.p.project.core.converter.base.Converter;
@@ -32,6 +33,7 @@ public abstract class AbstractService<E extends Persistable<Long>, D extends Ser
 
     public E save(D objectDTO) {
         E entity = converter.convertDTO(objectDTO);
+        LoggerFactory.getLogger(getClass()).debug("Do save with id: {}", entity.getId());
         return dao.save(entity);
     }
     

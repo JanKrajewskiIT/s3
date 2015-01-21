@@ -48,7 +48,8 @@
                                                     <span class="label label-info font14"><h:outputText value="#{document.state.label}"/></span>
                                                 </p:column>
                                                 <p:column headerText="Akcja" style="width: 140px">
-                                                    <p:commandLink styleClass="btn btn-success btn-xs">
+                                                    <p:commandLink styleClass="btn btn-success btn-xs"
+                                                                   action="#{serviceDocumentsTableBean.edit(document.id, document.serviceDocumentType)}">
                                                         <i class="glyphicon glyphicon-pencil"></i> Edytuj
                                                     </p:commandLink>
                                                     <p:spacer style="width: 10px"/>

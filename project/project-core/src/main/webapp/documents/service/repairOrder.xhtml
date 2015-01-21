@@ -31,13 +31,15 @@
                                             value="#{serviceRepairOrderTemplateBean.document.symbol}"/>
                                         <small class="pull-right">Data: <h:outputText
                                                 value="#{serviceRepairOrderTemplateBean.document.documentDate}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET"/>
                                         </h:outputText>
                                         </small>
                                     </h3>
                                 </div>
                                 <div class="box-body">
                                     <h:form>
+                                        <h:inputHidden id="id" value="${serviceRepairOrderTemplateBean.document.id}"/>
+                                        <h:inputHidden id="version" value="${serviceRepairOrderTemplateBean.document.version}"/>
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <label for="symbol">Symbol</label>
@@ -57,7 +59,7 @@
                                                 <p:inputText id="documentDate"
                                                              value="#{serviceRepairOrderTemplateBean.document.documentDate}"
                                                              styleClass="form-control">
-                                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                    <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET"/>
                                                 </p:inputText>
                                             </div>
 

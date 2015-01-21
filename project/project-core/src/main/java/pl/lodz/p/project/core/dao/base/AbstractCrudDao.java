@@ -1,5 +1,7 @@
 package pl.lodz.p.project.core.dao.base;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Persistable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +37,9 @@ public abstract class AbstractCrudDao<T extends Persistable<ID>, ID extends Seri
 
 	@Override
 	public <S extends T> S save(S entity) {
+		Logger logger = LoggerFactory.getLogger(getClass());
+		logger.info("Id: {}, isNew: {}", entity.getId(), entity.isNew());
+
 		if (entity.isNew()) {
 			entityManager.persist(entity);
 			return entity;

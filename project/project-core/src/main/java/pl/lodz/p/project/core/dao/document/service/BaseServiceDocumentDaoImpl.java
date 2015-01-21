@@ -42,9 +42,15 @@ class ServiceDocumentRowMapper implements RowMapper<ServiceDocument> {
         final Date documentDate = rs.getDate("document_date");
         final String strServiceDocumentType = rs.getString("service_document_type");
         final String strState = rs.getString("state");
+        final Long id = rs.getLong("id");
 
 
         return new ServiceDocument() {
+            @Override
+            public Long getId() {
+                return id;
+            }
+
             @Override
             public String getSymbol() {
                 return symbol;

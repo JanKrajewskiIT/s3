@@ -22,9 +22,6 @@ public class ContractorListController extends EditListController<ContractorDTO> 
     @Autowired
     private ContractorServiceImpl service;
 
-    @Autowired
-    private GUI gui;
-
     @PostConstruct
     private void init() {
         setService(service);
@@ -34,7 +31,7 @@ public class ContractorListController extends EditListController<ContractorDTO> 
 
     @Override
     public String edit(String id) {
-        return gui.redirect("contractorTemplate", id);
+        return GUI.redirect("contractorTemplate", id);
     }
 
 }

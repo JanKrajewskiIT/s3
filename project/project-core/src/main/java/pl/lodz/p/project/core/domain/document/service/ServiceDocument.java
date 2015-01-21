@@ -6,6 +6,8 @@ import java.util.Date;
 
 public interface ServiceDocument {
 
+	Long getId();
+
 	String getSymbol();
 
 	String getType();

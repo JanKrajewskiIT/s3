@@ -20,9 +20,6 @@ public class GoodListController extends EditListController<GoodDTO> {
     @Autowired
     private GoodServiceImpl service;
 
-    @Autowired
-    private GUI gui;
-
     private Double quantity;
 
     @PostConstruct
@@ -42,6 +39,6 @@ public class GoodListController extends EditListController<GoodDTO> {
 
     @Override
     public String edit(String id) {
-        return gui.redirect("addEditGood", id);
+        return GUI.redirect("addEditGood", id);
     }
 }
