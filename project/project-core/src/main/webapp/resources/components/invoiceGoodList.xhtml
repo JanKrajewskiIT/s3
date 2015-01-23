@@ -7,10 +7,11 @@
 
 	<composite:interface>
 		<composite:attribute name="controller" />
+		<composite:attribute name="widthValue"/>
 	</composite:interface>
 
 	<composite:implementation>
-		<div class="row" style="width: 107%;">
+		<div class="row" style="width: #{cc.attrs.widthValue};">
 			<div class="col-xs-11 table-responsive">
 				<p:dataTable tableStyleClass="table table-bordered table-striped"
 							 var="good" value="#{cc.attrs.controller.sourceObject.goodList}"

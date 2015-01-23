@@ -26,7 +26,7 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
     private Boolean warehouseResult = true;
     private Boolean paid;
     private PaymentMethodDTO paymentMethod;
-    private List<DocumentPositionDTO> goodsPositions;
+	private List<DocumentPositionDTO> goodList;
 
     @NotNull(message = "Data sprzedaży nie może być pusta!")
     private Date saleDate;
@@ -94,12 +94,12 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
 		this.paymentMethod = paymentMethod;
 	}
 
-	public List<DocumentPositionDTO> getGoodsPositions() {
-		return goodsPositions;
+	public List<DocumentPositionDTO> getGoodList() {
+		return goodList;
 	}
 
-	public void setGoodsPositions(List<DocumentPositionDTO> goodsPositions) {
-		this.goodsPositions = goodsPositions;
+	public void setGoodList(List<DocumentPositionDTO> goodList) {
+		this.goodList = goodList;
 	}
 
 	public Date getSaleDate() {

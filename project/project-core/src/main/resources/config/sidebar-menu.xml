@@ -31,8 +31,8 @@
         <menu-items>
             <menu-item name="Faktura Vat" styleClass="fa fa-edit">
                 <menu-items>
-                    <menu-item name="Wyświetl" targetUrl="/documents/saleDocuments/vatInvoicesTable.xhtml"/>
-                    <menu-item name="Dodaj" targetUrl="/documents/saleDocuments/vatInvoiceAddEdit.xhtml"/>
+                    <menu-item name="Wyświetl" targetUrl="/documents/saleDocuments/vatInvoiceList.xhtml"/>
+                    <menu-item name="Dodaj" targetUrl="/documents/saleDocuments/vatInvoice.xhtml"/>
                 </menu-items>
             </menu-item>
         </menu-items>
