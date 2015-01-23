@@ -37,6 +37,8 @@ public class DocumentNumeratorDaoImpl implements DocumentNumeratorDao {
             return "internal_invoices";
         } else if("WZ".equals(documentType) || "PZ".equals(documentType)) {
             return "external_invoices";
+        } else if ("SRO".equals(documentType)) {
+            return "service_repair_orders";
         }
         throw new RuntimeException("Not defined document: " + documentType);
     }
@@ -49,7 +51,6 @@ public class DocumentNumeratorDaoImpl implements DocumentNumeratorDao {
             String result = (String) entityManager.createNativeQuery("SELECT symbol FROM " + table + " WHERE type = '" + documentType + "' ORDER BY document_date DESC, symbol DESC LIMIT 1").getSingleResult();
             return result == null;
         } catch (NoResultException e) {
-            System.err.println("No result exception: " + e.getMessage());
             return true;
         }
     }

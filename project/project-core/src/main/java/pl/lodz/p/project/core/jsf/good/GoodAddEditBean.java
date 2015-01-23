@@ -85,21 +85,7 @@ public class GoodAddEditBean implements Serializable {
         good.setGroup(goodsGroupsService.getOneById(getGood().getGroup().getId()));
         good.setTax(taxService.getOneById(getGood().getTax().getId()));
 
-        if (getGood().getId() != null) {
-            //  TODO currently we dont need warehouses
-            /*List<WarehouseDTO> warehouses = warehousesEndpoint.getWarehouses();
-            Long id = .add(getGood());
-            for (WarehouseDTO warehouseDTO : warehouses) {
-                WarehouseGoodDTO warehouseGoodDTO = new WarehouseGoodDTO();
-                warehouseGoodDTO.setGoodId(.findById(id));
-                warehouseGoodDTO.setQuantity(0.0);
-                warehouseGoodDTO.setWarehouseId(warehouseDTO);
-                warehousesGoodsEndpointLocal.add(warehouseGoodDTO);
-            }
-            */
-        } else {
-            goodService.save(getGood());
-        }
+        goodService.save(good);
         return "goodsTable.xhtml?faces-redirect=true";
     }
 

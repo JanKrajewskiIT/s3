@@ -1,17 +1,15 @@
 package pl.lodz.p.project.core.jsf.base;
 
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-import java.io.Serializable;
-
 /**
  * @author Jan Krajewski
  */
-@Named
-@ViewScoped
-public class GUI implements Serializable {
+public final class GUI {
 
-    public String redirect(String xhtml, String id) {
+    public static String redirect(String xhtml) {
+        return xhtml + ".xhtml?faces-redirect=true";
+    }
+
+    public static String redirect(String xhtml, String id) {
         return xhtml + ".xhtml?faces-redirect=true&id=" + id;
     }
 }

@@ -2,7 +2,10 @@ package pl.lodz.p.project.core.jsf.documents.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import pl.lodz.p.project.core.domain.document.service.ServiceDocument;
+import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
 import pl.lodz.p.project.core.dto.document.service.BaseServiceDocumentDTO;
+import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.document.service.BaseServiceDocumentService;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +22,7 @@ public class ServiceDocumentsTableBean implements Serializable {
     @Autowired
     private BaseServiceDocumentService baseServiceDocumentService;
 
-    private List<BaseServiceDocumentDTO> documents;
+    private List<ServiceDocument> documents;
 
 
     @PostConstruct
@@ -27,13 +30,21 @@ public class ServiceDocumentsTableBean implements Serializable {
         setDocuments(baseServiceDocumentService.findAll());
     }
 
+    public String edit(Long id, ServiceDocumentType type) {
+        switch (type) {
+            case REPAIR_ORDER:
+                return GUI.redirect("/documents/service/repairOrder", id.toString());
+            default:
+                throw new IllegalArgumentException("Not implemented yet!");
+        }
+    }
 
-    public List<BaseServiceDocumentDTO> getDocuments() {
+    public List<ServiceDocument> getDocuments() {
         return documents;
     }
 
 
-    public void setDocuments(List<BaseServiceDocumentDTO> documents) {
+    public void setDocuments(List<ServiceDocument> documents) {
         this.documents = documents;
     }
 }

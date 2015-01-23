@@ -1,5 +1,7 @@
 package pl.lodz.p.project.core.converter.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.lodz.p.project.core.converter.account.UserConverter;
 import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.contractor.ContractorConverter;
@@ -33,13 +35,13 @@ public class ServiceRepairOrderConverter implements Converter<ServiceRepairOrder
             return null;
         }
         User user = userConverter.convertDTO(objectDTO.getIssuePerson());
-        Contractor contractor = contractorConverter.convertDTO(objectDTO.getContractor());
+        Contractor contractor = objectDTO.getContractor() == null ? null : contractorConverter.convertDTO(objectDTO.getContractor());
 
         ServiceRepairOrder entity = new ServiceRepairOrder();
         entity.setIssuePerson(user);
         entity.setContractor(contractor);
         entity.setDescription(objectDTO.getDescription());
-        entity.setEquipentInfo(objectDTO.getEquipentInfo());
+        entity.setEquipmentInfo(objectDTO.getEquipmentInfo());
         entity.setGuarantee(objectDTO.isGuarantee());
         entity.setGuaranteeNo(objectDTO.getGuaranteeNo());
         entity.setSaleDocumentNo(objectDTO.getSaleDocumentNo());
@@ -50,7 +52,6 @@ public class ServiceRepairOrderConverter implements Converter<ServiceRepairOrder
         entity.setState(objectDTO.getState());
         entity.setSymbol(objectDTO.getSymbol());
 
-
         return entity;
     }
 
@@ -60,13 +61,13 @@ public class ServiceRepairOrderConverter implements Converter<ServiceRepairOrder
             return null;
         }
         UserDTO user = userConverter.convertEntity(entity.getIssuePerson());
-        ContractorDTO contractor = contractorConverter.convertEntity(entity.getContractor());
+        ContractorDTO contractor = entity.getContractor() == null ? null : contractorConverter.convertEntity(entity.getContractor());
 
         ServiceRepairOrderDTO objectDTO = new ServiceRepairOrderDTO();
         objectDTO.setIssuePerson(user);
         objectDTO.setContractor(contractor);
         objectDTO.setDescription(entity.getDescription());
-        objectDTO.setEquipentInfo(entity.getEquipentInfo());
+        objectDTO.setEquipmentInfo(entity.getEquipmentInfo());
         objectDTO.setGuarantee(entity.isGuarantee());
         objectDTO.setGuaranteeNo(entity.getGuaranteeNo());
         objectDTO.setSaleDocumentNo(entity.getSaleDocumentNo());

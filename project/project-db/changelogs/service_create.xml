@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="service_repair_orders" author="bartosz.milczarek">
+        <sql>DROP TABLE IF EXISTS service_repair_orders;</sql>
+        <sql>
+            CREATE TABLE service_repair_orders
+            (
+            id BIGINT PRIMARY KEY NOT NULL,
+            is_active BOOL NOT NULL,
+            version BIGINT,
+            document_date DATE NOT NULL,
+            symbol VARCHAR(255) NOT NULL,
+            type VARCHAR(255) NOT NULL,
+            service_document_type VARCHAR(255),
+            state VARCHAR(255),
+            description VARCHAR,
+            equipment_info VARCHAR(255),
+            guarantee BOOL NOT NULL,
+            guarantee_no VARCHAR(80),
+            sale_document_no VARCHAR(80),
+            issue_person BIGINT NOT NULL,
+            contractor_id BIGINT,
+            FOREIGN KEY (contractor_id) REFERENCES contractors (id),
+            FOREIGN KEY (issue_person) REFERENCES users (id)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="service_fix_summaries" author="bartosz.milczarek">
+        <sql>DROP TABLE IF EXISTS service_fix_summaries;</sql>
+        <sql>
+            CREATE TABLE service_fix_summaries
+            (
+            id BIGINT PRIMARY KEY NOT NULL,
+            is_active BOOL NOT NULL DEFAULT TRUE,
+            version BIGINT DEFAULT 1,
+            document_date DATE NOT NULL,
+            symbol VARCHAR(255) NOT NULL,
+            type VARCHAR(255) NOT NULL,
+            service_document_type VARCHAR(255),
+            state VARCHAR(255),
+            description VARCHAR,
+            service_fix_order_symbol VARCHAR(80),
+            issue_person BIGINT NOT NULL,
+            FOREIGN KEY (issue_person) REFERENCES users (id)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

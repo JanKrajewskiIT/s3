@@ -19,9 +19,6 @@ public class ExternalInvoiceListController extends EditListController<ExternalIn
 	@Autowired
 	private ExternalInvoiceServiceImpl service;
 
-	@Autowired
-	private GUI gui;
-
 	@PostConstruct
 	private void init() {
 		setService(service);
@@ -31,7 +28,7 @@ public class ExternalInvoiceListController extends EditListController<ExternalIn
 
 	@Override
 	public String edit(String id) {
-		return gui.redirect("externalIncoming", id);
+		return GUI.redirect("externalIncoming", id);
 	}
 
 }

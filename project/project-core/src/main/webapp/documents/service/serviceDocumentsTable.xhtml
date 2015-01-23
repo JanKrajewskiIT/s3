@@ -29,24 +29,33 @@
                                     <div class="box-body table-responsive">
                                         <h:form>
                                             <p:dataTable id="serviceDocumentsTableId" var="document" tableStyleClass="table table-bordered dataTable" value="#{serviceDocumentsTableBean.documents}">
-                                                <p:column headerText="Data dokument" sortBy="document.creationDate" >
-                                                    <h:outputText value="#{document.creationDate}">
+                                                <p:column headerText="Symbol" sortBy="document.symbol">
+                                                    <h:outputText value="#{document.symbol}"/>
+                                                </p:column>
+                                                <p:column headerText="Data dokumentu" sortBy="document.creationDate" styleClass="text-right">
+                                                    <h:outputText value="#{document.documentDate}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
                                                     </h:outputText>
                                                 </p:column>
-                                                <p:column headerText="Symbol" sortBy="document.symbol">
-                                                    <h:outputText value="#{document.symbol}" />
+                                                <p:column headerText="Utowrzony przez" sortBy="document.documentCreator" styleClass="text-center">
+                                                    <h:outputText value="#{document.issuePerson.firstName} #{document.issuePerson.secondName}"/>
                                                 </p:column>
-
-                                                <p:column headerText="Utowrzony przez" sortBy="document.documentCreator" styleClass="text-right">
-                                                    <h:outputText value="#{report.totalSalesAmount}"/>
+                                                <p:column headerText="Typ dokumentu" sortBy="document.serviceDocumentType.label">
+                                                    <span class="label label-default font14"><h:outputText
+                                                            value="#{document.serviceDocumentType.label}"/></span>
                                                 </p:column>
-
-                                                <p:column headerText="Typ dokumentu" sortBy="document.serviceDocumentType.label" styleClass="text-right">
-                                                    <h:outputText value="#{document.serviceDocumentType.label}"/>
+                                                <p:column headerText="Status" sortBy="document.state.label">
+                                                    <span class="label label-info font14"><h:outputText value="#{document.state.label}"/></span>
                                                 </p:column>
-                                                <p:column headerText="Status" sortBy="document.state.label" styleClass="text-right">
-                                                    <h:outputText value="#{document.state.label}"/>
+                                                <p:column headerText="Akcja" style="width: 140px">
+                                                    <p:commandLink styleClass="btn btn-success btn-xs"
+                                                                   action="#{serviceDocumentsTableBean.edit(document.id, document.serviceDocumentType)}">
+                                                        <i class="glyphicon glyphicon-pencil"></i> Edytuj
+                                                    </p:commandLink>
+                                                    <p:spacer style="width: 10px"/>
+                                                    <p:commandLink styleClass="btn btn-danger btn-xs">
+                                                        <i class="glyphicon glyphicon-minus"></i> Usuń
+                                                    </p:commandLink>
                                                 </p:column>
                                             </p:dataTable>
                                         </h:form>

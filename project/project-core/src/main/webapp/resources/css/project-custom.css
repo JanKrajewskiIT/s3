@@ -63,6 +63,6 @@
     padding: 0em 0em !important;
 }
 
-.ui-state-highlight {
+.ui-state-highlight, tr.ui-state-highlight:hover > td {
     background: #2d5972 !important;
 }

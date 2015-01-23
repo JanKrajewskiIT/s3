@@ -2,6 +2,7 @@ package pl.lodz.p.project.core.service.base;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Persistable;
 import pl.lodz.p.project.core.converter.base.Converter;
