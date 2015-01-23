@@ -4,7 +4,9 @@
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:cc="http://java.sun.com/jsf/composite/components">
+	xmlns:cc="http://java.sun.com/jsf/composite/components"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 	<composite:interface>
 		<composite:attribute name="controller" />
@@ -17,7 +19,9 @@
 		<div class="row">
 			<div class="col-xs-4 pull-left">
 				<label>Ilość</label>
-				<p:inputText styleClass="form-control" value="#{cc.attrs.controller.quantity}" />
+				<p:inputText styleClass="form-control" value="#{cc.attrs.controller.quantity}" >
+					<f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00"/>
+				</p:inputText>
 			</div>
 			<div class="col-xs-4 pull-right" style="top: 25px;">
 				<p:commandLink styleClass="btn btn-primary pull-right" type="button"

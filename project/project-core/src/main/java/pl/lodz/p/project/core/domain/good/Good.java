@@ -5,11 +5,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import pl.lodz.p.project.core.domain.base.NamedEntity;
+import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoiceGood;
 import pl.lodz.p.project.core.enums.GoodType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  *
@@ -60,6 +62,22 @@ public class Good extends NamedEntity<Long> {
     @JoinColumn(name = "good_group_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private GoodGroup group;
+
+	@NotNull
+	@Column(name = "quantity")
+	//TODO only for implementation without warehouses
+	private Double quantity;
+
+	@OneToMany(mappedBy = "id.good", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<InternalInvoiceGood> invoiceGoodList;
+
+	public Set<InternalInvoiceGood> getInvoiceGoodList() {
+		return invoiceGoodList;
+	}
+
+	public void setInvoiceGoodList(Set<InternalInvoiceGood> invoiceGoodList) {
+		this.invoiceGoodList = invoiceGoodList;
+	}
 
 	public String getSymbol() {
 		return symbol;
@@ -131,6 +149,14 @@ public class Good extends NamedEntity<Long> {
 
 	public void setGroup(GoodGroup group) {
 		this.group = group;
+	}
+
+	public Double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
 	}
 
 	@Override

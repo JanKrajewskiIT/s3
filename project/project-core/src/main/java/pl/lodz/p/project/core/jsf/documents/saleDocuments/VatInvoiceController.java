@@ -70,10 +70,6 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 	@Autowired
 	private DocumentPositionService documentPositionService;
 
-
-	@Autowired
-	private GUI gui;
-
 	@Autowired
 	private GoodListController goodListController;
 
@@ -107,7 +103,7 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 
 	public String forwardContractor() {
 		String id = getSourceObject().getContractor().getId().toString();
-		return gui.redirect("contractorTemplate", id);
+		return GUI.redirect("contractorTemplate", id);
 	}
 
 

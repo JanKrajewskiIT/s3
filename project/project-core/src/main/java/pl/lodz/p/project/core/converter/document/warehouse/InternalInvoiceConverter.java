@@ -4,9 +4,9 @@ import pl.lodz.p.project.core.converter.account.UserConverter;
 import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.converter.good.GoodConverter;
 import pl.lodz.p.project.core.domain.account.User;
+import pl.lodz.p.project.core.domain.document.base.InvoiceGoodKey;
 import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoice;
 import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoiceGood;
-import pl.lodz.p.project.core.domain.document.warehouse.InvoiceGoodKey;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
@@ -52,6 +52,7 @@ public class InternalInvoiceConverter implements Converter<InternalInvoice, Inte
 			invoiceGood.getId().setGood(goodConverter.convertDTO(invoiceGoodDTO.getGood()));
 			invoiceGood.getId().setInvoice(entity);
 			invoiceGood.setQuantity(invoiceGoodDTO.getQuantity());
+			//invoiceGood.getId().getGood().setInvoiceGoodList(entity.getInvoiceGoodList());
 			entity.getInvoiceGoodList().add(invoiceGood);
 		}
 		return entity;

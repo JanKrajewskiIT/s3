@@ -23,10 +23,19 @@ public class GoodDTO extends NamedDTO<Long> implements Comparable<GoodDTO> {
     private String pkwiu;   
     private String description;
     private Double weight;
+	private Double quantity;
     private UnitDTO unit;
     private TaxDTO tax;
     private GoodGroupDTO group;
 	private PricesDTO prices;
+
+	public Double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
+	}
 
 	public GoodType getType() {
 		return type;

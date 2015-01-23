@@ -6,7 +6,6 @@ import pl.lodz.p.project.core.domain.document.items.TransportMean;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 import java.util.Set;
 
 /**

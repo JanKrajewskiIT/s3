@@ -3,9 +3,8 @@ package pl.lodz.p.project.core.domain.document.base;
 import pl.lodz.p.project.core.domain.good.Good;
 
 import javax.persistence.Embeddable;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import java.io.Serializable;
 
 /**
@@ -14,12 +13,12 @@ import java.io.Serializable;
 @Embeddable
 public class InvoiceGoodKey<T extends Document> implements Serializable {
 
-    @JoinColumn(name = "invoice_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name="INVOICE_ID", referencedColumnName="ID")
     private T invoice;
 
-    @JoinColumn(name = "good_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name="GOOD_ID", referencedColumnName="ID")
     private Good good;
 
     public T getInvoice() {
@@ -37,4 +36,5 @@ public class InvoiceGoodKey<T extends Document> implements Serializable {
     public void setGood(Good good) {
         this.good = good;
     }
+
 }

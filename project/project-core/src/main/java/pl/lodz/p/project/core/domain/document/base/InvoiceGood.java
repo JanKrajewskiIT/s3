@@ -11,9 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author Jan Krajewski
  */
 @MappedSuperclass
-public abstract class InvoiceGood<T extends Document> extends BaseEntity<InvoiceGoodKey<T>> {
-
-    private static final long serialVersionUID = 1L;
+public class InvoiceGood<T extends Document> extends BaseEntity<InvoiceGoodKey<T>> {
 
     @Basic(optional = false)
     @NotNull

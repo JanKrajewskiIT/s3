@@ -48,6 +48,7 @@ public class GoodConverter implements Converter<Good, GoodDTO> {
 		entity.setType(objectDTO.getType());
 		entity.setUnit(unit);
 		entity.setWeight(objectDTO.getWeight());
+		entity.setQuantity(objectDTO.getQuantity());
 		return entity;
 	}
 
@@ -71,6 +72,7 @@ public class GoodConverter implements Converter<Good, GoodDTO> {
 		objectDTO.setType(entity.getType());
 		objectDTO.setUnit(unit);
 		objectDTO.setWeight(entity.getWeight());
+		objectDTO.setQuantity(entity.getQuantity());
 		return objectDTO;
 	}
 

@@ -1,7 +1,6 @@
 package pl.lodz.p.project.core.domain.document.warehouse;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 /**
