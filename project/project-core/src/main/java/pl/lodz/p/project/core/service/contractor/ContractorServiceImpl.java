@@ -34,7 +34,13 @@ public class ContractorServiceImpl extends AbstractService<Contractor, Contracto
     @RolesAllowed(ACCESS_LEVEL)
     @Override
     public void delete(Long id) {
-    	super.delete(id);
+        super.delete(id);
+    }
+
+    @RolesAllowed(ACCESS_LEVEL)
+    @Override
+    public void disactive(ContractorDTO contractorDTO) {
+        super.disactive(contractorDTO);
     }
 
     @RolesAllowed(ACCESS_LEVEL)

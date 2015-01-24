@@ -9,6 +9,7 @@ import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.dao.base.CrudDao;
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
+import pl.lodz.p.project.core.domain.base.BaseEntity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.List;
  * @author Janiu
  *
  * @param <E>
- * @param <D>
+ * @param <D> 
  */
-public abstract class AbstractService<E extends Persistable<Long>, D extends Serializable> {
+public abstract class AbstractService<E extends BaseEntity<Long>, D extends Serializable> {
 
     protected final Transformer transformer = new Transformer();
     protected final ReverseTransformer reverseTransformer = new ReverseTransformer();
@@ -54,7 +55,12 @@ public abstract class AbstractService<E extends Persistable<Long>, D extends Ser
     	List<E> entityList = dao.findAll();
     	return Lists.transform(entityList, transformer);
     }
-    
+
+    public List<D> getAllActive() {
+        List<E> entityList = dao.findAllActive();
+        return Lists.transform(entityList, transformer);
+    }
+
     public List<D> getAll(List<Long> idList) {
     	List<E> entityList = dao.findAll(idList);
     	return Lists.transform(entityList, transformer);
@@ -67,7 +73,7 @@ public abstract class AbstractService<E extends Persistable<Long>, D extends Ser
     public void delete(Long id) {
         dao.delete(id);
     }
-    
+
     public void delete(D objectDTO) {
         E entity = converter.convertDTO(objectDTO);
         dao.delete(entity);
@@ -80,6 +86,12 @@ public abstract class AbstractService<E extends Persistable<Long>, D extends Ser
     
     public void deleteAll() {
     	dao.deleteAll();
+    }
+
+    public void disactive(D objectDTO) {
+        E entity = converter.convertDTO(objectDTO);
+        entity.setActive(false);
+        dao.save(entity);
     }
 
     public Page<D> search(String searchQuery, PageRequest pageRequest) {

@@ -1,4 +1,4 @@
-package pl.lodz.p.project.core.jsf.documents.warehouse;
+package pl.lodz.p.project.core.jsf.contractor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
@@ -31,7 +31,7 @@ public class ContractorListController extends EditListController<ContractorDTO> 
 
     @Override
     public String edit(String id) {
-        return GUI.redirect("contractorTemplate", id);
+        return GUI.redirect("contractor", id);
     }
 
 }

@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort;
+import pl.lodz.p.project.core.dto.base.BaseDTO;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * @author Jan Krajewski
  */
-public abstract class EditListController<T extends Serializable> extends UIObject implements Serializable {
+public abstract class EditListController<T extends BaseDTO<Long>> extends UIObject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -56,7 +57,7 @@ public abstract class EditListController<T extends Serializable> extends UIObjec
 
 	public void remove(T object) {
 		getItems().remove(object);
-		service.delete(object);
+		service.disactive(object);
 	}
 
 	public String edit(String id) {

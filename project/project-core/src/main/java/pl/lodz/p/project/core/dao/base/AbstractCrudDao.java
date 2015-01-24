@@ -103,6 +103,12 @@ public abstract class AbstractCrudDao<T extends Persistable<ID>, ID extends Seri
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<T> findAllActive() {
+		return entityManager.createQuery("from " + domainClass.getName() + " where is_active = true").getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<T> findAll() {
 		return entityManager.createQuery("from " + domainClass.getName()).getResultList();
 	}

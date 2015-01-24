@@ -11,8 +11,8 @@
             <activeNode requestPath="/contractor" compare="STARTS_WITH"/>
         </activeDefinitions>
         <menu-items>
-            <menu-item name="Wyświetl" targetUrl="/contractor/contractorTable.xhtml"/>
-            <menu-item name="Dodaj" targetUrl="/contractor/contractorTemplate.xhtml"/>
+            <menu-item name="Wyświetl" targetUrl="/contractor/contractorList.xhtml"/>
+            <menu-item name="Dodaj" targetUrl="/contractor/contractor.xhtml"/>
         </menu-items>
     </menu-item>
     <menu-item name="Produkty" styleClass="fa fa-laptop" hasAnyRole="admin,user">

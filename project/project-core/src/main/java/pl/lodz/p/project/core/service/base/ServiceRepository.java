@@ -34,6 +34,8 @@ public interface ServiceRepository<E extends Persistable<Long>, D extends Serial
 
     public void deleteAll();
 
+    public void disactive(D objectDTO);
+
     public Page<D> search(String searchQuery, PageRequest pageRequest);
 
 }

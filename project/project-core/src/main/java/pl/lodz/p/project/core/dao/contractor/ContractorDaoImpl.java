@@ -44,6 +44,7 @@ class ContractorSearchSpecification implements Specification<Contractor> {
     
     @Override
     public Predicate toPredicate(Root<Contractor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+        query.where(cb.isTrue(root.<Boolean>get("active")));
         if(StringUtils.isBlank(searchQuery)) {
             return cb.isNotNull(root);
         } else {

@@ -175,7 +175,7 @@ public class Contractor extends NamedEntity<Long> {
 	public void setGroup(ContractorGroup group) {
 		this.group = group;
 	}
-	
+	/*
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
@@ -191,4 +191,5 @@ public class Contractor extends NamedEntity<Long> {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
+*/
 }

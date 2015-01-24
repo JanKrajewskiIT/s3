@@ -89,7 +89,7 @@ public abstract class AbstractPageableDao<T extends Persistable<ID>, ID extends 
      */
     private TypedQuery<T> getQuery(Specification<T> spec, Pageable pageable) {
         CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<T> query = builder.createQuery(getDomainClass());
+        CriteriaQuery<T> query = builder.createQuery(getDomainClass()).where();
 
         Root<T> root = applySpecificationToCriteria(spec, query);
         query.select(root);
@@ -160,9 +160,14 @@ public abstract class AbstractPageableDao<T extends Persistable<ID>, ID extends 
 
         CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
         Predicate predicate = spec.toPredicate(root, query, builder);
+        Predicate active = builder.isTrue(root.<Boolean>get("active"));
+
+        query.where(active);
 
         if (predicate != null) {
-            query.where(predicate);
+            query.where(
+                builder.and(predicate, active)
+            );
         }
 
         return root;
