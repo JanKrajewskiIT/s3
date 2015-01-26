@@ -34,6 +34,8 @@ public class ServiceDocumentsTableBean implements Serializable {
         switch (type) {
             case REPAIR_ORDER:
                 return GUI.redirect("/documents/service/repairOrder", id.toString());
+            case FIX_SUMMARY:
+                return GUI.redirect("/documents/service/serviceFixSummary", id.toString());
             default:
                 throw new IllegalArgumentException("Not implemented yet!");
         }

@@ -6,6 +6,7 @@ public class ServiceFixSummaryDTO extends BaseServiceDocumentDTO {
 
 	public ServiceFixSummaryDTO() {
 		super(ServiceDocumentType.FIX_SUMMARY);
+		setType("SFS");
 	}
 	
 	private String description;

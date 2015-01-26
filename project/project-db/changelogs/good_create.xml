@@ -108,4 +108,12 @@
 			ALTER TABLE GOODS ADD CONSTRAINT GOODS_FK3 FOREIGN KEY (GOOD_GROUP_ID) REFERENCES GOODS_GROUPS (ID) MATCH FULL;
 		</sql>
 	</changeSet>
+
+	<changeSet id="added_quantity_column" author="bartosz.milczarek">
+		<addColumn tableName="goods">
+			<column name="quantity" type="double precision" defaultValue="0.0">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>

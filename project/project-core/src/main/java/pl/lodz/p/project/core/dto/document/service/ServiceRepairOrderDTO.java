@@ -14,6 +14,7 @@ public class ServiceRepairOrderDTO extends BaseServiceDocumentDTO {
 
     public ServiceRepairOrderDTO() {
         super(ServiceDocumentType.REPAIR_ORDER);
+        setType("SRO");
     }
 
     public ContractorDTO getContractor() {

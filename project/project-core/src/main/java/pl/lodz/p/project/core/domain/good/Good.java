@@ -65,7 +65,6 @@ public class Good extends NamedEntity<Long> {
 
 	@NotNull
 	@Column(name = "quantity")
-	//TODO only for implementation without warehouses
 	private Double quantity;
 
 	@OneToMany(mappedBy = "id.good", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
