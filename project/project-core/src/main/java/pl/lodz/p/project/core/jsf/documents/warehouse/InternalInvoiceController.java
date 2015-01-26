@@ -26,7 +26,6 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	@Autowired
 	private InternalInvoiceService service;
 
-
 	@Autowired
 	private DocumentNumeratorService documentNumeratorService;
 

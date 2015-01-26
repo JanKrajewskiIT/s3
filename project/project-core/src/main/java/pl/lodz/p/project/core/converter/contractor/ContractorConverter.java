@@ -42,9 +42,10 @@ public class ContractorConverter implements Converter<Contractor, ContractorDTO>
 		entity.setDiscount(objectDTO.getDiscount());
 		entity.setWebsite(objectDTO.getWebsite());
 		entity.setEmail(objectDTO.getEmail());
-		entity.setDescription(objectDTO.getRepresentative());
+		entity.setDescription(objectDTO.getDescription());
 		entity.setRepresentative(objectDTO.getRepresentative());
 		entity.setGroup(group);
+		entity.setPhone(objectDTO.getPhone());
 		entity.setCompany(objectDTO.getType().equals("Firma"));
 		entity.setSupplier(objectDTO.getRole().equals("Dostawca"));
 		return entity;
@@ -68,8 +69,9 @@ public class ContractorConverter implements Converter<Contractor, ContractorDTO>
 		objectDTO.setDiscount(entity.getDiscount());
 		objectDTO.setWebsite(entity.getWebsite());
 		objectDTO.setEmail(entity.getEmail());
-		objectDTO.setDescription(entity.getRepresentative());
+		objectDTO.setDescription(entity.getDescription());
 		objectDTO.setRepresentative(entity.getRepresentative());
+		objectDTO.setPhone(entity.getPhone());
 		objectDTO.setGroup(group);
 		objectDTO.setType(type);
 		objectDTO.setRole(role);

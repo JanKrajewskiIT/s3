@@ -16,12 +16,13 @@ public class ContractorDTO extends NamedDTO<Long> implements Comparable<Contract
     private String symbol;
     private String type;
     private String role;
-    private AddressDTO address;
+    private AddressDTO address = new AddressDTO();
     private String nip;
     private Double discount = 0d;
     private String accountNumber;
     private String website;
     private String email;
+    private String phone;
     private String description;
     private String representative;
     private ContractorGroupDTO group;
@@ -56,6 +57,14 @@ public class ContractorDTO extends NamedDTO<Long> implements Comparable<Contract
 
     public void setAddress(AddressDTO address) {
         this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getNip() {

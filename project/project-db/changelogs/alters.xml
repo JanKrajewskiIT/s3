@@ -6,4 +6,10 @@
 	<changeSet id="set_sequences_current_values" author="jan.krajewski">
 
 	</changeSet> -->
+
+	<changeSet id="alter_account_number_type" author="jan.krajewski">
+		<sql>
+			alter table contractors alter column account_number type character varying(50);
+		</sql>
+	</changeSet>
 </databaseChangeLog>

@@ -1,11 +1,6 @@
 package pl.lodz.p.project.core.domain.contractor;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import pl.lodz.p.project.core.domain.base.NamedEntity;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -29,7 +24,7 @@ public class Contractor extends NamedEntity<Long> {
     private String symbol;
 
 	@Embedded
-	private Address address;
+	private Address address = new Address();
     
     @Size(min = 0, max = 13)    
     @Column(name = "nip") 
@@ -45,6 +40,10 @@ public class Contractor extends NamedEntity<Long> {
     @Size(max = 60)
     @Column(name = "website")
     private String website;
+
+	@Size(max = 60)
+	@Column(name = "phone")
+	private String phone;
 
 	@Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Invalid email")
 	@Basic(optional = false)
@@ -158,6 +157,14 @@ public class Contractor extends NamedEntity<Long> {
 
 	public void setCompany(Boolean company) {
 		this.company = company;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public Collection<ContractorContact> getContractorsContactsCollection() {
