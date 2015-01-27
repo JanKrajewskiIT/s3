@@ -133,4 +133,10 @@
 			ALTER TABLE CONTRACTORS_CONTACTS ADD CONSTRAINT CONTRACTORS_CONTACTS_FK1 FOREIGN KEY (CONTRACTOR_ID) REFERENCES CONTRACTORS (ID) MATCH FULL;
 		</sql>
 	</changeSet>
+
+	<changeSet id="addded_missing_col_contractors_phone" author="bartosz.milczarek">
+		<addColumn tableName="CONTRACTORS">
+			<column name="phone" type="VARCHAR(30)"/>
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>
