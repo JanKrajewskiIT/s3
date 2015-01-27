@@ -44,7 +44,7 @@ public class InternalInvoiceDaoImpl extends AbstractPageableDao<InternalInvoice,
 			if (StringUtils.isBlank(searchQuery)) {
 				return cb.isNotNull(root);
 			} else {
-				return cb.like(cb.upper(root.<String>get("name")), "%" + searchQuery.toUpperCase() + "%");
+				return cb.like(cb.upper(root.<String>get("symbol")), "%" + searchQuery.toUpperCase() + "%");
 			}
 		}
 	}

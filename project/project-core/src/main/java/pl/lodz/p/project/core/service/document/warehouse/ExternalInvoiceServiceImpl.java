@@ -44,6 +44,12 @@ public class ExternalInvoiceServiceImpl extends AbstractService<ExternalInvoice,
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
+    public void disactive(ExternalInvoiceDTO invoice) {
+        super.disactive(invoice);
+    }
+
+    @RolesAllowed(ACCESS_LEVEL)
+    @Override
     public Page<ExternalInvoiceDTO> search(String searchQuery, PageRequest pageRequest) {
         Page<ExternalInvoice> page = ((ExternalInvoiceDao) dao).search(searchQuery, pageRequest);
         List<ExternalInvoiceDTO> list = Lists.transform(page.getContent(), transformer);

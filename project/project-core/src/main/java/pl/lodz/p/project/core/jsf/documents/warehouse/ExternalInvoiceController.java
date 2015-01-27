@@ -50,6 +50,7 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 		setSourceObject(new ExternalInvoiceDTO());
 		getSourceObject().setTransportMean(new TransportMeanDTO());
 		getSourceObject().setGoodList(new ArrayList<ExternalInvoiceGoodDTO>());
+		getSourceObject().setDeliveryDate(constantElements.getCurrentDate());
 		setTotal();
 	}
 
@@ -104,14 +105,12 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	}
 
 	public void selectContractor() {
-		System.out.println("ELO313");
 		super.setVisible(false);
 		goodListController.setVisible(false);
 		contractorListController.setVisible(true);
 	}
 
 	public void selectGood() {
-		System.out.println("ELO312");
 		super.setVisible(false);
 		goodListController.setVisible(true);
 		contractorListController.setVisible(false);

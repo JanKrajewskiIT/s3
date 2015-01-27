@@ -7,9 +7,7 @@ import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageImpl;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoice;
-import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoiceGood;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
-import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 import pl.lodz.p.project.core.service.base.AbstractService;
 import pl.lodz.p.project.core.service.good.GoodService;
@@ -45,10 +43,13 @@ public class InternalInvoiceServiceImpl extends AbstractService<InternalInvoice,
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
+    public void disactive(InternalInvoiceDTO invoice) {
+        super.disactive(invoice);
+    }
+
+    @RolesAllowed(ACCESS_LEVEL)
+    @Override
     public InternalInvoice save(InternalInvoiceDTO invoice) {
-        for(InternalInvoiceGoodDTO invoiceGood : invoice.getGoodList()) {
-            goodService.save(invoiceGood.getGood());
-        }
         return super.save(invoice);
     }
 

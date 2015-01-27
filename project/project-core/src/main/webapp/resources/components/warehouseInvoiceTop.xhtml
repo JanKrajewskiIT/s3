@@ -6,7 +6,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:cc="http://java.sun.com/jsf/composite/components">
 
 	<composite:interface>
 		<composite:attribute name="controller"/>
@@ -46,14 +47,16 @@
 				<label>Numer zamówienia</label>
 				<p:inputText styleClass="form-control"
 						value="#{cc.attrs.controller.sourceObject.orderSymbol}"/>
-			</div>
-			<div class="col-lg-3 invoice-col">
+
 				<label>Środek transportu</label>
 				<h:selectOneMenu styleClass="form-control" value="#{cc.attrs.controller.sourceObject.transportMean.id}">
 					<f:selectItem itemLabel="---" itemValue="#{null}"/>
 					<f:selectItems itemLabel="#{transportMean.name}" var="transportMean" itemValue="#{transportMean.id}"
 								   value="#{transportMeanListController.items}"/>
 				</h:selectOneMenu>
+
+				<label>Data dostarczenia</label>
+				<!--<cc:calendar value="# {cc.attrs.controller.sourceObject.deliveryDate}"/>-->
 			</div>
 		</div>
 	</composite:implementation>

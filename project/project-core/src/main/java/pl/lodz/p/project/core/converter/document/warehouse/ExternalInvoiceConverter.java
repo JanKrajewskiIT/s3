@@ -59,7 +59,8 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		entity.setIssuePerson(issuePerson);
 		entity.setReceivePerson(objectDTO.getReceivePerson());
 		entity.setAnnotation(objectDTO.getAnnotation());
-		entity.setOrderSymbol(objectDTO.getOrderSymbol());		
+		entity.setOrderSymbol(objectDTO.getOrderSymbol());
+		entity.setDeliveryDate(objectDTO.getDeliveryDate());
 		entity.setContractor(contractor);
 		entity.setTransportMean(transportMean);
 		entity.setInvoiceGoodList(new TreeSet<ExternalInvoiceGood>());
@@ -93,6 +94,7 @@ public class ExternalInvoiceConverter implements Converter<ExternalInvoice, Exte
 		objectDTO.setReceivePerson(entity.getReceivePerson());
 		objectDTO.setAnnotation(entity.getAnnotation());
 		objectDTO.setOrderSymbol(entity.getOrderSymbol());
+		objectDTO.setDeliveryDate(entity.getDeliveryDate());
 		objectDTO.setContractor(contractor);
 		objectDTO.setTransportMean(transportMean);
 		objectDTO.setGoodList(new ArrayList<ExternalInvoiceGoodDTO>());

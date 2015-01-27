@@ -6,6 +6,7 @@ import pl.lodz.p.project.core.domain.document.items.TransportMean;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -30,6 +31,10 @@ public class ExternalInvoice extends WarehouseInvoice {
     @Size(min = 1, max = 16)
     @Column(name = "order_symbol")
     private String orderSymbol;
+
+	//@NotNull
+	//@Column(name = "delivery_date")
+	private transient Date deliveryDate;
 
 	@OneToMany(mappedBy = "id.invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<ExternalInvoiceGood> invoiceGoodList;
@@ -56,6 +61,14 @@ public class ExternalInvoice extends WarehouseInvoice {
 
 	public void setOrderSymbol(String orderSymbol) {
 		this.orderSymbol = orderSymbol;
+	}
+
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 
 	public Set<ExternalInvoiceGood> getInvoiceGoodList() {
