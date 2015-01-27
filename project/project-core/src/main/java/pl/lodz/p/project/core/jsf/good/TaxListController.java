@@ -3,6 +3,7 @@ package pl.lodz.p.project.core.jsf.good;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.lodz.p.project.core.dto.good.TaxDTO;
 import pl.lodz.p.project.core.jsf.base.EditListController;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.good.TaxService;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +22,12 @@ public class TaxListController extends EditListController<TaxDTO> {
 
     @PostConstruct
     private void init() {
-        setService(service);
+        initList();
+    }
+
+    @Override
+    public ServiceRepository getService() {
+        return service;
     }
 
 }

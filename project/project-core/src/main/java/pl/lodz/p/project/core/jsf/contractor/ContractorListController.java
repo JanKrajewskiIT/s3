@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.jsf.base.EditPageableListController;
 import pl.lodz.p.project.core.jsf.base.GUI;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.contractor.ContractorServiceImpl;
 
 import javax.annotation.PostConstruct;
@@ -24,9 +25,13 @@ public class ContractorListController extends EditPageableListController<Contrac
 
     @PostConstruct
     private void init() {
-        setService(service);
         initStartPage(5, "name");
         search();
+    }
+
+    @Override
+    public ServiceRepository getService() {
+        return service;
     }
 
     @Override

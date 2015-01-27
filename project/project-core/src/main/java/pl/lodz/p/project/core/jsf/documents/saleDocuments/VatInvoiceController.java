@@ -14,6 +14,7 @@ import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.jsf.contractor.ContractorListController;
 import pl.lodz.p.project.core.jsf.good.GoodListController;
 import pl.lodz.p.project.core.service.account.UserService;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.contractor.ContractorService;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.items.DocumentPositionService;
@@ -391,6 +392,17 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 	public void save() {
 		getSourceObject().setIssuePerson(constantElements.getUser());
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
-		saleDocumentService.save(getSourceObject());
+		super.save();
 	}
+
+	@Override
+	protected void createNew() {
+	}
+
+	@Override
+	public ServiceRepository getService() {
+		return null;
+	}
+
+
 }

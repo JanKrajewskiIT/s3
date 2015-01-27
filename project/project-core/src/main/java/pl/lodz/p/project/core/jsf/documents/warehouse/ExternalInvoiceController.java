@@ -1,6 +1,7 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Persistable;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;
@@ -9,6 +10,7 @@ import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.jsf.contractor.ContractorListController;
 import pl.lodz.p.project.core.jsf.good.GoodListController;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.items.TransportMeanService;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
@@ -19,6 +21,9 @@ import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Jan Krajewski
+ */
 @Named
 @ViewScoped
 public class ExternalInvoiceController extends EditObjectController<ExternalInvoiceDTO> {
@@ -35,22 +40,17 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	private ExternalInvoiceService service;
 
 	@Autowired
-	private TransportMeanService transportMeanService;
-
-	@Autowired
 	private DocumentNumeratorService documentNumeratorService;
 
 	@Autowired
 	private ConstantElements constantElements;
 
-	private List<TransportMeanDTO> transportMeanList;
-
-	@PostConstruct
-	private void init() {
+	@Override
+	protected void createNew() {
 		setSourceObject(new ExternalInvoiceDTO());
 		getSourceObject().setTransportMean(new TransportMeanDTO());
 		getSourceObject().setGoodList(new ArrayList<ExternalInvoiceGoodDTO>());
-		transportMeanList = transportMeanService.getAll();
+		setTotal();
 	}
 
 	public void afterObjectSet(String type) {
@@ -64,8 +64,9 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	public void save() {
 		getSourceObject().setIssuePerson(constantElements.getUser());
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
-		service.save(getSourceObject());
+		super.save();
 	}
+
 
 	public void addContractor() {
 		setVisible(true);
@@ -117,11 +118,8 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 		contractorListController.setVisible(false);
 	}
 
-	public List<TransportMeanDTO> getTransportMeanList() {
-		return transportMeanList;
-	}
-
-	public void setTransportMeanList(List<TransportMeanDTO> transportMeanList) {
-		this.transportMeanList = transportMeanList;
+	@Override
+	public ServiceRepository getService() {
+		return service;
 	}
 }

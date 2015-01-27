@@ -1,10 +1,10 @@
-package pl.lodz.p.project.core.jsf.good;
+package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.lodz.p.project.core.dto.good.GoodGroupDTO;
+import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 import pl.lodz.p.project.core.jsf.base.EditListController;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
-import pl.lodz.p.project.core.service.good.GoodGroupService;
+import pl.lodz.p.project.core.service.document.items.TransportMeanService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -15,10 +15,10 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class GoodGroupListController extends EditListController<GoodGroupDTO> {
+public class TransportMeanListController extends EditListController<TransportMeanDTO> {
 
     @Autowired
-    private GoodGroupService service;
+    private TransportMeanService service;
 
     @PostConstruct
     private void init() {
@@ -29,5 +29,4 @@ public class GoodGroupListController extends EditListController<GoodGroupDTO> {
     public ServiceRepository getService() {
         return service;
     }
-
 }

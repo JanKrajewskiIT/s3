@@ -52,7 +52,7 @@
 				<h:selectOneMenu styleClass="form-control" value="#{cc.attrs.controller.sourceObject.transportMean.id}">
 					<f:selectItem itemLabel="---" itemValue="#{null}"/>
 					<f:selectItems itemLabel="#{transportMean.name}" var="transportMean" itemValue="#{transportMean.id}"
-								   value="#{cc.attrs.controller.transportMeanList}"/>
+								   value="#{transportMeanListController.items}"/>
 				</h:selectOneMenu>
 			</div>
 		</div>

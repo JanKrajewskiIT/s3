@@ -1,10 +1,12 @@
 package pl.lodz.p.project.core.jsf.contractor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Persistable;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorGroupDTO;
 import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.contractor.ContractorService;
 
 import javax.annotation.PostConstruct;
@@ -12,8 +14,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
- *
- * @author Janiu
+ * @author Jan Krajewski
  */
 @Named
 @ViewScoped
@@ -27,12 +28,6 @@ public class ContractorController extends EditObjectController<ContractorDTO> {
     @Autowired
     private PostalCodeListController postalCodeListController;
 
-    @PostConstruct
-    protected void init() {
-        setService(service);
-        setObject();
-    }
-
     @Override
     protected void createNew() {
         setSourceObject(new ContractorDTO());
@@ -45,9 +40,16 @@ public class ContractorController extends EditObjectController<ContractorDTO> {
         String code = getSourceObject().getAddress().getPostalCode().getCode();
         PostalCodeDTO postalCode = postalCodeListController.retrievePostalCode(code);
         getSourceObject().getAddress().setPostalCode(postalCode);
-        service.save(getSourceObject());
+        super.save();
         //return "contractorsTable.xhtml?faces-redirect=true";
     }
+
+    @Override
+    public ServiceRepository getService() {
+        return service;
+    }
+
+}
 
 /*
     public boolean isViewCompany() {
@@ -57,5 +59,3 @@ public class ContractorController extends EditObjectController<ContractorDTO> {
         return false;
     }
 */
-
-}

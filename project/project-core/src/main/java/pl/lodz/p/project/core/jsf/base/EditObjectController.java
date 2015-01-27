@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Persistable;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 
+import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,7 +16,6 @@ public abstract class EditObjectController<T extends Serializable> extends UIObj
 
 	private static final long serialVersionUID = 1L;
 
-	private ServiceRepository<Persistable<Long>, T> service;
 	protected T sourceObject;
 	protected Mode mode = Mode.EDIT;
 
@@ -39,19 +39,22 @@ public abstract class EditObjectController<T extends Serializable> extends UIObj
 
 	};
 
-	protected void setObject() {
+	@PostConstruct
+	protected void init() {
 		String id = GUI.catchId("id");
 		if (StringUtils.isBlank(id)) {
 			createNew();
 		} else {
 			Long longId = Long.parseLong(id);
-			sourceObject = service.getOneById(longId);
+			sourceObject = getService().getOneById(longId);
 		}
 	}
 
-	protected /*abstract*/ void createNew() { }
+	protected abstract void createNew();
 
-	protected abstract void save();
+	protected void save() {
+		getService().save(sourceObject);
+	}
 
 	public List<Action> getActions() {
 		return Lists.newArrayList(SAVE_ACTION, CLEAN_ACTION);
@@ -65,8 +68,6 @@ public abstract class EditObjectController<T extends Serializable> extends UIObj
 		this.sourceObject = sourceObject;
 	}
 
-	public void setService(ServiceRepository service) {
-		this.service = service;
-	}
+	public abstract ServiceRepository<Persistable<Long>, T> getService();
 
 }

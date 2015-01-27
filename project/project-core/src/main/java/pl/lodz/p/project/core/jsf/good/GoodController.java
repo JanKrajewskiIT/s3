@@ -1,9 +1,11 @@
 package pl.lodz.p.project.core.jsf.good;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Persistable;
 import pl.lodz.p.project.core.dto.good.*;
 import pl.lodz.p.project.core.enums.GoodType;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.good.GoodService;
 
 import javax.annotation.PostConstruct;
@@ -11,7 +13,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
- * @author Łukasz, Jan Krajewski
+ * @author Jan Krajewski
  */
 @Named
 @ViewScoped
@@ -19,12 +21,6 @@ public class GoodController extends EditObjectController<GoodDTO> {
 
     @Autowired
     private GoodService service;
-
-    @PostConstruct
-    protected void init() {
-        setService(service);
-        setObject();
-    }
 
     @Override
     protected void createNew() {
@@ -34,11 +30,12 @@ public class GoodController extends EditObjectController<GoodDTO> {
         getSourceObject().setTax(new TaxDTO());
         getSourceObject().setUnit(new UnitDTO());
         getSourceObject().setPrices(new PricesDTO());
+        getSourceObject().setQuantity(100.0);
     }
 
     @Override
-    public void save() {
-        service.save(getSourceObject());
+    public ServiceRepository getService() {
+        return service;
     }
 
     public void handlePriceMagNetChange() {

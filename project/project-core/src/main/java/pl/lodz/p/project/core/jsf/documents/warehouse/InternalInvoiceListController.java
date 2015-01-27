@@ -4,12 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
 import pl.lodz.p.project.core.jsf.base.EditPageableListController;
 import pl.lodz.p.project.core.jsf.base.GUI;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.document.warehouse.InternalInvoiceService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+/**
+ * @author Jan Krajewski
+ */
 @Named
 @ViewScoped
 public class InternalInvoiceListController extends EditPageableListController<InternalInvoiceDTO> {
@@ -21,9 +25,13 @@ public class InternalInvoiceListController extends EditPageableListController<In
 
 	@PostConstruct
 	private void init() {
-		setService(service);
 		initStartPage(5, "symbol");
 		search();
+	}
+
+	@Override
+	public ServiceRepository getService() {
+		return service;
 	}
 
 	@Override

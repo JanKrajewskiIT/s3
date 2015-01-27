@@ -2,6 +2,7 @@ package pl.lodz.p.project.core.jsf.base;
 
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 
+import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * @author Jan Krajewski
  */
-public class EditListController<T extends Serializable> extends UIObject implements Serializable {
+public abstract class EditListController<T extends Serializable> extends UIObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,7 +18,9 @@ public class EditListController<T extends Serializable> extends UIObject impleme
     protected List<T> selection = new ArrayList<T>();
     protected T singleSelection;
 
-    private ServiceRepository service;
+    public void initList() {
+        items = getService().getAll();
+    }
 
     public String edit(String id) {
         return null;
@@ -51,12 +54,6 @@ public class EditListController<T extends Serializable> extends UIObject impleme
         this.singleSelection = singleSelection;
     }
 
-    public ServiceRepository getService() {
-        return service;
-    }
-
-    public void setService(ServiceRepository service) {
-        this.service = service;
-    }
+    public abstract ServiceRepository getService();
 
 }
