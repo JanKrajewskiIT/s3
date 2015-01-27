@@ -54,7 +54,7 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	}
 
 	public void afterObjectSet(String type) {
-		init();
+		createNew();
 		setVisible(true);
 		getSourceObject().setType(type);
 		getSourceObject().setSymbol(documentNumeratorService.nextNumber(type));
@@ -65,17 +65,6 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 		getSourceObject().setIssuePerson(constantElements.getUser());
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
 		super.save();
-	}
-
-
-	public void addContractor() {
-		setVisible(true);
-		getSourceObject().setContractor(contractorListController.getSingleSelection());
-	}
-
-	public String forwardContractor() {
-		String id = getSourceObject().getContractor().getId().toString();
-		return GUI.redirect("contractorTemplate", id);
 	}
 
 	public void addGood() {
@@ -96,6 +85,16 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 			total += good.getQuantity() * good.getGood().getPrices().getPriceAGross();
 		}
 		getSourceObject().setTotal(total);
+	}
+
+	public void addContractor() {
+		setVisible(true);
+		getSourceObject().setContractor(contractorListController.getSingleSelection());
+	}
+
+	public String forwardContractor() {
+		String id = getSourceObject().getContractor().getId().toString();
+		return GUI.redirect("contractorTemplate", id);
 	}
 
 	public void setVisible(boolean state) {

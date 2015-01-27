@@ -39,15 +39,14 @@
 											<p:panel visible="#{externalInvoiceController.visible}">
 												<cc:warehouseInvoiceTop controller="#{externalInvoiceController}" />
 												<p:spacer style="height : 10px"/>
-												<cc:invoiceGoodList controller="#{externalInvoiceController}"
-																	widthValue="107%"/>
+												<cc:invoiceGoodList controller="#{externalInvoiceController}" widthValue="107%"/>
 												<p:spacer style="height : 10px"/>
 												<cc:warehouseInvoiceBottom controller="#{externalInvoiceController}" />
 												<p:spacer style="height : 10px"/>
 												<cc:buttonBox controller="#{externalInvoiceController}"/>
 											</p:panel>
-											<p:panel visible="#{editPageableListController.visible}">
-												<cc:goodChooser controller="#{editPageableListController}"
+											<p:panel visible="#{goodListController.visible}">
+												<cc:goodChooser controller="#{goodListController}"
 																action="#{externalInvoiceController.addGood()}"
 																editable="false"/>
 											</p:panel>
