@@ -37,14 +37,14 @@
 									<div class="box-body">
 										<h:form>
 											<p:panel visible="#{internalInvoiceController.visible}">
-												<cc:invoiceGoodList controller="#{internalInvoiceController}" />
+												<cc:invoiceGoodList controller="#{internalInvoiceController}" widthValue="107%"/>
 												<p:spacer style="height : 10px"/>
 												<cc:warehouseInvoiceBottom controller="#{internalInvoiceController}" />
 												<p:spacer style="height : 10px"/>
 												<cc:buttonBox controller="#{internalInvoiceController}"/>
 											</p:panel>
-											<p:panel visible="#{editPageableListController.visible}">
-												<cc:goodChooser controller="#{editPageableListController}"
+											<p:panel visible="#{goodListController.visible}">
+												<cc:goodChooser controller="#{goodListController}"
 																action="#{internalInvoiceController.addGood()}"
 																editable="false"/>
 											</p:panel>

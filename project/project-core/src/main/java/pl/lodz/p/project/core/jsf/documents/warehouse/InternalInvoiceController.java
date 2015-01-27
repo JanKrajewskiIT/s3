@@ -45,7 +45,7 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	}
 
 	public void afterObjectSet(String type) {
-		init();
+		createNew();
 		setVisible(true);
 		getSourceObject().setType(type);
 		getSourceObject().setSymbol(documentNumeratorService.nextNumber(type));
@@ -56,11 +56,6 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
 		getSourceObject().setIssuePerson(constantElements.getUser());
 		super.save();
-	}
-
-	@Override
-	public ServiceRepository getService() {
-		return service;
 	}
 
 	public void addGood() {
@@ -92,5 +87,10 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	public void selectGood() {
 		super.setVisible(false);
 		goodListController.setVisible(true);
+	}
+
+	@Override
+	public ServiceRepository getService() {
+		return service;
 	}
 }
