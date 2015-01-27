@@ -2,7 +2,7 @@ package pl.lodz.p.project.core.jsf.contractor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
-import pl.lodz.p.project.core.jsf.base.EditListController;
+import pl.lodz.p.project.core.jsf.base.EditPageableListController;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.contractor.ContractorServiceImpl;
 
@@ -15,7 +15,7 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class ContractorListController extends EditListController<ContractorDTO> {
+public class ContractorListController extends EditPageableListController<ContractorDTO> {
 
     private static final long serialVersionUID = 1L;
 

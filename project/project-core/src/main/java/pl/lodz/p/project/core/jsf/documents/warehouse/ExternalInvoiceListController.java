@@ -2,7 +2,7 @@ package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
-import pl.lodz.p.project.core.jsf.base.EditListController;
+import pl.lodz.p.project.core.jsf.base.EditPageableListController;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceServiceImpl;
 
@@ -12,7 +12,7 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class ExternalInvoiceListController extends EditListController<ExternalInvoiceDTO> {
+public class ExternalInvoiceListController extends EditPageableListController<ExternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 1L;
 

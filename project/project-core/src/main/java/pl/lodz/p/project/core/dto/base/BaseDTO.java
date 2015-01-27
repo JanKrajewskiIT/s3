@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author Jan Krajewski
  */
-public abstract class BaseDTO<T extends Serializable> implements Serializable {
+public class BaseDTO<T extends Serializable> implements Serializable {
 
     private T id;
     private Long version = 1L;

@@ -43,8 +43,8 @@
 												<p:spacer style="height : 10px"/>
 												<cc:buttonBox controller="#{internalInvoiceController}"/>
 											</p:panel>
-											<p:panel visible="#{goodListController.visible}">
-												<cc:goodChooser controller="#{goodListController}"
+											<p:panel visible="#{editPageableListController.visible}">
+												<cc:goodChooser controller="#{editPageableListController}"
 																action="#{internalInvoiceController.addGood()}"
 																editable="false"/>
 											</p:panel>

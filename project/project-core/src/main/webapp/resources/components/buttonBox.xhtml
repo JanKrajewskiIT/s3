@@ -15,7 +15,7 @@
 				<ui:repeat value="#{cc.attrs.controller.actions}" var="action" >
 					<p:commandButton value="#{action.name}" update="#{action.update}"
 									 styleClass="btn btn-primary btn-lg pull-right"
-							 		 action="#{action.call}"/>
+							 		 action="#{action.call}" global="false"/>
 					<p:spacer style="width : 10px"/>
 				</ui:repeat>
 			</div>

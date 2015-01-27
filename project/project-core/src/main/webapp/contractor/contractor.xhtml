@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:cc="http://java.sun.com/jsf/composite/components">>
+      xmlns:cc="http://java.sun.com/jsf/composite/components">
 
 <h:body>
     <ui:composition template="../layout/main-template.xhtml">
@@ -44,7 +44,7 @@
                                                 <label>Grupa Kontrahencka</label>
                                                 <h:selectOneMenu value="#{contractorController.sourceObject.group.id}" styleClass="form-control">
                                                     <f:selectItem value="#{null}" itemLabel="---" />
-                                                    <f:selectItems value="#{contractorController.contractorGroupList}"
+                                                    <f:selectItems value="#{contractorGroupListController.items}"
                                                                    var="group" itemLabel="#{group.name}"
                                                                    itemValue="#{group.id}"/>
                                                 </h:selectOneMenu>
@@ -68,7 +68,7 @@
                                             <div class="col-xs-4">
                                                 <label>Typ</label>
                                                 <h:selectOneRadio value="#{contractorController.sourceObject.type}">
-                                                    <f:selectItem itemValue="Firma" itemLabel="&emsp; Firma &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" />
+                                                    <f:selectItem itemValue="Firma" itemLabel="&emsp; Firma &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" />
                                                     <f:selectItem itemValue="Osoba fizyczna" itemLabel="&emsp; Osoba fizyczna"/>
                                                     <f:ajax render="only-company-component"/>
                                                 </h:selectOneRadio>
@@ -125,6 +125,7 @@
                                                                  placeholder="Wprowadź komentarz"/>
                                             </div>
                                         </div>
+                                        <p:spacer style="height: 20px;" />
                                         <cc:buttonBox controller="#{contractorController}"/>
                                     </h:form>
                                 </div>

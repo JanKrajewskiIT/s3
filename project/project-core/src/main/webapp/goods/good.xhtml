@@ -1,17 +1,16 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:cc="http://java.sun.com/jsf/composite/components">
 
 <h:body>
     <ui:composition template="../layout/main-template.xhtml">
         <ui:define name="content">
-            <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
-                <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Kokpit</a></li>
@@ -19,73 +18,68 @@
                         <li class="active">Dodaj</li>
                     </ol>
                 </section>
-
-                <!-- Main content -->
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">Dodaj produkt</h3>
+                                    <h3 class="page-header col-xs-12">
+                                        Dodaj produkt
+                                        <small class="pull-right">Data: #{constantElements.currentDateValue}</small>
+                                    </h3>
                                 </div>
                                 <div class="box-body">
-                                    <h:form id="addEditGoodFormId">
+                                    <h:form>
                                         <p:messages autoUpdate="true"/>
-
                                         <div class="row">
                                             <div class="col-xs-4">
                                                 <label>Symbol</label>
-                                                <p:inputText id="symbolInputText" value="#{goodAddEditBean.good.symbol}"
+                                                <p:inputText value="#{goodController.sourceObject.symbol}"
                                                              type="text" styleClass="form-control"
-                                                             placeholder="Wprowadz symbol"/>
+                                                             placeholder="Wprowadź symbol"/>
                                             </div>
                                             <div class="col-xs-4">
                                                 <label>Nazwa</label>
-                                                <p:inputText id="nameInputText" type="text"
-                                                             value="#{goodAddEditBean.good.name}"
-                                                             styleClass="form-control" placeholder="Wprowadz nazwe"/>
+                                                <p:inputText value="#{goodController.sourceObject.name}"
+                                                             styleClass="form-control" type="text"
+                                                             placeholder="Wprowadź nazwe"/>
                                             </div>
                                             <div class="col-xs-4">
                                                 <label>Typ</label>
                                                 <h:selectOneRadio styleClass="typeSelectOneRadio"
-                                                                  id="typeSelectOneRadio"
-                                                                  value="#{goodAddEditBean.good.type}">
-                                                    <f:selectItem
-                                                            itemLabel="Towar &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"
-                                                            itemValue="GOOD"/>
-                                                    <f:selectItem itemLabel="Usługa" itemValue="SERVICE"/>
+                                                                  value="#{goodController.sourceObject.type}">
+                                                    <f:selectItem itemValue="GOOD"
+                                                                  itemLabel="&emsp;Towar &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" />
+                                                    <f:selectItem itemLabel="&emsp;Usługa" itemValue="SERVICE"/>
                                                 </h:selectOneRadio>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-4">
                                                 <label>Jednostka</label>
-                                                <h:selectOneMenu id="unitSelectMenu"
-                                                                 value="#{goodAddEditBean.good.unit.id}"
+                                                <h:selectOneMenu value="#{goodController.sourceObject.unit.id}"
                                                                  styleClass="form-control">
                                                     <f:selectItem itemLabel="---" itemValue="#{null}"/>
-                                                    <f:selectItems value="#{goodAddEditBean.units}" var="unit"
+                                                    <f:selectItems value="#{unitListController.items}" var="unit"
                                                                    itemLabel="#{unit.name}" itemValue="#{unit.id}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="col-xs-4">
                                                 <label>Grupa Towarowa</label>
-                                                <h:selectOneMenu id="goodsGroupsSelectMenu"
-                                                                 value="#{goodAddEditBean.good.group.id}"
+                                                <h:selectOneMenu value="#{goodController.sourceObject.group.id}"
                                                                  styleClass="form-control">
                                                     <f:selectItem itemLabel="---" itemValue="#{null}"/>
-                                                    <f:selectItems value="#{goodAddEditBean.goodsGroups}"
+                                                    <f:selectItems value="#{goodGroupListController.items}"
                                                                    var="group" itemLabel="#{group.name}"
                                                                    itemValue="#{group.id}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="col-xs-4">
                                                 <label>Rodzaj podatku</label>
-                                                <h:selectOneMenu id="taxesSelectMenu"
-                                                                 value="#{goodAddEditBean.good.tax.id}"
+                                                <h:selectOneMenu value="#{goodController.sourceObject.tax.id}"
                                                                  styleClass="form-control">
                                                     <f:selectItem itemLabel="---" itemValue="#{null}"/>
-                                                    <f:selectItems value="#{goodAddEditBean.taxes}" var="tax"
+                                                    <f:selectItems value="#{taxListController.items}" var="tax"
                                                                    itemLabel="#{tax.name}" itemValue="#{tax.id}"/>
                                                 </h:selectOneMenu>
                                             </div>
@@ -93,60 +87,56 @@
                                         <div class="row" style="">
                                             <div class="col-xs-4">
                                                 <label>PKWiU SWW</label>
-                                                <p:inputText id="pkwiuInputText" value="#{goodAddEditBean.good.pkwiu}"
+                                                <p:inputText value="#{goodController.sourceObject.pkwiu}"
                                                              type="text" styleClass="form-control"
-                                                             placeholder="Wprowadz PKWiU SWW"/>
+                                                             placeholder="Wprowadź PKWiU SWW"/>
                                             </div>
                                             <div class="col-xs-4">
                                                 <label>Waga</label>
-                                                <p:inputText id="weightInputText" value="#{goodAddEditBean.good.weight}"
+                                                <p:inputText value="#{goodController.sourceObject.weight}"
                                                              type="text" styleClass="form-control"
-                                                             placeholder="Wprowadz wagę">
+                                                             placeholder="Wprowadź wagę">
                                                     <f:convertNumber type="number" groupingUsed="true"
                                                                      minFractionDigits="2" pattern="#0.00"/>
                                                 </p:inputText>
                                             </div>
                                             <div class="col-xs-2">
                                                 <label>Cena Magazynowa Netto</label>
-                                                <p:inputText id="priceMagNet" type="text"
-                                                             value="#{goodAddEditBean.good.prices.priceMagNet}"
+                                                <p:inputText id="priceMagNet"
+                                                             value="#{goodController.sourceObject.prices.priceMagNet}"
                                                              styleClass="form-control text-right"
-                                                             placeholder="Wprowadz cene">
+                                                             placeholder="Wprowadź cenę" type="text">
                                                     <f:convertNumber type="number" groupingUsed="true"
                                                                      minFractionDigits="2" pattern="#0.00"/>
-                                                    <p:ajax event="blur"
-                                                            listener="#{goodAddEditBean.handlePriceMagNetChange}"
-                                                            update="priceMagNet,priceMagGross"/>
+                                                    <p:ajax event="blur" listener="#{goodController.handlePriceMagNetChange}"
+                                                            update="priceMagNet, priceMagGross"/>
                                                 </p:inputText>
                                             </div>
                                             <div class="col-xs-2">
                                                 <label>Cena Magazynowa Brutto</label>
-                                                <p:inputText id="priceMagGross" type="text"
-                                                             value="#{goodAddEditBean.good.prices.priceMagGross}"
+                                                <p:inputText id="priceMagGross"
+                                                             value="#{goodController.sourceObject.prices.priceMagGross}"
                                                              styleClass="form-control text-right"
-                                                             placeholder="Wprowadz cene">
+                                                             placeholder="Wprowadź cenę" type="text">
                                                     <f:convertNumber type="number" groupingUsed="true"
                                                                      minFractionDigits="2" pattern="#0.00"/>
-                                                    <p:ajax event="blur"
-                                                            listener="#{goodAddEditBean.handlePriceMagGrossChange}"
-                                                            update="priceMagNet,priceMagGross"/>
+                                                    <p:ajax event="blur" listener="#{goodController.handlePriceMagGrossChange}"
+                                                            update="priceMagNet, priceMagGross"/>
                                                 </p:inputText>
                                             </div>
                                         </div>
-                                        <div class="row" style="">
+                                        <div class="row">
                                             <div class="col-xs-7">
                                                 <label>Opis</label>
-                                                <p:inputTextarea id="descriptionTextarea" rows="8"
-                                                                 value="#{goodAddEditBean.good.description}"
-                                                                 styleClass="form-control" placeholder="Wprowadz opis"/>
+                                                <p:inputTextarea value="#{goodController.sourceObject.description}" rows="8"
+                                                                 styleClass="form-control" placeholder="Wprowadź opis"/>
                                             </div>
                                             <div class="col-xs-5">
                                                 <br/>
                                                 <p:panelGrid styleClass="table table-bordered dataTable">
                                                     <f:facet name="header">
                                                         <p:row>
-                                                            <p:column colspan="4"
-                                                                      style="font-weight: bold;">Ceny</p:column>
+                                                            <p:column colspan="4" style="font-weight: bold;">Ceny</p:column>
                                                         </p:row>
                                                         <p:row>
                                                             <p:column></p:column>
@@ -158,24 +148,22 @@
                                                         <p:column style="font-weight: bold;">Cena A</p:column>
                                                         <p:column>
                                                             <p:inputText id="priceANet"
-                                                                         value="#{goodAddEditBean.good.prices.priceANet}"
+                                                                         value="#{goodController.sourceObject.prices.priceANet}"
                                                                          styleClass="form-control text-right">
                                                                 <f:convertNumber type="number" groupingUsed="true"
                                                                                  minFractionDigits="2" pattern="#0.00"/>
-                                                                <p:ajax event="blur"
-                                                                        listener="#{goodAddEditBean.handlePriceANetChange}"
-                                                                        update="priceANet,priceAGross"/>
+                                                                <p:ajax event="blur" listener="#{goodController.handlePriceANetChange}"
+                                                                        update="priceANet, priceAGross"/>
                                                             </p:inputText>
                                                         </p:column>
                                                         <p:column>
                                                             <p:inputText id="priceAGross"
-                                                                         value="#{goodAddEditBean.good.prices.priceAGross}"
+                                                                         value="#{goodController.sourceObject.prices.priceAGross}"
                                                                          styleClass="form-control text-right">
                                                                 <f:convertNumber type="number" groupingUsed="true"
                                                                                  minFractionDigits="2" pattern="#0.00"/>
-                                                                <p:ajax event="blur"
-                                                                        listener="#{goodAddEditBean.handlePriceAGrossChange}"
-                                                                        update="priceANet,priceAGross"/>
+                                                                <p:ajax event="blur" listener="#{goodController.handlePriceAGrossChange}"
+                                                                        update="priceANet, priceAGross"/>
                                                             </p:inputText>
                                                         </p:column>
                                                     </p:row>
@@ -183,24 +171,22 @@
                                                         <p:column style="font-weight: bold;">Cena B</p:column>
                                                         <p:column>
                                                             <p:inputText id="priceBNet"
-                                                                         value="#{goodAddEditBean.good.prices.priceBNet}"
+                                                                         value="#{goodController.sourceObject.prices.priceBNet}"
                                                                          styleClass="form-control text-right">
                                                                 <f:convertNumber type="number" groupingUsed="true"
                                                                                  minFractionDigits="2" pattern="#0.00"/>
-                                                                <p:ajax event="blur"
-                                                                        listener="#{goodAddEditBean.handlePriceBNetChange}"
-                                                                        update="priceBNet,priceBGross"/>
+                                                                <p:ajax event="blur" listener="#{goodController.handlePriceBNetChange}"
+                                                                        update="priceBNet, priceBGross"/>
                                                             </p:inputText>
                                                         </p:column>
                                                         <p:column>
                                                             <p:inputText id="priceBGross"
-                                                                         value="#{goodAddEditBean.good.prices.priceBGross}"
+                                                                         value="#{goodController.sourceObject.prices.priceBGross}"
                                                                          styleClass="form-control text-right">
                                                                 <f:convertNumber type="number" groupingUsed="true"
                                                                                  minFractionDigits="2" pattern="#0.00"/>
-                                                                <p:ajax event="blur"
-                                                                        listener="#{goodAddEditBean.handlePriceBGrossChange}"
-                                                                        update="priceBNet,priceBGross"/>
+                                                                <p:ajax event="blur" listener="#{goodController.handlePriceBGrossChange}"
+                                                                        update="priceBNet, priceBGross"/>
                                                             </p:inputText>
                                                         </p:column>
                                                     </p:row>
@@ -208,55 +194,37 @@
                                                         <p:column style="font-weight: bold;">Cena C</p:column>
                                                         <p:column>
                                                             <p:inputText id="priceCNet"
-                                                                         value="#{goodAddEditBean.good.prices.priceCNet}"
+                                                                         value="#{goodController.sourceObject.prices.priceCNet}"
                                                                          styleClass="form-control text-right">
                                                                 <f:convertNumber type="number" groupingUsed="true"
                                                                                  minFractionDigits="2" pattern="#0.00"/>
-                                                                <p:ajax event="blur"
-                                                                        listener="#{goodAddEditBean.handlePriceCNetChange}"
-                                                                        update="priceCNet,priceCGross"/>
+                                                                <p:ajax event="blur" listener="#{goodController.handlePriceCNetChange}"
+                                                                        update="priceCNet, priceCGross"/>
                                                             </p:inputText>
                                                         </p:column>
                                                         <p:column>
                                                             <p:inputText id="priceCGross"
-                                                                         value="#{goodAddEditBean.good.prices.priceCGross}"
+                                                                         value="#{goodController.sourceObject.prices.priceCGross}"
                                                                          styleClass="form-control text-right">
                                                                 <f:convertNumber type="number" groupingUsed="true"
                                                                                  minFractionDigits="2" pattern="#0.00"/>
-                                                                <p:ajax event="blur"
-                                                                        listener="#{goodAddEditBean.handlePriceCGrossChange}"
-                                                                        update="priceCNet,priceCGross"/>
+                                                                <p:ajax event="blur" listener="#{goodController.handlePriceCGrossChange}"
+                                                                        update="priceCNet, priceCGross"/>
                                                             </p:inputText>
                                                         </p:column>
                                                     </p:row>
                                                 </p:panelGrid>
                                             </div>
                                         </div>
-                                        <br/>
-
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <p:commandButton value="Zapisz"
-                                                                 styleClass="btn btn-primary btn-lg pull-right"
-                                                                 action="#{goodAddEditBean.saveGood()}"/>
-                                                <p:commandButton value="Wyczyść"
-                                                                 styleClass="btn btn-primary btn-lg pull-right"
-                                                                 style="margin-right:  10px" ajax="true"
-                                                                 update="@(form :not(.typeSelectOneRadio))"
-                                                                 action="#{goodAddEditBean.clear()}"/>
-                                            </div>
-                                        </div>
+                                        <p:spacer style="height: 20px;" />
+                                        <cc:buttonBox controller="#{goodController}"/>
                                     </h:form>
                                 </div>
-                                <!-- /.box-body -->
                             </div>
-                            <!-- /.box -->
                         </div>
                     </div>
                 </section>
-                <!-- /.content -->
             </aside>
-            <!-- /.right-side -->
         </ui:define>
     </ui:composition>
 </h:body>

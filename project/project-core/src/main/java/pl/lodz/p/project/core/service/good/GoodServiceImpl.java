@@ -51,6 +51,12 @@ public class GoodServiceImpl extends AbstractService<Good, GoodDTO> implements G
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
+    public void disactive(GoodDTO goodDTO) {
+        super.disactive(goodDTO);
+    }
+
+    @RolesAllowed(ACCESS_LEVEL)
+    @Override
     public Page<GoodDTO> search(String searchQuery, PageRequest pageRequest) {
         Page<Good> pageGoods = ((GoodDao) dao).search(searchQuery, pageRequest);
     	List<GoodDTO> goodList = Lists.transform(pageGoods.getContent(), transformer);

@@ -1,6 +1,8 @@
 package pl.lodz.p.project.core.jsf.base;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Persistable;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 
 import java.io.Serializable;
@@ -11,10 +13,9 @@ import java.util.List;
  */
 public abstract class EditObjectController<T extends Serializable> extends UIObject implements Serializable {
 
-	private static final long serialVersionUID = -5022126225567406058L;
+	private static final long serialVersionUID = 1L;
 
-	private ServiceRepository service;
-
+	private ServiceRepository<Persistable<Long>, T> service;
 	protected T sourceObject;
 	protected Mode mode = Mode.EDIT;
 
@@ -31,16 +32,26 @@ public abstract class EditObjectController<T extends Serializable> extends UIObj
 
 	};
 
-	private Action CLEAN_ACTION = new Action("Wyczyść", "") {
+	private Action CLEAN_ACTION = new Action("Wyczyść", "@form") {
 
 		@Override
-		public void call() {
-			sourceObject = (T) new Object();
-		}
+		public void call() { createNew(); }
 
 	};
 
-	public abstract void save();
+	protected void setObject() {
+		String id = GUI.catchId("id");
+		if (StringUtils.isBlank(id)) {
+			createNew();
+		} else {
+			Long longId = Long.parseLong(id);
+			sourceObject = service.getOneById(longId);
+		}
+	}
+
+	protected /*abstract*/ void createNew() { }
+
+	protected abstract void save();
 
 	public List<Action> getActions() {
 		return Lists.newArrayList(SAVE_ACTION, CLEAN_ACTION);

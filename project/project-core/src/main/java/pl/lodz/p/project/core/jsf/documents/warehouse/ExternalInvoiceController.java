@@ -8,6 +8,7 @@ import pl.lodz.p.project.core.jsf.base.EditObjectController;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.jsf.contractor.ContractorListController;
+import pl.lodz.p.project.core.jsf.good.GoodListController;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.items.TransportMeanService;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;

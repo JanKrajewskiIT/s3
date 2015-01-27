@@ -12,7 +12,7 @@ import pl.lodz.p.project.core.jsf.base.EditObjectController;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.jsf.contractor.ContractorListController;
-import pl.lodz.p.project.core.jsf.documents.warehouse.GoodListController;
+import pl.lodz.p.project.core.jsf.good.GoodListController;
 import pl.lodz.p.project.core.service.account.UserService;
 import pl.lodz.p.project.core.service.contractor.ContractorService;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;

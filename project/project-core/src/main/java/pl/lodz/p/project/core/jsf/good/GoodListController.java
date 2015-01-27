@@ -1,8 +1,8 @@
-package pl.lodz.p.project.core.jsf.documents.warehouse;
+package pl.lodz.p.project.core.jsf.good;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
-import pl.lodz.p.project.core.jsf.base.EditListController;
+import pl.lodz.p.project.core.jsf.base.EditPageableListController;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.good.GoodServiceImpl;
 
@@ -15,7 +15,7 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class GoodListController extends EditListController<GoodDTO> {
+public class GoodListController extends EditPageableListController<GoodDTO> {
 
     @Autowired
     private GoodServiceImpl service;
@@ -39,6 +39,6 @@ public class GoodListController extends EditListController<GoodDTO> {
 
     @Override
     public String edit(String id) {
-        return GUI.redirect("addEditGood", id);
+        return GUI.redirect("good", id);
     }
 }
