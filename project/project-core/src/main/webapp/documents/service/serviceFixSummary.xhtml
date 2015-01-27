@@ -38,6 +38,8 @@
                                 </div>
                                 <div class="box-body">
                                     <h:form>
+                                        <h:inputHidden id="id" value="#{serviceFixSummaryTemplateBean.document.id}"/>
+                                        <h:inputHidden id="version" value="#{serviceFixSummaryTemplateBean.document.version}"/>
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <label for="symbol">Symbol</label>
@@ -46,7 +48,6 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <label>Status</label>
-
                                                 <div>
                                                     <span class="label label-info font14"><h:outputText
                                                             value="#{serviceFixSummaryTemplateBean.document.state.label}"/></span>

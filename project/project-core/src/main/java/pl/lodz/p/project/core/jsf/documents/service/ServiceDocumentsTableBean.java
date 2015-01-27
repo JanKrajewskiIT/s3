@@ -7,6 +7,8 @@ import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
 import pl.lodz.p.project.core.dto.document.service.BaseServiceDocumentDTO;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.document.service.BaseServiceDocumentService;
+import pl.lodz.p.project.core.service.document.service.ServiceFixSummaryService;
+import pl.lodz.p.project.core.service.document.service.ServiceRepairOrderService;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -21,6 +23,12 @@ public class ServiceDocumentsTableBean implements Serializable {
 
     @Autowired
     private BaseServiceDocumentService baseServiceDocumentService;
+
+    @Autowired
+    private ServiceFixSummaryService serviceFixSummaryService;
+
+    @Autowired
+    private ServiceRepairOrderService serviceRepairOrderService;
 
     private List<ServiceDocument> documents;
 
@@ -39,6 +47,19 @@ public class ServiceDocumentsTableBean implements Serializable {
             default:
                 throw new IllegalArgumentException("Not implemented yet!");
         }
+    }
+
+    public void remove(Long id, ServiceDocumentType type) {
+        switch (type) {
+            case REPAIR_ORDER:
+                serviceRepairOrderService.delete(id);
+                break;
+            case FIX_SUMMARY:
+                serviceFixSummaryService.delete(id);
+            default:
+                throw new IllegalArgumentException("Not implemented yet!");
+        }
+        setDocuments(baseServiceDocumentService.findAll());
     }
 
     public List<ServiceDocument> getDocuments() {

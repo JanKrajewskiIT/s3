@@ -53,7 +53,9 @@
                                                         <i class="glyphicon glyphicon-pencil"></i> Edytuj
                                                     </p:commandLink>
                                                     <p:spacer style="width: 10px"/>
-                                                    <p:commandLink styleClass="btn btn-danger btn-xs">
+                                                    <p:commandLink styleClass="btn btn-danger btn-xs"
+                                                                   action="#{serviceDocumentsTableBean.remove(document.id, document.serviceDocumentType)}"
+                                                                   update="@form">
                                                         <i class="glyphicon glyphicon-minus"></i> Usuń
                                                     </p:commandLink>
                                                 </p:column>
