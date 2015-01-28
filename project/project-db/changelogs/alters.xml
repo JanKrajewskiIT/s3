@@ -12,4 +12,11 @@
 			alter table contractors alter column account_number type character varying(50);
 		</sql>
 	</changeSet>
+	<changeSet id="alter_sale_documents" author="lukasz.mucha">
+		<sql>
+			ALTER TABLE sale_documents ADD COLUMN deliver_person character varying(255);
+			ALTER TABLE sale_documents DROP COLUMN receive_person;
+			ALTER TABLE sale_documents ADD COLUMN receive_person character varying(255);
+		</sql>
+	</changeSet>
 </databaseChangeLog>

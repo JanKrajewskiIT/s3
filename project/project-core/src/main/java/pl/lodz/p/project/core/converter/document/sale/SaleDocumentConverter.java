@@ -37,7 +37,6 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 	@Override
 	public SaleDocument convertDTO(SaleDocumentDTO objectDTO) {
 		Contractor contractor = contractorConverter.convertDTO(objectDTO.getContractor());
-		Contractor receivePerson = contractorConverter.convertDTO(objectDTO.getReceivePerson());
 		User issuePerson = userConverter.convertDTO(objectDTO.getIssuePerson());
 		PaymentMethod paymentMethod = paymentMethodConverter.convertDTO(objectDTO.getPaymentMethod());
 		
@@ -51,10 +50,12 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		entity.setIssuePerson(issuePerson);
 		entity.setPaymentMethod(paymentMethod);
 		entity.setOrderSymbol(objectDTO.getOrderSymbol());
+		entity.setAnnotation(objectDTO.getAnnotation());
 		entity.setPaidTotal(objectDTO.getPaidTotal());
 		entity.setPaid(objectDTO.isPaid());
 		entity.setPaymentDate(objectDTO.getPaymentDate());
-		entity.setReceivePerson(receivePerson);
+		entity.setReceivePerson(objectDTO.getReceivePerson());
+		entity.setDeliverPerson(objectDTO.getDeliverPerson());
 		entity.setSaleDate(objectDTO.getSaleDate());
 		entity.setSymbol(objectDTO.getSymbol());
 		entity.setTotal(objectDTO.getTotal());
@@ -66,7 +67,6 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 	@Override
 	public SaleDocumentDTO convertEntity(SaleDocument entity) {
 		ContractorDTO contractor = contractorConverter.convertEntity(entity.getContractor());
-		ContractorDTO receivePerson = contractorConverter.convertEntity(entity.getReceivePerson());
 		UserDTO issuePerson = userConverter.convertEntity(entity.getIssuePerson());
 		PaymentMethodDTO paymentMethod = paymentMethodConverter.convertEntity(entity.getPaymentMethod());
 		
@@ -78,12 +78,14 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		objectDTO.setDocumentDate(objectDTO.getDocumentDate());
 		objectDTO.setDocumentPlace(entity.getDocumentPlace());
 		objectDTO.setIssuePerson(issuePerson);
+		objectDTO.setAnnotation(entity.getAnnotation());
 		objectDTO.setPaymentMethod(paymentMethod);
 		objectDTO.setOrderSymbol(entity.getOrderSymbol());
 		objectDTO.setPaidTotal(entity.getPaidTotal());
 		objectDTO.setPaid(entity.isPaid());
 		objectDTO.setPaymentDate(entity.getPaymentDate());
-		objectDTO.setReceivePerson(receivePerson);
+		objectDTO.setReceivePerson(entity.getReceivePerson());
+		objectDTO.setDeliverPerson(entity.getDeliverPerson());
 		objectDTO.setSaleDate(entity.getSaleDate());
 		objectDTO.setSymbol(entity.getSymbol());
 		objectDTO.setTotal(entity.getTotal());
