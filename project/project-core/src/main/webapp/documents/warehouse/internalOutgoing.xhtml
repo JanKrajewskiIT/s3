@@ -36,6 +36,7 @@
 									</div>
 									<div class="box-body">
 										<h:form>
+											<p:growl id="growl" showDetail="true" sticky="true"/>
 											<p:panel visible="#{internalInvoiceController.visible}">
 												<cc:invoiceGoodList controller="#{internalInvoiceController}" widthValue="107%"/>
 												<p:spacer style="height : 10px"/>

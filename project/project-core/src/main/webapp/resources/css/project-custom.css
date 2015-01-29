@@ -66,3 +66,8 @@
 .ui-state-highlight, tr.ui-state-highlight:hover > td {
     background: #2d5972 !important;
 }
+
+.ui-growl {
+    top: 100px !important;
+    color : white !important;
+}

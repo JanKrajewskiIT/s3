@@ -12,4 +12,6 @@ public interface InternalInvoiceDao extends CrudDao<InternalInvoice, Long> {
 
     Page<InternalInvoice> search(String searchQuery, PageRequest pageRequest);
 
+    public void updateQuantity(Long id, Double quantity);
+
 }
