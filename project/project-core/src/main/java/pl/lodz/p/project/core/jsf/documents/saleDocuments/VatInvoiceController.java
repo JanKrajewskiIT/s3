@@ -1,35 +1,24 @@
 package pl.lodz.p.project.core.jsf.documents.saleDocuments;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.document.items.DocumentPositionDTO;
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
 import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
-import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.jsf.contractor.ContractorListController;
 import pl.lodz.p.project.core.jsf.good.GoodListController;
-import pl.lodz.p.project.core.service.account.UserService;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
-import pl.lodz.p.project.core.service.contractor.ContractorService;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
-import pl.lodz.p.project.core.service.document.items.DocumentPositionService;
 import pl.lodz.p.project.core.service.document.items.DocumentSettingsService;
-import pl.lodz.p.project.core.service.document.items.PaymentMethodService;
 import pl.lodz.p.project.core.service.document.sale.SaleDocumentService;
-import pl.lodz.p.project.core.service.good.GoodService;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -44,32 +33,22 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 	 */
 	private static final long serialVersionUID = 6806332655702953164L;
 
-	@Autowired
-	private ContractorService contractorService;
 
 	@Autowired
 	private ContractorListController contractorListController;
 
-	@Autowired
-	private GoodService goodService;
 
 	@Autowired
-	private SaleDocumentService saleDocumentService;
+	private SaleDocumentService service;
 
 	@Autowired
 	private DocumentNumeratorService documentNumeratorService;
 
-	@Autowired
-	private PaymentMethodService paymentMethodsService;
 
 	@Autowired
 	private DocumentSettingsService documentSettingsService;
 
-	@Autowired
-	private UserService userService;
 
-	@Autowired
-	private DocumentPositionService documentPositionService;
 
 	@Autowired
 	private GoodListController goodListController;
@@ -77,18 +56,8 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 	@Autowired
 	private ConstantElements constantElements;
 
-	private List<ContractorDTO> contractorsList;
-	private List<GoodDTO> allGoodsList;
-	private List<PaymentMethodDTO> paymentMethods;
 	private Double totalNet, totalGross;
 
-	private GoodDTO selectedGood;
-	private SaleDocumentDTO saleDocumentDTO;
-	private String documentSymbol;
-
-	public VatInvoiceController() {
-
-	}
 
 	public void afterObjectSet(String type) {
 		init();
@@ -100,6 +69,7 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 	public void addContractor() {
 		setVisible(true);
 		getSourceObject().setContractor(contractorListController.getSingleSelection());
+		getSourceObject().setReceivePerson(contractorListController.getSingleSelection().getName());
 	}
 
 	public String forwardContractor() {
@@ -124,27 +94,28 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 	}
 
 	public void selectContractor() {
-		System.out.println("ELO313");
 		super.setVisible(false);
 		goodListController.setVisible(false);
 		contractorListController.setVisible(true);
 	}
 
 	public void selectGood() {
-		System.out.println("ELO312");
 		super.setVisible(false);
 		goodListController.setVisible(true);
 		contractorListController.setVisible(false);
 	}
 
 	@PostConstruct
-	public void init() {
+	@Override
+	public void createNew() {
 		setSourceObject(new SaleDocumentDTO());
 		getSourceObject().setGoodList(new ArrayList<DocumentPositionDTO>());
 		getSourceObject().setSaleDate(DateUtil.getCurrentDate());
 		getSourceObject().setPaymentDate(DateUtil.getCurrentDate());
 		getSourceObject().setPaymentMethod(new PaymentMethodDTO());
 		getSourceObject().setDocumentPlace(documentSettingsService.findDefaultDocumentPlace());
+		getSourceObject().setIssuePerson(constantElements.getUser());
+		getSourceObject().setDeliverPerson(getSourceObject().getIssuePerson().getFirstName() + " " + getSourceObject().getIssuePerson().getSecondName());
 		/*totalNet = 0d;
 		totalGross = 0d;
 		documentSymbol = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
@@ -162,65 +133,59 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 		}
 		loadPaymentMethods();*/
 	}
-
-
-	private void loadPaymentMethods() {
-		setPaymentMethods(paymentMethodsService.getAll());
-	}
-
-
+/*
 	public String editInvoice(String id, String whId) {
 		return "vatInvoice.xhtml?faces-redirect=true&id=" + id + "&whId=" + whId;
-	}
+	}*/
 
 	public void saveInvoice() {
-		saleDocumentDTO.setPaymentMethod((paymentMethodsService.getOneById(saleDocumentDTO.getPaymentMethod().getId())));
-		if (StringUtils.isNotBlank(documentSymbol)) {
-			// documentsPositionsEndpointLocal.edit(goodsPositions);
-			saleDocumentService.save(saleDocumentDTO); // TODO : Proably here
-														// should be separte
-														// method edit
-		} else {
-			try {
-				//saleDocumentDTO.setGoodList(goodsPositions);
-				saleDocumentService.save(saleDocumentDTO);
-				FacesContext.getCurrentInstance().getExternalContext().redirect("vatInvoiceList.xhtml");
-				// } catch (DocumentSymbolAlreadyInUseException e) {
-				// System.out.println("DocumentSymbolAlreadyInUseException!!!");
-				// documentSymbol =
-				// documentNumeratorEndpoint.nextNumber(DOCUMENT_TYPE);
-				// updateDocumentSymbol(documentSymbol);
-				// FacesContext.getCurrentInstance().addMessage(null,
-				// new FacesMessage("Symbol dokumentu jest już zajęty",
-				// "Symbol został ustawiony na najbliższy wolny"));
-				// } catch (WarehouseQuantityLimitExceededException e) {
-				// System.out.println("WarehouseQuantityLimitExceededException - max qty: "
-				// + e.getMaxAvailableQuantity());
-				// FacesContext.getCurrentInstance().addMessage(
-				// null,
-				// new FacesMessage("Brak wpisanej ilości w magazynie",
-				// "Dostępna ilosć " + e.getGood().getName() + " w magazynie: "
-				// + e.getMaxAvailableQuantity()));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		/*saleDocumentDTO.setPaymentMethod((paymentMethodsService.getOneById(saleDocumentDTO.getPaymentMethod().getId())));
+//		if (StringUtils.isNotBlank(documentSymbol)) {
+			documentsPositionsEndpointLocal.edit(goodsPositions);
+//			saleDocumentService.save(saleDocumentDTO); // TODO : Proably here
+														should be separte
+														method edit
+//		} else {
+//			try {
+				saleDocumentDTO.setGoodList(goodsPositions);
+//				saleDocumentService.save(saleDocumentDTO);
+//				FacesContext.getCurrentInstance().getExternalContext().redirect("vatInvoiceList.xhtml");
+				} catch (DocumentSymbolAlreadyInUseException e) {
+				System.out.println("DocumentSymbolAlreadyInUseException!!!");
+				documentSymbol =
+				documentNumeratorEndpoint.nextNumber(DOCUMENT_TYPE);
+				updateDocumentSymbol(documentSymbol);
+				FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage("Symbol dokumentu jest już zajęty",
+				"Symbol został ustawiony na najbliższy wolny"));
+				} catch (WarehouseQuantityLimitExceededException e) {
+				System.out.println("WarehouseQuantityLimitExceededException - max qty: "
+				+ e.getMaxAvailableQuantity());
+				FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage("Brak wpisanej ilości w magazynie",
+				"Dostępna ilosć " + e.getGood().getName() + " w magazynie: "
+				+ e.getMaxAvailableQuantity()));
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}*/
+		//}
 
 	}
 
-	private void updateDocumentSymbol(String symbol) {
+	/*private void updateDocumentSymbol(String symbol) {
 		saleDocumentDTO.setSymbol(symbol);
 		for (DocumentPositionDTO documentPositionDTO : getSourceObject().getGoodList()) {
 			documentPositionDTO.setSymbol(symbol);
 		}
-	}
+	}*/
 
 	public void setTotal() {
 		totalNet = 0d;
 		totalGross = 0d;
 		for (DocumentPositionDTO documentPositionDTO : getSourceObject().getGoodList()) {
-			totalNet = totalNet + documentPositionDTO.getValueNet();
-			totalGross = totalGross + documentPositionDTO.getValueGross();
+			totalNet = totalNet + (documentPositionDTO.getGood().getPrices().getPriceANet() * documentPositionDTO.getQuantity());
+			totalGross = totalGross + (documentPositionDTO.getGood().getPrices().getPriceAGross() * documentPositionDTO.getQuantity());
 		}
 
 		if (getSourceObject().getDiscount() == 0) {
@@ -231,77 +196,6 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 			getSourceObject().setTotal(totalGross * discountMultiplier);
 		}
 
-	}
-
-	/**
-	 * @return the contractorsList
-	 */
-	public List<ContractorDTO> getContractorsList() {
-		return contractorsList;
-	}
-
-	/**
-	 * @param contractorsList
-	 *            the contractorsList to set
-	 */
-	public void setContractorsList(List<ContractorDTO> contractorsList) {
-		this.contractorsList = contractorsList;
-	}
-
-	public String buyerToTextAreaString() {
-		if (saleDocumentDTO.getContractor() != null) {
-			return "Symbol: " + saleDocumentDTO.getContractor().getSymbol() + "\r\nNazwa: " + saleDocumentDTO.getContractor().getName() + "\r\nMiasto: "
-					+ saleDocumentDTO.getContractor().getAddress().getCity() + "\r\nAdress: " + saleDocumentDTO.getContractor().getAddress().getAddress() + "\r\nNIP: "
-					+ saleDocumentDTO.getContractor().getNip();
-		} else {
-			return "";
-		}
-	}
-
-	/**
-	 * @return the allGoodsList
-	 */
-	public List<GoodDTO> getAllGoodsList() {
-		return allGoodsList;
-	}
-
-	/**
-	 * @param allGoodsList
-	 *            the allGoodsList to set
-	 */
-	public void setAllGoodsList(List<GoodDTO> allGoodsList) {
-		this.allGoodsList = allGoodsList;
-	}
-
-	/**
-	 * @return the selectedGood
-	 */
-	public GoodDTO getSelectedGood() {
-		return selectedGood;
-	}
-
-	/**
-	 * @param selectedGood
-	 *            the selectedGood to set
-	 */
-	public void setSelectedGood(GoodDTO selectedGood) {
-		this.selectedGood = selectedGood;
-	}
-
-
-	public void priceNetChanged(DocumentPositionDTO documentPosition) {
-		GoodDTO good = documentPosition.getGood();
-		if (documentPosition.getPriceNet().equals(good.getPrices().getPriceANet())) {
-			documentPosition.setPriceGross(good.getPrices().getPriceAGross());
-		} else if (documentPosition.getPriceNet().equals(good.getPrices().getPriceBNet())) {
-			documentPosition.setPriceGross(good.getPrices().getPriceBGross());
-		} else if (documentPosition.getPriceNet().equals(good.getPrices().getPriceCNet())) {
-			documentPosition.setPriceGross(good.getPrices().getPriceCGross());
-		} else {
-			throw new IllegalArgumentException("Invalid value of price net");
-		}
-
-		setTotal();
 	}
 
 	// public void quantityChanged(DocumentPositionDTO documentPosition) {
@@ -325,25 +219,7 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 	//
 	// }
 
-	public void clear() {
-		setSaleDocumentDTO(new SaleDocumentDTO());
-	}
-
-	/**
-	 * @return the saleDocumentDTO
-	 */
-	public SaleDocumentDTO getSaleDocumentDTO() {
-		return saleDocumentDTO;
-	}
-
-	/**
-	 * @param saleDocumentDTO
-	 *            the saleDocumentDTO to set
-	 */
-	public void setSaleDocumentDTO(SaleDocumentDTO saleDocumentDTO) {
-		this.saleDocumentDTO = saleDocumentDTO;
-	}
-	/**
+	/*
 	 * @return the totalNet
 	 */
 	public Double getTotalNet() {
@@ -373,20 +249,6 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 		this.totalGross = totalGross;
 	}
 
-	/**
-	 * @return the paymentMethods
-	 */
-	public List<PaymentMethodDTO> getPaymentMethods() {
-		return paymentMethods;
-	}
-
-	/**
-	 * @param paymentMethods
-	 *            the paymentMethods to set
-	 */
-	public void setPaymentMethods(List<PaymentMethodDTO> paymentMethods) {
-		this.paymentMethods = paymentMethods;
-	}
 
 	@Override
 	public void save() {
@@ -396,12 +258,8 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 	}
 
 	@Override
-	protected void createNew() {
-	}
-
-	@Override
 	public ServiceRepository getService() {
-		return null;
+		return service;
 	}
 
 

@@ -9,6 +9,7 @@ import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.dao.pagingandsearching.Specification;
 import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoice;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -29,6 +30,12 @@ public class InternalInvoiceDaoImpl extends AbstractPageableDao<InternalInvoice,
 	@Transactional(readOnly = true)
 	public Page<InternalInvoice> search(String searchQuery, PageRequest pageRequest) {
 		return findAll(new InvoiceSearchSpecification(searchQuery), pageRequest);
+	}
+
+	public void updateQuantity(Long id, Double quantity) {
+		String queryValue = "UPDATE Good good SET good.quantity = :quantity WHERE good.id = :id";
+		Query query = getEntityManager().createQuery(queryValue);
+		query.setParameter("quantity", quantity).setParameter("id", id).executeUpdate();
 	}
 
 	class InvoiceSearchSpecification implements Specification<InternalInvoice> {

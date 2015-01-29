@@ -33,7 +33,19 @@ public class SaleDocument extends Document<Long> {
     @Column(name = "payment_date")
     @Temporal(TemporalType.DATE)
     private Date paymentDate;
-    
+
+	@Basic(optional = false)
+	@Column(name = "deliver_person")
+	private String deliverPerson;
+
+	@Basic(optional = false)
+	@Column(name = "reveive_person")
+	private String receivePerson;
+
+	@Basic(optional = true)
+	@Column(name = "annotation")
+	private String annotation;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "total")
@@ -66,10 +78,6 @@ public class SaleDocument extends Document<Long> {
     @NotNull
     @Column(name = "is_paid")
     private Boolean paid;
-        
-    @JoinColumn(name = "receive_person", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Contractor receivePerson;
 
     @JoinColumn(name = "payment_method_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -143,11 +151,11 @@ public class SaleDocument extends Document<Long> {
 		this.paid = paid;
 	}
 
-	public Contractor getReceivePerson() {
+	public String getReceivePerson() {
 		return receivePerson;
 	}
 
-	public void setReceivePerson(Contractor receivePerson) {
+	public void setReceivePerson(String receivePerson) {
 		this.receivePerson = receivePerson;
 	}
 
@@ -190,4 +198,19 @@ public class SaleDocument extends Document<Long> {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
+	public String getDeliverPerson() {
+		return deliverPerson;
+	}
+
+	public void setDeliverPerson(String deliverPerson) {
+		this.deliverPerson = deliverPerson;
+	}
+
+	public String getAnnotation() {
+		return annotation;
+	}
+
+	public void setAnnotation(String annotation) {
+		this.annotation = annotation;
+	}
 }

@@ -3,11 +3,14 @@ package pl.lodz.p.project.core.service.document.warehouse;
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Component;
 import pl.lodz.p.project.core.dao.document.warehouse.InternalInvoiceDao;
+import pl.lodz.p.project.core.dao.good.GoodDao;
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageImpl;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoice;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
+import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
+import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 import pl.lodz.p.project.core.service.base.AbstractService;
 import pl.lodz.p.project.core.service.good.GoodService;
@@ -27,7 +30,7 @@ public class InternalInvoiceServiceImpl extends AbstractService<InternalInvoice,
     private final static String ACCESS_LEVEL = "documentManagement";
 
     @Inject
-    private GoodService goodService;
+    private GoodDao goodDao;
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
@@ -50,6 +53,10 @@ public class InternalInvoiceServiceImpl extends AbstractService<InternalInvoice,
     @RolesAllowed(ACCESS_LEVEL)
     @Override
     public InternalInvoice save(InternalInvoiceDTO invoice) {
+        for(InternalInvoiceGoodDTO invoiceGood : invoice.getGoodList()) {
+            GoodDTO good = invoiceGood.getGood();
+            ((InternalInvoiceDao) dao).updateQuantity(good.getId(), good.getQuantity());
+        }
         return super.save(invoice);
     }
 

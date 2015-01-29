@@ -44,21 +44,13 @@
                                             <div class="row">
 
                                                 <div class="col-lg-4">
-                                                    <label>Data Sprzedaży</label>
-
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-calendar"></i>
-                                                        </div>
-                                                        <p:inputMask id="saleDateInputText"
-                                                                     value="#{vatInvoiceController.sourceObject.saleDate}"
-                                                                     styleClass="form-control" mask="99/99/9999"
-                                                                     placeholder="dd/mm/rrrr">
-                                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET"/>
-                                                        </p:inputMask>
-                                                    </div>
-                                                    <p:spacer style="height : 10px"/>
-                                                    <label>Sposób płatności</label>
+                                                    <label for="saleDate">Data Sprzedaży</label>
+                                                    <p:inputText id="saleDate"
+                                                                 value="#{vatInvoiceController.sourceObject.saleDate}"
+                                                                 styleClass="form-control">
+                                                        <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET"/>
+                                                    </p:inputText>
+                                                    <label for="paymentMethodMenu">Sposób płatności</label>
                                                     <h:selectOneMenu id="paymentMethodMenu"
                                                                      value="#{vatInvoiceController.sourceObject.paymentMethod.id}"
                                                                      styleClass="form-control">
@@ -67,30 +59,34 @@
                                                                 var="payment" itemLabel="#{payment.name}"
                                                                 itemValue="#{payment.id}"/>
                                                     </h:selectOneMenu>
+                                                    <label for="orderInputText">Symbol Zamówienia</label>
+                                                    <p:inputText id="orderInputText"
+                                                                 value="#{vatInvoiceController.sourceObject.orderSymbol}"
+                                                                 styleClass="form-control"
+                                                                 placeholder="Wprowadz symbol zamówienia"/>
+                                                    <label for="paidCheckbox">Zapłacono:</label>
+                                                    <h:selectBooleanCheckbox id="paidCheckbox"
+                                                                             value="#{vatInvoiceController.sourceObject.paid}"/>
                                                 </div>
 
                                                 <div class="col-lg-4">
-                                                    <label>Data płatności</label>
-
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-calendar"></i>
-                                                        </div>
-                                                        <p:inputMask id="paymentDateInputText"
-                                                                     value="#{vatInvoiceController.sourceObject.paymentDate}"
-                                                                     styleClass="form-control" mask="99/99/9999"
-                                                                     placeholder="dd/mm/rrrr">
-                                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET"/>
-                                                        </p:inputMask>
-                                                    </div>
+                                                    <label for="paymentDate">Data płatności</label>
+                                                    <p:inputText id="paymentDate"
+                                                                 value="#{vatInvoiceController.sourceObject.paymentDate}"
+                                                                 styleClass="form-control">
+                                                        <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET"/>
+                                                    </p:inputText>
                                                     <p:spacer style="height : 10px"/>
-                                                    <label>Rabat</label>
+                                                    <label for="disocuntInputText">Rabat</label>
                                                     <p:inputText id="disocuntInputText"
                                                                  value="#{vatInvoiceController.sourceObject.discount}"
                                                                  styleClass="form-control">
                                                         <f:convertNumber type="number" groupingUsed="true"
                                                                          minFractionDigits="2" pattern="#0.00"/>
                                                     </p:inputText>
+                                                    <label for="warehouseResultCheckbox">Zapłacono:</label>
+                                                    <h:selectBooleanCheckbox id="warehouseResultCheckbox"
+                                                                             value="#{vatInvoiceController.sourceObject.warehouseResult}"/>
                                                 </div>
 
                                                 <div class="col-lg-4">
@@ -133,7 +129,42 @@
                                                 <cc:invoiceGoodList controller="#{vatInvoiceController}"
                                                                     widthValue="107%"/>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <label for="totalNetTextArea">Suma netto</label>
+                                                    <p:inputText id="totalNetTextArea"
+                                                                 value="#{vatInvoiceController.totalNet}"
+                                                                 styleClass="form-control text-right" disabled="true">
+                                                        <f:convertNumber type="number" groupingUsed="true"
+                                                                         minFractionDigits="2" pattern="#0.00"/>
+                                                    </p:inputText>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label for="totalGrossTextArea">Suma brutto</label>
+                                                    <p:inputText id="totalGrossTextArea"
+                                                                 value="#{vatInvoiceController.totalGross}"
+                                                                 styleClass="form-control text-right" disabled="true">
+                                                        <f:convertNumber type="number" groupingUsed="true"
+                                                                         minFractionDigits="2" pattern="#0.00"/>
+                                                    </p:inputText>
+                                                </div>
+                                                <div class="col-xs-3"/>
+                                                <div class="col-lg-3">
+                                                    <label for="paidTextArea">Zapłacono</label>
+                                                    <p:inputText id="paidTextArea"
+                                                                 value="#{vatInvoiceController.sourceObject.paidTotal}"
+                                                                 styleClass="form-control text-right">
+                                                        <f:convertNumber type="number" groupingUsed="true"
+                                                                         minFractionDigits="2" pattern="#0.00"/>
+                                                    </p:inputText>
+                                                </div>
+                                            </div>
+                                            <p:spacer style="height : 10px"/>
+                                            <cc:warehouseInvoiceBottom controller="#{vatInvoiceController}"/>
+                                            <p:spacer style="height : 10px"/>
+                                            <cc:buttonBox controller="#{vatInvoiceController}"/>
                                         </p:panel>
+
                                         <p:spacer style="height : 10px"/>
                                         <p:panel visible="#{goodListController.visible}">
                                             <cc:goodChooser controller="#{goodListController}"
