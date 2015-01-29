@@ -21,7 +21,7 @@ public class ServiceProductsRequest extends BaseDocumentService {
     @Column(name = "service_repair_order", length = 80)
     private String serviceRepairOrderSymbol;
 
-    @OneToMany(mappedBy = "id.invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "id.invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ServiceProductsRequestGood> items = new HashSet<>();
 
     public ServiceProductsRequest() {

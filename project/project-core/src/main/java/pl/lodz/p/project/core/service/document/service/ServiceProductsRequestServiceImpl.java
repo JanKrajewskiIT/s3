@@ -18,21 +18,6 @@ import java.util.Set;
  */
 @Service
 @Interceptors({TrackerInterceptor.class})
-@Transactional
 public class ServiceProductsRequestServiceImpl extends AbstractService<ServiceProductsRequest, ServiceProductsRequestDTO> implements ServiceProductsRequestService {
 
-    @Override
-    public ServiceProductsRequest save(ServiceProductsRequestDTO objectDTO) {
-        ServiceProductsRequest entity = converter.convertDTO(objectDTO);
-        if (entity.isNew()) {
-            Set<ServiceProductsRequestGood> items = new HashSet<>(entity.getItems());
-            entity.setItems(null);
-            ((AbstractCrudDao) dao).getEntityManager().persist(entity);
-            entity.setItems(items);
-            ((AbstractCrudDao) dao).getEntityManager().merge(entity);
-            return entity;
-        } else {
-            return super.save(objectDTO);
-        }
-    }
 }
