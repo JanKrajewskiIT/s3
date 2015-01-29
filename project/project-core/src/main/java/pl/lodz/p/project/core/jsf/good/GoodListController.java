@@ -21,7 +21,7 @@ public class GoodListController extends EditPageableListController<GoodDTO> {
     @Autowired
     private GoodServiceImpl service;
 
-    private Double quantity;
+    private Double quantity = 1.00;
 
     @PostConstruct
     private void init() {

@@ -28,11 +28,11 @@
 					<p:column headerText="Ilość" style="width: 12%;">
 						<p:outputLabel value="#{good.quantity}" />
 					</p:column>
-					<p:column headerText="Cena" style="width: 12%;" >
+					<p:column headerText="Cena Brutto" style="width: 12%;">
 						<p:outputLabel value="#{good.good.prices.priceMagGross}"/>
 					</p:column>
-					<p:column headerText="Watość" style="width: 12%;">
-						<p:outputLabel value="TODO" />
+					<p:column headerText="Watość Brutto" style="width: 12%;">
+						<p:outputLabel value="#{good.quantity * good.good.prices.priceMagGross}"/>
 					</p:column>
 				</p:dataTable>
 			</div>

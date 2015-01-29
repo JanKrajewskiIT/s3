@@ -1,6 +1,7 @@
 package pl.lodz.p.project.core.jsf.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.contractor.AddressDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
@@ -8,6 +9,9 @@ import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.service.account.UserService;
 
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.util.Date;
@@ -23,7 +27,8 @@ public class ConstantElements {
     private UserService userService;
 
     public UserDTO getUser() {
-        return userService.getUserByEmail("admin@gmail.com");
+        String remoteUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+        return userService.getUserByEmail(remoteUser);
     }
 
     public ContractorDTO getUserData() {

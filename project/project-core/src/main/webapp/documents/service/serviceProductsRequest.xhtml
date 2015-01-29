@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:cc="http://java.sun.com/jsf/composite/components"
       xmlns="http://www.w3.org/1999/xhtml">
 
 
@@ -17,7 +18,7 @@
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i>Kokpit</a></li>
                         <li><a href="#">Dokumenty serwisowe</a></li>
-                        <li class="active">Podsumowanie naprawy</li>
+                        <li class="active">Zapotrzebowanie serwisowe</li>
                     </ol>
                 </section>
 
@@ -27,10 +28,10 @@
                             <div class="box">
                                 <div class="box-header">
                                     <h3 class="page-header col-xs-12">
-                                        Podsumowanie naprawy: <h:outputText
-                                            value="#{serviceFixSummaryTemplateBean.document.symbol}"/>
+                                        Zapotrzebowanie serwisowe: <h:outputText
+                                            value="#{serviceProductsRequestTemplateBean.document.symbol}"/>
                                         <small class="pull-right">Data: <h:outputText
-                                                value="#{serviceFixSummaryTemplateBean.document.documentDate}">
+                                                value="#{serviceProductsRequestTemplateBean.document.documentDate}">
                                             <f:convertDateTime pattern="dd-MM-yyyy"/>
                                         </h:outputText>
                                         </small>
@@ -38,25 +39,27 @@
                                 </div>
                                 <div class="box-body">
                                     <h:form>
-                                        <h:inputHidden id="id" value="#{serviceFixSummaryTemplateBean.document.id}"/>
-                                        <h:inputHidden id="version" value="#{serviceFixSummaryTemplateBean.document.version}"/>
+                                        <h:inputHidden id="id" value="#{serviceProductsRequestTemplateBean.document.id}"/>
+                                        <h:inputHidden id="version" value="#{serviceProductsRequestTemplateBean.document.version}"/>
+
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <label for="symbol">Symbol</label>
                                                 <p:inputText id="symbol" styleClass="form-control"
-                                                             value="#{serviceFixSummaryTemplateBean.document.symbol}"/>
+                                                             value="#{serviceProductsRequestTemplateBean.document.symbol}"/>
                                             </div>
                                             <div class="col-sm-4">
                                                 <label>Status</label>
+
                                                 <div>
                                                     <span class="label label-info font14"><h:outputText
-                                                            value="#{serviceFixSummaryTemplateBean.document.state.label}"/></span>
+                                                            value="#{serviceProductsRequestTemplateBean.document.state.label}"/></span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <label for="documentDate">Data dokumentu</label>
                                                 <p:inputText id="documentDate"
-                                                             value="#{serviceFixSummaryTemplateBean.document.documentDate}"
+                                                             value="#{serviceProductsRequestTemplateBean.document.documentDate}"
                                                              styleClass="form-control">
                                                     <f:convertDateTime pattern="dd-MM-yyyy"/>
                                                 </p:inputText>
@@ -67,21 +70,25 @@
                                             <div class="col-sm-4">
                                                 <label>Nr zlecenia naprawy</label>
                                                 <p:inputText styleClass="form-control"
-                                                             value="#{serviceFixSummaryTemplateBean.document.serviceFixOrderSymbol}"/>
+                                                             value="#{serviceProductsRequestTemplateBean.document.serviceRepairOrderSymbol}"/>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <label for="description">Przebieg naprawy</label>
-                                                <p:inputTextarea id="description" styleClass="form-control" rows="7"
-                                                                 value="#{serviceFixSummaryTemplateBean.document.description}"/>
-                                            </div>
-                                        </div>
+                                        <p:spacer style="height : 10px"/>
+                                        <p:panel visible="#{serviceProductsRequestTemplateBean.documentsGoodsListVisible}">
+                                            <cc:invoiceGoodList controller="#{serviceProductsRequestTemplateBean}"/>
+                                        </p:panel>
+                                        <p:spacer style="height : 10px"/>
+                                        <p:panel visible="#{serviceProductsRequestTemplateBean.goodListController.visible}">
+                                            <cc:goodChooser controller="#{serviceProductsRequestTemplateBean.goodListController}"
+                                                            action="#{serviceProductsRequestTemplateBean.addGood()}"
+                                                            editable="false"/>
+                                        </p:panel>
+
                                         <div class="row">
                                             <div class="col-sm-4 col-sm-offset-8">
                                                 <label for="documentCreator">Wystawił</label>
                                                 <p:inputText id="documentCreator" styleClass="form-control" disabled="true"
-                                                             value="#{serviceFixSummaryTemplateBean.issuePerson}"/>
+                                                             value="#{serviceProductsRequestTemplateBean.issuePerson}"/>
                                             </div>
                                         </div>
                                         <p:spacer style="height: 10px"/>
@@ -90,9 +97,9 @@
                                             <div class="col-sm-12">
                                                 <p:commandButton value="Zapisz"
                                                                  styleClass="btn btn-primary btn-lg pull-right"
-                                                                 action="#{serviceFixSummaryTemplateBean.save}"/>
+                                                                 action="#{serviceProductsRequestTemplateBean.save}"/>
                                                 <p:commandButton update="@(form)"
-                                                                 action="#{serviceFixSummaryTemplateBean.clear()}"
+                                                                 action="#{serviceProductsRequestTemplateBean.clear()}"
                                                                  value="Wyczyść"
                                                                  styleClass="btn btn-primary btn-lg pull-right"
                                                                  style="margin-right:  10px" ajax="true"/>

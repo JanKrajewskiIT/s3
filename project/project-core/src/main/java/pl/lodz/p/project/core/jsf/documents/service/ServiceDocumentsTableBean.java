@@ -15,7 +15,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-@Named("serviceDocumentsTableBean")
+@Named
 @Scope("request")
 public class ServiceDocumentsTableBean implements Serializable {
 

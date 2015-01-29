@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Persistable;
+import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.project.core.converter.base.Converter;
 import pl.lodz.p.project.core.dao.base.CrudDao;
 import pl.lodz.p.project.core.dao.pagingandsearching.Page;
