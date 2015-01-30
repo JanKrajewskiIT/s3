@@ -5,7 +5,6 @@ import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
 import pl.lodz.p.project.core.domain.document.service.ServiceFixSummary;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.document.service.ServiceFixSummaryDTO;
-import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.document.service.ServiceFixSummaryService;
 
 import javax.inject.Named;

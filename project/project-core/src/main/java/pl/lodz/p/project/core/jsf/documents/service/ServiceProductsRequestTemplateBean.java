@@ -1,6 +1,5 @@
 package pl.lodz.p.project.core.jsf.documents.service;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
@@ -22,7 +21,7 @@ import java.util.Date;
  * Created by milczu on 28.01.15.
  */
 @Named
-@ViewScoped
+@Scope("view")
 public class ServiceProductsRequestTemplateBean extends AbstractServiceTemplateBean<ServiceProductsRequestDTO, ServiceProductsRequest, ServiceProductsRequestService> implements Serializable {
 
     private static final long serialVersionUID = 1L;

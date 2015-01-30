@@ -2,7 +2,6 @@ package pl.lodz.p.project.core.jsf.base;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**

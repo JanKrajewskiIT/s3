@@ -1,7 +1,7 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Persistable;
+import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
@@ -12,10 +12,7 @@ import pl.lodz.p.project.core.jsf.good.GoodListController;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.warehouse.InternalInvoiceService;
-import pl.lodz.p.project.core.service.good.GoodService;
 
-import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.util.ArrayList;
 
@@ -23,7 +20,7 @@ import java.util.ArrayList;
  * @author Jan Krajewski
  */
 @Named
-@ViewScoped
+@Scope("view")
 public class InternalInvoiceController extends EditObjectController<InternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 7763768017180337728L;
@@ -33,9 +30,6 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 
 	@Autowired
 	private InternalInvoiceService service;
-
-	@Autowired
-	private GoodService goodService;
 
 	@Autowired
 	private DocumentNumeratorService documentNumeratorService;
@@ -64,11 +58,23 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	public void save() {
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
 		getSourceObject().setIssuePerson(constantElements.getUser());
-		estimateQuantity();
+		if(getSourceObject().getType().equals("PW")) {
+			estimateQuantityUp();
+		} else if(getSourceObject().getType().equals("RW")){
+			estimateQuantityDown();
+		}
 		super.save();
 	}
 
-	private void estimateQuantity() {
+	private void estimateQuantityUp() {
+		for(InternalInvoiceGoodDTO invoice : getSourceObject().getGoodList()) {
+			invoice.getGood().setQuantity(
+					invoice.getGood().getQuantity() - invoice.getQuantity()
+			);
+		}
+	}
+
+	private void estimateQuantityDown() {
 		for(InternalInvoiceGoodDTO invoice : getSourceObject().getGoodList()) {
 			invoice.getGood().setQuantity(
 				invoice.getGood().getQuantity() - invoice.getQuantity()

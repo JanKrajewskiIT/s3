@@ -3,16 +3,15 @@ package pl.lodz.p.project.core.jsf.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.contractor.AddressDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.service.account.UserService;
-import sun.nio.cs.US_ASCII;
 
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.util.Date;
 
@@ -20,7 +19,7 @@ import java.util.Date;
  * @author Jan Krajewski
  */
 @Named
-@ViewScoped
+@Scope("view")
 public class ConstantElements {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConstantElements.class);

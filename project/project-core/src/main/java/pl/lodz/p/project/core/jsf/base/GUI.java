@@ -1,19 +1,18 @@
 package pl.lodz.p.project.core.jsf.base;
 
 import org.primefaces.context.RequestContext;
-import org.springframework.web.jsf.FacesContextUtils;
+import org.springframework.context.annotation.Scope;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
  * @author Jan Krajewski
  */
 @Named
-@ViewScoped
+@Scope("view")
 public final class GUI {
 
     public static String redirect(String xhtml) {

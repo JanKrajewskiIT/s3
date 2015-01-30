@@ -1,6 +1,7 @@
 package pl.lodz.p.project.core.jsf.documents.saleDocuments;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.items.DocumentPositionDTO;
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
 import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
@@ -15,8 +16,6 @@ import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.items.DocumentSettingsService;
 import pl.lodz.p.project.core.service.document.sale.SaleDocumentService;
 
-import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ import java.util.ArrayList;
  * @author Łukasz
  */
 @Named
-@ViewScoped
+@Scope("view")
 public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> {
 
 	/**
@@ -105,7 +104,7 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 		contractorListController.setVisible(false);
 	}
 
-	@PostConstruct
+	//@PostConstruct
 	@Override
 	public void createNew() {
 		setSourceObject(new SaleDocumentDTO());
@@ -115,7 +114,7 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 		getSourceObject().setPaymentMethod(new PaymentMethodDTO());
 		getSourceObject().setDocumentPlace(documentSettingsService.findDefaultDocumentPlace());
 		getSourceObject().setIssuePerson(constantElements.getUser());
-		getSourceObject().setDeliverPerson(getSourceObject().getIssuePerson().getFirstName() + " " + getSourceObject().getIssuePerson().getSecondName());
+		//getSourceObject().setDeliverPerson(getSourceObject().getIssuePerson().getFirstName() + " " + getSourceObject().getIssuePerson().getSecondName());
 		/*totalNet = 0d;
 		totalGross = 0d;
 		documentSymbol = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");

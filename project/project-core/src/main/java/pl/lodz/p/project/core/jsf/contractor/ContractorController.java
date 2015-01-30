@@ -1,7 +1,7 @@
 package pl.lodz.p.project.core.jsf.contractor;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Persistable;
+import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorGroupDTO;
 import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
@@ -9,15 +9,13 @@ import pl.lodz.p.project.core.jsf.base.EditObjectController;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.contractor.ContractorService;
 
-import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
  * @author Jan Krajewski
  */
 @Named
-@ViewScoped
+@Scope("view")
 public class ContractorController extends EditObjectController<ContractorDTO> {
 
 	private static final long serialVersionUID = 1L;

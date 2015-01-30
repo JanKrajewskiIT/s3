@@ -15,7 +15,7 @@ import java.util.List;
  * @author Łukasz
  */
 @Named(value = "invoicesTableBean")
-@Scope("request")
+@Scope("view")
 public class InvoiceTableBean implements Serializable {
 
 	/**

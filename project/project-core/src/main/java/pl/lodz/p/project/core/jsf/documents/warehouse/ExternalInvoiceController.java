@@ -1,7 +1,7 @@
 package pl.lodz.p.project.core.jsf.documents.warehouse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Persistable;
+import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;
@@ -12,20 +12,16 @@ import pl.lodz.p.project.core.jsf.contractor.ContractorListController;
 import pl.lodz.p.project.core.jsf.good.GoodListController;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
-import pl.lodz.p.project.core.service.document.items.TransportMeanService;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
 
-import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Jan Krajewski
  */
 @Named
-@ViewScoped
+@Scope("view")
 public class ExternalInvoiceController extends EditObjectController<ExternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 6806332655702953164L;

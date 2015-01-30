@@ -2,7 +2,6 @@ package pl.lodz.p.project.core.jsf.base;
 
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 
-import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

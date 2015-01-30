@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocument;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
-import pl.lodz.p.project.core.dto.document.service.BaseServiceDocumentDTO;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.service.document.service.BaseServiceDocumentService;
 import pl.lodz.p.project.core.service.document.service.ServiceFixSummaryService;
