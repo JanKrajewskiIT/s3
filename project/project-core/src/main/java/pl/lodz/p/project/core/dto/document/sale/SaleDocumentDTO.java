@@ -23,10 +23,13 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
     private Double paidTotal = 0d;
     private Double discount = 0d;
     private String orderSymbol;
-    private Boolean warehouseResult = true;
-    private Boolean paid;
-    private PaymentMethodDTO paymentMethod;
+	private boolean warehouseResult = true;
+	private boolean paid;
+	private String receivePerson;
+	private String deliverPerson;
+	private PaymentMethodDTO paymentMethod;
 	private List<DocumentPositionDTO> goodList;
+	private String annotation;
 
     @NotNull(message = "Data sprzedaży nie może być pusta!")
     private Date saleDate;
@@ -39,10 +42,7 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
 
     @NotNull(message = "Miejsce wystawienia nie może być puste!")
     private String documentPlace;
-    
-    @NotNull(message = "Pole Wystawił nie może być puste!")
-    private ContractorDTO receivePerson;
-    
+
     @NotNull(message = "Pole Nabywca nie może być puste!")
     private ContractorDTO contractor;
 
@@ -70,19 +70,19 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
 		this.orderSymbol = orderSymbol;
 	}
 
-	public Boolean isWarehouseResult() {
+	public boolean isWarehouseResult() {
 		return warehouseResult;
 	}
 
-	public void setWarehouseResult(Boolean warehouseResult) {
+	public void setWarehouseResult(boolean warehouseResult) {
 		this.warehouseResult = warehouseResult;
 	}
 
-	public Boolean isPaid() {
+	public boolean isPaid() {
 		return paid;
 	}
 
-	public void setPaid(Boolean paid) {
+	public void setPaid(boolean paid) {
 		this.paid = paid;
 	}
 
@@ -134,14 +134,6 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
 		this.documentPlace = documentPlace;
 	}
 
-	public ContractorDTO getReceivePerson() {
-		return receivePerson;
-	}
-
-	public void setReceivePerson(ContractorDTO receivePerson) {
-		this.receivePerson = receivePerson;
-	}
-
 	public ContractorDTO getContractor() {
 		return contractor;
 	}
@@ -159,5 +151,28 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
 	public int compareTo(SaleDocumentDTO o) {
 		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
-   
+
+	public void setReceivePerson(String receivePerson) {
+		this.receivePerson = receivePerson;
+	}
+
+	public String getReceivePerson() {
+		return receivePerson;
+	}
+
+	public String getDeliverPerson() {
+		return deliverPerson;
+	}
+
+	public void setDeliverPerson(String deliverPerson) {
+		this.deliverPerson = deliverPerson;
+	}
+
+	public String getAnnotation() {
+		return annotation;
+	}
+
+	public void setAnnotation(String annotation) {
+		this.annotation = annotation;
+	}
 }

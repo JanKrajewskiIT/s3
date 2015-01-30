@@ -17,7 +17,6 @@ public class DateUtil {
     }
 
     public static Date getCurrentDate() {
-        Calendar cal = Calendar.getInstance();
-        return cal.getTime();
+        return new Date();
     }
 }

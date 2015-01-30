@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Persistable;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.InternalInvoiceGoodDTO;
+import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
+import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.jsf.good.GoodListController;
 import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.warehouse.InternalInvoiceService;
+import pl.lodz.p.project.core.service.good.GoodService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -32,10 +35,16 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	private InternalInvoiceService service;
 
 	@Autowired
+	private GoodService goodService;
+
+	@Autowired
 	private DocumentNumeratorService documentNumeratorService;
 
 	@Autowired
 	private ConstantElements constantElements;
+
+	@Autowired
+	private GUI gui;
 
 	@Override
 	protected void createNew() {
@@ -55,19 +64,56 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	public void save() {
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
 		getSourceObject().setIssuePerson(constantElements.getUser());
+		estimateQuantity();
 		super.save();
 	}
 
+	private void estimateQuantity() {
+		for(InternalInvoiceGoodDTO invoice : getSourceObject().getGoodList()) {
+			invoice.getGood().setQuantity(
+				invoice.getGood().getQuantity() - invoice.getQuantity()
+			);
+		}
+	}
+
 	public void addGood() {
+		GoodDTO good = goodListController.getSingleSelection();
+		Double quantity = goodListController.getQuantity();
 		setVisible(true);
 
+		if(good.getQuantity() < quantity || quantity <= 0.0) {
+			gui.showWarnMessage("Brak wystarczającej ilości " + good.getName());
+			return;
+		}
+
+		getExistingInvoiceGood().setQuantity(quantity);
+		setTotal();
+	}
+
+	public InternalInvoiceGoodDTO getExistingInvoiceGood() {
+		GoodDTO good = goodListController.getSingleSelection();
+		for(InternalInvoiceGoodDTO invoiceGood : getSourceObject().getGoodList()) {
+			if(invoiceGood.getGood().equals(good)) {
+				return invoiceGood;
+			}
+		}
+		return addNewInvoiceGood();
+	}
+
+	public InternalInvoiceGoodDTO addNewInvoiceGood() {
 		InternalInvoiceGoodDTO invoiceGood = new InternalInvoiceGoodDTO();
 		invoiceGood.setGood(goodListController.getSingleSelection());
-		invoiceGood.setQuantity(goodListController.getQuantity());
 		invoiceGood.setInvoice(getSourceObject());
 		getSourceObject().getGoodList().add(invoiceGood);
+		return invoiceGood;
+	}
 
-		setTotal();
+	public void addGood(GoodDTO good, Double quantity) {
+		InternalInvoiceGoodDTO newInvoiceGood = new InternalInvoiceGoodDTO();
+		newInvoiceGood.setGood(good);
+		newInvoiceGood.setQuantity(quantity);
+		newInvoiceGood.setInvoice(getSourceObject());
+		getSourceObject().getGoodList().add(newInvoiceGood);
 	}
 
 	public void setTotal() {

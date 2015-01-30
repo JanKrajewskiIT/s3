@@ -19,10 +19,6 @@ public abstract class EditObjectController<T extends Serializable> extends UIObj
 	protected T sourceObject;
 	protected Mode mode = Mode.EDIT;
 
-	public static enum Mode {
-		EDIT, CREATE
-	}
-
 	private Action SAVE_ACTION = new Action("Zapisz", "") {
 
 		@Override

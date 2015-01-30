@@ -9,16 +9,18 @@ public class ServiceProductsRequestDTO extends BaseServiceDocumentDTO {
 	
 	public ServiceProductsRequestDTO() {
 		super(ServiceDocumentType.PRODUCTS_REQUEST);
+		setType("SPR");
 	}
-	
-	private List<ServiceProductRequestItemDTO> items = new ArrayList<>();
+
+	private List<ServiceProductRequestItemDTO> goodList = new ArrayList<>();
 	private String serviceRepairOrderSymbol;
 
-	public List<ServiceProductRequestItemDTO> getItems() {
-		return items;
+	public List<ServiceProductRequestItemDTO> getGoodList() {
+		return goodList;
 	}
-	public void setItems(List<ServiceProductRequestItemDTO> items) {
-		this.items = items;
+
+	public void setGoodList(List<ServiceProductRequestItemDTO> goodList) {
+		this.goodList = goodList;
 	}
 	public String getServiceRepairOrderSymbol() {
 		return serviceRepairOrderSymbol;

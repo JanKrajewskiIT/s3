@@ -1,8 +1,11 @@
 package pl.lodz.p.project.core.domain.document.base;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import pl.lodz.p.project.core.domain.good.Good;
 
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import java.io.Serializable;
@@ -37,4 +40,13 @@ public class InvoiceGoodKey<T extends Document> implements Serializable {
         this.good = good;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return EqualsBuilder.reflectionEquals(this, o);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
 }

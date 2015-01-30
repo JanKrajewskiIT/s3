@@ -15,7 +15,6 @@ import javax.persistence.Query;
 import javax.validation.ConstraintViolationException;
 
 /**
-*
 * @author Łukasz Gadomski, Milczu
 */
 @Repository
@@ -57,17 +56,18 @@ public class UserDaoImpl extends AbstractCrudDao<User, Long> implements UserDao 
      * @param email the e-mail address of the searched user
      * @return the found user.
      */
-	@Override
-	@Transactional(readOnly = true)
-	public User findByEmail(String email) {
-		LOGGER.info("findByEmail: {}", email);
+    @Override
+    @Transactional(readOnly = true)
+    public User findByEmail(String email) {
+        LOGGER.info("findByEmail: {}", email);
         try {
             return getEntityManager().createNamedQuery(User.NAMED_QUERY_FIND_BY_EMAIL, User.class)
                     .setParameter("email", email).getSingleResult();
         } catch (NoResultException nre) {
+            LOGGER.warn("findByEmail - NoResultException", e.getMessage());
             return null;
         }
-	}
+    }
 
     @Override
     public User findByCredentials(String userName, String password) {

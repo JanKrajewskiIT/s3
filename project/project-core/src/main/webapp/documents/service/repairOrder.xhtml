@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:cc="http://java.sun.com/jsf/composite/components"
       xmlns="http://www.w3.org/1999/xhtml">
 
 
@@ -104,8 +105,8 @@
                                             </div>
                                         </div>
                                         <p:spacer style="height: 10px"/>
-
-                                        <div class="row">
+                                        <cc:buttonBox controller="#{serviceRepairOrderTemplateBean}"/>
+                                        <!--<div class="row">
                                             <div class="col-sm-12">
                                                 <p:commandButton value="Zapisz"
                                                                  styleClass="btn btn-primary btn-lg pull-right"
@@ -116,7 +117,7 @@
                                                                  styleClass="btn btn-primary btn-lg pull-right"
                                                                  style="margin-right:  10px" ajax="true"/>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </h:form>
                                 </div>
                             </div>
