@@ -31,7 +31,7 @@ public class UserDaoImpl extends AbstractCrudDao<User, Long> implements UserDao 
     public void create(User user) throws UniqueConstraintViolationException {
         try {
             save(user);
-            user = getEntityManager().merge(user);
+            getEntityManager().merge(user);
         } catch (ConstraintViolationException e) {
             Throwable t = e.getCause();
             if (t != null && t.getMessage().contains("duplicate key value violates unique constraint")) {
@@ -59,11 +59,11 @@ public class UserDaoImpl extends AbstractCrudDao<User, Long> implements UserDao 
     @Override
     @Transactional(readOnly = true)
     public User findByEmail(String email) {
-        LOGGER.info("findByEmail: {}", email);
         try {
+            LOGGER.debug("findByEmail: {}", email);
             return getEntityManager().createNamedQuery(User.NAMED_QUERY_FIND_BY_EMAIL, User.class)
                     .setParameter("email", email).getSingleResult();
-        } catch (NoResultException nre) {
+        } catch (NoResultException e) {
             LOGGER.warn("findByEmail - NoResultException", e.getMessage());
             return null;
         }
