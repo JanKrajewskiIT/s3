@@ -7,5 +7,5 @@ import pl.lodz.p.project.core.service.base.ServiceRepository;
 /**
  * Created by milczu on 20.01.15.
  */
-public interface ServiceFixSummaryService extends ServiceRepository<ServiceFixSummary, ServiceFixSummaryDTO> {
+public interface ServiceFixSummaryService extends BaseService<ServiceFixSummary, ServiceFixSummaryDTO> {
 }

@@ -28,4 +28,8 @@ public class ServiceFixSummaryTemplateBean extends AbstractServiceTemplateBean<S
 
         return document;
     }
+
+    public String save() {
+        return super.save();
+    }
 }

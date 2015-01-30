@@ -7,5 +7,5 @@ import pl.lodz.p.project.core.service.base.ServiceRepository;
 /**
  * Created by milczu on 29.01.15.
  */
-public interface ServiceProductsRequestService extends ServiceRepository<ServiceProductsRequest, ServiceProductsRequestDTO> {
+public interface ServiceProductsRequestService extends BaseService<ServiceProductsRequest, ServiceProductsRequestDTO> {
 }

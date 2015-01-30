@@ -10,6 +10,6 @@ import javax.interceptor.Interceptors;
 
 @Service
 @Interceptors({TrackerInterceptor.class})
-public class ServiceRepairOrderServiceImpl extends AbstractService<ServiceRepairOrder, ServiceRepairOrderDTO> implements ServiceRepairOrderService {
+public class ServiceRepairOrderServiceImpl extends AbstractBaseService<ServiceRepairOrder, ServiceRepairOrderDTO> implements ServiceRepairOrderService {
 
 }

@@ -13,6 +13,6 @@ import javax.interceptor.Interceptors;
  */
 @Service
 @Interceptors({TrackerInterceptor.class})
-public class ServiceFixSummaryServiceImpl extends AbstractService<ServiceFixSummary, ServiceFixSummaryDTO> implements ServiceFixSummaryService {
+public class ServiceFixSummaryServiceImpl extends AbstractBaseService<ServiceFixSummary, ServiceFixSummaryDTO> implements ServiceFixSummaryService {
 
 }

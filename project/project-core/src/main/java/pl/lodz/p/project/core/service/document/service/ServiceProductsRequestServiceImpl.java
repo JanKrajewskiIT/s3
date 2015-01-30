@@ -18,6 +18,6 @@ import java.util.Set;
  */
 @Service
 @Interceptors({TrackerInterceptor.class})
-public class ServiceProductsRequestServiceImpl extends AbstractService<ServiceProductsRequest, ServiceProductsRequestDTO> implements ServiceProductsRequestService {
+public class ServiceProductsRequestServiceImpl extends AbstractBaseService<ServiceProductsRequest, ServiceProductsRequestDTO> implements ServiceProductsRequestService {
 
 }
