@@ -1,16 +1,16 @@
 package pl.lodz.p.project.core.jsf.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.contractor.AddressDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.contractor.PostalCodeDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.service.account.UserService;
+import sun.nio.cs.US_ASCII;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -23,12 +23,22 @@ import java.util.Date;
 @ViewScoped
 public class ConstantElements {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConstantElements.class);
+
     @Autowired
     private UserService userService;
 
     public UserDTO getUser() {
         String remoteUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
-        return userService.getUserByEmail(remoteUser);
+        UserDTO userDTO = userService.getUserByEmail(remoteUser);
+        if (userDTO == null) {
+            LOGGER.warn("Unable to find User by email: {}", remoteUser);
+            userDTO = new UserDTO();
+            userDTO.setFirstName("Admin");
+            userDTO.setSecondName("Admiński");
+            userDTO.setId(1L);
+        }
+        return userDTO;
     }
 
     public ContractorDTO getUserData() {

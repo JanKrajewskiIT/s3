@@ -48,14 +48,7 @@ public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentD
     protected abstract T createNew();
 
     protected UserDTO currentUser() {
-        UserDTO userDTO = constantElements.getUser();
-        if (userDTO == null) {
-            userDTO = new UserDTO();
-            userDTO.setFirstName("Admin");
-            userDTO.setSecondName("Admiński");
-            userDTO.setId(1L);
-        }
-        return userDTO;
+        return constantElements.getUser();
     }
 
     public String getIssuePerson() {
