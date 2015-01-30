@@ -1,5 +1,7 @@
 package pl.lodz.p.project.core.jsf.usermanagement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.account.RoleDTO;
@@ -25,6 +27,8 @@ import java.util.List;
 public class AddNewUserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AddNewUserBean.class);
 
 	@Autowired 
 	private UserService userService;
@@ -72,6 +76,7 @@ public class AddNewUserBean implements Serializable {
             pendingInvitationService.sendInvitation(registrationURL, email, selectedRole);
             facesContext.addMessage(null, new FacesMessage("Sukces", "Wysłano zaproszenie do rejestracji!"));
         } catch (Exception e) {
+            LOGGER.error("Failed to send an account invitation!", e);
             facesContext.addMessage(null, new FacesMessage("Błąd", "Operacja nie powiodła się!"));
         }
     }

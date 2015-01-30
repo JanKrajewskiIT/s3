@@ -19,7 +19,7 @@ import java.util.List;
  * @author Łukasz Gadomski
  */
 @Named(value = "userListBean")
-@Scope("request")
+@Scope("view")
 public class UserListBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

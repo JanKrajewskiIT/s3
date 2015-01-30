@@ -10,6 +10,7 @@ import pl.lodz.p.project.core.dto.base.BaseDTO;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -20,6 +21,7 @@ import java.util.Set;
 public class UserDTO extends BaseDTO<Long> implements Comparable<UserDTO> {
 
 	private static final long serialVersionUID = 1L;
+
 
 	@NotNull(message = "Hasło nie może być puste!")
     @Size(min = 6, max = 64, message = "Hasło musi zawierać minimum 6 znaków!")
@@ -33,8 +35,10 @@ public class UserDTO extends BaseDTO<Long> implements Comparable<UserDTO> {
     
     @NotNull(message = "Adres e-mail nie może być pusty!")
     private String email;
-    
-    private Set<RoleDTO> roleSet;
+
+    private boolean active;
+
+    private Set<RoleDTO> roleSet = new HashSet<>();
 
     private boolean admin;
     private boolean manager;
@@ -70,6 +74,14 @@ public class UserDTO extends BaseDTO<Long> implements Comparable<UserDTO> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Set<RoleDTO> getRoleSet() {

@@ -40,7 +40,7 @@
                                                         <label>Rola</label>
                                                         <h:selectOneMenu id="role-dropdown" value="#{addNewUserBean.selectedRole}" converter="#{roleDTOConverter}" styleClass="form-control">
                                                             <f:selectItem itemLabel="Wybierz rolę użytkownika" noSelectionOption="true" />
-                                                            <f:selectItems value="#{addNewUserBean.roleList}" var="role" itemLabel="#{role.roleName}" />
+                                                            <f:selectItems value="#{addNewUserBean.roleList}" var="role" itemLabel="#{role.name}" />
                                                         </h:selectOneMenu>
                                                     </div>
                                                     <div class="col-xs-4">

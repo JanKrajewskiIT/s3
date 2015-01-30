@@ -1,5 +1,7 @@
 package pl.lodz.p.project.core.jsf.usermanagement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.account.PendingInvitationDTO;
@@ -20,10 +22,12 @@ import java.io.Serializable;
  * @author Łukasz Gadomski
  */
 @Named(value = "registrationBean")
-@Scope("request")
+@Scope("view")
 public class RegistrationBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationBean.class);
 
 	@Autowired 
 	private UserService userService;
@@ -48,14 +52,18 @@ public class RegistrationBean implements Serializable {
      */
     @PostConstruct
     public void initRegistration() {
+        LOGGER.info("POST CONSTRUCT REGISTRATION BEAN");
         FacesContext facesContext = FacesContext.getCurrentInstance();
         token = facesContext.getExternalContext().getRequestParameterMap().get("token");
+        LOGGER.error("TOKEN = " + token);
         if (token == null) {
+            LOGGER.error("No token passed. Redirecting to 404 error page!");
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "404");
             return;
         }
         pendingInvitationDTO = pendingInvitationService.getOneByToken(token);
         if (pendingInvitationDTO == null) {
+            LOGGER.error("There is no matching pedning invitation for token " + token + ". Redirecting to 404 error page!");
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "404");
         }
     }
@@ -74,10 +82,12 @@ public class RegistrationBean implements Serializable {
         try {
             userDTO.setEmail(pendingInvitationDTO.getEmail());
             userDTO.getRoleSet().add(pendingInvitationDTO.getRole());
+            userDTO.setActive(true);
             userService.createUser(userDTO);
             pendingInvitationService.delete(pendingInvitationDTO.getId());
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "registrationSuccess");
         } catch (UniqueConstraintViolationException e) {
+            LOGGER.error("Failed to register new account!",e);
             facesContext.addMessage(null, new FacesMessage("Istnieje już konto o danym adresie e-mail!"));
         }
     }

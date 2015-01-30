@@ -60,9 +60,13 @@ public class UserDaoImpl extends AbstractCrudDao<User, Long> implements UserDao 
 	@Override
 	@Transactional(readOnly = true)
 	public User findByEmail(String email) {
-		LOGGER.info("findByLogin: {}", email);
-		return getEntityManager().createNamedQuery(User.NAMED_QUERY_FIND_BY_EMAIL, User.class)
-				.setParameter("email", email).getSingleResult();
+		LOGGER.info("findByEmail: {}", email);
+        try {
+            return getEntityManager().createNamedQuery(User.NAMED_QUERY_FIND_BY_EMAIL, User.class)
+                    .setParameter("email", email).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
 	}
 
     @Override

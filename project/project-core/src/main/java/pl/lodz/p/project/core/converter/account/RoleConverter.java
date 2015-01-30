@@ -21,7 +21,7 @@ public class RoleConverter implements Converter<Role, RoleDTO> {
 		entity.setId(objectDTO.getId());
 		entity.setVersion(objectDTO.getVersion());
 		entity.setName(objectDTO.getName());
-		return null;
+		return entity;
 	}
 
 	@Override

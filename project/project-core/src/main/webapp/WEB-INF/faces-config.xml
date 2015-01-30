@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
-	version="2.1">
+			  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+			  version="2.1">
 
 	<application>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+		<system-event-listener>
+			<system-event-listener-class>pl.lodz.p.project.core.jsf.scope.ViewScopeCallbackRegistrar</system-event-listener-class>
+			<system-event-class>javax.faces.event.PostConstructViewMapEvent</system-event-class>
+			<source-class>javax.faces.component.UIViewRoot</source-class>
+		</system-event-listener>
+
+		<system-event-listener>
+			<system-event-listener-class>pl.lodz.p.project.core.jsf.scope.ViewScopeCallbackRegistrar</system-event-listener-class>
+			<system-event-class>javax.faces.event.PreDestroyViewMapEvent</system-event-class>
+			<source-class>javax.faces.component.UIViewRoot</source-class>
+		</system-event-listener>
 	</application>
 
 	<navigation-rule>
@@ -35,29 +46,29 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
-            <from-outcome>forgotpassword</from-outcome>
-            <to-view-id>/password-recovery/forgot-password.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>passwordresetsuccess</from-outcome>
-            <to-view-id>/password-recovery/success.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>404</from-outcome>
-            <to-view-id>/error/404.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
+			<from-outcome>forgotpassword</from-outcome>
+			<to-view-id>/password-recovery/forgot-password.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>passwordresetsuccess</from-outcome>
+			<to-view-id>/password-recovery/success.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>404</from-outcome>
+			<to-view-id>/error/404.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 
-    <render-kit>
-        <renderer>
-            <component-family>org.primefaces.component</component-family>
-            <renderer-type>org.primefaces.component.RowEditorRenderer</renderer-type>
-            <renderer-class>pl.lodz.p.project.core.jsf.primefaces.BootstrapRowEditorRenderer</renderer-class>
-        </renderer>
-    </render-kit>
-		
+	<render-kit>
+		<renderer>
+			<component-family>org.primefaces.component</component-family>
+			<renderer-type>org.primefaces.component.RowEditorRenderer</renderer-type>
+			<renderer-class>pl.lodz.p.project.core.jsf.primefaces.BootstrapRowEditorRenderer</renderer-class>
+		</renderer>
+	</render-kit>
+
 
 </faces-config>

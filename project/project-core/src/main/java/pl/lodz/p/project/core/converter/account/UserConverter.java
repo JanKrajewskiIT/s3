@@ -24,6 +24,7 @@ public class UserConverter implements Converter<User, UserDTO> {
 		entity.setSecondName(objectDTO.getSecondName());
 		entity.setPassword(objectDTO.getPassword());
 		entity.setEmail(objectDTO.getEmail());
+		entity.setActive(objectDTO.isActive());
 		return entity;
 	}
 
@@ -36,6 +37,7 @@ public class UserConverter implements Converter<User, UserDTO> {
 		objectDTO.setSecondName(entity.getSecondName());
 		objectDTO.setPassword(entity.getPassword());
 		objectDTO.setEmail(entity.getEmail());
+		objectDTO.setActive(entity.isActive());
 		return objectDTO;
 	}
 }

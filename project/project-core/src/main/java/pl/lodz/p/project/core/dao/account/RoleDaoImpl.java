@@ -25,7 +25,7 @@ public class RoleDaoImpl extends AbstractCrudDao<Role, Long> implements RoleDao 
     public Role findByName(String roleName) {
         try {
             Query query = getEntityManager().createNamedQuery("Role.findByRoleName");
-            query.setParameter("roleName", roleName);
+            query.setParameter("name", roleName);
             return (Role) query.getSingleResult();
         } catch (NoResultException nre) {
             return null;
