@@ -23,6 +23,7 @@
     <http pattern="/login/error.xhtml" security="none"/>
     <http pattern="/registration/**" security="none" />
     <http pattern="/error/**" security="none" />
+    <http pattern="/password-recovery/**" security="none" />
     <http pattern="/javax.faces.resource/**" security="none"/>
     <http pattern="/resources/**" security="none"/>
 

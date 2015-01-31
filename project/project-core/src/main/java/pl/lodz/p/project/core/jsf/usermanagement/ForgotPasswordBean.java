@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 
 /**
  *
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Named(value = "forgotPasswordBean")
 @Scope("request")
-public class ForgotPasswordBean {
+public class ForgotPasswordBean implements Serializable {
 
 	@Autowired 
 	private UserService userService;

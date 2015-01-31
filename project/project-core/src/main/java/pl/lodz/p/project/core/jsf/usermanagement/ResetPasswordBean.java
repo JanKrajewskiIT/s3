@@ -1,5 +1,7 @@
 package pl.lodz.p.project.core.jsf.usermanagement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.account.PasswordChangeRequestDTO;
@@ -11,14 +13,17 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import java.io.Serializable;
 
 /**
  *
  * @author Łukasz Gadomski
  */
 @Named(value = "resetPasswordBean")
-@Scope("request")
-public class ResetPasswordBean {
+@Scope("view")
+public class ResetPasswordBean implements Serializable {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResetPasswordBean.class);
 
 	@Autowired 
 	private UserService userService;
@@ -40,8 +45,11 @@ public class ResetPasswordBean {
             facesContext.getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "404");
             return;
         }
-        // TODO change id to long
-        //passwordChangeRequestDTO = accountManagementService.getPasswordChangeRequestById(id);
+        try {
+            passwordChangeRequestDTO = passwordChangeRequestService.getOneById(Long.parseLong(id));
+        } catch (NumberFormatException e) {
+            LOGGER.warn("Invalid ID passed to reset-password page: " + id);
+        }
         if (passwordChangeRequestDTO == null) {
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "404");
             return;
