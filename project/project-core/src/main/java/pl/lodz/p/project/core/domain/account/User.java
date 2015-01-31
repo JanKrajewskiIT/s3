@@ -125,15 +125,19 @@ public class User extends BaseEntity<Long> implements UserDetails {
 		this.rolesCollection = rolesCollection;
 	}
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
 
-    @Override
-    public boolean equals(Object object) {
-        return EqualsBuilder.reflectionEquals(this, object);
-    }
+	/* These implementations made Collection.contains(Object o) method not work properly.
+        Had to comment them out to make user roles management work again. */
+
+//    @Override
+//    public int hashCode() {
+//        return HashCodeBuilder.reflectionHashCode(this);
+//    }
+//
+//    @Override
+//    public boolean equals(Object object) {
+//        return EqualsBuilder.reflectionEquals(this, object);
+//    }
 
     @Override
     public String toString() {

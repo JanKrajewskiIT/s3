@@ -34,7 +34,9 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profil</a>
+                                    <h:form>
+                                        <h:commandButton value="Profil" action="profile" styleClass="btn btn-default btn-flat" />
+                                    </h:form>
                                 </div>
                                 <div class="pull-right">
                                     <a href="#{root}/j_spring_security_logout" class="btn btn-default btn-flat">Wyloguj</a>

@@ -16,11 +16,11 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "roles")
-@NamedQuery(name = Role.NAMED_QUERY_FIND_BY_EMAIL, query = "SELECT r FROM Role r WHERE r.name = :name")
+@NamedQuery(name = Role.NAMED_QUERY_FIND_BY_NAME, query = "SELECT r FROM Role r WHERE r.name = :name")
 public class Role extends NamedEntity<Long> {
 
     private static final long serialVersionUID = 1L;
-	public static final String NAMED_QUERY_FIND_BY_EMAIL = "Role.findByRoleName";
+	public static final String NAMED_QUERY_FIND_BY_NAME = "Role.findByRoleName";
 
     @JoinTable(name = "users_roles", joinColumns = {
         @JoinColumn(name = "role_id", referencedColumnName = "id")}, inverseJoinColumns = {
@@ -37,15 +37,18 @@ public class Role extends NamedEntity<Long> {
         this.usersCollection = usersCollection;
     }
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
+    /* These implementations made Collection.contains(Object o) method not work properly.
+        Had to comment them out to make user roles management work again. */
 
-    @Override
-    public boolean equals(Object object) {
-        return EqualsBuilder.reflectionEquals(this, object);
-    }
+//    @Override
+//    public int hashCode() {
+//        return HashCodeBuilder.reflectionHashCode(this);
+//    }
+//
+//    @Override
+//    public boolean equals(Object object) {
+//        return EqualsBuilder.reflectionEquals(this, object);
+//    }
 
     @Override
     public String toString() {

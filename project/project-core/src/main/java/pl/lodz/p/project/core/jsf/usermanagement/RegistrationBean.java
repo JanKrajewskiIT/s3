@@ -52,10 +52,8 @@ public class RegistrationBean implements Serializable {
      */
     @PostConstruct
     public void initRegistration() {
-        LOGGER.info("POST CONSTRUCT REGISTRATION BEAN");
         FacesContext facesContext = FacesContext.getCurrentInstance();
         token = facesContext.getExternalContext().getRequestParameterMap().get("token");
-        LOGGER.error("TOKEN = " + token);
         if (token == null) {
             LOGGER.error("No token passed. Redirecting to 404 error page!");
             facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "404");

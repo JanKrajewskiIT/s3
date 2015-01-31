@@ -1,12 +1,15 @@
 package pl.lodz.p.project.core.jsf.usermanagement;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.exception.OptLockException;
 import pl.lodz.p.project.core.service.account.UserService;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -17,10 +20,12 @@ import java.io.Serializable;
  * @author Łukasz Gadomski
  */
 @Named(value = "profileBean")
-@Scope("session")
+@Scope("view")
 public class ProfileBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProfileBean.class);
 
 	@Autowired 
 	private UserService userService;
@@ -37,10 +42,10 @@ public class ProfileBean implements Serializable {
     public ProfileBean() {
     }
 
-    public String initProfile(String userName) {
-        this.userName = userName;
+    @PostConstruct
+    public void init() {
+        userName = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
         userDTO = userService.getUserByEmail(userName);
-        return "profile";
     }
 
     public void changePassword() {
@@ -50,9 +55,6 @@ public class ProfileBean implements Serializable {
             return;
         }
         if (!userDTO.getPassword().equals(DigestUtils.sha256Hex(currentPassword))) {
-            System.out.println("HASŁO = " + userDTO.getPassword());
-            System.out.println("NIE HASH" + currentPassword);
-            System.out.println("DRUGIE HASŁO = " + DigestUtils.sha256Hex(currentPassword));
             facesContext.addMessage(null, new FacesMessage("Błąd", "Podane hasło jest nieprawidłowe!"));
             return;
         }
@@ -61,6 +63,7 @@ public class ProfileBean implements Serializable {
             userService.editUserPassword(userDTO);
             userDTO = userService.getUserByEmail(userName);
             facesContext.addMessage(null, new FacesMessage("Sukces", "Hasło zostało zmienione!"));
+            LOGGER.info("Password changed for user: " + userName);
         } catch (Exception e) {
             facesContext.addMessage(null, new FacesMessage("Błąd", "Edycja nie powiodłą się!"));
         }
@@ -81,6 +84,7 @@ public class ProfileBean implements Serializable {
             userService.editUserEmailAddress(userDTO);
             userDTO = userService.getUserByEmail(userName);
             facesContext.addMessage(null, new FacesMessage("Sukces", "Adres e-mail został zmieniony!"));
+            LOGGER.info("E-mail address changed for user: " + userName + ". New address: " + newEmail);
         } catch (OptLockException ole) {
             facesContext.addMessage(null, new FacesMessage("Błąd", "Edycja nie powiodła się z powodu równoległej edycji!"));
         } catch (Exception e) {
