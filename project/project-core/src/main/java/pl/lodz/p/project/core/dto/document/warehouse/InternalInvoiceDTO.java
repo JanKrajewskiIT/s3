@@ -1,24 +1,19 @@
 package pl.lodz.p.project.core.dto.document.warehouse;
 
-import java.util.List;
+import com.google.common.collect.ComparisonChain;
 
 /**
  * 
  * @author Jan Krajewski
  *
  */
-public class InternalInvoiceDTO extends WarehouseInvoiceDTO {
+public class InternalInvoiceDTO extends WarehouseInvoiceDTO<InternalInvoiceGoodDTO> implements Comparable<InternalInvoiceDTO> {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<InternalInvoiceGoodDTO> goodList;
-
-	public List<InternalInvoiceGoodDTO> getGoodList() {
-		return goodList;
+	@Override
+	public int compareTo(InternalInvoiceDTO o) {
+		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
-	public void setGoodList(List<InternalInvoiceGoodDTO> goodList) {
-		this.goodList = goodList;
-	}
-	
 }

@@ -8,19 +8,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "internal_invoices")
-public class InternalInvoice extends WarehouseInvoice {
+public class InternalInvoice extends WarehouseInvoice<InternalInvoiceGood> {
 
 	private static final long serialVersionUID = 1L;
-
-	@OneToMany(mappedBy = "id.invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<InternalInvoiceGood> invoiceGoodList;
-
-	public Set<InternalInvoiceGood> getInvoiceGoodList() {
-		return invoiceGoodList;
-	}
-
-	public void setInvoiceGoodList(Set<InternalInvoiceGood> invoiceGoodList) {
-		this.invoiceGoodList = invoiceGoodList;
-	}
 
 }

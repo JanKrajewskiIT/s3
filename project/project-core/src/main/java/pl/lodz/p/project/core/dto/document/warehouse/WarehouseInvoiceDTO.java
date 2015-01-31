@@ -1,14 +1,14 @@
 package pl.lodz.p.project.core.dto.document.warehouse;
 
-import com.google.common.collect.ComparisonChain;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import pl.lodz.p.project.core.dto.document.base.DocumentDTO;
+import pl.lodz.p.project.core.dto.document.base.InvoiceGoodDTO;
+
+import java.util.List;
 
 /**
  * @author Jan Krajewski
  */
-public abstract class WarehouseInvoiceDTO extends DocumentDTO<Long> implements Comparable<WarehouseInvoiceDTO> {
+public abstract class WarehouseInvoiceDTO<T extends InvoiceGoodDTO> extends DocumentDTO<Long> {
 
     private static final long serialVersionUID = 1L;
 
@@ -16,6 +16,7 @@ public abstract class WarehouseInvoiceDTO extends DocumentDTO<Long> implements C
     private String receivePerson;
     private String deliverPerson;
     private String annotation;
+    private List<T> goodList;
 
     public Double getTotal() {
         return total;
@@ -49,14 +50,11 @@ public abstract class WarehouseInvoiceDTO extends DocumentDTO<Long> implements C
         this.annotation = annotation;
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    public List<T> getGoodList() {
+        return goodList;
     }
 
-    @Override
-    public int compareTo(WarehouseInvoiceDTO o) {
-        return ComparisonChain.start().compare(this.getId(), o.getId()).result();
+    public void setGoodList(List<T> goodList) {
+        this.goodList = goodList;
     }
-
 }

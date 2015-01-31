@@ -1,31 +1,22 @@
 package pl.lodz.p.project.core.dto.document.warehouse;
 
+import com.google.common.collect.ComparisonChain;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Jan Krajewski
  */
-public class ExternalInvoiceDTO extends WarehouseInvoiceDTO {
+public class ExternalInvoiceDTO extends WarehouseInvoiceDTO<ExternalInvoiceGoodDTO> implements Comparable<ExternalInvoiceDTO> {
 
     private static final long serialVersionUID = 1L;
 
-    private List<ExternalInvoiceGoodDTO> goodList;
     private ContractorDTO contractor;
     private TransportMeanDTO transportMean;
     private String orderSymbol;
     private Date deliveryDate;
-
-    public List<ExternalInvoiceGoodDTO> getGoodList() {
-        return goodList;
-    }
-
-    public void setGoodList(List<ExternalInvoiceGoodDTO> goodList) {
-        this.goodList = goodList;
-    }
 
     public ContractorDTO getContractor() {
         return contractor;
@@ -59,4 +50,8 @@ public class ExternalInvoiceDTO extends WarehouseInvoiceDTO {
         this.orderSymbol = orderSymbol;
     }
 
+    @Override
+    public int compareTo(ExternalInvoiceDTO o) {
+        return ComparisonChain.start().compare(this.getId(), o.getId()).result();
+    }
 }

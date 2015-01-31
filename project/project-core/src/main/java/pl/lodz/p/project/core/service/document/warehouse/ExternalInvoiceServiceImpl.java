@@ -8,6 +8,8 @@ import pl.lodz.p.project.core.dao.pagingandsearching.PageImpl;
 import pl.lodz.p.project.core.dao.pagingandsearching.PageRequest;
 import pl.lodz.p.project.core.domain.document.warehouse.ExternalInvoice;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
+import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;
+import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.interceptor.TrackerInterceptor;
 import pl.lodz.p.project.core.service.base.AbstractService;
 
@@ -38,14 +40,18 @@ public class ExternalInvoiceServiceImpl extends AbstractService<ExternalInvoice,
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
-    public ExternalInvoice save(ExternalInvoiceDTO invoice) {
-        return super.save(invoice);
+    public void disactive(ExternalInvoiceDTO invoice) {
+        super.disactive(invoice);
     }
 
     @RolesAllowed(ACCESS_LEVEL)
     @Override
-    public void disactive(ExternalInvoiceDTO invoice) {
-        super.disactive(invoice);
+    public ExternalInvoice save(ExternalInvoiceDTO invoice) {
+        for(ExternalInvoiceGoodDTO invoiceGood : invoice.getGoodList()) {
+            GoodDTO good = invoiceGood.getGood();
+            ((ExternalInvoiceDao) dao).updateQuantity(good.getId(), good.getQuantity());
+        }
+        return super.save(invoice);
     }
 
     @RolesAllowed(ACCESS_LEVEL)

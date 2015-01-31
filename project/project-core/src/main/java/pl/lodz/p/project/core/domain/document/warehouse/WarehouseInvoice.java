@@ -1,18 +1,18 @@
 package pl.lodz.p.project.core.domain.document.warehouse;
 
 import pl.lodz.p.project.core.domain.document.base.Document;
+import pl.lodz.p.project.core.domain.document.base.InvoiceGood;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * @author Jan Krajewski
  */
 @MappedSuperclass
-public abstract class WarehouseInvoice extends Document<Long> {
+public abstract class WarehouseInvoice<T extends InvoiceGood> extends Document<Long> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -36,6 +36,17 @@ public abstract class WarehouseInvoice extends Document<Long> {
 	@Basic(optional = false)
 	@Column(name = "annotation")
 	private String annotation;
+
+	@OneToMany(mappedBy = "id.invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<T> invoiceGoodList;
+
+	public Set<T> getInvoiceGoodList() {
+		return invoiceGoodList;
+	}
+
+	public void setInvoiceGoodList(Set<T> invoiceGoodList) {
+		this.invoiceGoodList = invoiceGoodList;
+	}
 
 	public Double getTotal() {
 		return total;

@@ -69,7 +69,7 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	private void estimateQuantityUp() {
 		for(InternalInvoiceGoodDTO invoice : getSourceObject().getGoodList()) {
 			invoice.getGood().setQuantity(
-					invoice.getGood().getQuantity() - invoice.getQuantity()
+					invoice.getGood().getQuantity() + invoice.getQuantity()
 			);
 		}
 	}
@@ -87,9 +87,11 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 		Double quantity = goodListController.getQuantity();
 		setVisible(true);
 
-		if(good.getQuantity() < quantity || quantity <= 0.0) {
-			gui.showWarnMessage("Brak wystarczającej ilości " + good.getName());
-			return;
+		if(getSourceObject().getType().equals("RW")) {
+			if (good.getQuantity() < quantity || quantity <= 0.0) {
+				gui.showWarnMessage("Brak wystarczającej ilości " + good.getName());
+				return;
+			}
 		}
 
 		getExistingInvoiceGood().setQuantity(quantity);
@@ -113,7 +115,7 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 		getSourceObject().getGoodList().add(invoiceGood);
 		return invoiceGood;
 	}
-
+/*
 	public void addGood(GoodDTO good, Double quantity) {
 		InternalInvoiceGoodDTO newInvoiceGood = new InternalInvoiceGoodDTO();
 		newInvoiceGood.setGood(good);
@@ -121,7 +123,7 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 		newInvoiceGood.setInvoice(getSourceObject());
 		getSourceObject().getGoodList().add(newInvoiceGood);
 	}
-
+*/
 	public void setTotal() {
 		double total = 0d;
 		for(InternalInvoiceGoodDTO good : getSourceObject().getGoodList()) {

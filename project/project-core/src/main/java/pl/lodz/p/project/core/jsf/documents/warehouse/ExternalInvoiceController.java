@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;
+import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.jsf.config.ConstantElements;
@@ -41,6 +42,9 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	@Autowired
 	private ConstantElements constantElements;
 
+	@Autowired
+	private GUI gui;
+
 	@Override
 	protected void createNew() {
 		setSourceObject(new ExternalInvoiceDTO());
@@ -59,21 +63,64 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 
 	@Override
 	public void save() {
-		getSourceObject().setIssuePerson(constantElements.getUser());
 		getSourceObject().setDocumentDate(constantElements.getCurrentDate());
+		getSourceObject().setIssuePerson(constantElements.getUser());
+		if(getSourceObject().getType().equals("PZ")) {
+			estimateQuantityUp();
+		} else if(getSourceObject().getType().equals("WZ")) {
+			estimateQuantityDown();
+		}
 		super.save();
 	}
 
+	private void estimateQuantityUp() {
+		for(ExternalInvoiceGoodDTO invoice : getSourceObject().getGoodList()) {
+			invoice.getGood().setQuantity(
+					invoice.getGood().getQuantity() + invoice.getQuantity()
+			);
+		}
+	}
+
+	private void estimateQuantityDown() {
+		for(ExternalInvoiceGoodDTO invoice : getSourceObject().getGoodList()) {
+			invoice.getGood().setQuantity(
+					invoice.getGood().getQuantity() - invoice.getQuantity()
+			);
+		}
+	}
+
 	public void addGood() {
+		GoodDTO good = goodListController.getSingleSelection();
+		Double quantity = goodListController.getQuantity();
 		setVisible(true);
 
+		if(getSourceObject().getType().equals("WZ")) {
+			if (good.getQuantity() < quantity || quantity <= 0.0) {
+				gui.showWarnMessage("Brak wystarczającej ilości " + good.getName());
+				return;
+			}
+		}
+
+		getExistingInvoiceGood().setQuantity(quantity);
+		setTotal();
+	}
+
+	public ExternalInvoiceGoodDTO getExistingInvoiceGood() {
+		GoodDTO good = goodListController.getSingleSelection();
+		for(ExternalInvoiceGoodDTO invoiceGood : getSourceObject().getGoodList()) {
+			if(invoiceGood.getGood().equals(good)) {
+				return invoiceGood;
+			}
+		}
+		return addNewInvoiceGood();
+	}
+
+	public ExternalInvoiceGoodDTO addNewInvoiceGood() {
 		ExternalInvoiceGoodDTO invoiceGood = new ExternalInvoiceGoodDTO();
 		invoiceGood.setGood(goodListController.getSingleSelection());
-		invoiceGood.setQuantity(goodListController.getQuantity());
 		invoiceGood.setInvoice(getSourceObject());
 		getSourceObject().getGoodList().add(invoiceGood);
-
-		setTotal();
+		return invoiceGood;
 	}
 
 	public void setTotal() {

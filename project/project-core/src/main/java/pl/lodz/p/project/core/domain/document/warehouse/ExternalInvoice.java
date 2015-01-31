@@ -14,7 +14,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "external_invoices")
-public class ExternalInvoice extends WarehouseInvoice { 
+public class ExternalInvoice extends WarehouseInvoice<ExternalInvoiceGood> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,9 +35,6 @@ public class ExternalInvoice extends WarehouseInvoice {
 	//@NotNull
 	//@Column(name = "delivery_date")
 	private transient Date deliveryDate;
-
-	@OneToMany(mappedBy = "id.invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<ExternalInvoiceGood> invoiceGoodList;
 
 	public Contractor getContractor() {
 		return contractor;
@@ -71,12 +68,5 @@ public class ExternalInvoice extends WarehouseInvoice {
 		this.deliveryDate = deliveryDate;
 	}
 
-	public Set<ExternalInvoiceGood> getInvoiceGoodList() {
-		return invoiceGoodList;
-	}
-
-	public void setInvoiceGoodList(Set<ExternalInvoiceGood> invoiceGoodList) {
-		this.invoiceGoodList = invoiceGoodList;
-	}
 }
 
