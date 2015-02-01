@@ -48,7 +48,7 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 	}
 
 	public void afterObjectSet(String type) {
-		createNew();
+		//createNew();
 		setVisible(true);
 		getSourceObject().setType(type);
 		getSourceObject().setSymbol(documentNumeratorService.nextNumber(type));

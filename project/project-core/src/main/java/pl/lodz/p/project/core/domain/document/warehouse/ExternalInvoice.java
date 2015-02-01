@@ -32,9 +32,9 @@ public class ExternalInvoice extends WarehouseInvoice<ExternalInvoiceGood> {
     @Column(name = "order_symbol")
     private String orderSymbol;
 
-	//@NotNull
-	//@Column(name = "delivery_date")
-	private transient Date deliveryDate;
+	@NotNull
+	@Column(name = "delivery_date")
+	private Date deliveryDate;
 
 	public Contractor getContractor() {
 		return contractor;

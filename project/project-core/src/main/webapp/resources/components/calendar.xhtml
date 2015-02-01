@@ -15,12 +15,9 @@
 			<div class="input-group-addon">
 				<i class="fa fa-calendar" />
 			</div>
-			<p:inputMask value="#{cc.attrs.value}"
-						 styleClass="form-control"
-						 mask="99/99/9999"
-						 placeholder="dd/mm/rrrr">
-				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET"/>
-			</p:inputMask>
+			<p:inputText value="#{cc.attrs.value}" styleClass="form-control" >
+				<f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET" />
+			</p:inputText>
 		</div>
 	</composite:implementation>
 </ui:composition>

@@ -13,6 +13,7 @@ import pl.lodz.p.project.core.service.account.UserService;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Date;
  */
 @Named
 @Scope("view")
-public class ConstantElements {
+public class ConstantElements implements Serializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConstantElements.class);
 

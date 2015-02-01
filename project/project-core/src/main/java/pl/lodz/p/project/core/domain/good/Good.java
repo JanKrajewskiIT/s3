@@ -67,17 +67,6 @@ public class Good extends NamedEntity<Long> {
 	@Column(name = "quantity")
 	private Double quantity;
 
-	@OneToMany(mappedBy = "id.good", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<InternalInvoiceGood> invoiceGoodList;
-
-	public Set<InternalInvoiceGood> getInvoiceGoodList() {
-		return invoiceGoodList;
-	}
-
-	public void setInvoiceGoodList(Set<InternalInvoiceGood> invoiceGoodList) {
-		this.invoiceGoodList = invoiceGoodList;
-	}
-
 	public String getSymbol() {
 		return symbol;
 	}

@@ -55,7 +55,7 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	}
 
 	public void afterObjectSet(String type) {
-		createNew();
+		//createNew();
 		setVisible(true);
 		getSourceObject().setType(type);
 		getSourceObject().setSymbol(documentNumeratorService.nextNumber(type));

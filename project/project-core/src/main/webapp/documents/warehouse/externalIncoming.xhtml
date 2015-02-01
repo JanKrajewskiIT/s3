@@ -38,11 +38,32 @@
 										<h:form>
 											<p:growl id="growl" showDetail="true" sticky="true"/>
 											<p:panel visible="#{externalInvoiceController.visible}">
-												<cc:warehouseInvoiceTop controller="#{externalInvoiceController}" />
+												<div class="row invoice-info">
+													<div class="col-lg-3 invoice-col">
+														<cc:contractor name="Nabywca"
+																	   value="#{externalInvoiceController.sourceObject.contractor}"
+																	   action="#{externalInvoiceController.selectContractor}"/>
+													</div>
+													<div class="col-lg-3 invoice-col">
+														<label>Numer zamówienia</label>
+														<p:inputText styleClass="form-control"
+																	 value="#{externalInvoiceController.sourceObject.orderSymbol}"/>
+
+														<label>Środek transportu</label>
+														<h:selectOneMenu styleClass="form-control" value="#{externalInvoiceController.sourceObject.transportMean.id}">
+															<f:selectItem itemLabel="---" itemValue="#{null}"/>
+															<f:selectItems itemLabel="#{transportMean.name}" var="transportMean" itemValue="#{transportMean.id}"
+																		   value="#{transportMeanListController.items}"/>
+														</h:selectOneMenu>
+
+														<label>Data dostarczenia</label>
+														<cc:calendar value="#{externalInvoiceController.sourceObject.deliveryDate}" />
+													</div>
+												</div>
 												<p:spacer style="height : 10px"/>
 												<cc:invoiceGoodList controller="#{externalInvoiceController}" widthValue="107%"/>
 												<p:spacer style="height : 10px"/>
-												<cc:warehouseInvoiceBottom controller="#{externalInvoiceController}" />
+												<cc:invoiceBottom controller="#{externalInvoiceController}" />
 												<p:spacer style="height : 10px"/>
 												<cc:buttonBox controller="#{externalInvoiceController}"/>
 											</p:panel>

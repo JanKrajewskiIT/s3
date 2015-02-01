@@ -7,13 +7,14 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import java.io.Serializable;
 
 /**
  * @author Jan Krajewski
  */
-@Named
+@Named("gui")
 @Scope("view")
-public final class GUI {
+public class GUI implements Serializable {
 
     public static String redirect(String xhtml) {
         return xhtml + ".xhtml?faces-redirect=true";
