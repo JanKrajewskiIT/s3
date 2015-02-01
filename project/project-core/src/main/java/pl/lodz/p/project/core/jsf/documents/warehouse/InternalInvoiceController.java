@@ -115,15 +115,7 @@ public class InternalInvoiceController extends EditObjectController<InternalInvo
 		getSourceObject().getGoodList().add(invoiceGood);
 		return invoiceGood;
 	}
-/*
-	public void addGood(GoodDTO good, Double quantity) {
-		InternalInvoiceGoodDTO newInvoiceGood = new InternalInvoiceGoodDTO();
-		newInvoiceGood.setGood(good);
-		newInvoiceGood.setQuantity(quantity);
-		newInvoiceGood.setInvoice(getSourceObject());
-		getSourceObject().getGoodList().add(newInvoiceGood);
-	}
-*/
+
 	public void setTotal() {
 		double total = 0d;
 		for(InternalInvoiceGoodDTO good : getSourceObject().getGoodList()) {

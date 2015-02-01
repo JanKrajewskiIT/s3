@@ -19,4 +19,10 @@
 			ALTER TABLE sale_documents ADD COLUMN receive_person character varying(255);
 		</sql>
 	</changeSet>
+
+	<changeSet id="alter_warehouse_add_delivery" author="jan.krajewski">
+		<sql>
+			alter table external_invoices add column delivery_date DATE NOT NULL DEFAULT current_date;
+		</sql>
+	</changeSet>
 </databaseChangeLog>

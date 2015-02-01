@@ -55,7 +55,6 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	}
 
 	public void afterObjectSet(String type) {
-		//createNew();
 		setVisible(true);
 		getSourceObject().setType(type);
 		getSourceObject().setSymbol(documentNumeratorService.nextNumber(type));
@@ -134,11 +133,6 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 	public void addContractor() {
 		setVisible(true);
 		getSourceObject().setContractor(contractorListController.getSingleSelection());
-	}
-
-	public String forwardContractor() {
-		String id = getSourceObject().getContractor().getId().toString();
-		return GUI.redirect("contractorTemplate", id);
 	}
 
 	public void setVisible(boolean state) {
