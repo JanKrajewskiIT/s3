@@ -12,6 +12,7 @@ import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -30,7 +31,7 @@ public class GUI implements Serializable {
     public static void redirect(String xhtml, String id) {
         try {
             String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-            String redirectURI = context + xhtml + ".xhtml?faces-redirect=true";
+            String redirectURI = context + (xhtml.startsWith("/") ? EMPTY : "/") + xhtml + ".xhtml?faces-redirect=true";
             if (isNotBlank(id)) {
                 redirectURI += "&id=" + id;
             }

@@ -36,7 +36,7 @@ public class InternalInvoiceListController extends EditPageableListController<In
 
 	@Override
 	public void edit(String id) {
-		GUI.redirect("internalIncoming", id);
+		GUI.redirect("/documents/warehouse/internalIncoming", id);
 	}
 
 }
