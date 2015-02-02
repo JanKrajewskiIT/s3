@@ -35,8 +35,8 @@ public class ContractorListController extends EditPageableListController<Contrac
     }
 
     @Override
-    public String edit(String id) {
-        return GUI.redirect("contractor", id);
+    public void edit(String id) {
+        GUI.redirect("contractor", id);
     }
 
 }

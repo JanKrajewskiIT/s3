@@ -2,9 +2,9 @@ package pl.lodz.p.project.core.dao.pagingandsearching;
 
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.util.Assert;
 import pl.lodz.p.project.core.dao.base.AbstractCrudDao;
 import pl.lodz.p.project.core.dao.pagingandsearching.Sort.Order;
-import pl.lodz.p.project.core.util.Assert;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
@@ -42,7 +42,6 @@ public abstract class AbstractPageableDao<T extends Persistable<ID>, ID extends 
 
     @Override
     public List<T> findAll(Specification<T> spec) {
-
         return getQuery(spec, (Sort) null).getResultList();
     }
 
@@ -111,7 +110,7 @@ public abstract class AbstractPageableDao<T extends Persistable<ID>, ID extends 
      * @return
      */
     private TypedQuery<T> getQuery(Specification<T> spec, Sort sort) {
-
+        Assert.notNull(spec);
         CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(getDomainClass());
 
@@ -152,7 +151,7 @@ public abstract class AbstractPageableDao<T extends Persistable<ID>, ID extends 
      * @return
      */
     private <S> Root<T> applySpecificationToCriteria(Specification<T> spec, CriteriaQuery<S> query) {
-        Assert.notNull(query);
+
         Root<T> root = query.from(getDomainClass());
         if (spec == null) {
             return root;

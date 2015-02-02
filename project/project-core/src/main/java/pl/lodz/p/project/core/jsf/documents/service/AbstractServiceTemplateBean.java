@@ -7,9 +7,16 @@ import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.document.service.BaseServiceDocumentDTO;
 import pl.lodz.p.project.core.jsf.base.Action;
+import pl.lodz.p.project.core.jsf.base.ClearAction;
+import pl.lodz.p.project.core.jsf.base.ClearableForm;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.jsf.base.Mode;
+import pl.lodz.p.project.core.jsf.base.SaveAction;
+import pl.lodz.p.project.core.jsf.base.SaveableForm;
 import pl.lodz.p.project.core.jsf.config.ConstantElements;
+import pl.lodz.p.project.core.jsf.documents.service.action.DocumentStateChangeable;
+import pl.lodz.p.project.core.jsf.documents.service.action.MarkDocumentAsInDoneAction;
+import pl.lodz.p.project.core.jsf.documents.service.action.MarkDocumentAsInProgressAction;
 import pl.lodz.p.project.core.service.document.service.BaseService;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +27,7 @@ import java.util.List;
 /**
  * Created by milczu on 28.01.15.
  */
-public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentDTO, E extends BaseDocumentService, S extends BaseService<E, T>> {
+public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentDTO, E extends BaseDocumentService, S extends BaseService<E, T>> implements ClearableForm, SaveableForm, DocumentStateChangeable {
 
     private static final String SERVICE_DOCUMENTS_TABLE_VIEW_URI = "/documents/service/serviceDocumentsTable";
 
@@ -30,34 +37,6 @@ public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentD
     private Mode mode;
     private T document;
     private String issuePerson;
-
-    private final Action clearAction = new Action("Wyczyść", "@form") {
-        @Override
-        public void call() {
-            clear();
-        }
-    };
-
-    private final Action saveAction = new Action("Zapisz") {
-        @Override
-        public void call() {
-            save();
-        }
-    };
-
-    private final Action markDocumentAsInProgressAction = new Action("Rozpocznij") {
-        @Override
-        public void call() {
-            markDocumentAsInProgress();
-        }
-    };
-
-    private final Action markDocumentAsDoneAction = new Action("Zakończ") {
-        @Override
-        public void call() {
-            markDocumentAsDone();
-        }
-    };
 
     @Autowired
     private ConstantElements constantElements;
@@ -75,6 +54,7 @@ public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentD
         issuePerson = document.getIssuePerson() == null ? null : document.getIssuePerson().getFirstName() + " " + document.getIssuePerson().getSecondName();
     }
 
+    @Override
     public void clear() {
         document = createNew();
     }
@@ -89,19 +69,22 @@ public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentD
         return issuePerson;
     }
 
-    public String save() {
+    @Override
+    public void save() {
         service.save(document);
-        return GUI.redirect(SERVICE_DOCUMENTS_TABLE_VIEW_URI);
+        GUI.redirect(SERVICE_DOCUMENTS_TABLE_VIEW_URI);
     }
 
-    public String markDocumentAsInProgress() {
+    @Override
+    public void markDocumentAsInProgress() {
         service.markDocumentAsInProgress(document.getId());
-        return GUI.redirect(SERVICE_DOCUMENTS_TABLE_VIEW_URI);
+        GUI.redirect(SERVICE_DOCUMENTS_TABLE_VIEW_URI);
     }
 
-    public String markDocumentAsDone() {
+    @Override
+    public void markDocumentAsDone() {
         service.markDocumentAsDone(document.getId());
-        return GUI.redirect(SERVICE_DOCUMENTS_TABLE_VIEW_URI);
+        GUI.redirect(SERVICE_DOCUMENTS_TABLE_VIEW_URI);
     }
 
     public T getDocument() {
@@ -114,13 +97,12 @@ public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentD
 
     public List<Action> getActions() {
         List<Action> actions = new ArrayList<>();
-        actions.add(clearAction);
-        actions.add(saveAction);
+        actions.add(new SaveAction(this));
+        actions.add(new ClearAction(this));
         if (ServiceDocumentState.NEW == document.getState() && mode == Mode.EDIT) {
-            actions.add(markDocumentAsInProgressAction);
-        }
-        if (ServiceDocumentState.IN_PROGRESS == document.getState()) {
-            actions.add(markDocumentAsDoneAction);
+            actions.add(new MarkDocumentAsInProgressAction(this));
+        } else if (ServiceDocumentState.IN_PROGRESS == document.getState()) {
+            actions.add(new MarkDocumentAsInDoneAction(this));
         }
         return actions;
     }
