@@ -3,7 +3,11 @@ package pl.lodz.p.project.core.jsf.documents.saleDocuments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
+import pl.lodz.p.project.core.jsf.base.EditPageableListController;
+import pl.lodz.p.project.core.jsf.base.GUI;
+import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.document.sale.SaleDocumentService;
+import pl.lodz.p.project.core.service.document.sale.SaleDocumentServiceImpl;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -16,47 +20,28 @@ import java.util.List;
  */
 @Named(value = "invoicesTableBean")
 @Scope("view")
-public class InvoiceTableBean implements Serializable {
+public class InvoiceTableBean extends EditPageableListController<SaleDocumentDTO> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Autowired
-    private SaleDocumentService saleDocumentService;
-
-    private List<SaleDocumentDTO> invoices;
-
-    /**
-     * Creates a new instance of GoodsTable
-     */
-    public InvoiceTableBean() {
-    }
+    @Autowired
+    private SaleDocumentServiceImpl service;
 
     @PostConstruct
-    public void init() {
-        setInvoices(saleDocumentService.getAll());
+    private void init() {
+        initStartPage(5, "symbol");
+        search();
     }
 
-    public void removeInvoice(SaleDocumentDTO invoice) {
-        getInvoices().remove(invoice);
-        saleDocumentService.delete(invoice);
+    @Override
+    public ServiceRepository getService() {
+        return service;
     }
 
-    /**
-     * @return the invoices
-     */
-    public List<SaleDocumentDTO> getInvoices() {
-        return invoices;
+    @Override
+    public String edit(String id) {
+        return GUI.redirect("vatInvoice", id);
     }
 
-    /**
-     * @param invoices the invoices to set
-     */
-    public void setInvoices(List<SaleDocumentDTO> invoices) {
-        this.invoices = invoices;
-    }
-
-    
 }
+

@@ -84,7 +84,14 @@
                                                         <f:convertNumber type="number" groupingUsed="true"
                                                                          minFractionDigits="2" pattern="#0.00"/>
                                                     </p:inputText>
-                                                    <label for="warehouseResultCheckbox">Zapłacono:</label>
+
+                                                    <label for="transportMeanMenu">Środek transportu</label>
+                                                    <h:selectOneMenu id="transportMeanMenu" styleClass="form-control" value="#{vatInvoiceController.sourceObject.transportMean.id}">
+                                                        <f:selectItem itemLabel="---" itemValue="#{null}"/>
+                                                        <f:selectItems itemLabel="#{transportMean.name}" var="transportMean" itemValue="#{transportMean.id}"
+                                                                       value="#{transportMeanListController.items}"/>
+                                                    </h:selectOneMenu>
+                                                    <label for="warehouseResultCheckbox">Skutek magazynowy:</label>
                                                     <h:selectBooleanCheckbox id="warehouseResultCheckbox"
                                                                              value="#{vatInvoiceController.sourceObject.warehouseResult}"/>
                                                 </div>

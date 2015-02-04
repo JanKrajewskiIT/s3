@@ -21,7 +21,8 @@ public abstract class EditListController<T extends Serializable> extends UIObjec
         items = getService().getAll();
     }
 
-    public void edit(String id) {
+    public String edit(String id) {
+        return null;
     }
 
     public void onSelect(T selected) {

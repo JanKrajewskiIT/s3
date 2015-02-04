@@ -25,6 +25,9 @@ public class BaseDTO<T extends Serializable> implements Serializable {
     public void setId(T id) {
         this.id = id;
     }
+    public boolean isNew() {
+        return id == null;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -37,7 +40,6 @@ public class BaseDTO<T extends Serializable> implements Serializable {
 
         return true;
     }
-
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;

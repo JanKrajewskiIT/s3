@@ -15,7 +15,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Named
-@Scope("view")
+@Scope("request")
 public class ServiceDocumentsTableBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,12 +37,12 @@ public class ServiceDocumentsTableBean implements Serializable {
         setDocuments(baseServiceDocumentService.findAll());
     }
 
-    public void edit(Long id, ServiceDocumentType type) {
+    public String edit(Long id, ServiceDocumentType type) {
         switch (type) {
             case REPAIR_ORDER:
-                GUI.redirect("/documents/service/repairOrder", id.toString());
+                return GUI.redirect("/documents/service/repairOrder", id.toString());
             case FIX_SUMMARY:
-                GUI.redirect("/documents/service/serviceFixSummary", id.toString());
+                return GUI.redirect("/documents/service/serviceFixSummary", id.toString());
             default:
                 throw new IllegalArgumentException("Not implemented yet!");
         }
