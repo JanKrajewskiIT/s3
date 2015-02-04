@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.dto.document.items.DocumentPositionDTO;
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
+import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
 import pl.lodz.p.project.core.jsf.base.DateUtil;
 import pl.lodz.p.project.core.jsf.base.EditObjectController;
@@ -71,9 +72,9 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 		getSourceObject().setReceivePerson(contractorListController.getSingleSelection().getName());
 	}
 
-	public void forwardContractor() {
+	public String forwardContractor() {
 		String id = getSourceObject().getContractor().getId().toString();
-		GUI.redirect("contractorTemplate", id);
+		return GUI.redirect("contractorTemplate", id);
 	}
 
 
@@ -82,6 +83,8 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 		DocumentPositionDTO documentPosition = new DocumentPositionDTO();
 		documentPosition.setGood(goodListController.getSingleSelection());
 		documentPosition.setQuantity(goodListController.getQuantity());
+		documentPosition.setTax(goodListController.getSingleSelection().getTax());
+		documentPosition.setPriceNet(goodListController.getSingleSelection().getPrices().getPriceANet());
 		getSourceObject().getGoodList().add(documentPosition);
 		setTotal();
 	}
@@ -104,80 +107,19 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 		contractorListController.setVisible(false);
 	}
 
-	//@PostConstruct
 	@Override
 	public void createNew() {
 		setSourceObject(new SaleDocumentDTO());
 		getSourceObject().setGoodList(new ArrayList<DocumentPositionDTO>());
+		getSourceObject().setTransportMean(new TransportMeanDTO());
 		getSourceObject().setSaleDate(DateUtil.getCurrentDate());
 		getSourceObject().setPaymentDate(DateUtil.getCurrentDate());
 		getSourceObject().setPaymentMethod(new PaymentMethodDTO());
 		getSourceObject().setDocumentPlace(documentSettingsService.findDefaultDocumentPlace());
 		getSourceObject().setIssuePerson(constantElements.getUser());
-		//getSourceObject().setDeliverPerson(getSourceObject().getIssuePerson().getFirstName() + " " + getSourceObject().getIssuePerson().getSecondName());
-		/*totalNet = 0d;
-		totalGross = 0d;
-		documentSymbol = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-		if (StringUtils.isBlank(documentSymbol)) {
-			documentSymbol = documentNumeratorService.nextNumber(DOCUMENT_TYPE);
-			saleDocumentDTO = new SaleDocumentDTO();
-
-			saleDocumentDTO.setSymbol(documentSymbol);
-			breadcrumb = "Dodaj";
-		} else {
-			// saleDocumentDTO = saleDocumentService.getOneById(invoiceId);
-			goodsPositions = documentPositionService.getDocumentPositions(documentSymbol);
-			breadcrumb = "Edytuj";
-			countTotals();
-		}
-		loadPaymentMethods();*/
-	}
-/*
-	public String editInvoice(String id, String whId) {
-		return "vatInvoice.xhtml?faces-redirect=true&id=" + id + "&whId=" + whId;
-	}*/
-
-	public void saveInvoice() {
-		/*saleDocumentDTO.setPaymentMethod((paymentMethodsService.getOneById(saleDocumentDTO.getPaymentMethod().getId())));
-//		if (StringUtils.isNotBlank(documentSymbol)) {
-			documentsPositionsEndpointLocal.edit(goodsPositions);
-//			saleDocumentService.save(saleDocumentDTO); // TODO : Proably here
-														should be separte
-														method edit
-//		} else {
-//			try {
-				saleDocumentDTO.setGoodList(goodsPositions);
-//				saleDocumentService.save(saleDocumentDTO);
-//				FacesContext.getCurrentInstance().getExternalContext().redirect("vatInvoiceList.xhtml");
-				} catch (DocumentSymbolAlreadyInUseException e) {
-				System.out.println("DocumentSymbolAlreadyInUseException!!!");
-				documentSymbol =
-				documentNumeratorEndpoint.nextNumber(DOCUMENT_TYPE);
-				updateDocumentSymbol(documentSymbol);
-				FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage("Symbol dokumentu jest już zajęty",
-				"Symbol został ustawiony na najbliższy wolny"));
-				} catch (WarehouseQuantityLimitExceededException e) {
-				System.out.println("WarehouseQuantityLimitExceededException - max qty: "
-				+ e.getMaxAvailableQuantity());
-				FacesContext.getCurrentInstance().addMessage(
-				null,
-				new FacesMessage("Brak wpisanej ilości w magazynie",
-				"Dostępna ilosć " + e.getGood().getName() + " w magazynie: "
-				+ e.getMaxAvailableQuantity()));
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}*/
-		//}
+		getSourceObject().setDeliverPerson(getSourceObject().getIssuePerson().getFirstName() + " " + getSourceObject().getIssuePerson().getSecondName());
 
 	}
-
-	/*private void updateDocumentSymbol(String symbol) {
-		saleDocumentDTO.setSymbol(symbol);
-		for (DocumentPositionDTO documentPositionDTO : getSourceObject().getGoodList()) {
-			documentPositionDTO.setSymbol(symbol);
-		}
-	}*/
 
 	public void setTotal() {
 		totalNet = 0d;
@@ -197,30 +139,6 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 
 	}
 
-	// public void quantityChanged(DocumentPositionDTO documentPosition) {
-	// GoodDTO good = documentPosition.getGood();
-	// double newQuantity = documentPosition.getQuantity();
-	// try {
-	// warehousesGoodsEndpoint.isAvailable(good.getId(), warehouseId,
-	// newQuantity);
-	// } catch (WarehouseQuantityLimitExceededException e) {
-	// System.out.println("WarehouseQuantityLimitExceededException - max qty: "
-	// + e.getMaxAvailableQuantity());
-	// documentPosition.setQuantity(e.getMaxAvailableQuantity());
-	// FacesContext.getCurrentInstance().addMessage(
-	// null,
-	// new FacesMessage("Brak wpisanej ilości w magazynie", "Zmniejszono ilosć "
-	// + good.getName() + " do dostępnego stanu: "
-	// + e.getMaxAvailableQuantity()));
-	// } finally {
-	// countTotals();
-	// }
-	//
-	// }
-
-	/*
-	 * @return the totalNet
-	 */
 	public Double getTotalNet() {
 		return totalNet;
 	}

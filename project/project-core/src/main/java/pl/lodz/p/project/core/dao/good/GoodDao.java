@@ -10,6 +10,6 @@ import pl.lodz.p.project.core.domain.good.Good;
  * @author Milczu, Janiu
  */
 public interface GoodDao extends CrudDao<Good, Long> {
-    
+
     Page<Good> search(String searchQuery, PageRequest pageRequest);
 }

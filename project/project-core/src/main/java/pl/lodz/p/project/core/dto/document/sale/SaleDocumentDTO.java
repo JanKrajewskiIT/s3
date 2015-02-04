@@ -7,6 +7,7 @@ import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.document.base.DocumentDTO;
 import pl.lodz.p.project.core.dto.document.items.DocumentPositionDTO;
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
+import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -45,6 +46,8 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
 
     @NotNull(message = "Pole Nabywca nie może być puste!")
     private ContractorDTO contractor;
+
+	private TransportMeanDTO transportMean;
 
 	public Double getPaidTotal() {
 		return paidTotal;
@@ -174,5 +177,12 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
 
 	public void setAnnotation(String annotation) {
 		this.annotation = annotation;
+	}
+	public TransportMeanDTO getTransportMean() {
+		return transportMean;
+	}
+
+	public void setTransportMean(TransportMeanDTO transportMean) {
+		this.transportMean = transportMean;
 	}
 }

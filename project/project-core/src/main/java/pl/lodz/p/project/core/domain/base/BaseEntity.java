@@ -82,4 +82,5 @@ public abstract class BaseEntity<ID extends Serializable> implements Versioned, 
 	public int hashCode() {
 		return new HashCodeBuilder().append(id).build();
 	}
+
 }

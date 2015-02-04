@@ -1,54 +1,56 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:composite="http://java.sun.com/jsf/composite"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" >
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
-	<composite:interface>
-		<composite:attribute name="controller" />
-		<composite:attribute name="widthValue"/>
-	</composite:interface>
+    <composite:interface>
+        <composite:attribute name="controller"/>
+        <composite:attribute name="widthValue"/>
+        <composite:attribute name="widthValue"/>
+    </composite:interface>
 
-	<composite:implementation>
-		<div class="row" style="width: #{cc.attrs.widthValue};">
-			<div class="col-xs-11 table-responsive">
-				<p:dataTable tableStyleClass="table table-bordered table-striped"
-							 var="good" value="#{cc.attrs.controller.sourceObject.goodList}"
-							 id="invoiceGoodTable">
-					<p:column headerText="Nazwa asortymentu" style="width: 40%;">
-						<p:outputLabel value="#{good.good.name}"/>
-					</p:column>
-					<p:column headerText="PKWiU" style="width: 12%;">
-						<p:outputLabel value="#{good.good.pkwiu}" />
-					</p:column>
-					<p:column headerText="J.m." style="width: 12%;">
-						<p:outputLabel value="#{good.good.unit.name}" />
-					</p:column>
-					<p:column headerText="Ilość" style="width: 12%;">
-						<p:outputLabel value="#{good.quantity}" />
-					</p:column>
-					<p:column headerText="Cena Brutto" style="width: 12%;">
-						<p:outputLabel value="#{good.good.prices.priceMagGross}"/>
-					</p:column>
-					<p:column headerText="Watość" style="width: 12%;">
-						<p:outputLabel value="#{good.good.prices.priceMagGross * good.quantity}"/>
-					</p:column>
-				</p:dataTable>
-			</div>
-			<div class="col-xs-1">
-				<div class="row" style="margin-bottom: 5px;">
-					<p:commandLink styleClass="btn btn-danger" update="invoiceGoodTable">
-						<i class="fa fa-minus" />
-					</p:commandLink>
-				</div>
-				<div class="row">
-					<p:commandLink styleClass="btn btn-success" type="button"
-								   action="#{cc.attrs.controller.selectGood}" update="@form">
-						<i class="fa fa-plus" />
-					</p:commandLink>
-				</div>
-			</div>
-		</div>
-	</composite:implementation>
+    <composite:implementation>
+        <div class="row" style="width: #{cc.attrs.widthValue};">
+            <div class="col-xs-11 table-responsive">
+                <p:dataTable tableStyleClass="table table-bordered table-striped"
+                             var="good" value="#{cc.attrs.controller.sourceObject.goodList}"
+                             id="invoiceGoodTable">
+                    <p:column headerText="Nazwa asortymentu" style="width: 40%;">
+                        <p:outputLabel value="#{good.good.name}"/>
+                    </p:column>
+                    <p:column headerText="PKWiU" style="width: 12%;">
+                        <p:outputLabel value="#{good.good.pkwiu}"/>
+                    </p:column>
+                    <p:column headerText="J.m." style="width: 12%;">
+                        <p:outputLabel value="#{good.good.unit.name}"/>
+                    </p:column>
+                    <p:column headerText="Ilość" style="width: 12%;">
+                        <p:outputLabel value="#{good.quantity}"/>
+                    </p:column>
+                    <p:column headerText="Cena Brutto" style="width: 12%;">
+                        <p:outputLabel value="#{good.good.prices.priceMagGross}"/>
+                    </p:column>
+                    <p:column headerText="Watość" style="width: 12%;">
+                        <p:outputLabel value="#{good.good.prices.priceMagGross * good.quantity}"/>
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <div class="col-xs-1">
+                <div class="row" style="margin-bottom: 5px;">
+                    <p:commandLink styleClass="btn btn-danger" update="invoiceGoodTable">
+                        <i class="fa fa-minus"/>
+                    </p:commandLink>
+                </div>
+                <div class="row">
+                    <p:commandLink styleClass="btn btn-success" type="button"
+                                   action="#{cc.attrs.controller.selectGood}" update="@form">
+                        <i class="fa fa-plus"/>
+                    </p:commandLink>
+                </div>
+            </div>
+        </div>
+    </composite:implementation>
 </ui:composition>

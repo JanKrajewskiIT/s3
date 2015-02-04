@@ -5,13 +5,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import pl.lodz.p.project.core.domain.base.NamedEntity;
-import pl.lodz.p.project.core.domain.document.warehouse.InternalInvoiceGood;
 import pl.lodz.p.project.core.enums.GoodType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
 /**
  *

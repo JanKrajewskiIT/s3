@@ -4,6 +4,7 @@ import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import pl.lodz.p.project.core.dto.base.BaseDTO;
+import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
 import pl.lodz.p.project.core.dto.good.GoodDTO;
 import pl.lodz.p.project.core.dto.good.TaxDTO;
 
@@ -15,22 +16,14 @@ public class DocumentPositionDTO extends BaseDTO<Long> implements Comparable<Doc
 
 	private static final long serialVersionUID = 1L;
 
-	private String symbol;
     private Double quantity;
     private TaxDTO tax;
     private GoodDTO good;
-    private Double priceNet = 0d;
+	private SaleDocumentDTO saleDocumentDTO;
+	private Double priceNet = 0d;
     private Double priceGross = 0d;
     private Double valueNet = 0d;
     private Double valueGross = 0d;
-
-	public String getSymbol() {
-		return symbol;
-	}
-
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
-	}
 
 	public Double getQuantity() {
 		return quantity;
@@ -102,4 +95,11 @@ public class DocumentPositionDTO extends BaseDTO<Long> implements Comparable<Doc
 		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
+	public SaleDocumentDTO getSaleDocumentDTO() {
+		return saleDocumentDTO;
+	}
+
+	public void setSaleDocumentDTO(SaleDocumentDTO saleDocumentDTO) {
+		this.saleDocumentDTO = saleDocumentDTO;
+	}
 }

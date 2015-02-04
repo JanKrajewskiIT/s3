@@ -1,19 +1,14 @@
 package pl.lodz.p.project.core.jsf.base;
 
 import org.primefaces.context.RequestContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.jsf.FacesContextUtils;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import java.io.IOException;
 import java.io.Serializable;
-
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * @author Jan Krajewski
@@ -22,23 +17,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @Scope("view")
 public class GUI implements Serializable {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GUI.class);
-
-    public static void redirect(String xhtml) {
-        redirect(xhtml, null);
+    public static String redirect(String xhtml) {
+        return xhtml + ".xhtml?faces-redirect=true";
     }
 
-    public static void redirect(String xhtml, String id) {
-        try {
-            String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-            String redirectURI = context + (xhtml.startsWith("/") ? EMPTY : "/") + xhtml + ".xhtml?faces-redirect=true";
-            if (isNotBlank(id)) {
-                redirectURI += "&id=" + id;
-            }
-            FacesContext.getCurrentInstance().getExternalContext().redirect(redirectURI);
-        } catch (IOException e) {
-            LOGGER.error("IOException", e);
-        }
+    public static String redirect(String xhtml, String id) {
+        return xhtml + ".xhtml?faces-redirect=true&id=" + id;
     }
 
     public static String catchId(String idColumn) {

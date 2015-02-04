@@ -35,8 +35,8 @@ public class ExternalInvoiceListController extends EditPageableListController<Ex
 	}
 
 	@Override
-	public void edit(String id) {
-		GUI.redirect("/documents/warehouse/externalIncoming", id);
+	public String edit(String id) {
+		return GUI.redirect("externalIncoming", id);
 	}
 
 }

@@ -12,17 +12,47 @@
 			alter table contractors alter column account_number type character varying(50);
 		</sql>
 	</changeSet>
+
+	<changeSet id="alter_warehouse_add_delivery" author="jan.krajewski">
+		<sql>
+			alter table external_invoices add column delivery_date DATE NOT NULL DEFAULT current_date;
+		</sql>
+	</changeSet>
+
 	<changeSet id="alter_sale_documents" author="lukasz.mucha">
 		<sql>
 			ALTER TABLE sale_documents ADD COLUMN deliver_person character varying(255);
 			ALTER TABLE sale_documents DROP COLUMN receive_person;
 			ALTER TABLE sale_documents ADD COLUMN receive_person character varying(255);
-		</sql>
-	</changeSet>
+			DROP TABLE documents_positions;
 
-	<changeSet id="alter_warehouse_add_delivery" author="jan.krajewski">
-		<sql>
-			alter table external_invoices add column delivery_date DATE NOT NULL DEFAULT current_date;
+			CREATE TABLE documents_positions
+			(
+			good_id bigint NOT NULL DEFAULT (1)::bigint,
+			invoice_id bigint NOT NULL DEFAULT (1)::bigint,
+			quantity double precision NOT NULL,
+			price_net numeric(10,2) NOT NULL,
+			tax_id bigint NOT NULL DEFAULT (1)::bigint,
+			is_active boolean NOT NULL DEFAULT true,
+			version bigint NOT NULL DEFAULT (1)::bigint,
+			CONSTRAINT documents_positions_pk PRIMARY KEY (good_id , invoice_id ),
+			CONSTRAINT documents_positions_fk1 FOREIGN KEY (good_id)
+			REFERENCES goods (id) MATCH FULL
+			ON UPDATE NO ACTION ON DELETE NO ACTION,
+			CONSTRAINT documents_positions_fk2 FOREIGN KEY (invoice_id)
+			REFERENCES sale_documents (id) MATCH FULL
+			ON UPDATE NO ACTION ON DELETE NO ACTION,
+			CONSTRAINT documents_positions_fk3 FOREIGN KEY (tax_id)
+			REFERENCES taxes (id) MATCH FULL
+			ON UPDATE NO ACTION ON DELETE NO ACTION
+			)
+			ALTER TABLE sale_documents ADD COLUMN transport_id bigint;
+			ALTER TABLE sale_documents ALTER COLUMN transport_id SET DEFAULT (1)::bigint;
+
+			ALTER TABLE sale_documents
+			ADD CONSTRAINT sale_documents_fk3 FOREIGN KEY (transport_id)
+			REFERENCES transport_means (id) MATCH FULL
+			ON UPDATE NO ACTION ON DELETE NO ACTION;
 		</sql>
 	</changeSet>
 </databaseChangeLog>

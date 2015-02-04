@@ -43,7 +43,7 @@ public class GoodListController extends EditPageableListController<GoodDTO> {
     }
 
     @Override
-    public void edit(String id) {
-        GUI.redirect("/goods/good", id);
+    public String edit(String id) {
+        return GUI.redirect("good", id);
     }
 }

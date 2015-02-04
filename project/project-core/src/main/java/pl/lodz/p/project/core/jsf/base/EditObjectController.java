@@ -23,7 +23,7 @@ public abstract class EditObjectController<T extends Serializable> extends UIObj
 
 		@Override
 		public void call() {
-			save();
+			 save();
 		}
 
 	};
@@ -31,7 +31,9 @@ public abstract class EditObjectController<T extends Serializable> extends UIObj
 	private Action CLEAN_ACTION = new Action("Wyczyść", "@form") {
 
 		@Override
-		public void call() { createNew(); }
+		public void call() {
+			createNew();
+		}
 
 	};
 
