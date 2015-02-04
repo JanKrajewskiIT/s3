@@ -12,7 +12,7 @@ import javax.validation.constraints.Null;
 @Table(name = "service_repair_orders")
 public class ServiceRepairOrder extends BaseDocumentService {
 
-    private static final String DOCUMENT_TYPE = "SRO";
+    public static final String DOCUMENT_TYPE = "SRO";
 
     public ServiceRepairOrder() {
         super(ServiceDocumentType.REPAIR_ORDER);

@@ -1,12 +1,13 @@
 package pl.lodz.p.project.core.dto.document.service;
 
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
+import pl.lodz.p.project.core.domain.document.service.ServiceFixSummary;
 
 public class ServiceFixSummaryDTO extends BaseServiceDocumentDTO {
 
 	public ServiceFixSummaryDTO() {
 		super(ServiceDocumentType.FIX_SUMMARY);
-		setType("SFS");
+		setType(ServiceFixSummary.DOCUMENT_TYPE);
 	}
 	
 	private String description;

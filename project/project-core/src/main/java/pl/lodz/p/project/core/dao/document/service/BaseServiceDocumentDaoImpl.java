@@ -30,7 +30,7 @@ public class BaseServiceDocumentDaoImpl implements BaseServiceDocumentDao {
 
     private static final ServiceDocumentRowMapper SERVICE_DOCUMENT_ROW_MAPPER = new ServiceDocumentRowMapper();
     private final List<String> columns = Lists.newArrayList("symbol", "type", "document_date", "service_document_type", "state", "id");
-    private final List<String> tableNames = Lists.newArrayList("service_repair_orders", "service_fix_summaries");
+    private final List<String> tableNames = Lists.newArrayList("service_repair_orders", "service_fix_summaries", "service_products_requests");
     private final String findAllSQL;
 
     public BaseServiceDocumentDaoImpl() {

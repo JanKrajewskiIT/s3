@@ -11,6 +11,8 @@ import javax.persistence.Table;
 @Entity
 public class ServiceFixSummary extends BaseDocumentService {
 
+    public static final String DOCUMENT_TYPE = "SFS";
+
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
@@ -19,6 +21,7 @@ public class ServiceFixSummary extends BaseDocumentService {
 
     public ServiceFixSummary() {
         super(ServiceDocumentType.FIX_SUMMARY);
+        setType(DOCUMENT_TYPE);
     }
 
     public String getDescription() {

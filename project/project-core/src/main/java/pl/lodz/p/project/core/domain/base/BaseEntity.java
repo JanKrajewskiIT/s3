@@ -1,5 +1,6 @@
 package pl.lodz.p.project.core.domain.base;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -79,6 +80,6 @@ public abstract class BaseEntity<ID extends Serializable> implements Versioned, 
 
 	@Override
 	public int hashCode() {
-		return id.hashCode();
+		return new HashCodeBuilder().append(id).build();
 	}
 }

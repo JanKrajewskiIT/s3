@@ -18,6 +18,8 @@ import java.util.Set;
 @Entity
 public class ServiceProductsRequest extends BaseDocumentService {
 
+    public static final String DOCUMENT_TYPE = "SPR";
+
     @Column(name = "service_repair_order", length = 80)
     private String serviceRepairOrderSymbol;
 
@@ -26,6 +28,7 @@ public class ServiceProductsRequest extends BaseDocumentService {
 
     public ServiceProductsRequest() {
         super(ServiceDocumentType.PRODUCTS_REQUEST);
+        setType(DOCUMENT_TYPE);
     }
 
     public String getServiceRepairOrderSymbol() {

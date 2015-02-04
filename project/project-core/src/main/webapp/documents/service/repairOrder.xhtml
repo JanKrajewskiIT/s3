@@ -39,71 +39,81 @@
                                 </div>
                                 <div class="box-body">
                                     <h:form>
-                                        <h:inputHidden id="id" value="${serviceRepairOrderTemplateBean.document.id}"/>
-                                        <h:inputHidden id="version" value="${serviceRepairOrderTemplateBean.document.version}"/>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="symbol">Symbol</label>
-                                                <p:inputText id="symbol" styleClass="form-control"
-                                                             value="#{serviceRepairOrderTemplateBean.document.symbol}"/>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <label>Status</label>
+                                        <p:panel visible="#{serviceRepairOrderTemplateBean.visible}">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="symbol">Symbol</label>
+                                                    <p:inputText id="symbol" styleClass="form-control"
+                                                                 value="#{serviceRepairOrderTemplateBean.document.symbol}"/>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="documentDate">Data dokumentu</label>
+                                                    <p:inputText id="documentDate"
+                                                                 value="#{serviceRepairOrderTemplateBean.document.documentDate}"
+                                                                 styleClass="form-control">
+                                                        <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET"/>
+                                                    </p:inputText>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <cc:contractor name="Klient"
+                                                                   value="#{serviceRepairOrderTemplateBean.document.contractor}"
+                                                                   action="#{serviceRepairOrderTemplateBean.selectContractor}"/>
 
-                                                <div>
-                                                    <span class="label label-info font14"><h:outputText
-                                                            value="#{serviceRepairOrderTemplateBean.document.state.label}"/></span>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <label for="documentDate">Data dokumentu</label>
-                                                <p:inputText id="documentDate"
-                                                             value="#{serviceRepairOrderTemplateBean.document.documentDate}"
-                                                             styleClass="form-control">
-                                                    <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET"/>
-                                                </p:inputText>
-                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <label>Nazwa sprzętu <em>(typ, producent, model)</em></label>
+                                                    <p:inputText styleClass="form-control"
+                                                                 value="#{serviceRepairOrderTemplateBean.document.equipmentInfo}"/>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>Status</label>
 
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <label>Nazwa sprzętu <em>(typ, producent, model)</em></label>
-                                                <p:inputText styleClass="form-control"
-                                                             value="#{serviceRepairOrderTemplateBean.document.equipmentInfo}"/>
+                                                    <div>
+                                                        <span class="label label-info font14"><h:outputText
+                                                                value="#{serviceRepairOrderTemplateBean.document.state.label}"/></span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="symbol">Gwarancja</label>
-                                                <h:selectBooleanCheckbox
-                                                        value="#{serviceRepairOrderTemplateBean.document.guarantee}"
-                                                        styleClass="form-control"/>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="symbol">Gwarancja</label>
+                                                    <h:selectBooleanCheckbox
+                                                            value="#{serviceRepairOrderTemplateBean.document.guarantee}"
+                                                            styleClass="form-control"/>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="guaranteeNo">Nr karty gwarancyjnej</label>
+                                                    <p:inputText id="guaranteeNo" styleClass="form-control"
+                                                                 value="#{serviceRepairOrderTemplateBean.document.guaranteeNo}"/>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label for="saleDocumentNo">Potwierdzenie zakupu</label>
+                                                    <p:inputText id="saleDocumentNo" styleClass="form-control"
+                                                                 value="#{serviceRepairOrderTemplateBean.document.saleDocumentNo}"/>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <label for="guaranteeNo">Nr karty gwarancyjnej</label>
-                                                <p:inputText id="guaranteeNo" styleClass="form-control"
-                                                             value="#{serviceRepairOrderTemplateBean.document.guaranteeNo}"/>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <label for="description">Opis usterki</label>
+                                                    <p:inputTextarea id="description" styleClass="form-control" rows="7"
+                                                                     value="#{serviceRepairOrderTemplateBean.document.description}"/>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <label for="saleDocumentNo">Potwierdzenie zakupu</label>
-                                                <p:inputText id="saleDocumentNo" styleClass="form-control"
-                                                             value="#{serviceRepairOrderTemplateBean.document.saleDocumentNo}"/>
+                                            <div class="row">
+                                                <div class="col-sm-4 col-sm-offset-8">
+                                                    <label for="documentCreator">Wystawił</label>
+                                                    <p:inputText id="documentCreator" styleClass="form-control" disabled="true"
+                                                                 value="#{serviceRepairOrderTemplateBean.issuePerson}"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <label for="description">Opis usterki</label>
-                                                <p:inputTextarea id="description" styleClass="form-control" rows="7"
-                                                                 value="#{serviceRepairOrderTemplateBean.document.description}"/>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-sm-offset-8">
-                                                <label for="documentCreator">Wystawił</label>
-                                                <p:inputText id="documentCreator" styleClass="form-control" disabled="true"
-                                                             value="#{serviceRepairOrderTemplateBean.issuePerson}"/>
-                                            </div>
-                                        </div>
+                                        </p:panel>
+                                        <p:panel visible="#{serviceRepairOrderTemplateBean.contractorListController.visible}">
+                                            <cc:contractorChooser controller="#{serviceRepairOrderTemplateBean.contractorListController}"
+                                                                  action="#{serviceRepairOrderTemplateBean.addContractor()}"
+                                                                  editable="false"/>
+                                        </p:panel>
                                         <p:spacer style="height: 10px"/>
                                         <cc:buttonBox controller="#{serviceRepairOrderTemplateBean}"/>
                                     </h:form>

@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.lodz.p.project.core.domain.document.service.BaseDocumentService;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
+import pl.lodz.p.project.core.domain.document.service.ServiceFixSummary;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.document.service.BaseServiceDocumentDTO;
 import pl.lodz.p.project.core.jsf.base.Action;
@@ -17,6 +18,8 @@ import pl.lodz.p.project.core.jsf.config.ConstantElements;
 import pl.lodz.p.project.core.jsf.documents.service.action.DocumentStateChangeable;
 import pl.lodz.p.project.core.jsf.documents.service.action.MarkDocumentAsInDoneAction;
 import pl.lodz.p.project.core.jsf.documents.service.action.MarkDocumentAsInProgressAction;
+import pl.lodz.p.project.core.jsf.documents.service.action.MarkDocumentAsInProgressAgainAction;
+import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.service.BaseService;
 
 import javax.annotation.PostConstruct;
@@ -36,10 +39,15 @@ public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentD
 
     private Mode mode;
     private T document;
+    private Long documentId;
+    private Long documentVersion;
     private String issuePerson;
 
     @Autowired
     private ConstantElements constantElements;
+
+    @Autowired
+    private DocumentNumeratorService documentNumeratorService;
 
     @PostConstruct
     public void init() {
@@ -47,10 +55,14 @@ public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentD
         if (StringUtils.isBlank(id)) {
             mode = Mode.CREATE;
             document = createNew();
+            document.setSymbol(documentNumeratorService.nextNumber(document.getType()));
+
         } else {
             mode = Mode.EDIT;
             document = service.getOneById(Long.parseLong(id));
         }
+        documentId = document.getId();
+        documentVersion = document.getVersion();
         issuePerson = document.getIssuePerson() == null ? null : document.getIssuePerson().getFirstName() + " " + document.getIssuePerson().getSecondName();
     }
 
@@ -71,6 +83,8 @@ public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentD
 
     @Override
     public void save() {
+        document.setId(documentId);
+        document.setVersion(documentVersion);
         service.save(document);
         GUI.redirect(SERVICE_DOCUMENTS_TABLE_VIEW_URI);
     }
@@ -103,11 +117,17 @@ public abstract class AbstractServiceTemplateBean<T extends BaseServiceDocumentD
             actions.add(new MarkDocumentAsInProgressAction(this));
         } else if (ServiceDocumentState.IN_PROGRESS == document.getState()) {
             actions.add(new MarkDocumentAsInDoneAction(this));
+        } else if (ServiceDocumentState.DONE == document.getState()) {
+            actions.add(new MarkDocumentAsInProgressAgainAction(this));
         }
         return actions;
     }
 
     protected Mode getMode() {
         return mode;
+    }
+
+    protected DocumentNumeratorService getDocumentNumeratorService() {
+        return documentNumeratorService;
     }
 }

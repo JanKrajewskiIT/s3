@@ -68,6 +68,7 @@ public class ServiceProductsRequestConverter implements Converter<ServiceProduct
             itemDTO.setDocument(objectDTO);
             itemDTO.setGood(goodConverter.convertEntity(entityGood.getId().getGood()));
             itemDTO.setQuantity(entityGood.getQuantity());
+            objectDTO.getGoodList().add(itemDTO);
         }
 
         return objectDTO;

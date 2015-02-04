@@ -1,6 +1,7 @@
 package pl.lodz.p.project.core.dto.document.service;
 
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentType;
+import pl.lodz.p.project.core.domain.document.service.ServiceRepairOrder;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 
 public class ServiceRepairOrderDTO extends BaseServiceDocumentDTO {
@@ -14,7 +15,7 @@ public class ServiceRepairOrderDTO extends BaseServiceDocumentDTO {
 
     public ServiceRepairOrderDTO() {
         super(ServiceDocumentType.REPAIR_ORDER);
-        setType("SRO");
+        setType(ServiceRepairOrder.DOCUMENT_TYPE);
     }
 
     public ContractorDTO getContractor() {

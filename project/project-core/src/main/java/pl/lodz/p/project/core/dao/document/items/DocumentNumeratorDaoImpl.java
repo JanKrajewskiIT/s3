@@ -2,6 +2,9 @@ package pl.lodz.p.project.core.dao.document.items;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pl.lodz.p.project.core.domain.document.service.ServiceFixSummary;
+import pl.lodz.p.project.core.domain.document.service.ServiceProductsRequest;
+import pl.lodz.p.project.core.domain.document.service.ServiceRepairOrder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -37,8 +40,12 @@ public class DocumentNumeratorDaoImpl implements DocumentNumeratorDao {
             return "internal_invoices";
         } else if("WZ".equals(documentType) || "PZ".equals(documentType)) {
             return "external_invoices";
-        } else if ("SRO".equals(documentType)) {
+        } else if (ServiceRepairOrder.DOCUMENT_TYPE.equals(documentType)) {
             return "service_repair_orders";
+        } else if (ServiceFixSummary.DOCUMENT_TYPE.equals(documentType)) {
+            return "service_fix_summaries";
+        } else if (ServiceProductsRequest.DOCUMENT_TYPE.equals(documentType)) {
+            return "service_products_requests";
         }
         throw new RuntimeException("Not defined document: " + documentType);
     }
