@@ -1,10 +1,11 @@
-package pl.lodz.p.project.core.dto.document.sale;
+package pl.lodz.p.project.core.dto.document.purchase;
 
 import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
 import pl.lodz.p.project.core.dto.document.base.DocumentDTO;
+import pl.lodz.p.project.core.dto.document.sale.DocumentPositionDTO;
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
 
@@ -16,23 +17,22 @@ import java.util.List;
  *
  * @author Janiu
  */
-public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<SaleDocumentDTO> {
+public class PurchaseInvoiceDTO extends DocumentDTO<Long> implements Comparable<PurchaseInvoiceDTO> {
 
 	private static final long serialVersionUID = 1L;
 
     private Double paidTotal = 0d;
     private Double discount = 0d;
-    private String orderSymbol;
 	private boolean warehouseResult = true;
 	private boolean paid;
 	private String receivePerson;
 	private String deliverPerson;
 	private PaymentMethodDTO paymentMethod;
-	private List<DocumentPositionDTO> goodList;
+	private List<PurchaseInvoiceGoodDTO> goodList;
 	private String annotation;
 
-    @NotNull(message = "Data sprzedaży nie może być pusta!")
-    private Date saleDate;
+    @NotNull(message = "Data zakupu nie może być pusta!")
+    private Date purchaseDate;
     
     @NotNull(message = "Data płatności nie może być pusta!")
     private Date paymentDate;
@@ -64,14 +64,6 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
 		this.discount = discount;
 	}
 
-	public String getOrderSymbol() {
-		return orderSymbol;
-	}
-
-	public void setOrderSymbol(String orderSymbol) {
-		this.orderSymbol = orderSymbol;
-	}
-
 	public boolean isWarehouseResult() {
 		return warehouseResult;
 	}
@@ -96,21 +88,14 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
 		this.paymentMethod = paymentMethod;
 	}
 
-	public List<DocumentPositionDTO> getGoodList() {
+	public List<PurchaseInvoiceGoodDTO> getGoodList() {
 		return goodList;
 	}
 
-	public void setGoodList(List<DocumentPositionDTO> goodList) {
+	public void setGoodList(List<PurchaseInvoiceGoodDTO> goodList) {
 		this.goodList = goodList;
 	}
 
-	public Date getSaleDate() {
-		return saleDate;
-	}
-
-	public void setSaleDate(Date saleDate) {
-		this.saleDate = saleDate;
-	}
 
 	public Date getPaymentDate() {
 		return paymentDate;
@@ -150,7 +135,7 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
     }
 
 	@Override
-	public int compareTo(SaleDocumentDTO o) {
+	public int compareTo(PurchaseInvoiceDTO o) {
 		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
@@ -183,5 +168,13 @@ public class SaleDocumentDTO extends DocumentDTO<Long> implements Comparable<Sal
 
 	public void setTransportMean(TransportMeanDTO transportMean) {
 		this.transportMean = transportMean;
+	}
+
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
+
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
 	}
 }

@@ -1,4 +1,4 @@
-package pl.lodz.p.project.core.dto.document.items;
+package pl.lodz.p.project.core.dto.document.purchase;
 
 import com.google.common.collect.ComparisonChain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -12,14 +12,14 @@ import pl.lodz.p.project.core.dto.good.TaxDTO;
  *
  * @author Janiu
  */
-public class DocumentPositionDTO extends BaseDTO<Long> implements Comparable<DocumentPositionDTO> {
+public class PurchaseInvoiceGoodDTO extends BaseDTO<Long> implements Comparable<PurchaseInvoiceGoodDTO> {
 
 	private static final long serialVersionUID = 1L;
 
     private Double quantity;
     private TaxDTO tax;
     private GoodDTO good;
-	private SaleDocumentDTO saleDocumentDTO;
+	private PurchaseInvoiceDTO purchaseInvoiceDTO;
 	private Double priceNet = 0d;
     private Double priceGross = 0d;
     private Double valueNet = 0d;
@@ -91,15 +91,15 @@ public class DocumentPositionDTO extends BaseDTO<Long> implements Comparable<Doc
     }
 
 	@Override
-	public int compareTo(DocumentPositionDTO o) {
+	public int compareTo(PurchaseInvoiceGoodDTO o) {
 		return ComparisonChain.start().compare(this.getId(), o.getId()).result();
 	}
 
-	public SaleDocumentDTO getSaleDocumentDTO() {
-		return saleDocumentDTO;
+	public PurchaseInvoiceDTO getPurchaseInvoiceDTO() {
+		return purchaseInvoiceDTO;
 	}
 
-	public void setSaleDocumentDTO(SaleDocumentDTO saleDocumentDTO) {
-		this.saleDocumentDTO = saleDocumentDTO;
+	public void setPurchaseInvoiceDTO(PurchaseInvoiceDTO purchaseInvoiceDTO) {
+		this.purchaseInvoiceDTO = purchaseInvoiceDTO;
 	}
 }

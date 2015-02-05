@@ -19,7 +19,7 @@ public abstract class EditObjectController<T extends Serializable> extends UIObj
 	protected T sourceObject;
 	protected Mode mode = Mode.EDIT;
 
-	private Action SAVE_ACTION = new Action("Zapisz", "") {
+	private Action SAVE_ACTION = new Action("Zapisz", "@form") {
 
 		@Override
 		public void call() {

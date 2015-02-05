@@ -61,4 +61,7 @@ public class GUI implements Serializable {
         showMessage(FacesMessage.SEVERITY_WARN, aMessage);
     }
 
+    public void showInformationMessage(String aMessage) {
+        showMessage(FacesMessage.SEVERITY_INFO, aMessage);
+    }
 }

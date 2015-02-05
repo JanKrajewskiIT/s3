@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite/components">
+
+    <h:body>
+        <ui:composition template="../layout/main-template.xhtml">
+            <ui:define name="content">
+                <aside class="right-side">
+                    <section class="content-header">
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i>Kokpit</a></li>
+                            <li><a href="#">Kontrahenci</a></li>
+                            <li class="active">Wyświetl</li>
+                        </ol>
+                    </section>
+
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="page-header col-xs-12">
+                                            Kontrahenci
+                                            <small class="pull-right">Data: #{constantElements.currentDateValue}</small>
+                                        </h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <h:form>
+                                            <cc:contractorList controller="#{contractorListController}" editable="true"/>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
