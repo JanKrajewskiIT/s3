@@ -28,7 +28,7 @@ public class ServiceFixSummaryTemplateBean extends AbstractServiceTemplateBean<S
         return document;
     }
 
-    public String save() {
-        return super.save();
+    public void save() {
+        super.save();
     }
 }

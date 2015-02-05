@@ -2,7 +2,6 @@ package pl.lodz.p.project.core.jsf.base;
 
 import org.primefaces.context.RequestContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.jsf.FacesContextUtils;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -26,12 +25,12 @@ public class GUI implements Serializable {
     }
 
     public static String catchId(String idColumn) {
-        ExternalContext context =  FacesContext.getCurrentInstance().getExternalContext();
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         return context.getRequestParameterMap().get(idColumn);
     }
 
     private void showMessage(FacesMessage.Severity aSeverity, String aMessage) {
-        FacesContext.getCurrentInstance().addMessage("", new FacesMessage(aSeverity, aMessage, "")) ;
+        FacesContext.getCurrentInstance().addMessage("", new FacesMessage(aSeverity, aMessage, ""));
         update(":growl");
     }
 
