@@ -32,7 +32,7 @@
                                             value="#{serviceFixSummaryTemplateBean.document.symbol}"/>
                                         <small class="pull-right">Data: <h:outputText
                                                 value="#{serviceFixSummaryTemplateBean.document.documentDate}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET"/>
                                         </h:outputText>
                                         </small>
                                     </h3>
@@ -58,7 +58,7 @@
                                                 <p:inputText id="documentDate"
                                                              value="#{serviceFixSummaryTemplateBean.document.documentDate}"
                                                              styleClass="form-control">
-                                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                    <f:convertDateTime pattern="dd-MM-yyyy" timeZone="CET"/>
                                                 </p:inputText>
                                             </div>
 
