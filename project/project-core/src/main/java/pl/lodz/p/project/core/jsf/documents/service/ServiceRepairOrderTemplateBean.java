@@ -6,41 +6,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import pl.lodz.p.project.core.domain.document.service.ServiceDocumentState;
 import pl.lodz.p.project.core.domain.document.service.ServiceFixSummary;
+import pl.lodz.p.project.core.domain.document.service.ServiceProductsRequest;
 import pl.lodz.p.project.core.domain.document.service.ServiceRepairOrder;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.document.service.ServiceFixSummaryDTO;
+import pl.lodz.p.project.core.dto.document.service.ServiceProductsRequestDTO;
 import pl.lodz.p.project.core.dto.document.service.ServiceRepairOrderDTO;
 import pl.lodz.p.project.core.jsf.base.Action;
 import pl.lodz.p.project.core.jsf.base.CanBeVisible;
-import pl.lodz.p.project.core.jsf.base.ClearAction;
 import pl.lodz.p.project.core.jsf.base.GUI;
 import pl.lodz.p.project.core.jsf.base.Mode;
-import pl.lodz.p.project.core.jsf.base.SaveAction;
 import pl.lodz.p.project.core.jsf.contractor.ContractorListController;
-import pl.lodz.p.project.core.jsf.documents.service.action.CreateFixSummaryFromRepairOrderAction;
-import pl.lodz.p.project.core.jsf.documents.service.action.FixSummaryFromRepairOrderCreatable;
-import pl.lodz.p.project.core.jsf.documents.service.action.MarkDocumentAsInDoneAction;
-import pl.lodz.p.project.core.jsf.documents.service.action.MarkDocumentAsInProgressAction;
-import pl.lodz.p.project.core.jsf.documents.service.action.MarkDocumentAsInProgressAgainAction;
+import pl.lodz.p.project.core.jsf.documents.service.action.CreateFixSummaryFromServiceDocumentAction;
+import pl.lodz.p.project.core.jsf.documents.service.action.CreateProductsRequestFromServiceDocumentAction;
+import pl.lodz.p.project.core.jsf.documents.service.action.FixSummaryCreatable;
+import pl.lodz.p.project.core.jsf.documents.service.action.ProductsRequestCreatable;
 import pl.lodz.p.project.core.service.document.service.ServiceFixSummaryService;
+import pl.lodz.p.project.core.service.document.service.ServiceProductsRequestService;
 import pl.lodz.p.project.core.service.document.service.ServiceRepairOrderService;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Named
 @Scope("view")
-public class ServiceRepairOrderTemplateBean extends AbstractServiceTemplateBean<ServiceRepairOrderDTO, ServiceRepairOrder, ServiceRepairOrderService> implements Serializable, FixSummaryFromRepairOrderCreatable, CanBeVisible {
+public class ServiceRepairOrderTemplateBean extends AbstractServiceTemplateBean<ServiceRepairOrderDTO, ServiceRepairOrder, ServiceRepairOrderService> implements Serializable, FixSummaryCreatable, ProductsRequestCreatable, CanBeVisible {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceRepairOrderTemplateBean.class);
 
     @Autowired
     private ServiceFixSummaryService serviceFixSummaryService;
+
+    @Autowired
+    private ServiceProductsRequestService serviceProductsRequestService;
 
     @Autowired
     private ContractorListController contractorListController;
@@ -66,7 +68,10 @@ public class ServiceRepairOrderTemplateBean extends AbstractServiceTemplateBean<
     public List<Action> getActions() {
         List<Action> actions = super.getActions();
         if (Mode.EDIT == getMode() && (getDocument().getState() == ServiceDocumentState.IN_PROGRESS || getDocument().getState() == ServiceDocumentState.DONE)) {
-            actions.add(new CreateFixSummaryFromRepairOrderAction(this));
+            actions.add(new CreateFixSummaryFromServiceDocumentAction(this));
+        }
+        if (Mode.EDIT == getMode() && getDocument().getState() == ServiceDocumentState.IN_PROGRESS) {
+            actions.add(new CreateProductsRequestFromServiceDocumentAction(this));
         }
         return actions;
     }
@@ -84,6 +89,21 @@ public class ServiceRepairOrderTemplateBean extends AbstractServiceTemplateBean<
         ServiceFixSummary entity = serviceFixSummaryService.save(fixSummaryDTO);
 
         GUI.redirect("/documents/service/serviceFixSummary", entity.getId().toString());
+    }
+
+    @Override
+    public void createProductsRequest() {
+        ServiceProductsRequestDTO productsRequestDTO = new ServiceProductsRequestDTO();
+        productsRequestDTO.setSymbol(getDocumentNumeratorService().nextNumber(productsRequestDTO.getType()));
+        productsRequestDTO.setState(ServiceDocumentState.NEW);
+        productsRequestDTO.setDocumentDate(new Date());
+
+        UserDTO documentCreator = currentUser();
+        productsRequestDTO.setIssuePerson(documentCreator);
+        productsRequestDTO.setServiceRepairOrderSymbol(getDocument().getSymbol());
+        ServiceProductsRequest entity = serviceProductsRequestService.save(productsRequestDTO);
+
+        GUI.redirect("/documents/service/serviceProductsRequest", entity.getId().toString());
     }
 
     @Override
