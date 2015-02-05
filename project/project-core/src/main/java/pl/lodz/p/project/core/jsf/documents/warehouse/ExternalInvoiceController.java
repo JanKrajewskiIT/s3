@@ -15,7 +15,6 @@ import pl.lodz.p.project.core.service.base.ServiceRepository;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
 import pl.lodz.p.project.core.service.document.warehouse.ExternalInvoiceService;
 
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.util.ArrayList;
 
@@ -70,7 +69,7 @@ public class ExternalInvoiceController extends EditObjectController<ExternalInvo
 		} else if(getSourceObject().getType().equals("WZ")) {
 			estimateQuantityDown();
 		}
-		 super.save();
+		super.save();
 	}
 
 	private void estimateQuantityUp() {

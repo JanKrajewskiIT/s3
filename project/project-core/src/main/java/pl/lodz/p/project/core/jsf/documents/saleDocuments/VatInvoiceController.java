@@ -72,9 +72,9 @@ public class VatInvoiceController extends EditObjectController<SaleDocumentDTO> 
 		getSourceObject().setReceivePerson(contractorListController.getSingleSelection().getName());
 	}
 
-	public String forwardContractor() {
+	public void forwardContractor() {
 		String id = getSourceObject().getContractor().getId().toString();
-		return GUI.redirect("contractorTemplate", id);
+		GUI.redirect("contractorTemplate", id);
 	}
 
 

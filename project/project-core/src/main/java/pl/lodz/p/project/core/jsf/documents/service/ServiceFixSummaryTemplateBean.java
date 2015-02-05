@@ -11,8 +11,8 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Date;
 
-@Scope("request")
 @Named
+@Scope("view")
 public class ServiceFixSummaryTemplateBean extends AbstractServiceTemplateBean<ServiceFixSummaryDTO, ServiceFixSummary, ServiceFixSummaryService> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,7 +28,4 @@ public class ServiceFixSummaryTemplateBean extends AbstractServiceTemplateBean<S
         return document;
     }
 
-    public String save() {
-        return super.save();
-    }
 }

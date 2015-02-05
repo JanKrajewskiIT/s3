@@ -39,8 +39,8 @@ public class InvoiceTableBean extends EditPageableListController<SaleDocumentDTO
     }
 
     @Override
-    public String edit(String id) {
-        return GUI.redirect("vatInvoice", id);
+    public void edit(String id) {
+        GUI.redirect("vatInvoice", id);
     }
 
 }
