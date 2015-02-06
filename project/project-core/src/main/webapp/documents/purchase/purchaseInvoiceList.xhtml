@@ -14,8 +14,8 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-laptop"></i>Dokumenty Sprzedaży</a></li>
-                        <li class="active">Faktura VAT</li>
+                        <li><a href="#"><i class="fa fa-laptop"></i>Dokumenty Zakupu</a></li>
+                        <li class="active">Faktura Zakupu</li>
                         <li class="active">Wyświetl</li>
                     </ol>
                 </section>
@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="box-body">
                                     <h:form>
-                                        <cc:warehouseInvoiceList controller="#{invoicesTableBean}" editable="true"/>
+                                        <cc:warehouseInvoiceList controller="#{purchaseInvoiceTableController}" editable="true"/>
                                     </h:form>
                                 </div>
                             </div>

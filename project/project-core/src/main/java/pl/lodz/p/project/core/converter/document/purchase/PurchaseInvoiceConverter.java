@@ -1,4 +1,4 @@
-package pl.lodz.p.project.core.converter.document.sale;
+package pl.lodz.p.project.core.converter.document.purchase;
 
 import pl.lodz.p.project.core.converter.account.UserConverter;
 import pl.lodz.p.project.core.converter.base.Converter;
@@ -12,10 +12,14 @@ import pl.lodz.p.project.core.domain.contractor.Contractor;
 import pl.lodz.p.project.core.domain.document.base.InvoiceGoodKey;
 import pl.lodz.p.project.core.domain.document.items.PaymentMethod;
 import pl.lodz.p.project.core.domain.document.items.TransportMean;
+import pl.lodz.p.project.core.domain.document.purchase.PurchaseInvoice;
+import pl.lodz.p.project.core.domain.document.purchase.PurchaseInvoiceGood;
 import pl.lodz.p.project.core.domain.document.sale.DocumentPosition;
 import pl.lodz.p.project.core.domain.document.sale.SaleDocument;
 import pl.lodz.p.project.core.dto.account.UserDTO;
 import pl.lodz.p.project.core.dto.contractor.ContractorDTO;
+import pl.lodz.p.project.core.dto.document.purchase.PurchaseInvoiceDTO;
+import pl.lodz.p.project.core.dto.document.purchase.PurchaseInvoiceGoodDTO;
 import pl.lodz.p.project.core.dto.document.sale.DocumentPositionDTO;
 import pl.lodz.p.project.core.dto.document.items.PaymentMethodDTO;
 import pl.lodz.p.project.core.dto.document.items.TransportMeanDTO;
@@ -32,7 +36,7 @@ import java.util.TreeSet;
  */
 @Named
 @ApplicationScoped
-public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocumentDTO> {
+public class PurchaseInvoiceConverter implements Converter<PurchaseInvoice, PurchaseInvoiceDTO> {
 
 	@Inject
 	UserConverter userConverter;
@@ -53,13 +57,13 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 	TaxConverter taxConverter;
 
 	@Override
-	public SaleDocument convertDTO(SaleDocumentDTO objectDTO) {
+	public PurchaseInvoice convertDTO(PurchaseInvoiceDTO objectDTO) {
 		Contractor contractor = contractorConverter.convertDTO(objectDTO.getContractor());
 		User issuePerson = userConverter.convertDTO(objectDTO.getIssuePerson());
 		PaymentMethod paymentMethod = paymentMethodConverter.convertDTO(objectDTO.getPaymentMethod());
 		TransportMean transportMean= transportMeanConverter.convertDTO(objectDTO.getTransportMean());
 
-		SaleDocument entity = new SaleDocument();
+		PurchaseInvoice entity = new PurchaseInvoice();
 		entity.setId(objectDTO.getId());
 		entity.setVersion(objectDTO.getVersion());
 		entity.setContractor(contractor);
@@ -68,7 +72,6 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		entity.setDocumentPlace(objectDTO.getDocumentPlace());
 		entity.setIssuePerson(issuePerson);
 		entity.setPaymentMethod(paymentMethod);
-		entity.setOrderSymbol(objectDTO.getOrderSymbol());
 		entity.setAnnotation(objectDTO.getAnnotation());
 		entity.setPaidTotal(objectDTO.getPaidTotal());
 		entity.setPaid(objectDTO.isPaid());
@@ -76,16 +79,16 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		entity.setPaymentDate(objectDTO.getPaymentDate());
 		entity.setReceivePerson(objectDTO.getReceivePerson());
 		entity.setDeliverPerson(objectDTO.getDeliverPerson());
-		entity.setSaleDate(objectDTO.getSaleDate());
+		entity.setPurchaseDate(objectDTO.getPurchaseDate());
 		entity.setSymbol(objectDTO.getSymbol());
 		entity.setTotal(objectDTO.getTotal());
 		entity.setType(objectDTO.getType());
 		entity.setWarehouseResult(objectDTO.isWarehouseResult());
-		entity.setInvoiceGoodList(new TreeSet<DocumentPosition>());
+		entity.setInvoiceGoodList(new TreeSet<PurchaseInvoiceGood>());
 
-		for (DocumentPositionDTO invoiceGoodDTO : objectDTO.getGoodList()) {
-			DocumentPosition invoiceGood = new DocumentPosition();
-			invoiceGood.setId(new InvoiceGoodKey<SaleDocument>());
+		for (PurchaseInvoiceGoodDTO invoiceGoodDTO : objectDTO.getGoodList()) {
+			PurchaseInvoiceGood invoiceGood = new PurchaseInvoiceGood();
+			invoiceGood.setId(new InvoiceGoodKey<PurchaseInvoice>());
 			invoiceGood.getId().setGood(goodConverter.convertDTO(invoiceGoodDTO.getGood()));
 			invoiceGood.getId().setInvoice(entity);
 			invoiceGood.setQuantity(invoiceGoodDTO.getQuantity());
@@ -97,13 +100,13 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 	}
 
 	@Override
-	public SaleDocumentDTO convertEntity(SaleDocument entity) {
+	public PurchaseInvoiceDTO convertEntity(PurchaseInvoice entity) {
 		ContractorDTO contractor = contractorConverter.convertEntity(entity.getContractor());
 		UserDTO issuePerson = userConverter.convertEntity(entity.getIssuePerson());
 		PaymentMethodDTO paymentMethod = paymentMethodConverter.convertEntity(entity.getPaymentMethod());
 		TransportMeanDTO transportMeanDTO = transportMeanConverter.convertEntity(entity.getTransportMean());
 
-		SaleDocumentDTO objectDTO = new SaleDocumentDTO();
+		PurchaseInvoiceDTO objectDTO = new PurchaseInvoiceDTO();
 		objectDTO.setId(entity.getId());
 		objectDTO.setVersion(entity.getVersion());
 		objectDTO.setContractor(contractor);
@@ -114,23 +117,22 @@ public class SaleDocumentConverter implements Converter<SaleDocument, SaleDocume
 		objectDTO.setIssuePerson(issuePerson);
 		objectDTO.setAnnotation(entity.getAnnotation());
 		objectDTO.setPaymentMethod(paymentMethod);
-		objectDTO.setOrderSymbol(entity.getOrderSymbol());
 		objectDTO.setPaidTotal(entity.getPaidTotal());
 		objectDTO.setPaid(entity.isPaid());
 		objectDTO.setPaymentDate(entity.getPaymentDate());
 		objectDTO.setReceivePerson(entity.getReceivePerson());
 		objectDTO.setDeliverPerson(entity.getDeliverPerson());
-		objectDTO.setSaleDate(entity.getSaleDate());
+		objectDTO.setPurchaseDate(entity.getPurchaseDate());
 		objectDTO.setSymbol(entity.getSymbol());
 		objectDTO.setTotal(entity.getTotal());
 		objectDTO.setType(entity.getType());
 		objectDTO.setWarehouseResult(entity.isWarehouseResult());
-		objectDTO.setGoodList(new ArrayList<DocumentPositionDTO>());
-		for (DocumentPosition invoiceGood : entity.getInvoiceGoodList()) {
-			DocumentPositionDTO invoiceGoodDTO = new DocumentPositionDTO();
+		objectDTO.setGoodList(new ArrayList<PurchaseInvoiceGoodDTO>());
+		for (PurchaseInvoiceGood invoiceGood : entity.getInvoiceGoodList()) {
+			PurchaseInvoiceGoodDTO invoiceGoodDTO = new PurchaseInvoiceGoodDTO();
 			invoiceGoodDTO.setGood(goodConverter.convertEntity(invoiceGood.getId().getGood()));
 			invoiceGoodDTO.setQuantity(invoiceGood.getQuantity());
-			invoiceGoodDTO.setSaleDocumentDTO(objectDTO);
+			invoiceGoodDTO.setPurchaseInvoiceDTO(objectDTO);
 			invoiceGoodDTO.setTax(taxConverter.convertEntity(invoiceGood.getTax()));
 			invoiceGoodDTO.setPriceNet(invoiceGood.getPriceNet());
 			objectDTO.getGoodList().add(invoiceGoodDTO);

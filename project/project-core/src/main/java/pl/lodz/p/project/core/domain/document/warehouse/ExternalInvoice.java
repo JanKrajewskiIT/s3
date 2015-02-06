@@ -26,8 +26,7 @@ public class ExternalInvoice extends WarehouseInvoice<ExternalInvoiceGood> {
     @ManyToOne(optional = false)
     private TransportMean transportMean;
 
-	@Basic(optional = false)
-    @NotNull
+	@Basic(optional = true)
     @Size(min = 1, max = 16)
     @Column(name = "order_symbol")
     private String orderSymbol;

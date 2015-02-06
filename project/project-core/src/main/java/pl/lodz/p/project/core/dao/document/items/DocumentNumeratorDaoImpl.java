@@ -38,6 +38,8 @@ public class DocumentNumeratorDaoImpl implements DocumentNumeratorDao {
             return "sale_documents";
         } else if("RW".equals(documentType) || "PW".equals(documentType)) {
             return "internal_invoices";
+        } else if("FZ".equals(documentType)) {
+            return "purchase_documents";
         } else if("WZ".equals(documentType) || "PZ".equals(documentType)) {
             return "external_invoices";
         } else if (ServiceRepairOrder.DOCUMENT_TYPE.equals(documentType)) {

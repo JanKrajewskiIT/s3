@@ -1,8 +1,9 @@
-package pl.lodz.p.project.core.converter.document.sale;
+package pl.lodz.p.project.core.converter.document.purchase;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import pl.lodz.p.project.core.dto.document.purchase.PurchaseInvoiceGoodDTO;
 import pl.lodz.p.project.core.dto.document.sale.DocumentPositionDTO;
-import pl.lodz.p.project.core.dto.document.sale.SaleDocumentDTO;
+import pl.lodz.p.project.core.dto.document.purchase.PurchaseInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceDTO;
 import pl.lodz.p.project.core.dto.document.warehouse.ExternalInvoiceGoodDTO;
 import pl.lodz.p.project.core.service.document.items.DocumentNumeratorService;
@@ -16,13 +17,13 @@ import java.util.ArrayList;
  */
 @Named
 @ApplicationScoped
-public class SaleDocumentExternalInvoiceConverter {
+public class PurchaseInvoiceExternalInvoiceConverter {
 
-    private final String type = "WZ";
+    private final String type = "PZ";
     @Autowired
     private DocumentNumeratorService documentNumeratorService;
 
-    public ExternalInvoiceDTO convertToExternal(SaleDocumentDTO entity) {
+    public ExternalInvoiceDTO convertToExternal(PurchaseInvoiceDTO entity) {
 
         ExternalInvoiceDTO objectDTO = new ExternalInvoiceDTO();
         objectDTO.setVersion(entity.getVersion());
@@ -34,13 +35,12 @@ public class SaleDocumentExternalInvoiceConverter {
         objectDTO.setIssuePerson(entity.getIssuePerson());
         objectDTO.setReceivePerson(entity.getReceivePerson());
         objectDTO.setAnnotation(entity.getAnnotation());
-        objectDTO.setOrderSymbol(entity.getOrderSymbol());
-        objectDTO.setDeliveryDate(entity.getSaleDate());
+        objectDTO.setDeliveryDate(entity.getPurchaseDate());
         objectDTO.setContractor(entity.getContractor());
         objectDTO.setTransportMean(entity.getTransportMean());
         objectDTO.setGoodList(new ArrayList<ExternalInvoiceGoodDTO>());
 
-        for (DocumentPositionDTO invoiceGood : entity.getGoodList()) {
+        for (PurchaseInvoiceGoodDTO invoiceGood : entity.getGoodList()) {
             ExternalInvoiceGoodDTO invoiceGoodDTO = new ExternalInvoiceGoodDTO();
             invoiceGoodDTO.setGood(invoiceGood.getGood());
             invoiceGoodDTO.setQuantity(invoiceGood.getQuantity());
