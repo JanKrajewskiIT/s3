@@ -36,7 +36,6 @@ import java.util.List;
 public class ServiceRepairOrderTemplateBean extends AbstractServiceTemplateBean<ServiceRepairOrderDTO, ServiceRepairOrder, ServiceRepairOrderService> implements Serializable, FixSummaryCreatable, ProductsRequestCreatable, CanBeVisible {
 
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = LoggerFactory.getLogger(ServiceRepairOrderTemplateBean.class);
 
     @Autowired
     private ServiceFixSummaryService serviceFixSummaryService;

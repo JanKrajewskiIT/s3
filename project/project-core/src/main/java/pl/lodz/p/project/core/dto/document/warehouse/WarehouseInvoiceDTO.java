@@ -12,7 +12,7 @@ public abstract class WarehouseInvoiceDTO<T extends InvoiceGoodDTO> extends Docu
 
     private static final long serialVersionUID = 1L;
 
-    private Double total;
+    private Double total = 0.00;
     private String receivePerson;
     private String deliverPerson;
     private String annotation;

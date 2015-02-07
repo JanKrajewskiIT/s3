@@ -19,7 +19,7 @@ public abstract class WarehouseInvoice<T extends InvoiceGood> extends Document<L
 	@Basic(optional = false)
     @NotNull
     @Column(name = "total")
-	private Double total;	
+	private Double total = 0.00;
 
 	@Basic(optional = false)
     @NotNull
@@ -33,7 +33,6 @@ public abstract class WarehouseInvoice<T extends InvoiceGood> extends Document<L
     @Column(name = "deliver_person")
 	private String deliverPerson;
 
-	@Basic(optional = false)
 	@Column(name = "annotation")
 	private String annotation;
 
